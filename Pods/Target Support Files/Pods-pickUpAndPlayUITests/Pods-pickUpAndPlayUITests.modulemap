@@ -1,0 +1,6 @@
+framework module Pods_pickUpAndPlayUITests {
+  umbrella header "Pods-pickUpAndPlayUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,782 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D6831CB1F253D3300E7CA72 /* sportControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831CA1F253D3300E7CA72 /* sportControl.swift */; };
+		1D6831CD1F26F76700E7CA72 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */; };
+		1D6831D31F270A9F00E7CA72 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831D21F270A9F00E7CA72 /* Game.swift */; };
+		1D6831D51F293BB600E7CA72 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831D41F293BB600E7CA72 /* Player.swift */; };
+		1D93E06A1F303B7A00E61AA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D93E0691F303B7A00E61AA9 /* Assets.xcassets */; };
+		1D93E06C1F30F61700E61AA9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93E06B1F30F61700E61AA9 /* Location.swift */; };
+		1DF99A7E1EF6432400C3B589 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */; };
+		450EC6971ED1103C00CC3259 /* createGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450EC6961ED1103C00CC3259 /* createGameController.swift */; };
+		4543A9D51EDDE44600D383AC /* eventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */; };
+		454D9CE81EDFE81C00C9F60F /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D9CE71EDFE81C00C9F60F /* UserPageViewController.swift */; };
+		454D9CEA1EE08C0A00C9F60F /* userHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */; };
+		454E54AF1ECB72790011B84F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E54AE1ECB72790011B84F /* MapViewController.swift */; };
+		45C42D401EC297500051D2E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */; };
+		45F1F3B71ECE5FF8005A1E09 /* scheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */; };
+		45F5A8F51EC27E2600EAAFCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */; };
+		45F5A8F71EC27E2600EAAFCF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */; };
+		45F5A8FA1EC27E2700EAAFCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F5A8F81EC27E2700EAAFCF /* Main.storyboard */; };
+		45F5A8FF1EC27E2700EAAFCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F5A8FD1EC27E2700EAAFCF /* LaunchScreen.storyboard */; };
+		A0AB5EDFEE0D6D9E8DB001EE /* Pods_pickUpAndPlayTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5477D618254B5F632C0C5C2 /* Pods_pickUpAndPlayTests.framework */; };
+		DC0709B04F83A81E14AD3326 /* Pods_pickUpAndPlayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5F7DF33FC200272A73DD05 /* Pods_pickUpAndPlayUITests.framework */; };
+		F1252DB89718B73D7960E3EA /* Pods_pickUpAndPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E87DE6C1C6EBC1D3EBDF7AF7 /* Pods_pickUpAndPlay.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		45F5A9061EC27E2700EAAFCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F5A8E91EC27E2600EAAFCF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45F5A8F01EC27E2600EAAFCF;
+			remoteInfo = pickUpAndPlay;
+		};
+		45F5A9111EC27E2700EAAFCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F5A8E91EC27E2600EAAFCF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45F5A8F01EC27E2600EAAFCF;
+			remoteInfo = pickUpAndPlay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1D6831CA1F253D3300E7CA72 /* sportControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportControl.swift; sourceTree = "<group>"; };
+		1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		1D6831D21F270A9F00E7CA72 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		1D6831D41F293BB600E7CA72 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		1D93E0691F303B7A00E61AA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1D93E06B1F30F61700E61AA9 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		450EC6961ED1103C00CC3259 /* createGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createGameController.swift; sourceTree = "<group>"; };
+		4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eventDetailsViewController.swift; sourceTree = "<group>"; };
+		454D9CE71EDFE81C00C9F60F /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
+		454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHomePageViewController.swift; sourceTree = "<group>"; };
+		454E54AE1ECB72790011B84F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleController.swift; sourceTree = "<group>"; };
+		45F5A8F11EC27E2600EAAFCF /* pickUpAndPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pickUpAndPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		45F5A8F91EC27E2700EAAFCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		45F5A8FE1EC27E2700EAAFCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		45F5A9001EC27E2700EAAFCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45F5A9051EC27E2700EAAFCF /* pickUpAndPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pickUpAndPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45F5A9101EC27E2700EAAFCF /* pickUpAndPlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pickUpAndPlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49B984E5CBAB4017648FC634 /* Pods-pickUpAndPlayTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests.release.xcconfig"; sourceTree = "<group>"; };
+		4E3F874A4679B0CDB17CF1EB /* Pods-pickUpAndPlayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay.release.xcconfig"; sourceTree = "<group>"; };
+		75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay.debug.xcconfig"; sourceTree = "<group>"; };
+		B85E9A5FF405715ED580512A /* Pods-pickUpAndPlayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D5477D618254B5F632C0C5C2 /* Pods_pickUpAndPlayTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pickUpAndPlayTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D64604FC2117483D2BFADE65 /* Pods-pickUpAndPlayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E87DE6C1C6EBC1D3EBDF7AF7 /* Pods_pickUpAndPlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pickUpAndPlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF5F7DF33FC200272A73DD05 /* Pods_pickUpAndPlayUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pickUpAndPlayUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		45F5A8EE1EC27E2600EAAFCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1252DB89718B73D7960E3EA /* Pods_pickUpAndPlay.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45F5A9021EC27E2700EAAFCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0AB5EDFEE0D6D9E8DB001EE /* Pods_pickUpAndPlayTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45F5A90D1EC27E2700EAAFCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC0709B04F83A81E14AD3326 /* Pods_pickUpAndPlayUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		45F5A8E81EC27E2600EAAFCF = {
+			isa = PBXGroup;
+			children = (
+				45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */,
+				45F5A8F31EC27E2600EAAFCF /* pickUpAndPlay */,
+				45F5A8F21EC27E2600EAAFCF /* Products */,
+				C0E9D522032EB48D32C65034 /* Pods */,
+				9833C57A3A5B30FBB25F7880 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		45F5A8F21EC27E2600EAAFCF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45F5A8F11EC27E2600EAAFCF /* pickUpAndPlay.app */,
+				45F5A9051EC27E2700EAAFCF /* pickUpAndPlayTests.xctest */,
+				45F5A9101EC27E2700EAAFCF /* pickUpAndPlayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45F5A8F31EC27E2600EAAFCF /* pickUpAndPlay */ = {
+			isa = PBXGroup;
+			children = (
+				45F5A8F81EC27E2700EAAFCF /* Main.storyboard */,
+				1D6831D21F270A9F00E7CA72 /* Game.swift */,
+				1D93E06B1F30F61700E61AA9 /* Location.swift */,
+				1D6831D41F293BB600E7CA72 /* Player.swift */,
+				1D6831CA1F253D3300E7CA72 /* sportControl.swift */,
+				1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */,
+				45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */,
+				1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */,
+				454E54AE1ECB72790011B84F /* MapViewController.swift */,
+				45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */,
+				450EC6961ED1103C00CC3259 /* createGameController.swift */,
+				454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */,
+				4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */,
+				454D9CE71EDFE81C00C9F60F /* UserPageViewController.swift */,
+				1D93E0691F303B7A00E61AA9 /* Assets.xcassets */,
+				45F5A8FD1EC27E2700EAAFCF /* LaunchScreen.storyboard */,
+				45F5A9001EC27E2700EAAFCF /* Info.plist */,
+				45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */,
+			);
+			path = pickUpAndPlay;
+			sourceTree = "<group>";
+		};
+		9833C57A3A5B30FBB25F7880 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E87DE6C1C6EBC1D3EBDF7AF7 /* Pods_pickUpAndPlay.framework */,
+				D5477D618254B5F632C0C5C2 /* Pods_pickUpAndPlayTests.framework */,
+				EF5F7DF33FC200272A73DD05 /* Pods_pickUpAndPlayUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C0E9D522032EB48D32C65034 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */,
+				58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */,
+				D64604FC2117483D2BFADE65 /* Pods-pickUpAndPlayTests.debug.xcconfig */,
+				49B984E5CBAB4017648FC634 /* Pods-pickUpAndPlayTests.release.xcconfig */,
+				4E3F874A4679B0CDB17CF1EB /* Pods-pickUpAndPlayUITests.debug.xcconfig */,
+				B85E9A5FF405715ED580512A /* Pods-pickUpAndPlayUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		45F5A8F01EC27E2600EAAFCF /* pickUpAndPlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45F5A9191EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlay" */;
+			buildPhases = (
+				3C02BBB0C07E20CFDCE91289 /* [CP] Check Pods Manifest.lock */,
+				45F5A8ED1EC27E2600EAAFCF /* Sources */,
+				45F5A8EE1EC27E2600EAAFCF /* Frameworks */,
+				45F5A8EF1EC27E2600EAAFCF /* Resources */,
+				5989F6DFE71F273FFFB24BD2 /* [CP] Embed Pods Frameworks */,
+				92D6B37988B0A7907FCAC337 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pickUpAndPlay;
+			productName = pickUpAndPlay;
+			productReference = 45F5A8F11EC27E2600EAAFCF /* pickUpAndPlay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		45F5A9041EC27E2700EAAFCF /* pickUpAndPlayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45F5A91C1EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlayTests" */;
+			buildPhases = (
+				3A0F2B734EB5F806E0098879 /* [CP] Check Pods Manifest.lock */,
+				45F5A9011EC27E2700EAAFCF /* Sources */,
+				45F5A9021EC27E2700EAAFCF /* Frameworks */,
+				45F5A9031EC27E2700EAAFCF /* Resources */,
+				0FB8677C7C90250B959EA943 /* [CP] Embed Pods Frameworks */,
+				9874DFA43E55C6B8EA060E6C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45F5A9071EC27E2700EAAFCF /* PBXTargetDependency */,
+			);
+			name = pickUpAndPlayTests;
+			productName = pickUpAndPlayTests;
+			productReference = 45F5A9051EC27E2700EAAFCF /* pickUpAndPlayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		45F5A90F1EC27E2700EAAFCF /* pickUpAndPlayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45F5A91F1EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlayUITests" */;
+			buildPhases = (
+				7ABAD6BABD985A4B42A4FC23 /* [CP] Check Pods Manifest.lock */,
+				45F5A90C1EC27E2700EAAFCF /* Sources */,
+				45F5A90D1EC27E2700EAAFCF /* Frameworks */,
+				45F5A90E1EC27E2700EAAFCF /* Resources */,
+				91A287BA36A4E20D7AE9EEA2 /* [CP] Embed Pods Frameworks */,
+				265377211E7567CE61B93D25 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45F5A9121EC27E2700EAAFCF /* PBXTargetDependency */,
+			);
+			name = pickUpAndPlayUITests;
+			productName = pickUpAndPlayUITests;
+			productReference = 45F5A9101EC27E2700EAAFCF /* pickUpAndPlayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		45F5A8E91EC27E2600EAAFCF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Caleb Mitcler";
+				TargetAttributes = {
+					45F5A8F01EC27E2600EAAFCF = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = VE738W562A;
+						ProvisioningStyle = Automatic;
+					};
+					45F5A9041EC27E2700EAAFCF = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = J742724FE7;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 45F5A8F01EC27E2600EAAFCF;
+					};
+					45F5A90F1EC27E2700EAAFCF = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = J742724FE7;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 45F5A8F01EC27E2600EAAFCF;
+					};
+				};
+			};
+			buildConfigurationList = 45F5A8EC1EC27E2600EAAFCF /* Build configuration list for PBXProject "pickUpAndPlay" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 45F5A8E81EC27E2600EAAFCF;
+			productRefGroup = 45F5A8F21EC27E2600EAAFCF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				45F5A8F01EC27E2600EAAFCF /* pickUpAndPlay */,
+				45F5A9041EC27E2700EAAFCF /* pickUpAndPlayTests */,
+				45F5A90F1EC27E2700EAAFCF /* pickUpAndPlayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		45F5A8EF1EC27E2600EAAFCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45F5A8FF1EC27E2700EAAFCF /* LaunchScreen.storyboard in Resources */,
+				45C42D401EC297500051D2E4 /* GoogleService-Info.plist in Resources */,
+				1D93E06A1F303B7A00E61AA9 /* Assets.xcassets in Resources */,
+				45F5A8FA1EC27E2700EAAFCF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45F5A9031EC27E2700EAAFCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45F5A90E1EC27E2700EAAFCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0FB8677C7C90250B959EA943 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		265377211E7567CE61B93D25 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3A0F2B734EB5F806E0098879 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3C02BBB0C07E20CFDCE91289 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5989F6DFE71F273FFFB24BD2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7ABAD6BABD985A4B42A4FC23 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		91A287BA36A4E20D7AE9EEA2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92D6B37988B0A7907FCAC337 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9874DFA43E55C6B8EA060E6C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		45F5A8ED1EC27E2600EAAFCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D6831CB1F253D3300E7CA72 /* sportControl.swift in Sources */,
+				1DF99A7E1EF6432400C3B589 /* CreateAccountViewController.swift in Sources */,
+				450EC6971ED1103C00CC3259 /* createGameController.swift in Sources */,
+				1D6831D31F270A9F00E7CA72 /* Game.swift in Sources */,
+				454D9CEA1EE08C0A00C9F60F /* userHomePageViewController.swift in Sources */,
+				1D6831D51F293BB600E7CA72 /* Player.swift in Sources */,
+				1D93E06C1F30F61700E61AA9 /* Location.swift in Sources */,
+				4543A9D51EDDE44600D383AC /* eventDetailsViewController.swift in Sources */,
+				454D9CE81EDFE81C00C9F60F /* UserPageViewController.swift in Sources */,
+				1D6831CD1F26F76700E7CA72 /* GameTableViewCell.swift in Sources */,
+				45F1F3B71ECE5FF8005A1E09 /* scheduleController.swift in Sources */,
+				45F5A8F71EC27E2600EAAFCF /* LoginViewController.swift in Sources */,
+				45F5A8F51EC27E2600EAAFCF /* AppDelegate.swift in Sources */,
+				454E54AF1ECB72790011B84F /* MapViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45F5A9011EC27E2700EAAFCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45F5A90C1EC27E2700EAAFCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		45F5A9071EC27E2700EAAFCF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45F5A8F01EC27E2600EAAFCF /* pickUpAndPlay */;
+			targetProxy = 45F5A9061EC27E2700EAAFCF /* PBXContainerItemProxy */;
+		};
+		45F5A9121EC27E2700EAAFCF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45F5A8F01EC27E2600EAAFCF /* pickUpAndPlay */;
+			targetProxy = 45F5A9111EC27E2700EAAFCF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		45F5A8F81EC27E2700EAAFCF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45F5A8F91EC27E2700EAAFCF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		45F5A8FD1EC27E2700EAAFCF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45F5A8FE1EC27E2700EAAFCF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		45F5A9171EC27E2700EAAFCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		45F5A9181EC27E2700EAAFCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		45F5A91A1EC27E2700EAAFCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VE738W562A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Bolts\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FBSDKCoreKit\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FBSDKLoginKit\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMOAuth2\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+					"\"${PODS_ROOT}/TwitterCore/iOS\"",
+				);
+				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		45F5A91B1EC27E2700EAAFCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VE738W562A;
+				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		45F5A91D1EC27E2700EAAFCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D64604FC2117483D2BFADE65 /* Pods-pickUpAndPlayTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = J742724FE7;
+				INFOPLIST_FILE = pickUpAndPlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pickUpAndPlay.app/pickUpAndPlay";
+			};
+			name = Debug;
+		};
+		45F5A91E1EC27E2700EAAFCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49B984E5CBAB4017648FC634 /* Pods-pickUpAndPlayTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = J742724FE7;
+				INFOPLIST_FILE = pickUpAndPlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pickUpAndPlay.app/pickUpAndPlay";
+			};
+			name = Release;
+		};
+		45F5A9201EC27E2700EAAFCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E3F874A4679B0CDB17CF1EB /* Pods-pickUpAndPlayUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = J742724FE7;
+				INFOPLIST_FILE = pickUpAndPlayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = pickUpAndPlay;
+			};
+			name = Debug;
+		};
+		45F5A9211EC27E2700EAAFCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B85E9A5FF405715ED580512A /* Pods-pickUpAndPlayUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = J742724FE7;
+				INFOPLIST_FILE = pickUpAndPlayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = pickUpAndPlay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		45F5A8EC1EC27E2600EAAFCF /* Build configuration list for PBXProject "pickUpAndPlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45F5A9171EC27E2700EAAFCF /* Debug */,
+				45F5A9181EC27E2700EAAFCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45F5A9191EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45F5A91A1EC27E2700EAAFCF /* Debug */,
+				45F5A91B1EC27E2700EAAFCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45F5A91C1EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45F5A91D1EC27E2700EAAFCF /* Debug */,
+				45F5A91E1EC27E2700EAAFCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45F5A91F1EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45F5A9201EC27E2700EAAFCF /* Debug */,
+				45F5A9211EC27E2700EAAFCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 45F5A8E91EC27E2600EAAFCF /* Project object */;
+}
