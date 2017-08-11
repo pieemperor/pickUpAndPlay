@@ -25,44 +25,62 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
     
     var ref: DatabaseReference! = Database.database().reference()
     var profilePicURL = String()
+    let uuid = UUID()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         setupTextBoxes()
+        roundImage()
+
+
     }
 
     @IBAction func createAccount(_ sender: UIButton) {
         
-        if let fn = firstNameTextField.text, let ln = lastNameTextField.text, let e = emailTextField.text, let pw = passwordTextField.text, let cpw = confirmPasswordTextField.text {
-            if pw == cpw, pw.characters.count > 6 {
+        //If all fields are not empty, the password fields are equal, and the password field is longer than 6 characters, create an account
+        if let fn = firstNameTextField.text, let ln = lastNameTextField.text, let e = emailTextField.text, let pw = passwordTextField.text, let cpw = confirmPasswordTextField.text, pw == cpw, pw.characters.count > 6  {
+            
                 Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in
                     
+                    //Get PNG representation of the image they chose
+                    let imageData = UIImagePNGRepresentation(self.profilePic.image!)!
                     
-                    // Check that user isn't nil
-                    if let u = user {
+                    // Get a reference to the profilePics folder where we'll store our photos
+                    let picHandle = Storage.storage().reference().child("profilePics")
+                    
+                    // Get a reference to store the file as uuid
+                    let photoRef = picHandle.child(self.uuid.uuidString)
+                    
+                    // Upload file to Firebase Storage
+                    let metadata = StorageMetadata()
+                    metadata.contentType = "image/png"
+                    photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
                         
-                        //Save user's display name
-                        self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": self.profilePicURL])
-                        
-                        // User is found, go to home screen
-                        self.performSegue(withIdentifier: "goToMap", sender: self)
-                    }
-                    else {
-                        // Error: check error and show message
-                    }
-                })
-
-                }
-            }
-        }
+                        // When the image has successfully uploaded, we get it's download URL
+                        let picURL = snapshot.metadata?.downloadURL()?.absoluteString
+                        // Set the download URL to the message box, so that the user can send it to the database
+                    
+                        // Check that user isn't nil
+                        if let u = user {
+                            //Save user's display name
+                            self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": picURL!])
+                            
+                            // User is found, go to home screen
+                            self.performSegue(withIdentifier: "goToMap", sender: self)
+                        } else {
+                            // Error: check error and show message
+                        }
+                    }//End photo completion handler
+                })//End Firebase createUser
+            }//End if text fields not empty and password fields are equal
+        }//End createAccount
 
     @IBAction func selectProfilePicFromLibrary(_ sender: UITapGestureRecognizer) {
         firstNameTextField.resignFirstResponder()
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
-        
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
@@ -70,57 +88,22 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         // Dismiss the picker if the user canceled.
         dismiss(animated: true, completion: nil)
-        roundImage()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        
-        
         // Get local file URLs
-        guard let image: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
-        let imageData = UIImagePNGRepresentation(image)!
-        guard let _: NSURL = info[UIImagePickerControllerReferenceURL] as? NSURL else { return }
-        
-        // Get a reference to the location where we'll store our photos
-        let picHandle = Storage.storage().reference().child("profilePics")
-        
-        // Get a reference to store the file at chat_photos/<FILENAME>
-        let photoRef = picHandle.child("\(Auth.auth().currentUser!.uid).png")
-        
-        // Upload file to Firebase Storage
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/png"
-        photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
-            // When the image has successfully uploaded, we get it's download URL
-            let text = snapshot.metadata?.downloadURL()?.absoluteString
-            // Set the download URL to the message box, so that the user can send it to the database
-            self.profilePicURL = text!
+        guard let image: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         
-        /*
-        // The info dictionary may contain multiple representations of the image. You want to use the original.
-        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }*/
-        
-        // Set photoImageView to display the selected image.
+        // Set profilePic to display the selected image.
         profilePic.image = image
+        roundImage()
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     func setupTextBoxes() {
         firstNameTextField.layer.cornerRadius = 10.0
@@ -178,17 +161,9 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
             let firstView = self.stackView.arrangedSubviews[0]
             firstView.isHidden = false
         }
-        
     }
     
     func roundImage() {
         profilePic.layer.cornerRadius = profilePic.frame.height/2
     }
-    
-    
-    func uploadProfilePic() {
-        _ = Storage.storage().reference().child("profilePics\(Auth.auth().currentUser!.uid).jpg")
-        
-    }
-    
 }

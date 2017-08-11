@@ -11,7 +11,6 @@ import UIKit
 class GameTableViewCell: UITableViewCell {
     
     //MARK: Properties
-    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var sportImage: UIImageView!
@@ -24,7 +23,6 @@ class GameTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
 
 }

@@ -156,7 +156,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="fMG-YX-J4s">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="fMG-YX-J4s">
                                         <rect key="frame" x="0.0" y="113" width="250" height="120"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -381,7 +381,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hak-UL-hRI">
                                 <rect key="frame" x="127.5" y="83" width="120" height="145.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="120" image="testProfile" translatesAutoresizingMaskIntoConstraints="NO" id="pLT-sd-hlv">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="pLT-sd-hlv">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -434,7 +434,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KVr-RX-NXE">
-                                                    <rect key="frame" x="253.5" y="18.5" width="57.5" height="53"/>
+                                                    <rect key="frame" x="222.5" y="18.5" width="57.5" height="53"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqE-09-gv1">
                                                             <rect key="frame" x="0.0" y="0.0" width="57.5" height="38.5"/>
@@ -588,7 +588,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jeH-a5-1Jw">
-                                                    <rect key="frame" x="293.5" y="18.5" width="57.5" height="53"/>
+                                                    <rect key="frame" x="254.5" y="18.5" width="57.5" height="53"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLc-O6-56S">
                                                             <rect key="frame" x="0.0" y="0.0" width="57.5" height="38.5"/>
@@ -838,7 +838,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3WV-5e-CQS">
-                                                    <rect key="frame" x="253.5" y="18.5" width="57.5" height="53"/>
+                                                    <rect key="frame" x="222.5" y="18.5" width="57.5" height="53"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVM-IU-k13">
                                                             <rect key="frame" x="0.0" y="0.0" width="57.5" height="38.5"/>
@@ -1128,7 +1128,7 @@
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TvU-3m-pPR"/>
+        <segue reference="pmk-xo-nJj"/>
         <segue reference="krn-aR-g15"/>
     </inferredMetricsTieBreakers>
 </document>
