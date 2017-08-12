@@ -21,7 +21,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     
     var ref: DatabaseReference! = Database.database().reference()
     var gameList: [Game] = []
-    var selectedGameId = ""
+    var selectedGame = Game()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +70,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedGameId = self.gameList[indexPath.row].gameId
+        self.selectedGame = self.gameList[indexPath.row]
         self.performSegue(withIdentifier: "goToEventDetails", sender: self)
     }
     
@@ -108,7 +108,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToEventDetails" {
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
-            x.gameId = self.selectedGameId
+            x.game = self.selectedGame
         }
     }
     
@@ -174,10 +174,10 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     let time = timeString
                     let date = justDate
                     let spotsRemaining = dictionary["playerLimit"] //- dictionary["playerList"].count
+                    let gameType = dictionary["gameType"]
+        
                     
-                    
-                    
-                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining as! Int)
+                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining as! Int, gameType as! String)
                     self.gameList.append(game)
                     self.tableView.reloadData()
                 } //End if location

@@ -19,23 +19,27 @@ import AVFoundation
 
 class eventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var sportImage: UIImageView!
+    @IBOutlet weak var gameTypeLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var locationImage: UIImageView!
     
     //event key sent from schedulecontroller
-    var gameId = String()
     var game = Game()
     var playerList = [Player]()
     var idList = [String]()
     var selectedPlayer = ""
-    var passedLocation = ""
+    var passedLocation = Location()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
+        getGameInfo()
         fetchPlayers()
         
         //set table view delegate to self
@@ -121,7 +125,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                 
                                 self.idList.append(player.playerId)
                                 
-                                let eventsHandle = Database.database().reference().child("events").child(self.gameId)
+                                let eventsHandle = Database.database().reference().child("events").child(self.game.gameId)
                                 eventsHandle.updateChildValues(["playerList":self.idList])
                                 self.tableView.reloadData()
                             }
@@ -141,13 +145,15 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     private func setupButtons() {
         joinButton.layer.cornerRadius = joinButton.frame.height/2
+        locationImage.image = passedLocation.locationImage
+        locationImage.clipsToBounds = true
     }
     
     func fetchPlayers() {
         let ref = Database.database().reference()
         _ = ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                if snapshot.key == self.gameId {
+                if snapshot.key == self.game.gameId {
                 self.locationName.text = dictionary["location"] as? String
                     if let playerIdArray = dictionary["playerList"] as? [String] {
                         for player in playerIdArray {
@@ -188,4 +194,26 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             }//End if let dictionary
         })//End snapshot in
     }//End fetchPlayers
+    
+    private func getGameInfo() {
+        self.timeLabel.text = game.time
+        self.dateLabel.text = game.date
+        self.gameTypeLabel.text = game.gameType
+        
+        if game.sport == "soccer" {
+            sportImage.image = UIImage(named: "soccerBall")
+        } else if game.sport == "basketball" {
+            sportImage.image = UIImage(named: "basketball")
+        } else if game.sport == "volleyball" {
+            sportImage.image = UIImage(named: "volleyball")
+        } else if game.sport == "ultimate" {
+            sportImage.image = UIImage(named: "ultimate")
+        } else if game.sport == "discGolf" {
+            sportImage.image = UIImage(named: "discGolf")
+        } else if game.sport == "tennis" {
+            sportImage.image = UIImage(named: "tennis")
+        } else {
+            print("That is not a valid sport")
+        }
+    }
 }//End class

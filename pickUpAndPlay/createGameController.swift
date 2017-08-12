@@ -5,12 +5,9 @@
 //  Created by Caleb Mitcler on 5/20/17.
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //
-//TODO: Don't let them make a game if there is already a game for that time
 //TODO: Don't let them create a game if all the fields havent been selected
 //TODO: Fix the add subs button
-//TODO: Add other sports
 //TODO: Fix date picker and repeat picker
-
 
 import UIKit
 import Firebase
@@ -22,8 +19,8 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
     //name of location
     var location = Location()
     let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
+    var timeArray = [String]()
     private var sportButtons = [UIButton]()
-
     var isDatePickerShowing = false
     var numberOfSubs = 0
     
@@ -35,11 +32,9 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     var time = String()
     var repeatFrequency = "Never"
-    var gameType = "recreational"
+    var gameType = "Recreational"
     var playerLimit = 0
 
-    
-    
     //MARK: Outlets
     @IBOutlet weak var sportsButtonsStack: UIStackView!
     @IBOutlet weak var addSubsButton: UIButton!
@@ -51,7 +46,6 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var repeatPicker: UIPickerView!
-    
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
@@ -101,28 +95,32 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func gameTypeChanged(_ sender: UISegmentedControl) {
         if skillSelector.selectedSegmentIndex == 0 {
-            gameType = "recreational"
+            gameType = "Recreational"
         } else if skillSelector.selectedSegmentIndex == 1 {
-            gameType = "competitive"
+            gameType = "Competitive"
         } else {
             print("Invalid selector option")
         }
     }
     
     @IBAction func createGameButtonTapped(_ sender: Any) {
-        //create a new event and add info as children
-        let ref = Database.database().reference()
-        let key = ref.child("events").childByAutoId().key
-        let post = ["createdBy": Auth.auth().currentUser?.uid as Any,
-                    "location": location.name,
-                    "sport": selectedSport,
-                    "time": time,
-                    "repeatFrequency": repeatFrequency,
-                    "gameType": gameType,
-                    "playerLimit": playerLimit,
-                    "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
-        let childUpdates = ["/events/\(key)": post]
-        ref.updateChildValues(childUpdates)
+        if !timeArray.contains(time) {
+            //create a new event and add info as children
+            let ref = Database.database().reference()
+            let key = ref.child("events").childByAutoId().key
+            let post = ["createdBy": Auth.auth().currentUser?.uid as Any,
+                        "location": location.name,
+                        "sport": selectedSport,
+                        "time": time,
+                        "repeatFrequency": repeatFrequency,
+                        "gameType": gameType,
+                        "playerLimit": playerLimit,
+                        "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
+            let childUpdates = ["/events/\(key)": post]
+            ref.updateChildValues(childUpdates)
+        }  else {
+            print("There is already a game scheduled for that time.")
+        }
     }
     
     @IBAction func showRepeatPicker(_ sender: UIButton) {
@@ -282,7 +280,6 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     private func setupButtons() {
-        
         //Create green color
         let myGreen = UIColor(displayP3Red:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
         
@@ -324,9 +321,14 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
         } else if selectedSport == "volleyball" {
             playerLimit = 12
             numberOfSubs = 6
+        } else if selectedSport == "discGolf" {
+            playerLimit = 8
+            numberOfSubs = 0
+        } else if selectedSport == "tennis" {
+            playerLimit = 4
+            numberOfSubs = 2
         } else {
-            print("There is no sport with that name")
+            print("Cannot set player limit because wrong sport")
         }
     }
-    
 }

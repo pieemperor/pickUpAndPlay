@@ -14,7 +14,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     var userId = ""
     var gameList: [Game] = []
-    var selectedGameId = ""
+    var selectedGame = Game()
     var ref: DatabaseReference! = Database.database().reference()
     
     @IBOutlet weak var gameLabel: UILabel!
@@ -68,7 +68,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedGameId = self.gameList[indexPath.row].gameId
+        self.selectedGame = self.gameList[indexPath.row]
         self.performSegue(withIdentifier: "goToEventDetails", sender: self)
     }
     
@@ -141,33 +141,34 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         let ref = Database.database().reference()
         _ = ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                let playerArray = dictionary["playerList"] as! [String]
-                if playerArray.contains(self.userId) {
-                    
-                    let gameId = snapshot.key
-                    
-                    //Format the date stored in the database
-                    let df = DateFormatter()
-                    df.dateFormat = "MMM d, yyyy, h:mm a"
-                    let dateAsDate = df.date(from: dictionary["time"] as! String)
-                    df.dateFormat = "MMMM d"
-                    let justDate = df.string(from: dateAsDate!)
-                    df.dateFormat = "h:mm a"
-                    let timeString = df.string(from: dateAsDate!)
-                    
-                    
-                    //Set values of game variable from database information
-                    let sport = dictionary["sport"]
-                    let time = timeString
-                    let date = justDate
-                    let spotsRemaining = dictionary["playerLimit"] //- dictionary["playerList"].count
-                    
-                    
-                    
-                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining as! Int)
-                    self.gameList.append(game)
-                    self.tableView.reloadData()
-                } //End if location
+                if let playerArray = dictionary["playerList"] as? [String] {
+                    if playerArray.contains(self.userId) {
+                        
+                        let gameId = snapshot.key
+                        
+                        //Format the date stored in the database
+                        let df = DateFormatter()
+                        df.dateFormat = "MMM d, yyyy, h:mm a"
+                        let dateAsDate = df.date(from: dictionary["time"] as! String)
+                        df.dateFormat = "MMMM d"
+                        let justDate = df.string(from: dateAsDate!)
+                        df.dateFormat = "h:mm a"
+                        let timeString = df.string(from: dateAsDate!)
+                        
+                        
+                        //Set values of game variable from database information
+                        let sport = dictionary["sport"]
+                        let time = timeString
+                        let date = justDate
+                        let spotsRemaining = dictionary["playerLimit"] //- dictionary["playerList"].count
+                        let gameType = dictionary["gameType"]
+                        
+                        
+                        let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining as! Int, gameType as! String)
+                        self.gameList.append(game)
+                        self.tableView.reloadData()
+                    } //End if location
+                }
                 //Sort games by date
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
@@ -177,6 +178,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
-        x.gameId = self.selectedGameId
+        x.game = self.selectedGame
     }
 }

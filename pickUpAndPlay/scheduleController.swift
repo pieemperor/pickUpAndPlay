@@ -27,8 +27,8 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     var passedLocation = Location()
     //Sports available at that location - passed from mapViewController
     var gameList = [Game]()
-    var dateList = [Date]()
-    var selectedGameId = String()
+    var timeArray = [String]()
+    var selectedGame = Game()
     
     
     override func viewDidLoad() {
@@ -85,7 +85,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedGameId = self.gameList[indexPath.row].gameId
+        self.selectedGame = self.gameList[indexPath.row]
         self.performSegue(withIdentifier: "goToEventDetails", sender: self)
     }
     
@@ -148,7 +148,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     df.dateFormat = "MMM d, yyyy, h:mm a"
                     let dateAsDate = df.date(from: dictionary["time"] as! String)
-                    self.dateList.append(dateAsDate!)
                     df.dateFormat = "MMMM d"
                     let justDate = df.string(from: dateAsDate!)
                     df.dateFormat = "h:mm a"
@@ -161,10 +160,11 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     let time = timeString
                     let date = justDate
                     let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers!
+                    let gameType = dictionary["gameType"]
                     
-                    
-                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining)
+                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
                     self.gameList.append(game)
+                    self.timeArray.append(dictionary["time"] as! String)
                     self.tableView.reloadData()
                 } //End if location
                 //Sort games by date
@@ -181,12 +181,13 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
             // send the name of the location to the createGame view
             let x : createGameController = segue.destination as! createGameController
             x.location = self.passedLocation
+            x.timeArray = self.timeArray
         }
         
         if segue.identifier == "goToEventDetails"{
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
-            x.gameId = self.selectedGameId
+            x.game = self.selectedGame
+            x.passedLocation = self.passedLocation
         }
     }//End prepare for segue
-    
 } // End class
