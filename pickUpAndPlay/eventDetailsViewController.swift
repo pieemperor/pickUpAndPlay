@@ -22,6 +22,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var locationImage: UIImageView!
     
     //event key sent from schedulecontroller
     var gameId = String()
@@ -51,14 +52,12 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
         let player = playerList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableViewCell", for: indexPath) as? PlayerTableViewCell
+        cell?.playerNameLabel.text = player.firstName + " " + player.lastName
+        cell?.profilePic?.image = player.profilePicture
+        cell?.profilePic?.layer.cornerRadius = (cell?.profilePic?.frame.width)! / 2
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = player.firstName + " " + player.lastName
-        cell.imageView?.image = UIImage(named: "testProfile")
-        cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.width)! / 2.0
-        cell.textLabel?.textColor = .white
-        
-        return cell
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -98,14 +97,35 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             if let dict = snapshot.value as? [String : AnyObject] {
                 if snapshot.key == Auth.auth().currentUser!.uid {
                     if !self.idList.contains(Auth.auth().currentUser!.uid) {
-                        let player = Player(Auth.auth().currentUser!.uid, dict["firstName"] as! String, dict["lastName"] as! String, UIImage())
-                        self.playerList.append(player)
                         
-                        self.idList.append(player.playerId)
                         
-                        let eventsHandle = Database.database().reference().child("events").child(self.gameId)
-                        eventsHandle.updateChildValues(["playerList":self.idList])
-                        self.tableView.reloadData()
+                        let profilePicURL = dict["photo"] as? String
+                        var userProfilePic = UIImage()
+                        
+                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                            
+                            let picRef = Storage.storage().reference(forURL: profilePicURL!)
+                            
+                            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                            picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+                                if let error = error {
+                                    // Uh-oh, an error occurred!
+                                    print("The following error occurred - \(error)")
+                                } else {
+                                    // Data for "images/island.jpg" is returned
+                                    userProfilePic = UIImage(data: data!)!
+                                }
+                                
+                                let player = Player(Auth.auth().currentUser!.uid, dict["firstName"] as! String, dict["lastName"] as! String, userProfilePic)
+                                self.playerList.append(player)
+                                
+                                self.idList.append(player.playerId)
+                                
+                                let eventsHandle = Database.database().reference().child("events").child(self.gameId)
+                                eventsHandle.updateChildValues(["playerList":self.idList])
+                                self.tableView.reloadData()
+                            }
+                        }
                     }
                 }
             }
@@ -129,23 +149,42 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 if snapshot.key == self.gameId {
                 self.locationName.text = dictionary["location"] as? String
-                let playerIdArray = dictionary["playerList"] as! [String]
-                for player in playerIdArray {
-                    _ = ref.child("users").observe(.childAdded, with: {(snapshot) in
-                        if let userDictionary = snapshot.value as? [String : AnyObject] {
-                            if player == snapshot.key {
-                                let firstName = userDictionary["firstName"]
-                                let lastName = userDictionary["lastName"]
-                                
-                                let player = Player(player, firstName as! String, lastName as! String, UIImage())
-                                self.idList.append(player.playerId)
-                                self.playerList.append(player)
-                                self.tableView.reloadData()
-                            }
-                        }
-                    })
-                }//End for player in playerIdArray
-                }//End if gameId = snapshot
+                    if let playerIdArray = dictionary["playerList"] as? [String] {
+                        for player in playerIdArray {
+                            _ = ref.child("users").observe(.childAdded, with: {(snapshot) in
+                                if let userDictionary = snapshot.value as? [String : AnyObject] {
+                                    if player == snapshot.key {
+                                        let firstName = userDictionary["firstName"]
+                                        let lastName = userDictionary["lastName"]
+                                        let profilePicURL = userDictionary["photo"] as? String
+                                        var userProfilePic = UIImage()
+                                        
+                                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                                            
+                                            let picRef = Storage.storage().reference(forURL: profilePicURL!)
+                                            
+                                            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                                            picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+                                                if let error = error {
+                                                    // Uh-oh, an error occurred!
+                                                    print("The following error occurred - \(error)")
+                                                } else {
+                                                    // Data for "images/island.jpg" is returned
+                                                    userProfilePic = UIImage(data: data!)!
+                                                }
+                                                
+                                                let player = Player(player, firstName as! String, lastName as! String, userProfilePic)
+                                                self.idList.append(player.playerId)
+                                                self.playerList.append(player)
+                                                self.tableView.reloadData()
+                                            }
+                                        }//End if profilePicURL != ""
+                                    }//End if player == snapshot.key
+                                }//End if let userDictionary
+                            })//End .child("users").observe
+                        }//End for player in playerIdArray
+                    }//End if gameId = snapshot
+                }//End if let playerIdArray
             }//End if let dictionary
         })//End snapshot in
     }//End fetchPlayers

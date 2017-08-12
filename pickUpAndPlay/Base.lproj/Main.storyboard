@@ -694,27 +694,40 @@
                                 <rect key="frame" x="20" y="270" width="335" height="397"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="lKp-tQ-jf9" imageView="ER6-U5-x7r" rowHeight="100" style="IBUITableViewCellStyleDefault" id="GeU-6n-pOJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayerTableViewCell" rowHeight="100" id="GeU-6n-pOJ" customClass="PlayerTableViewCell" customModule="pickUpAndPlay" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="335" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GeU-6n-pOJ" id="ofF-Ol-Xew">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lKp-tQ-jf9">
-                                                    <rect key="frame" x="163" y="0.0" width="157" height="100"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ls5-dm-ITJ">
+                                                    <rect key="frame" x="23" y="20" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="79U-0V-pAU"/>
+                                                        <constraint firstAttribute="width" secondItem="Ls5-dm-ITJ" secondAttribute="height" multiplier="1:1" id="GTz-iJ-tHP"/>
+                                                        <constraint firstAttribute="height" constant="60" id="ZH0-tb-NAf"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SN-dY-M7e">
+                                                    <rect key="frame" x="113" y="40" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="testProfile" id="ER6-U5-x7r">
-                                                    <rect key="frame" x="15" y="0.0" width="133" height="100"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7SN-dY-M7e" firstAttribute="centerY" secondItem="ofF-Ol-Xew" secondAttribute="centerY" id="0iq-Hz-hTH"/>
+                                                <constraint firstItem="Ls5-dm-ITJ" firstAttribute="leading" secondItem="ofF-Ol-Xew" secondAttribute="leadingMargin" constant="15" id="V7F-hx-4qr"/>
+                                                <constraint firstItem="Ls5-dm-ITJ" firstAttribute="centerY" secondItem="ofF-Ol-Xew" secondAttribute="centerY" id="XLa-sq-Q5y"/>
+                                                <constraint firstItem="7SN-dY-M7e" firstAttribute="leading" secondItem="Ls5-dm-ITJ" secondAttribute="trailing" constant="30" id="krx-Uo-xXt"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="playerNameLabel" destination="7SN-dY-M7e" id="N1I-Ae-UTz"/>
+                                            <outlet property="profilePic" destination="Ls5-dm-ITJ" id="jz3-pv-VPE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -768,6 +781,7 @@
                     </view>
                     <connections>
                         <outlet property="joinButton" destination="IQ6-wu-lMl" id="BLZ-zW-Cjs"/>
+                        <outlet property="locationImage" destination="gKh-Hq-Aaq" id="9C1-nM-fdk"/>
                         <outlet property="locationName" destination="tav-fA-3YC" id="3qe-tp-Ay1"/>
                         <outlet property="tableView" destination="b1B-fF-TS9" id="nTO-0y-zTU"/>
                         <segue destination="JFS-5U-qgt" kind="show" identifier="goToUserPage" id="ebA-3z-1J7"/>
@@ -881,7 +895,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xjU-yB-COF">
                                 <rect key="frame" x="127.5" y="83" width="120" height="145.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="120" image="testProfile" translatesAutoresizingMaskIntoConstraints="NO" id="CeC-rp-IxQ">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="CeC-rp-IxQ">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -1102,7 +1116,7 @@
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1124,11 +1138,10 @@
         <image name="profileBG" width="397" height="282"/>
         <image name="soccerBall" width="179" height="179"/>
         <image name="testLocation" width="250" height="117"/>
-        <image name="testProfile" width="2016" height="1512"/>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="PIL-Kj-fUK"/>
         <segue reference="pmk-xo-nJj"/>
-        <segue reference="krn-aR-g15"/>
     </inferredMetricsTieBreakers>
 </document>

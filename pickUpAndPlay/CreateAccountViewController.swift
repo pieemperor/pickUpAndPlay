@@ -39,13 +39,18 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
 
     @IBAction func createAccount(_ sender: UIButton) {
         
+        UIView.animate(withDuration: 0.50) { () -> Void in
+            let firstView = self.stackView.arrangedSubviews[0]
+            firstView.isHidden = true
+        }
+        
         //If all fields are not empty, the password fields are equal, and the password field is longer than 6 characters, create an account
         if let fn = firstNameTextField.text, let ln = lastNameTextField.text, let e = emailTextField.text, let pw = passwordTextField.text, let cpw = confirmPasswordTextField.text, pw == cpw, pw.characters.count > 6  {
             
                 Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in
                     
                     //Get PNG representation of the image they chose
-                    let imageData = UIImagePNGRepresentation(self.profilePic.image!)!
+                    let imageData = UIImageJPEGRepresentation(self.profilePic.image!, 0.5)!
                     
                     // Get a reference to the profilePics folder where we'll store our photos
                     let picHandle = Storage.storage().reference().child("profilePics")
@@ -55,7 +60,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                     
                     // Upload file to Firebase Storage
                     let metadata = StorageMetadata()
-                    metadata.contentType = "image/png"
+                    metadata.contentType = "image/jpg"
                     photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
                         
                         // When the image has successfully uploaded, we get it's download URL

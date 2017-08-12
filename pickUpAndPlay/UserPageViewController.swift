@@ -110,6 +110,27 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
             let lastName = value?["lastName"] as? String ?? "Didn't work"
             self.nameLabel.text = firstName + " " + lastName
             self.gameLabel.text = "\(firstName)'s Games"
+            
+            let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
+            
+            if profilePicURL != "", profilePicURL != nil {
+                
+                let picRef = Storage.storage().reference(forURL: profilePicURL!)
+                
+                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+                    if let error = error {
+                        // Uh-oh, an error occurred!
+                        print("The following error occurred - \(error)")
+                    } else {
+                        // Data for "images/island.jpg" is returned
+                        self.profilePic.image = UIImage(data: data!)
+                    }
+                }
+            } else {
+                print("No profile pic URL")
+            }
+
             // ...
         }) { (error) in
             print(error.localizedDescription)
