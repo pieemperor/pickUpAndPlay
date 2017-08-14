@@ -683,13 +683,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cL-qp-SgA">
-                                <rect key="frame" x="0.0" y="172" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testLocation" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-Hq-Aaq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <constraints>
@@ -773,7 +766,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ls5-dm-ITJ">
-                                                    <rect key="frame" x="23" y="20" width="60" height="60"/>
+                                                    <rect key="frame" x="13" y="20" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="79U-0V-pAU"/>
                                                         <constraint firstAttribute="width" secondItem="Ls5-dm-ITJ" secondAttribute="height" multiplier="1:1" id="GTz-iJ-tHP"/>
@@ -781,7 +774,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SN-dY-M7e">
-                                                    <rect key="frame" x="113" y="40" width="42" height="21"/>
+                                                    <rect key="frame" x="88" y="40" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -789,9 +782,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="7SN-dY-M7e" firstAttribute="centerY" secondItem="ofF-Ol-Xew" secondAttribute="centerY" id="0iq-Hz-hTH"/>
-                                                <constraint firstItem="Ls5-dm-ITJ" firstAttribute="leading" secondItem="ofF-Ol-Xew" secondAttribute="leadingMargin" constant="15" id="V7F-hx-4qr"/>
+                                                <constraint firstItem="Ls5-dm-ITJ" firstAttribute="leading" secondItem="ofF-Ol-Xew" secondAttribute="leadingMargin" constant="5" id="V7F-hx-4qr"/>
                                                 <constraint firstItem="Ls5-dm-ITJ" firstAttribute="centerY" secondItem="ofF-Ol-Xew" secondAttribute="centerY" id="XLa-sq-Q5y"/>
-                                                <constraint firstItem="7SN-dY-M7e" firstAttribute="leading" secondItem="Ls5-dm-ITJ" secondAttribute="trailing" constant="30" id="krx-Uo-xXt"/>
+                                                <constraint firstItem="7SN-dY-M7e" firstAttribute="leading" secondItem="Ls5-dm-ITJ" secondAttribute="trailing" constant="15" id="krx-Uo-xXt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1167,7 +1160,7 @@
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
