@@ -15,6 +15,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     var userId = ""
     var gameList: [Game] = []
     var selectedGame = Game()
+    var locationToPass = ""
     var ref: DatabaseReference! = Database.database().reference()
     
     @IBOutlet weak var gameLabel: UILabel!
@@ -61,6 +62,14 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell?.sportImage.image = UIImage(named: "basketball")
         } else if game.sport == "volleyball" {
             cell?.sportImage.image = UIImage(named: "volleyball")
+        } else if game.sport == "ultimate" {
+            cell?.sportImage.image = UIImage(named: "ultimate")
+        } else if game.sport == "discGolf" {
+            cell?.sportImage.image = UIImage(named: "discGolf")
+        } else if game.sport == "tennis" {
+            cell?.sportImage.image = UIImage(named: "tennis")
+        } else {
+            print("Cannot set cell's image")
         }
         
         
@@ -162,7 +171,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                         let date = justDate
                         let spotsRemaining = dictionary["playerLimit"] //- dictionary["playerList"].count
                         let gameType = dictionary["gameType"]
-                        
+                        self.locationToPass = dictionary["location"] as! String
                         
                         let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining as! Int, gameType as! String)
                         self.gameList.append(game)
@@ -179,5 +188,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
         x.game = self.selectedGame
+        x.otherPassedLocation = self.locationToPass
     }
 }

@@ -48,14 +48,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         self.performSegue(withIdentifier: "goToSchedule", sender: self)
         return true
     }
-
-    //send location to schedule controller
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToSchedule" {
-            let x : scheduleController = segue.destination as! scheduleController
-            x.passedLocation = self.locationToPass
-        }
-    }
     
     func setupMap() {
         
@@ -93,6 +85,14 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                     print ("No sport selected")
                 }
             }
+        }
+    }
+    
+    //send location to schedule controller
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToSchedule" {
+            let x : scheduleController = segue.destination as! scheduleController
+            x.passedLocation = self.locationToPass
         }
     }
 }

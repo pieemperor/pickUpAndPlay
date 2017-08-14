@@ -331,4 +331,8 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
             print("Cannot set player limit because wrong sport")
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
 }

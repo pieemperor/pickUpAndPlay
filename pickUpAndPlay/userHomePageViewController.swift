@@ -22,6 +22,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     var ref: DatabaseReference! = Database.database().reference()
     var gameList: [Game] = []
     var selectedGame = Game()
+    var locationToPass = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,14 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
             cell?.sportImage.image = UIImage(named: "basketball")
         } else if game.sport == "volleyball" {
             cell?.sportImage.image = UIImage(named: "volleyball")
+        } else if game.sport == "ultimate" {
+            cell?.sportImage.image = UIImage(named: "ultimate")
+        } else if game.sport == "discGolf" {
+            cell?.sportImage.image = UIImage(named: "discGolf")
+        } else if game.sport == "tennis" {
+            cell?.sportImage.image = UIImage(named: "tennis")
+        } else {
+            print("Cannot set cell's image")
         }
         
         return cell!
@@ -102,13 +111,6 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
             self.performSegue(withIdentifier: "logOut", sender: nil)
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToEventDetails" {
-            let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
-            x.game = self.selectedGame
         }
     }
     
@@ -175,6 +177,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     let date = justDate
                     let spotsRemaining = dictionary["playerLimit"] //- dictionary["playerList"].count
                     let gameType = dictionary["gameType"]
+                    self.locationToPass = dictionary["location"] as! String
         
                     
                     let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining as! Int, gameType as! String)
@@ -187,4 +190,12 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         }) //End observe snapshot
     } //End fetchGames
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToEventDetails" {
+            let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
+            x.game = self.selectedGame
+            x.otherPassedLocation = self.locationToPass
+        }
+    }
 }//End class

@@ -34,6 +34,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     var idList = [String]()
     var selectedPlayer = ""
     var passedLocation = Location()
+    var otherPassedLocation = ""
     
     
     override func viewDidLoad() {
@@ -58,9 +59,13 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         let player = playerList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableViewCell", for: indexPath) as? PlayerTableViewCell
         cell?.playerNameLabel.text = player.firstName + " " + player.lastName
-        cell?.profilePic?.image = player.profilePicture
-        cell?.profilePic.clipsToBounds = true
-        cell?.profilePic?.layer.cornerRadius = (cell?.profilePic?.frame.width)! / 2
+        if player.profilePicture != nil {
+            cell?.profilePic?.image = player.profilePicture
+            cell?.profilePic.clipsToBounds = true
+            cell?.profilePic?.layer.cornerRadius = (cell?.profilePic?.frame.width)! / 2
+        } else {
+            cell?.profilePic?.image = UIImage(named: "testProfile")
+        }
         
         return cell!
     }
@@ -101,7 +106,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         _ = ref.child("users").observe(.childAdded, with: {(snapshot) in
             if let dict = snapshot.value as? [String : AnyObject] {
                 if snapshot.key == Auth.auth().currentUser!.uid {
-                    if !self.idList.contains(Auth.auth().currentUser!.uid) {
+                    let playerListCount = dict["playerList"]?.count!
+                    let spotsRemaining = dict["playerLimit"] as! Int - playerListCount!
+                    if !self.idList.contains(Auth.auth().currentUser!.uid), spotsRemaining > 0 {
                         
                         
                         let profilePicURL = dict["photo"] as? String
@@ -129,25 +136,45 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                 let eventsHandle = Database.database().reference().child("events").child(self.game.gameId)
                                 eventsHandle.updateChildValues(["playerList":self.idList])
                                 self.tableView.reloadData()
-                            }
-                        }
-                    }
-                }
-            }
-        })
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToUserPage" {
-        let x : UserPageViewController = segue.destination as! UserPageViewController
-        x.userId = self.selectedPlayer
-        }
-    }//End prepare for segue
+                            }//End get data
+                        }//End if profilePicURL
+                    }//End if !self.idList & spotsRemaining
+                }//End it snapshot.key == current user ID
+            }//End if let dict
+        })//End child users snapshot in
+    }//End join game
     
     private func setupButtons() {
         joinButton.layer.cornerRadius = joinButton.frame.height/2
-        locationImage.image = passedLocation.locationImage
-        locationImage.clipsToBounds = true
+        
+        if otherPassedLocation != "" {
+            if otherPassedLocation == "Davis Basketball Court" {
+                locationImage.image = UIImage(named: "davisBBall")!
+            } else if otherPassedLocation == "Buc Ridge Basketball Court" {
+                locationImage.image = UIImage(named: "bucRidgeBBall")!
+            } else if otherPassedLocation == "Davis Beach Volleyball Court (Outside)" {
+                locationImage.image = UIImage(named: "davisVBall")!
+            } else if otherPassedLocation == "Buc Ridge Beach Volleyball Court" {
+                locationImage.image = UIImage(named: "brvbCourt")!
+            } else if otherPassedLocation == "Campus Ridge Beach Volleyball Court" {
+                locationImage.image = UIImage(named: "campusRidgeVBCourt")!
+            } else if otherPassedLocation == "CPA Front Yard" {
+                locationImage.image = UIImage(named: "cpaFrontYard")!
+            } else if otherPassedLocation == "CPA Side Yard" {
+                locationImage.image = UIImage(named: "cpaSideYard")!
+            } else if otherPassedLocation == "The Quad" {
+                locationImage.image = UIImage(named: "quad")!
+            } else if otherPassedLocation == "Tri-Hall Field" {
+                locationImage.image = UIImage(named: "triHallField")!
+            } else if otherPassedLocation == "ETSU Disc Golf Course" {
+                locationImage.image = UIImage(named: "etsuDiscGolf")!
+            } else {
+                print("Invalid location passed to page")
+            }
+        } else {
+            locationImage.image = passedLocation.locationImage
+            locationImage.clipsToBounds = true
+        }
     }
     
     func fetchPlayers() {
@@ -217,4 +244,11 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             print("That is not a valid sport")
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToUserPage" {
+            let x : UserPageViewController = segue.destination as! UserPageViewController
+            x.userId = self.selectedPlayer
+        }
+    }//End prepare for segue
 }//End class
