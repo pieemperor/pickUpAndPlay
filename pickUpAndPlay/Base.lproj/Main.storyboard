@@ -156,17 +156,41 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="fMG-YX-J4s">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-15" translatesAutoresizingMaskIntoConstraints="NO" id="JoH-dy-zHy">
                                         <rect key="frame" x="0.0" y="113" width="250" height="120"/>
-                                        <gestureRecognizers/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HfS-Wl-oQt">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="gzC-wd-8IP"/>
+                                                </constraints>
+                                            </view>
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="fMG-YX-J4s">
+                                                <rect key="frame" x="65" y="0.0" width="120" height="120"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="fMG-YX-J4s" secondAttribute="height" multiplier="1:1" priority="750" id="5Mw-Ww-96K"/>
+                                                    <constraint firstAttribute="height" constant="120" id="wL5-YT-Pt8"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="4Be-BV-iZn" appends="YES" id="B7J-4V-1zS"/>
+                                                </connections>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s0e-C7-g5N">
+                                                <rect key="frame" x="170" y="0.0" width="80" height="120"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="AdX-Rp-RfL"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="fMG-YX-J4s" secondAttribute="height" multiplier="1:1" priority="750" id="5Mw-Ww-96K"/>
-                                            <constraint firstAttribute="height" constant="120" id="wL5-YT-Pt8"/>
+                                            <constraint firstItem="HfS-Wl-oQt" firstAttribute="leading" secondItem="JoH-dy-zHy" secondAttribute="leading" id="2nt-ew-Czz"/>
+                                            <constraint firstAttribute="trailing" secondItem="s0e-C7-g5N" secondAttribute="trailing" id="OyL-vI-MCa"/>
+                                            <constraint firstItem="fMG-YX-J4s" firstAttribute="centerX" secondItem="JoH-dy-zHy" secondAttribute="centerX" id="wke-Hp-jOZ"/>
                                         </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="4Be-BV-iZn" appends="YES" id="B7J-4V-1zS"/>
-                                        </connections>
-                                    </imageView>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1DR-qt-6SU">
                                         <rect key="frame" x="0.0" y="248" width="250" height="40"/>
                                         <subviews>
@@ -664,6 +688,7 @@
                         <outlet property="locationImage" destination="w51-qw-Lj7" id="h6f-Mw-FzG"/>
                         <outlet property="locationName" destination="sIX-q7-xLU" id="l4D-vl-4MI"/>
                         <outlet property="tableView" destination="OqN-R5-hsc" id="Hgh-Dh-1lU"/>
+                        <outlet property="upcomingGamesLabel" destination="HdK-5u-7UC" id="ox4-OP-N05"/>
                         <segue destination="sT7-Oz-uhz" kind="show" identifier="goToEventDetails" id="PIL-Kj-fUK"/>
                     </connections>
                 </viewController>
@@ -711,10 +736,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdZ-gB-ypM">
-                                <rect key="frame" x="0.0" y="250" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="250" width="375" height="80"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJP-2r-N14">
-                                        <rect key="frame" x="20" y="12.5" width="65" height="65"/>
+                                        <rect key="frame" x="20" y="7.5" width="65" height="65"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="65" id="0mT-OZ-lek"/>
                                             <constraint firstAttribute="height" constant="65" id="MQV-ZB-tro"/>
@@ -722,7 +747,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="Oex-IY-Xhm">
-                                        <rect key="frame" x="100" y="11" width="54" height="69.5"/>
+                                        <rect key="frame" x="100" y="6" width="54" height="69.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMl-1h-4ww">
                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="26.5"/>
@@ -750,12 +775,12 @@
                                     <constraint firstItem="Oex-IY-Xhm" firstAttribute="centerY" secondItem="QdZ-gB-ypM" secondAttribute="centerY" id="8CV-rF-eDQ"/>
                                     <constraint firstItem="NJP-2r-N14" firstAttribute="centerY" secondItem="QdZ-gB-ypM" secondAttribute="centerY" id="EHs-bq-rfg"/>
                                     <constraint firstItem="Oex-IY-Xhm" firstAttribute="leading" secondItem="NJP-2r-N14" secondAttribute="trailing" constant="15" id="RoI-dx-0vQ"/>
-                                    <constraint firstAttribute="height" constant="90" id="SKT-Q5-ugs"/>
+                                    <constraint firstAttribute="height" constant="80" id="SKT-Q5-ugs"/>
                                     <constraint firstItem="NJP-2r-N14" firstAttribute="leading" secondItem="QdZ-gB-ypM" secondAttribute="leading" constant="20" id="YD4-xS-uOE"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b1B-fF-TS9">
-                                <rect key="frame" x="20" y="360" width="335" height="307"/>
+                                <rect key="frame" x="20" y="350" width="335" height="317"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlayerTableViewCell" rowHeight="100" id="GeU-6n-pOJ" customClass="PlayerTableViewCell" customModule="pickUpAndPlay" customModuleProvider="target">
@@ -1160,7 +1185,7 @@
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

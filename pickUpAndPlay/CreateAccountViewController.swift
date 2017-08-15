@@ -32,16 +32,19 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         
         // Do any additional setup after loading the view.
         setupTextBoxes()
-        roundImage()
-
 
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        profilePic.layer.cornerRadius = profilePic.frame.width/2
+        profilePic.clipsToBounds = true
+    }
     @IBAction func createAccount(_ sender: UIButton) {
         
         UIView.animate(withDuration: 0.50) { () -> Void in
             let firstView = self.stackView.arrangedSubviews[0]
-            firstView.isHidden = true
+            firstView.isHidden = false
         }
         
         //If all fields are not empty, the password fields are equal, and the password field is longer than 6 characters, create an account
@@ -104,7 +107,6 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         
         // Set profilePic to display the selected image.
         profilePic.image = image
-        roundImage()
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
@@ -166,9 +168,5 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
             let firstView = self.stackView.arrangedSubviews[0]
             firstView.isHidden = false
         }
-    }
-    
-    func roundImage() {
-        profilePic.layer.cornerRadius = profilePic.frame.height/2
     }
 }

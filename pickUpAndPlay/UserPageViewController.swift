@@ -5,7 +5,6 @@
 //  Created by Caleb Mitcler on 6/1/17.
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //
-//TODO: Fix when a row is selected to look right
 
 import UIKit
 import Firebase
@@ -110,7 +109,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getUserInfo () {
-        
         //Get the user's first and last name from Firebase
         ref.child("users").child(self.userId).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
@@ -147,8 +145,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     }//End getUserInfo
     
     func fetchGames() {
-        let ref = Database.database().reference()
-        _ = ref.child("events").observe(.childAdded, with: {(snapshot) in
+        ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 if let playerArray = dictionary["playerList"] as? [String] {
                     if playerArray.contains(self.userId) {
@@ -183,7 +180,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
             } //End if let dictionary
         }) //End observe snapshot
     } //End fetchGames
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let x : eventDetailsViewController = segue.destination as! eventDetailsViewController

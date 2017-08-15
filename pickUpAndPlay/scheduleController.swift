@@ -22,6 +22,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var createGameButton: UIButton!
+    @IBOutlet weak var upcomingGamesLabel: UILabel!
    
     //name of location sent from mapViewController
     var passedLocation = Location()
@@ -35,12 +36,12 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         locationName.text = passedLocation.name
-        setupButtons()
 
     
         self.tableView.delegate = self
         self.tableView.dataSource = self
         fetchGames()
+        setupButtons()
         tableView.separatorColor = .clear
     }
     
@@ -132,7 +133,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         createGameButton.layer.cornerRadius = createGameButton.frame.height/2
         locationImage.image = passedLocation.locationImage
         locationImage.clipsToBounds = true
-        
     }//End setupButtons
     
     func fetchGames() {
