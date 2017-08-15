@@ -1037,6 +1037,9 @@
                                     <navigationItem title="Create Game" id="6Uc-dj-fVN">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nEC-i8-UEg">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="q54-Pw-kay" kind="unwind" unwindAction="unwindToScheduleWithUnwindSegue:" id="IJu-Bq-H0U"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -1110,7 +1113,6 @@
                                         </state>
                                         <connections>
                                             <action selector="createGameButtonTapped:" destination="gaw-D7-ZAc" eventType="touchUpInside" id="N6v-n1-ywn"/>
-                                            <segue destination="q54-Pw-kay" kind="unwind" unwindAction="unwindToScheduleWithUnwindSegue:" id="gv7-jL-vBA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1157,6 +1159,7 @@
                         <outlet property="addSubsLabel" destination="1Pa-F8-Ma5" id="RwB-qs-kQu"/>
                         <outlet property="createGameButton" destination="HhC-gL-hts" id="Oqm-sz-6Hw"/>
                         <outlet property="datePicker" destination="Tf2-OX-P4j" id="5Wu-PQ-99Y"/>
+                        <outlet property="locationImage" destination="ReT-xk-Tma" id="rhg-Wd-2LC"/>
                         <outlet property="locationLabel" destination="Z8E-FJ-1pB" id="dPp-RG-ctv"/>
                         <outlet property="repeatPicker" destination="YrU-bI-Ss1" id="0Ep-B9-zNN"/>
                         <outlet property="skillSelector" destination="7NE-1b-jEM" id="CLb-9u-0aM"/>

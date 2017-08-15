@@ -36,6 +36,7 @@ class createGameController: UIViewController{
     var playerLimit = 0
 
     //MARK: Outlets
+    @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var sportsButtonsStack: UIStackView!
     @IBOutlet weak var addSubsButton: UIButton!
     @IBOutlet weak var addSubsLabel: UILabel!
@@ -56,6 +57,7 @@ class createGameController: UIViewController{
         
         // Do any additional setup after loading the view.
         locationLabel.text = location.name
+        locationImage.image = location.locationImage
         
         setupDatePicker()
         
