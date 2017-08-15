@@ -1037,9 +1037,6 @@
                                     <navigationItem title="Create Game" id="6Uc-dj-fVN">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nEC-i8-UEg">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <segue destination="q54-Pw-kay" kind="unwind" unwindAction="unwindToScheduleWithUnwindSegue:" id="G52-MP-29C"/>
-                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -1113,6 +1110,7 @@
                                         </state>
                                         <connections>
                                             <action selector="createGameButtonTapped:" destination="gaw-D7-ZAc" eventType="touchUpInside" id="N6v-n1-ywn"/>
+                                            <segue destination="q54-Pw-kay" kind="unwind" unwindAction="unwindToScheduleWithUnwindSegue:" id="gv7-jL-vBA"/>
                                         </connections>
                                     </button>
                                 </subviews>
