@@ -13,12 +13,12 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class createGameController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
+class createGameController: UIViewController{
 
     //MARK: Properties
     //name of location
     var location = Location()
-    let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
+    //let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
     var timeArray = [String]()
     private var sportButtons = [UIButton]()
     var isDatePickerShowing = false
@@ -44,7 +44,7 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var timeButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var repeatButton: UIButton!
+    //@IBOutlet weak var repeatButton: UIButton!
     @IBOutlet weak var repeatPicker: UIPickerView!
     
     //MARK: viewDidLoad
@@ -59,9 +59,11 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         setupDatePicker()
         
+        /*
         //Setup Picker View
         repeatPicker.delegate = self
         repeatPicker.dataSource = self
+        */
         self.datePicker.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .white
 
@@ -141,6 +143,7 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
+    /*
     //MARK: PickerView functions
     // DataSource
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -160,6 +163,7 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
         repeatButton.setTitle(repeatOptions[row], for: .normal)
         repeatFrequency = repeatOptions[row]
     }
+     */
     
     
     //MARK: private functions
@@ -294,10 +298,12 @@ class createGameController: UIViewController, UIPickerViewDelegate, UIPickerView
         //Setup Create game button
         createGameButton.layer.cornerRadius = createGameButton.frame.height/2
         
+        /*
         //Setup repeat button
         repeatButton.layer.borderWidth = 1.0
         repeatButton.layer.borderColor = myGreen.cgColor
         repeatButton.layer.cornerRadius = 5.0
+ */
         
         let white: UIColor = .white
         skillSelector.setTitleTextAttributes([NSForegroundColorAttributeName: white], for: .normal)

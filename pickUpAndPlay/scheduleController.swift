@@ -155,6 +155,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     let numberOfPlayers = dictionary["playerList"]?.count!
                     
+                    if dateAsDate! > Date() {
                     //Set values of game variable from database information
                     let sport = dictionary["sport"]
                     let time = timeString
@@ -167,6 +168,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     self.timeArray.append(dictionary["time"] as! String)
                     self.tableView.reloadData()
                 } //End if location
+                }
                 //Sort games by date
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
