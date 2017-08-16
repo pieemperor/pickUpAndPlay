@@ -769,14 +769,29 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-Pt-Za5">
+                                        <rect key="frame" x="295" y="0.0" width="80" height="80"/>
+                                        <color key="backgroundColor" red="0.16078431369999999" green="0.6705882353" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="bAd-yn-qcl"/>
+                                            <constraint firstAttribute="width" constant="80" id="mCs-ou-k5T"/>
+                                        </constraints>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <string key="title">     Get
+Directions</string>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.36862745099999999" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Oex-IY-Xhm" firstAttribute="centerY" secondItem="QdZ-gB-ypM" secondAttribute="centerY" id="8CV-rF-eDQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="eWw-Pt-Za5" secondAttribute="trailing" id="BCN-4b-dfv"/>
                                     <constraint firstItem="NJP-2r-N14" firstAttribute="centerY" secondItem="QdZ-gB-ypM" secondAttribute="centerY" id="EHs-bq-rfg"/>
                                     <constraint firstItem="Oex-IY-Xhm" firstAttribute="leading" secondItem="NJP-2r-N14" secondAttribute="trailing" constant="15" id="RoI-dx-0vQ"/>
                                     <constraint firstAttribute="height" constant="80" id="SKT-Q5-ugs"/>
                                     <constraint firstItem="NJP-2r-N14" firstAttribute="leading" secondItem="QdZ-gB-ypM" secondAttribute="leading" constant="20" id="YD4-xS-uOE"/>
+                                    <constraint firstItem="eWw-Pt-Za5" firstAttribute="centerY" secondItem="QdZ-gB-ypM" secondAttribute="centerY" id="soj-cn-PWj"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b1B-fF-TS9">
@@ -1179,7 +1194,7 @@
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

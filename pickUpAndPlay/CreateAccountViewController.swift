@@ -48,41 +48,125 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         }
         
         //If all fields are not empty, the password fields are equal, and the password field is longer than 6 characters, create an account
-        if let fn = firstNameTextField.text, let ln = lastNameTextField.text, let e = emailTextField.text, let pw = passwordTextField.text, let cpw = confirmPasswordTextField.text, pw == cpw, pw.characters.count > 6  {
-            
-                Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in
-                    
-                    //Get PNG representation of the image they chose
-                    let imageData = UIImageJPEGRepresentation(self.profilePic.image!, 0.5)!
-                    
-                    // Get a reference to the profilePics folder where we'll store our photos
-                    let picHandle = Storage.storage().reference().child("profilePics")
-                    
-                    // Get a reference to store the file as uuid
-                    let photoRef = picHandle.child(self.uuid.uuidString)
-                    
-                    // Upload file to Firebase Storage
-                    let metadata = StorageMetadata()
-                    metadata.contentType = "image/jpg"
-                    photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
+        if let fn = firstNameTextField.text, let ln = lastNameTextField.text, let e = emailTextField.text, let pw = passwordTextField.text, let cpw = confirmPasswordTextField.text, fn != "", ln != "", e != "", pw != "", cpw != "" {
+            setDefaultBorderWidths()
+            if pw == cpw {
+                setDefaultBorderWidths()
+                if pw.characters.count > 5  {
+                    setDefaultBorderWidths()
+                    Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in
                         
-                        // When the image has successfully uploaded, we get it's download URL
-                        let picURL = snapshot.metadata?.downloadURL()?.absoluteString
-                        // Set the download URL to the message box, so that the user can send it to the database
-                    
-                        // Check that user isn't nil
-                        if let u = user {
-                            //Save user's display name
-                            self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": picURL!])
+                        //Get PNG representation of the image they chose
+                        let imageData = UIImageJPEGRepresentation(self.profilePic.image!, 0.5)!
+                        
+                        // Get a reference to the profilePics folder where we'll store our photos
+                        let picHandle = Storage.storage().reference().child("profilePics")
+                        
+                        // Get a reference to store the file as uuid
+                        let photoRef = picHandle.child(self.uuid.uuidString)
+                        
+                        // Upload file to Firebase Storage
+                        let metadata = StorageMetadata()
+                        metadata.contentType = "image/jpg"
+                        photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
                             
-                            // User is found, go to home screen
-                            self.performSegue(withIdentifier: "goToMap", sender: self)
-                        } else {
-                            // Error: check error and show message
-                        }
-                    }//End photo completion handler
-                })//End Firebase createUser
-            }//End if text fields not empty and password fields are equal
+                            // When the image has successfully uploaded, we get it's download URL
+                            let picURL = snapshot.metadata?.downloadURL()?.absoluteString
+                            // Set the download URL to the message box, so that the user can send it to the database
+                            
+                            // Check that user isn't nil
+                            if let u = user {
+                                //Save user's display name
+                                self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": picURL!])
+                                
+                                // User is found, go to home screen
+                                self.performSegue(withIdentifier: "goToMap", sender: self)
+                            } else {
+                                let alertController = UIAlertController(title: "Email Taken", message: "That email is already in use by another account", preferredStyle: .alert)
+                                let actionOk = UIAlertAction(title: "OK",
+                                                             style: .default,
+                                                             handler: nil) //You can use a block here to handle a press on this button
+                                
+                                alertController.addAction(actionOk)
+                                self.present(alertController, animated: true, completion: nil)
+                                self.emailTextField.layer.borderWidth = 1.0
+                                self.emailTextField.layer.borderColor = UIColor.red.cgColor
+                                // Error: check error and show message
+                            }
+                        }//End photo completion handler
+                    })//End Firebase createUser
+                }//End if password field is > 6
+                else {
+                    let alertController = UIAlertController(title: "Invalid Password", message: "Password must be at least 6 characters long", preferredStyle: .alert)
+                    let actionOk = UIAlertAction(title: "OK",
+                                                 style: .default,
+                                                 handler: nil) //You can use a block here to handle a press on this button
+                    
+                    alertController.addAction(actionOk)
+                    self.present(alertController, animated: true, completion: nil)
+                    self.passwordTextField.layer.borderWidth = 1.0
+                    self.passwordTextField.layer.borderColor = UIColor.red.cgColor
+                }
+            }//End if password fields are equal
+            else {
+                let alertController = UIAlertController(title: "Passwords Not Equal", message: "The password fields are not equal", preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "OK",
+                                             style: .default,
+                                             handler: nil) //You can use a block here to handle a press on this button
+                
+                alertController.addAction(actionOk)
+                self.present(alertController, animated: true, completion: nil)
+                self.confirmPasswordTextField.layer.borderWidth = 1.0
+                self.confirmPasswordTextField.layer.borderColor = UIColor.red.cgColor
+                self.passwordTextField.layer.borderWidth = 1.0
+                self.passwordTextField.layer.borderColor = UIColor.red.cgColor
+            }
+            }//End if fields are not empty
+        else {
+            let alertController = UIAlertController(title: "Empty Text Field", message: "All text fields are required", preferredStyle: .alert)
+            let actionOk = UIAlertAction(title: "OK",
+                                         style: .default,
+                                         handler: nil) //You can use a block here to handle a press on this button
+            
+            alertController.addAction(actionOk)
+            self.present(alertController, animated: true, completion: nil)
+            
+            //Checks each text field to make sure they're not empty. If they are, highlight in red
+            if firstNameTextField.text == "" {
+                self.firstNameTextField.layer.borderColor = UIColor.red.cgColor
+                self.firstNameTextField.layer.borderWidth = 1.0
+            } else {
+                self.firstNameTextField.layer.borderWidth = 0.0
+            }
+            
+            if lastNameTextField.text == "" {
+                self.lastNameTextField.layer.borderColor = UIColor.red.cgColor
+                self.lastNameTextField.layer.borderWidth = 1.0
+            } else {
+                self.lastNameTextField.layer.borderWidth = 0.0
+            }
+            
+            if emailTextField.text == "" {
+                self.emailTextField.layer.borderColor = UIColor.red.cgColor
+                self.emailTextField.layer.borderWidth = 1.0
+            } else {
+                self.emailTextField.layer.borderWidth = 0.0
+            }
+            
+            if passwordTextField.text == "" {
+                self.passwordTextField.layer.borderColor = UIColor.red.cgColor
+                self.passwordTextField.layer.borderWidth = 1.0
+            } else {
+                self.passwordTextField.layer.borderWidth = 0.0
+            }
+            
+            if confirmPasswordTextField.text == "" {
+                self.confirmPasswordTextField.layer.borderColor = UIColor.red.cgColor
+                self.confirmPasswordTextField.layer.borderWidth = 1.0
+            } else {
+                self.confirmPasswordTextField.layer.borderWidth = 0.0
+            }
+        }
         }//End createAccount
 
     @IBAction func selectProfilePicFromLibrary(_ sender: UITapGestureRecognizer) {
@@ -168,5 +252,13 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
             let firstView = self.stackView.arrangedSubviews[0]
             firstView.isHidden = false
         }
+    }
+    
+    func setDefaultBorderWidths() {
+        self.firstNameTextField.layer.borderWidth = 0.0
+        self.lastNameTextField.layer.borderWidth = 0.0
+        self.emailTextField.layer.borderWidth = 0.0
+        self.passwordTextField.layer.borderWidth = 0.0
+        self.confirmPasswordTextField.layer.borderWidth = 0.0
     }
 }
