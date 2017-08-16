@@ -1183,6 +1183,7 @@ Directions</string>
                         <outlet property="skillSelector" destination="7NE-1b-jEM" id="CLb-9u-0aM"/>
                         <outlet property="sportsButtonsStack" destination="MZH-hv-ugC" id="kHL-Tm-uKH"/>
                         <outlet property="timeButton" destination="Qii-ZG-OvQ" id="3lD-0z-uy9"/>
+                        <segue destination="sT7-Oz-uhz" kind="show" id="me9-Ge-Fbr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jP-GQ-hMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1197,7 +1198,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1223,6 +1224,6 @@ Directions</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
-        <segue reference="krn-aR-g15"/>
+        <segue reference="me9-Ge-Fbr"/>
     </inferredMetricsTieBreakers>
 </document>
