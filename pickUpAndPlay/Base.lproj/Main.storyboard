@@ -422,14 +422,14 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3RQ-cu-Ff6">
-                                <rect key="frame" x="41" y="319.5" width="293" height="347.5"/>
+                                <rect key="frame" x="25" y="319.5" width="325" height="347.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GameTableViewCell" rowHeight="90" id="23w-5S-e8C" customClass="GameTableViewCell" customModule="pickUpAndPlay" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="293" height="90"/>
+                                        <rect key="frame" x="0.0" y="28" width="325" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="23w-5S-e8C" id="851-A5-SNS">
-                                            <rect key="frame" x="0.0" y="0.0" width="293" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soccerBall" translatesAutoresizingMaskIntoConstraints="NO" id="1lx-Tn-hgP">
@@ -458,7 +458,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KVr-RX-NXE">
-                                                    <rect key="frame" x="222.5" y="18.5" width="57.5" height="53"/>
+                                                    <rect key="frame" x="254.5" y="18.5" width="57.5" height="53"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqE-09-gv1">
                                                             <rect key="frame" x="0.0" y="0.0" width="57.5" height="38.5"/>
@@ -502,13 +502,13 @@
                         <color key="backgroundColor" red="0.25098039220000001" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bup-dM-0Cj" firstAttribute="top" secondItem="3RQ-cu-Ff6" secondAttribute="bottom" id="3IC-Ia-USd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3RQ-cu-Ff6" secondAttribute="trailing" constant="25" id="4pl-06-WbH"/>
+                            <constraint firstAttribute="trailing" secondItem="3RQ-cu-Ff6" secondAttribute="trailing" constant="25" id="4pl-06-WbH"/>
                             <constraint firstItem="WKb-Sc-FhR" firstAttribute="leading" secondItem="02C-kg-tiW" secondAttribute="leading" id="GuI-Lm-8qa"/>
                             <constraint firstItem="WKb-Sc-FhR" firstAttribute="top" secondItem="02C-kg-tiW" secondAttribute="top" id="JKL-kw-7W6"/>
                             <constraint firstItem="3RQ-cu-Ff6" firstAttribute="top" secondItem="6UK-Wt-wqy" secondAttribute="bottom" constant="15" id="L7K-1H-535"/>
                             <constraint firstItem="3RQ-cu-Ff6" firstAttribute="centerX" secondItem="02C-kg-tiW" secondAttribute="centerX" id="MTb-Wd-Vsk"/>
                             <constraint firstItem="6UK-Wt-wqy" firstAttribute="top" secondItem="WKb-Sc-FhR" secondAttribute="bottom" constant="15" id="T3k-7U-nPZ"/>
-                            <constraint firstItem="3RQ-cu-Ff6" firstAttribute="leading" secondItem="02C-kg-tiW" secondAttribute="leadingMargin" constant="25" id="Tel-wZ-gQ8"/>
+                            <constraint firstItem="3RQ-cu-Ff6" firstAttribute="leading" secondItem="02C-kg-tiW" secondAttribute="leading" constant="25" id="Tel-wZ-gQ8"/>
                             <constraint firstItem="hak-UL-hRI" firstAttribute="centerX" secondItem="02C-kg-tiW" secondAttribute="centerX" id="YH2-cC-vlR"/>
                             <constraint firstItem="6UK-Wt-wqy" firstAttribute="centerX" secondItem="02C-kg-tiW" secondAttribute="centerX" id="ZDP-Qc-7mE"/>
                             <constraint firstItem="hak-UL-hRI" firstAttribute="top" secondItem="x0W-P3-xiA" secondAttribute="bottom" constant="19" id="aIV-lc-bdM"/>
@@ -781,6 +781,9 @@
                                             <string key="title">     Get
 Directions</string>
                                         </state>
+                                        <connections>
+                                            <action selector="getDirections:" destination="sT7-Oz-uhz" eventType="touchUpInside" id="rgW-Yq-oAV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.36862745099999999" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1194,7 +1197,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1220,6 +1223,6 @@ Directions</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
-        <segue reference="PIL-Kj-fUK"/>
+        <segue reference="krn-aR-g15"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -139,6 +139,15 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             }//End if let dict
         })//End child users snapshot in
     }//End join game
+    @IBAction func getDirections(_ sender: UIButton) {
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!))
+        {
+            UIApplication.shared.open(URL(string:
+                "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))&directionsmode=driving")! as URL, options: [:])
+        } else {
+            print("Can't use com.google.maps://")
+        }
+    }
     
     private func setupButtons() {
         joinButton.layer.cornerRadius = joinButton.frame.height/2
