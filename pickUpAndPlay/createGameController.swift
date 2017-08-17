@@ -127,6 +127,7 @@ class createGameController: UIViewController{
         }
     }
     
+    /*
     @IBAction func showRepeatPicker(_ sender: UIButton) {
         if repeatPicker.isHidden == false {
             repeatPicker.isHidden = true
@@ -134,7 +135,8 @@ class createGameController: UIViewController{
         repeatPicker.isHidden = false
         }
     }
-
+    */
+ 
     @IBAction func addSubs(_ sender: UIButton) {
         if addSubsButton.isSelected == false {
             addSubsButton.isSelected = true
