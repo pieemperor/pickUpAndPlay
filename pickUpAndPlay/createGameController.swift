@@ -53,30 +53,19 @@ class createGameController: UIViewController{
         super.viewDidLoad()
         setupButtons()
         setupSportButtons()
-        repeatPicker.isHidden = true
-        
-        // Do any additional setup after loading the view.
+        setupDatePicker()
         locationLabel.text = location.name
         locationImage.image = location.locationImage
         
-        setupDatePicker()
         
         /*
         //Setup Picker View
+        repeatPicker.isHidden = true
         repeatPicker.delegate = self
         repeatPicker.dataSource = self
         */
-        self.datePicker.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .white
-
-
-
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     //MARK: Actions
     @IBAction func selectTime(_ sender: UIButton) {
@@ -126,16 +115,6 @@ class createGameController: UIViewController{
             print("There is already a game scheduled for that time.")
         }
     }
-    
-    /*
-    @IBAction func showRepeatPicker(_ sender: UIButton) {
-        if repeatPicker.isHidden == false {
-            repeatPicker.isHidden = true
-        } else {
-        repeatPicker.isHidden = false
-        }
-    }
-    */
  
     @IBAction func addSubs(_ sender: UIButton) {
         if addSubsButton.isSelected == false {
@@ -146,6 +125,16 @@ class createGameController: UIViewController{
             playerLimit = playerLimit - numberOfSubs
         }
     }
+    
+    /*
+     @IBAction func showRepeatPicker(_ sender: UIButton) {
+     if repeatPicker.isHidden == false {
+        repeatPicker.isHidden = true
+     } else {
+        repeatPicker.isHidden = false
+     }
+     }
+    */
     
     /*
     //MARK: PickerView functions
@@ -285,6 +274,7 @@ class createGameController: UIViewController{
             height: dpSize.height
         )
         datePicker.minimumDate = NSDate() as Date
+        self.datePicker.backgroundColor = .white
     }
     
     private func setupButtons() {
@@ -307,7 +297,7 @@ class createGameController: UIViewController{
         repeatButton.layer.borderWidth = 1.0
         repeatButton.layer.borderColor = myGreen.cgColor
         repeatButton.layer.cornerRadius = 5.0
- */
+        */
         
         let white: UIColor = .white
         skillSelector.setTitleTextAttributes([NSForegroundColorAttributeName: white], for: .normal)

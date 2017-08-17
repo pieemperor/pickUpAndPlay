@@ -165,8 +165,18 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    private func updateButtonSelectionStates() {
+        if self.idList.contains(Auth.auth().currentUser!.uid) {
+            joinButton.setTitle("Unjoin", for: .selected)
+        } else {
+            joinButton.setTitle("Join", for: .normal)
+        }
+    }
+    
     private func setupButtons() {
         joinButton.layer.cornerRadius = joinButton.frame.height/2
+        
+
 
         if otherPassedLocation != "" {
             if otherPassedLocation == "Davis Basketball Court" {
