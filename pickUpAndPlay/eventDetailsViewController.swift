@@ -10,7 +10,6 @@
 //TODO: Pass location to this view controller and display background image
 //TODO: Fix crash if there are no players in playerList array
 
-
 import UIKit
 import Firebase
 import FirebaseAuth
@@ -100,13 +99,12 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func joinGame(_ sender: Any) {
         let ref = Database.database().reference()
-        _ = ref.child("users").observe(.childAdded, with: {(snapshot) in
+        ref.child("users").observe(.childAdded, with: {(snapshot) in
             if let dict = snapshot.value as? [String : AnyObject] {
                 if snapshot.key == Auth.auth().currentUser!.uid {
                     let playerListCount = dict["playerList"]?.count!
                     let spotsRemaining = dict["playerLimit"] as! Int - playerListCount!
                     if !self.idList.contains(Auth.auth().currentUser!.uid), spotsRemaining > 0 {
-                        
                         
                         let profilePicURL = dict["photo"] as? String
                         var userProfilePic = UIImage()
@@ -130,12 +128,21 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                 
                                 self.idList.append(player.playerId)
                                 
-                                let eventsHandle = Database.database().reference().child("events").child(self.game.gameId)
+                                let eventsHandle = ref.child("events").child(self.game.gameId)
                                 eventsHandle.updateChildValues(["playerList":self.idList])
                                 self.tableView.reloadData()
                             }//End get data
                         }//End if profilePicURL
                     }//End if !self.idList & spotsRemaining
+                    else {
+                        //Find index for userid to remove
+                        if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                            self.idList.remove(at: index)
+                        }
+                        
+                        let eventsHandle = Database.database().reference().child("events").child(self.game.gameId)
+                        eventsHandle.updateChildValues(["playerList":self.idList])
+                    }
                 }//End it snapshot.key == current user ID
             }//End if let dict
         })//End child users snapshot in
@@ -213,13 +220,13 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchPlayers() {
         let ref = Database.database().reference()
-        _ = ref.child("events").observe(.childAdded, with: {(snapshot) in
+        ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 if snapshot.key == self.game.gameId {
                 self.locationName.text = dictionary["location"] as? String
                     if let playerIdArray = dictionary["playerList"] as? [String] {
                         for player in playerIdArray {
-                            _ = ref.child("users").observe(.childAdded, with: {(snapshot) in
+                            ref.child("users").observe(.childAdded, with: {(snapshot) in
                                 if let userDictionary = snapshot.value as? [String : AnyObject] {
                                     if player == snapshot.key {
                                         let firstName = userDictionary["firstName"]

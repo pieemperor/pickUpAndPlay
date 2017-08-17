@@ -155,7 +155,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchGames() {
         let ref = Database.database().reference()
-        _ = ref.child("events").observe(.childAdded, with: {(snapshot) in
+        ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 let playerArray = dictionary["playerList"]!
                 if playerArray.contains(Auth.auth().currentUser?.uid as Any) {

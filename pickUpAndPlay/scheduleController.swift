@@ -137,7 +137,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchGames() {
         let ref = Database.database().reference()
-        _ = ref.child("events").observe(.childAdded, with: {(snapshot) in
+        ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 let location = dictionary["location"] as! String
                 if location == self.passedLocation.name {
