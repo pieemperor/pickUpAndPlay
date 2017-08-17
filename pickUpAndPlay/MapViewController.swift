@@ -84,6 +84,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 } else {
                     print ("No sport selected")
                 }
+            } else if location.availableSports.count > 1 {
+                state_marker.icon = UIImage(named: "multiSportMarker")
             }
         }
     }

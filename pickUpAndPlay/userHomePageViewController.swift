@@ -143,6 +143,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     }
                 }
             } else {
+                self.profilePic.image = UIImage(named: "defaultProfilePic")
                 print("No profile pic URL")
             }
             
