@@ -104,15 +104,6 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         cell.contentView.sendSubview(toBack: greenRoundedView)
     }
     
-    @IBAction func logOut(_ sender: UIBarButtonItem) {
-        do {
-            try Auth.auth().signOut()
-            self.performSegue(withIdentifier: "logOut", sender: nil)
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
-    
     //MARK: Firebase functions
     func getUserInfo () {
         
@@ -190,6 +181,8 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         }) //End observe snapshot
     } //End fetchGames
     
+    
+    @IBAction func unwindtoProfile(unwindSegue: UIStoryboardSegue){}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToEventDetails" {
