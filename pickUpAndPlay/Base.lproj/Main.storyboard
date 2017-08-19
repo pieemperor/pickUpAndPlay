@@ -1101,7 +1101,7 @@ Directions</string>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhC-gL-hts">
-                                <rect key="frame" x="62.5" y="516" width="250" height="35"/>
+                                <rect key="frame" x="62.5" y="496" width="250" height="35"/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.6705882353" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="INw-90-bhC"/>
@@ -1115,7 +1115,7 @@ Directions</string>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="clQ-7u-3ci">
-                                <rect key="frame" x="100" y="448" width="175" height="48"/>
+                                <rect key="frame" x="100" y="438" width="175" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ic-Im-hLc">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -1153,9 +1153,9 @@ Directions</string>
                         <constraints>
                             <constraint firstItem="ReT-xk-Tma" firstAttribute="leading" secondItem="Tbl-NB-D9Q" secondAttribute="leading" id="00t-EE-gHA"/>
                             <constraint firstItem="Z8E-FJ-1pB" firstAttribute="top" secondItem="6te-et-Amk" secondAttribute="bottom" constant="30" id="1rs-WK-vXX"/>
-                            <constraint firstItem="clQ-7u-3ci" firstAttribute="top" secondItem="ExG-Aj-rLe" secondAttribute="bottom" constant="20" id="7Wd-gR-O5c"/>
+                            <constraint firstItem="clQ-7u-3ci" firstAttribute="top" secondItem="ExG-Aj-rLe" secondAttribute="bottom" constant="10" id="7Wd-gR-O5c"/>
                             <constraint firstItem="6te-et-Amk" firstAttribute="top" secondItem="Tbl-NB-D9Q" secondAttribute="top" id="7zJ-4d-kl5"/>
-                            <constraint firstItem="HhC-gL-hts" firstAttribute="top" secondItem="clQ-7u-3ci" secondAttribute="bottom" constant="20" id="Cqs-ye-9ld"/>
+                            <constraint firstItem="HhC-gL-hts" firstAttribute="top" secondItem="clQ-7u-3ci" secondAttribute="bottom" constant="10" id="Cqs-ye-9ld"/>
                             <constraint firstItem="ExG-Aj-rLe" firstAttribute="top" secondItem="ReT-xk-Tma" secondAttribute="bottom" constant="30" id="ECg-Vl-1DO"/>
                             <constraint firstItem="6te-et-Amk" firstAttribute="leading" secondItem="Tbl-NB-D9Q" secondAttribute="leading" id="HE0-S8-wvL"/>
                             <constraint firstItem="Z8E-FJ-1pB" firstAttribute="leading" secondItem="Tbl-NB-D9Q" secondAttribute="leadingMargin" constant="40" id="NRb-fG-xxa"/>
@@ -1195,7 +1195,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

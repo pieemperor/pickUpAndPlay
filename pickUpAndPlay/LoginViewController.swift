@@ -59,6 +59,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                             if (error == nil){
                                 //everything works print the user data
                                 print(result ?? "No error")
+                                //added this
+                                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                                //this is where facebook connects to firebase auth
+                                Auth.auth().signIn(with: credential) { (user, error) in
+                                    self.performSegue(withIdentifier: "goToMap", sender: self)
+                                    if let error = error {
+                                        print("Could not sign in with Facebook: \(error)")
+                                        return
+                                    }
+                                }
                             }
                         })
                     }

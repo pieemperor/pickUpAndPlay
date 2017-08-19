@@ -42,6 +42,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         setupButtons()
         getGameInfo()
         fetchPlayers()
+        updateButtonSelectionStates()
         
         //set table view delegate to self
         self.tableView.delegate = self

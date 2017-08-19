@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         // [END old_delegate]
         return FBSDKApplicationDelegate.sharedInstance().application(application,
