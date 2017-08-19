@@ -27,16 +27,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gxt-KS-ybE">
-                                <rect key="frame" x="81" y="257" width="213" height="153.5"/>
+                                <rect key="frame" x="87.5" y="284" width="200" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyP-bJ-xQy">
-                                        <rect key="frame" x="0.0" y="0.0" width="213" height="33.5"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WdT-PZ-Dgd">
-                                        <rect key="frame" x="0.0" y="53.5" width="213" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Yq5-tu-BXV"/>
                                         </constraints>
@@ -45,7 +39,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSe-Db-Wg3">
-                                        <rect key="frame" x="0.0" y="113.5" width="213" height="40"/>
+                                        <rect key="frame" x="0.0" y="60" width="200" height="40"/>
                                         <color key="backgroundColor" red="0.16078431369999999" green="0.6705882353" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Zab-UT-0rl"/>
@@ -59,6 +53,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="31W-wF-ltA"/>
                                     <constraint firstItem="WdT-PZ-Dgd" firstAttribute="leading" secondItem="gxt-KS-ybE" secondAttribute="leading" id="4Co-kQ-iV7"/>
                                     <constraint firstAttribute="trailing" secondItem="hSe-Db-Wg3" secondAttribute="trailing" id="B5Y-7g-hBi"/>
                                     <constraint firstAttribute="trailing" secondItem="WdT-PZ-Dgd" secondAttribute="trailing" id="Yug-HN-0PK"/>
@@ -75,6 +70,12 @@
                                     <segue destination="v9q-KA-Lvw" kind="unwind" unwindAction="unwindToLoginWithUnwindSegue:" id="O4S-cu-VgX"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyP-bJ-xQy">
+                                <rect key="frame" x="81" y="80" width="213" height="33.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -86,6 +87,7 @@
                             <constraint firstItem="oGD-Zd-fnR" firstAttribute="leading" secondItem="fdN-xF-GWI" secondAttribute="leading" id="Rmk-1K-q54"/>
                             <constraint firstItem="gxt-KS-ybE" firstAttribute="centerX" secondItem="fdN-xF-GWI" secondAttribute="centerX" id="f8a-8K-VpL"/>
                             <constraint firstItem="6xN-cW-C5n" firstAttribute="leading" secondItem="fdN-xF-GWI" secondAttribute="leadingMargin" id="i5Q-14-6Nq"/>
+                            <constraint firstItem="uyP-bJ-xQy" firstAttribute="top" secondItem="Ytm-qV-X5L" secondAttribute="bottom" constant="60" id="s55-S1-Bgr"/>
                         </constraints>
                     </view>
                     <connections>
