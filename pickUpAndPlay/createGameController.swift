@@ -112,6 +112,7 @@ class createGameController: UIViewController{
                                 "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
                     let childUpdates = ["/events/\(key)": post]
                     ref.updateChildValues(childUpdates)
+                    performSegue(withIdentifier: "unwindToSchedule", sender: self)
                 } else {
                     let alertController = UIAlertController(title: "Time Slot Taken", message: "Someone has already created a game for that time.", preferredStyle: .alert)
                     let actionOk = UIAlertAction(title: "OK",

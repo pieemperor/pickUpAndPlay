@@ -1325,7 +1325,7 @@ Directions</string>
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nEC-i8-UEg">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
-                                                <segue destination="q54-Pw-kay" kind="unwind" unwindAction="unwindToScheduleWithUnwindSegue:" id="IJu-Bq-H0U"/>
+                                                <segue destination="q54-Pw-kay" kind="unwind" identifier="unwindToSchedule" unwindAction="unwindToScheduleWithUnwindSegue:" id="IJu-Bq-H0U"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
