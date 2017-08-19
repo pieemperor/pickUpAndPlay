@@ -16,6 +16,7 @@ class createGameController: UIViewController{
     //MARK: Properties
     //name of location
     var location = Location()
+    //timeArray gets sent to the createGame from sceduleController so a game can't be made with the same time
     var timeArray = [String]()
     private var sportButtons = [UIButton]()
     var isDatePickerShowing = false

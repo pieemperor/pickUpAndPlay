@@ -11,6 +11,7 @@ import Firebase
 
 class CreateAccountViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    //MARK: Outlets
     @IBOutlet weak var createAccountLabel: UILabel!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -21,14 +22,13 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
     
+    //MARK: variables
     var ref: DatabaseReference! = Database.database().reference()
     var profilePicURL = String()
     let uuid = UUID()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
         setupTextBoxes()
 
     }
@@ -38,8 +38,8 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         profilePic.layer.cornerRadius = profilePic.frame.width/2
         profilePic.clipsToBounds = true
     }
+    
     @IBAction func createAccount(_ sender: UIButton) {
-        
         UIView.animate(withDuration: 0.50) { () -> Void in
             let firstView = self.stackView.arrangedSubviews[0]
             firstView.isHidden = false

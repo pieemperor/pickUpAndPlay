@@ -43,7 +43,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-        getGameInfo()
+        setupLocations()
+        setDetailLabels()
         fetchPlayers()
         updateButtonSelectionStates()
         
@@ -198,10 +199,11 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     private func setupButtons() {
         joinButton.layer.cornerRadius = joinButton.frame.height/2
-        
-        joinButton.setTitle("Unjoin", for: .selected)
+        joinButton.setTitle("Bail", for: .selected)
         joinButton.setTitle("Join", for: .normal)
-
+    }
+    
+    private func setupLocations() {
         if otherPassedLocation != "" {
             if otherPassedLocation == "Davis Basketball Court" {
                 locationImage.image = UIImage(named: "davisBBall")!
@@ -301,7 +303,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         })//End snapshot in
     }//End fetchPlayers
     
-    private func getGameInfo() {
+    private func setDetailLabels() {
         self.timeLabel.text = game.time
         self.dateLabel.text = game.date
         self.gameTypeLabel.text = game.gameType
