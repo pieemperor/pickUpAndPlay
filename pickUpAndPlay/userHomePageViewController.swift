@@ -28,8 +28,11 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
         setupButtons()
-        getUserInfo()
         fetchGames()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getUserInfo()
     }
     
     func setupButtons() {

@@ -645,17 +645,41 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBG" translatesAutoresizingMaskIntoConstraints="NO" id="B0R-zK-ber">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="OKy-ER-3tq">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="Zst-Kp-yx9"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem id="Fml-uI-EI0">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="mBC-fE-jYH">
+                                            <connections>
+                                                <segue destination="rb3-Fa-8GU" kind="unwind" unwindAction="unwindtoProfileWithUnwindSegue:" id="eyI-4O-8he"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="uWp-Ag-YSd">
+                                            <connections>
+                                                <action selector="logOut:" destination="CPY-KD-Pqj" id="hR4-vF-nbO"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Profile" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaJ-3S-AVm">
+                                <rect key="frame" x="83" y="122" width="208" height="50.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="42"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ts1-Ca-icQ">
-                                <rect key="frame" x="62" y="158.5" width="250" height="349"/>
+                                <rect key="frame" x="62" y="232.5" width="250" height="340"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Profile" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaJ-3S-AVm">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="49"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="42"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="-15" translatesAutoresizingMaskIntoConstraints="NO" id="ouH-dj-37q">
-                                        <rect key="frame" x="0.0" y="64" width="250" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="120"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khT-tV-9Bk">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
@@ -690,7 +714,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="awN-dI-CIN">
-                                        <rect key="frame" x="0.0" y="199" width="250" height="40"/>
+                                        <rect key="frame" x="0.0" y="135" width="250" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wCX-v0-8Te">
                                                 <rect key="frame" x="0.0" y="0.0" width="115" height="40"/>
@@ -713,7 +737,7 @@
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DcR-p8-WUc">
-                                        <rect key="frame" x="0.0" y="254" width="250" height="40"/>
+                                        <rect key="frame" x="0.0" y="190" width="250" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="GYT-i7-yL9"/>
                                         </constraints>
@@ -722,7 +746,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZt-df-MGg">
-                                        <rect key="frame" x="0.0" y="309" width="250" height="40"/>
+                                        <rect key="frame" x="0.0" y="245" width="250" height="40"/>
                                         <color key="backgroundColor" red="0.16078431369999999" green="0.6705882353" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="pTw-ls-uco"/>
@@ -733,58 +757,40 @@
                                         </state>
                                         <connections>
                                             <action selector="createAccount:" destination="1zi-Z1-Lnp" eventType="touchUpInside" id="amR-KM-63s"/>
+                                            <action selector="updateProfile:" destination="CPY-KD-Pqj" eventType="touchUpInside" id="3rO-aX-ThL"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Wk-411">
+                                        <rect key="frame" x="0.0" y="300" width="250" height="40"/>
+                                        <color key="backgroundColor" red="1" green="0.17084418400000001" blue="0.042805989580000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Pmn-pz-1KK"/>
+                                            <constraint firstAttribute="width" constant="250" id="cBu-N9-4YJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <state key="normal" title="Delete Account">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="b8L-Gy-hHE"/>
                                 </constraints>
                             </stackView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="OKy-ER-3tq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem id="Fml-uI-EI0">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="mBC-fE-jYH">
-                                            <connections>
-                                                <segue destination="rb3-Fa-8GU" kind="unwind" unwindAction="unwindtoProfileWithUnwindSegue:" id="eyI-4O-8he"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="uWp-Ag-YSd">
-                                            <connections>
-                                                <action selector="logOut:" destination="CPY-KD-Pqj" id="hR4-vF-nbO"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4CZ-Wk-411">
-                                <rect key="frame" x="62" y="577" width="250" height="40"/>
-                                <color key="backgroundColor" red="1" green="0.17084418400000001" blue="0.042805989580000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Pmn-pz-1KK"/>
-                                    <constraint firstAttribute="width" constant="250" id="cBu-N9-4YJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                <state key="normal" title="Delete Account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="OKy-ER-3tq" firstAttribute="leading" secondItem="NOB-fN-QRM" secondAttribute="leading" id="15t-g4-fWM"/>
                             <constraint firstItem="EhD-4a-kId" firstAttribute="top" secondItem="B0R-zK-ber" secondAttribute="bottom" id="DKm-e4-48v"/>
                             <constraint firstAttribute="trailing" secondItem="B0R-zK-ber" secondAttribute="trailing" id="FcR-aW-Kyg"/>
                             <constraint firstItem="B0R-zK-ber" firstAttribute="top" secondItem="NOB-fN-QRM" secondAttribute="top" id="PGi-H4-K9q"/>
                             <constraint firstItem="ts1-Ca-icQ" firstAttribute="centerX" secondItem="NOB-fN-QRM" secondAttribute="centerX" id="RKt-ZR-1IV"/>
-                            <constraint firstItem="4CZ-Wk-411" firstAttribute="centerX" secondItem="NOB-fN-QRM" secondAttribute="centerX" id="Tqw-nw-idY"/>
-                            <constraint firstItem="ts1-Ca-icQ" firstAttribute="centerY" secondItem="NOB-fN-QRM" secondAttribute="centerY" id="vx6-bR-HZN"/>
+                            <constraint firstItem="ts1-Ca-icQ" firstAttribute="top" secondItem="QaJ-3S-AVm" secondAttribute="bottom" constant="60" id="RxE-hm-Upd"/>
+                            <constraint firstItem="QaJ-3S-AVm" firstAttribute="centerX" secondItem="NOB-fN-QRM" secondAttribute="centerX" id="c2W-jR-Uot"/>
+                            <constraint firstAttribute="trailing" secondItem="OKy-ER-3tq" secondAttribute="trailing" id="qI7-9g-9FH"/>
+                            <constraint firstItem="QaJ-3S-AVm" firstAttribute="top" secondItem="OKy-ER-3tq" secondAttribute="bottom" constant="60" id="u8X-OR-Pni"/>
+                            <constraint firstItem="OKy-ER-3tq" firstAttribute="top" secondItem="NOB-fN-QRM" secondAttribute="top" id="uTc-en-o2i"/>
                             <constraint firstItem="B0R-zK-ber" firstAttribute="leading" secondItem="NOB-fN-QRM" secondAttribute="leading" id="wsV-gk-Wir"/>
-                            <constraint firstItem="EhD-4a-kId" firstAttribute="top" secondItem="4CZ-Wk-411" secondAttribute="bottom" constant="50" id="yuy-Vf-O20"/>
                         </constraints>
                     </view>
                     <connections>
@@ -794,6 +800,7 @@
                         <outlet property="lastNameTextField" destination="FlQ-bl-APt" id="etu-qq-zw9"/>
                         <outlet property="profilePic" destination="FUW-p4-YnQ" id="sGg-qo-oe5"/>
                         <outlet property="updateProfileButton" destination="zZt-df-MGg" id="5wj-B8-YIc"/>
+                        <segue destination="rb3-Fa-8GU" kind="unwind" identifier="logOut" unwindAction="unwindToLoginWithUnwindSegue:" id="zHP-7q-90P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywS-kk-WFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1489,7 +1496,7 @@ Directions</string>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="krn-aR-g15"/>
         <segue reference="TvU-3m-pPR"/>
+        <segue reference="krn-aR-g15"/>
     </inferredMetricsTieBreakers>
 </document>

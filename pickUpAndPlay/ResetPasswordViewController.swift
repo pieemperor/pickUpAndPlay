@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 
 class ResetPasswordViewController: UIViewController {
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
 
     @IBOutlet weak var submitButtonTextField: UIButton!
     @IBOutlet weak var emailTextField: UITextField!

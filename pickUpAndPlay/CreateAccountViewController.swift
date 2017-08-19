@@ -23,6 +23,10 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
     @IBOutlet weak var stackView: UIStackView!
     
     //MARK: variables
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
     var ref: DatabaseReference! = Database.database().reference()
     var profilePicURL = String()
     let uuid = UUID()
