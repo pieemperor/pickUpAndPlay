@@ -133,6 +133,8 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         createGameButton.layer.cornerRadius = createGameButton.frame.height/2
         locationImage.image = passedLocation.locationImage
         locationImage.clipsToBounds = true
+        
+        locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }//End setupButtons
     
     func fetchGames() {
