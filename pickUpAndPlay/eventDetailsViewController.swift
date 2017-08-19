@@ -34,6 +34,11 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     var otherPassedLocation = ""
     var latitude = 0.0
     var longitude = 0.0
+    var inGame = false {
+        didSet {
+            updateButtonSelectionStates()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,57 +100,76 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         cell.contentView.sendSubview(toBack: greenRoundedView)
     }
     
-    
+    //Make sure the user is not in the game already - Then,  check to see if there are any spots open in that game. If not, tell the user that the game is full. If there are spots left, get the user's profile picture and info and create a player object and add it to the playerList and add that player's id to the playerList in the database
+    //If the user is already in the game, remove the user from the playerList in Firebase
     @IBAction func joinGame(_ sender: Any) {
         let ref = Database.database().reference()
-        ref.child("users").observe(.childAdded, with: {(snapshot) in
-            if let dict = snapshot.value as? [String : AnyObject] {
-                if snapshot.key == Auth.auth().currentUser!.uid {
-                    let playerListCount = dict["playerList"]?.count!
-                    let spotsRemaining = dict["playerLimit"] as! Int - playerListCount!
-                    if !self.idList.contains(Auth.auth().currentUser!.uid), spotsRemaining > 0 {
-                        
-                        let profilePicURL = dict["photo"] as? String
-                        var userProfilePic = UIImage()
-                        
-                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
-                            
-                            let picRef = Storage.storage().reference(forURL: profilePicURL!)
-                            
-                            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                            picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-                                if let error = error {
-                                    // Uh-oh, an error occurred!
-                                    print("The following error occurred - \(error)")
-                                } else {
-                                    // Data for "images/island.jpg" is returned
-                                    userProfilePic = UIImage(data: data!)!
-                                }
-                                
-                                let player = Player(Auth.auth().currentUser!.uid, dict["firstName"] as! String, dict["lastName"] as! String, userProfilePic)
-                                self.playerList.append(player)
-                                
-                                self.idList.append(player.playerId)
-                                
-                                let eventsHandle = ref.child("events").child(self.game.gameId)
-                                eventsHandle.updateChildValues(["playerList":self.idList])
-                                self.tableView.reloadData()
-                            }//End get data
-                        }//End if profilePicURL
-                    }//End if !self.idList & spotsRemaining
-                    else {
-                        //Find index for userid to remove
-                        if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
-                            self.idList.remove(at: index)
+        if !inGame {
+            ref.child("events").observe(.childAdded, with: {(snapshot) in
+                if let eventsDictionary = snapshot.value as? [String : AnyObject] {
+                    if snapshot.key == self.game.gameId {
+                        let playerListCount = eventsDictionary["playerList"]?.count!
+                        let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount!
+                        if spotsRemaining > 0 {
+                            ref.child("users").observe(.childAdded, with: {(snapshot) in
+                                if let usersDictionary = snapshot.value as? [String : AnyObject] {
+                                    if snapshot.key == Auth.auth().currentUser!.uid {
+                                        let profilePicURL = usersDictionary["photo"] as? String
+                                        var userProfilePic = UIImage()
+                                        
+                                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                                            
+                                            let picRef = Storage.storage().reference(forURL: profilePicURL!)
+                                            
+                                            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                                            picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+                                                if let error = error {
+                                                    // Uh-oh, an error occurred!
+                                                    print("The following error occurred - \(error)")
+                                                } else {
+                                                    // Data for "images/island.jpg" is returned
+                                                    userProfilePic = UIImage(data: data!)!
+                                                }
+                                                
+                                                let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic)
+                                                self.playerList.append(player)
+                                                
+                                                self.idList.append(player.playerId)
+                                                
+                                                let eventsHandle = ref.child("events").child(self.game.gameId)
+                                                eventsHandle.updateChildValues(["playerList":self.idList])
+                                                self.tableView.reloadData()
+                                                self.inGame = true
+                                            }//End get data
+                                        }//End if profilePicURL != ""
+                                    }//End if snapshot.key == Auth.auth().currentUser
+                                }//If let usersDictionary =
+                            })//End ref.child("users").observe
+                        }/* End if there are spots left */ else {
+                            let alertController = UIAlertController(title: "Game Full", message: "This game is full.", preferredStyle: .alert)
+                            let actionOk = UIAlertAction(title: "OK",
+                                                         style: .default,
+                                                         handler: nil) //You can use a block here to handle a press on this button
+                            alertController.addAction(actionOk)
+                            self.present(alertController, animated: true, completion: nil)
                         }
-                        
-                        let eventsHandle = Database.database().reference().child("events").child(self.game.gameId)
-                        eventsHandle.updateChildValues(["playerList":self.idList])
-                    }
-                }//End it snapshot.key == current user ID
-            }//End if let dict
-        })//End child users snapshot in
-    }//End join game
+                    }//End if snapshot key = gameID
+                }//End eventsDictionary
+            })//End ref.child("events").observe
+        } /* End if in game */ else {
+            //Find index for userid to remove
+            if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                self.idList.remove(at: index)
+                self.playerList.remove(at: index)
+                self.tableView.reloadData()
+                inGame = false
+            }
+            
+            let eventsHandle = ref.child("events").child(self.game.gameId)
+            eventsHandle.updateChildValues(["playerList":self.idList])
+        }
+    }
+    
     @IBAction func getDirections(_ sender: UIButton) {
         if longitude == 0 && latitude == 0 {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
@@ -165,17 +189,18 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     private func updateButtonSelectionStates() {
-        if self.idList.contains(Auth.auth().currentUser!.uid) {
-            joinButton.setTitle("Unjoin", for: .selected)
+        if inGame == true {
+            joinButton.isSelected = true
         } else {
-            joinButton.setTitle("Join", for: .normal)
+            joinButton.isSelected = false
         }
     }
     
     private func setupButtons() {
         joinButton.layer.cornerRadius = joinButton.frame.height/2
         
-
+        joinButton.setTitle("Unjoin", for: .selected)
+        joinButton.setTitle("Join", for: .normal)
 
         if otherPassedLocation != "" {
             if otherPassedLocation == "Davis Basketball Court" {
@@ -234,6 +259,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 if snapshot.key == self.game.gameId {
                 self.locationName.text = dictionary["location"] as? String
                     if let playerIdArray = dictionary["playerList"] as? [String] {
+                        if playerIdArray.contains(Auth.auth().currentUser!.uid) {
+                            self.inGame = true
+                        }
                         for player in playerIdArray {
                             ref.child("users").observe(.childAdded, with: {(snapshot) in
                                 if let userDictionary = snapshot.value as? [String : AnyObject] {
