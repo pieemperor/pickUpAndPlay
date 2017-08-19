@@ -5,8 +5,6 @@
 //  Created by Caleb Mitcler on 5/20/17.
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //
-//TODO: Don't let them create a game if all the fields havent been selected
-//TODO: Fix the add subs button
 //TODO: Fix date picker and repeat picker
 
 import UIKit
@@ -34,7 +32,6 @@ class createGameController: UIViewController{
     var gameType = "Recreational"
     var playerLimit = 0
     //let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
-
 
     //MARK: Outlets
     @IBOutlet weak var locationImage: UIImageView!

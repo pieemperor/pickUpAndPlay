@@ -6,8 +6,6 @@
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //https://www.youtube.com/watch?v=B9sH_VxPPo4&t=81s
 
-//TODO: Add all info to page
-//TODO: Pass location to this view controller and display background image
 //TODO: Fix crash if there are no players in playerList array
 
 import UIKit

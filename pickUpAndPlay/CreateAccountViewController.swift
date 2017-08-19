@@ -5,8 +5,6 @@
 //  Created by Dakota Cowell on 6/18/17.
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //
-//TODO: Make profile pics round
-//TODO: Give feedback if password isn't long enough or doesn't match or if things arent filled out
 
 import UIKit
 import Firebase

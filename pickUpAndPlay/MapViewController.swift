@@ -6,7 +6,6 @@
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //
 //TODO: Create Filter function
-//TODO: Create multi sport marker
 //TODO: Add CPA courts and Tennis Courts
 //TODO: Add intermediate screen for the CPA and Tennis courts
 

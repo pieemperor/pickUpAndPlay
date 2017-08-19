@@ -6,7 +6,6 @@
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //
 //TODO: Allow user to edit profile
-//TODO: Allow logout
 
 import UIKit
 import FirebaseAuth
