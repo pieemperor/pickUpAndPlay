@@ -131,6 +131,27 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     
+    @IBAction func deleteAccount(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Delete Account?", message: "Clicking confirm will permanently delete your account", preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: "Cancel",
+                                     style: .cancel,
+                                     handler: nil) //You can use a block here to handle a press on this button
+        let actionDelete = UIAlertAction(title: "Confirm",
+                                         style: .destructive,
+                                         handler: { UIAlertAction in
+                                            Auth.auth().currentUser?.delete { error in
+                                                if let error = error {
+                                                    // An error happened.
+                                                } else {
+                                                    // Account deleted.
+                                                }
+                                            }
+        }) //You can use a block here to handle a press on this button
+        alertController.addAction(actionCancel)
+        alertController.addAction(actionDelete)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     private func setupButtons() {
         deleteAccountButton.layer.cornerRadius = 10.0
         firstNameTextField.layer.cornerRadius = 10.0
