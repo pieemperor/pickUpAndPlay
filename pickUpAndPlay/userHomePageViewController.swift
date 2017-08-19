@@ -111,38 +111,39 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     func getUserInfo () {
         
         //Get the user's first and last name from Firebase
-        let userID = Auth.auth().currentUser?.uid
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            let firstName = value?["firstName"] as? String ?? "Didn't work"
-            let lastName = value?["lastName"] as? String ?? "Didn't work"
-            self.nameLabel.text = firstName + " " + lastName
-            
-            let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
-            
-            if profilePicURL != "", profilePicURL != nil {
+        if let userID = Auth.auth().currentUser?.uid {
+            ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                let firstName = value?["firstName"] as? String ?? "Didn't work"
+                let lastName = value?["lastName"] as? String ?? "Didn't work"
+                self.nameLabel.text = firstName + " " + lastName
                 
-                let picRef = Storage.storage().reference(forURL: profilePicURL!)
+                let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
                 
-                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-                    if let error = error {
-                        // Uh-oh, an error occurred!
-                        print("The following error occurred - \(error)")
-                    } else {
-                        // Data for "images/island.jpg" is returned
-                        self.profilePic.image = UIImage(data: data!)
+                if profilePicURL != "", profilePicURL != nil {
+                    
+                    let picRef = Storage.storage().reference(forURL: profilePicURL!)
+                    
+                    // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                    picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+                        if let error = error {
+                            // Uh-oh, an error occurred!
+                            print("The following error occurred - \(error)")
+                        } else {
+                            // Data for "images/island.jpg" is returned
+                            self.profilePic.image = UIImage(data: data!)
+                        }
                     }
+                } else {
+                    self.profilePic.image = UIImage(named: "defaultProfilePic")
+                    print("No profile pic URL")
                 }
-            } else {
-                self.profilePic.image = UIImage(named: "defaultProfilePic")
-                print("No profile pic URL")
+                
+                // ...
+            }) { (error) in
+                print(error.localizedDescription)
             }
-            
-            // ...
-        }) { (error) in
-            print(error.localizedDescription)
         }
     }//End getUserInfo
     
