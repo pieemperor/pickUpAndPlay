@@ -18,14 +18,13 @@ class createGameController: UIViewController{
     //MARK: Properties
     //name of location
     var location = Location()
-    //let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
     var timeArray = [String]()
     private var sportButtons = [UIButton]()
     var isDatePickerShowing = false
     var numberOfSubs = 0
     
     //variables to send to Firebase
-    var selectedSport = String() {
+    var selectedSport = "" {
         didSet {
             updateButtonSelectionStates()
         }
@@ -34,6 +33,8 @@ class createGameController: UIViewController{
     var repeatFrequency = "Never"
     var gameType = "Recreational"
     var playerLimit = 0
+    //let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
+
 
     //MARK: Outlets
     @IBOutlet weak var locationImage: UIImageView!
@@ -97,22 +98,46 @@ class createGameController: UIViewController{
     }
     
     @IBAction func createGameButtonTapped(_ sender: Any) {
-        if !timeArray.contains(time) {
-            //create a new event and add info as children
-            let ref = Database.database().reference()
-            let key = ref.child("events").childByAutoId().key
-            let post = ["createdBy": Auth.auth().currentUser?.uid as Any,
-                        "location": location.name,
-                        "sport": selectedSport,
-                        "time": time,
-                        "repeatFrequency": repeatFrequency,
-                        "gameType": gameType,
-                        "playerLimit": playerLimit,
-                        "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
-            let childUpdates = ["/events/\(key)": post]
-            ref.updateChildValues(childUpdates)
-        }  else {
-            print("There is already a game scheduled for that time.")
+        if selectedSport != "" {
+            if time != "" {
+                if !timeArray.contains(time) {
+                    //create a new event and add info as children
+                    let ref = Database.database().reference()
+                    let key = ref.child("events").childByAutoId().key
+                    let post = ["createdBy": Auth.auth().currentUser?.uid as Any,
+                                "location": location.name,
+                                "sport": selectedSport,
+                                "time": time,
+                                "repeatFrequency": repeatFrequency,
+                                "gameType": gameType,
+                                "playerLimit": playerLimit,
+                                "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
+                    let childUpdates = ["/events/\(key)": post]
+                    ref.updateChildValues(childUpdates)
+                } else {
+                    let alertController = UIAlertController(title: "Time Slot Taken", message: "Someone has already created a game for that time.", preferredStyle: .alert)
+                    let actionOk = UIAlertAction(title: "OK",
+                                                 style: .default,
+                                                 handler: nil) //You can use a block here to handle a press on this button
+                    alertController.addAction(actionOk)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            } else {
+                let alertController = UIAlertController(title: "No time selected", message: "You must select a time for your game.", preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "OK",
+                                             style: .default,
+                                             handler: nil) //You can use a block here to handle a press on this button
+                
+                alertController.addAction(actionOk)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        } else {
+            let alertController = UIAlertController(title: "No sport selected", message: "You must select a sport.", preferredStyle: .alert)
+            let actionOk = UIAlertAction(title: "OK",
+                                         style: .default,
+                                         handler: nil) //You can use a block here to handle a press on this button
+            alertController.addAction(actionOk)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
  
