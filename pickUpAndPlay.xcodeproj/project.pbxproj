@@ -11,6 +11,7 @@
 		1D6831CD1F26F76700E7CA72 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */; };
 		1D6831D31F270A9F00E7CA72 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831D21F270A9F00E7CA72 /* Game.swift */; };
 		1D6831D51F293BB600E7CA72 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831D41F293BB600E7CA72 /* Player.swift */; };
+		1D6EB6251F4D442100626326 /* SelectSpecificLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6EB6241F4D442100626326 /* SelectSpecificLocationViewController.swift */; };
 		1D93E06A1F303B7A00E61AA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D93E0691F303B7A00E61AA9 /* Assets.xcassets */; };
 		1D93E06C1F30F61700E61AA9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93E06B1F30F61700E61AA9 /* Location.swift */; };
 		1D9548611F3E6686002816E7 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9548601F3E6686002816E7 /* PlayerTableViewCell.swift */; };
@@ -55,6 +56,7 @@
 		1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		1D6831D21F270A9F00E7CA72 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		1D6831D41F293BB600E7CA72 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		1D6EB6241F4D442100626326 /* SelectSpecificLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSpecificLocationViewController.swift; sourceTree = "<group>"; };
 		1D93E0691F303B7A00E61AA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D93E06B1F30F61700E61AA9 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1D9548601F3E6686002816E7 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				45F5A8F81EC27E2700EAAFCF /* Main.storyboard */,
+				1D6EB6241F4D442100626326 /* SelectSpecificLocationViewController.swift */,
 				1DCE46311F48118C00EF8855 /* EditProfileViewController.swift */,
 				1D6831D21F270A9F00E7CA72 /* Game.swift */,
 				1D93E06B1F30F61700E61AA9 /* Location.swift */,
@@ -487,6 +490,7 @@
 				45F1F3B71ECE5FF8005A1E09 /* scheduleController.swift in Sources */,
 				45F5A8F71EC27E2600EAAFCF /* LoginViewController.swift in Sources */,
 				1D9548611F3E6686002816E7 /* PlayerTableViewCell.swift in Sources */,
+				1D6EB6251F4D442100626326 /* SelectSpecificLocationViewController.swift in Sources */,
 				45F5A8F51EC27E2600EAAFCF /* AppDelegate.swift in Sources */,
 				454E54AF1ECB72790011B84F /* MapViewController.swift in Sources */,
 			);

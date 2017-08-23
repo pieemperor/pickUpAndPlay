@@ -142,6 +142,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                                             Auth.auth().currentUser?.delete { error in
                                                 if let error = error {
                                                     // An error happened.
+                                                    print(error)
                                                 } else {
                                                     // Account deleted.
                                                 }

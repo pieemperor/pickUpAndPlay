@@ -31,7 +31,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         Location(["ultimate"], "CPA Side Yard", -82.3748875, 36.300691, UIImage(named: "cpaSideYard")!),
         Location(["ultimate"], "The Quad", -82.3698213, 36.3029164, UIImage(named: "quad")!),
         Location(["ultimate"], "Tri-Hall Field", -82.3642177, 36.3038811, UIImage(named: "triHallField")!),
-        Location(["discGolf"], "ETSU Disc Golf Course", -82.362922, 36.30044, UIImage(named: "etsuDiscGolf")!)
+        Location(["discGolf"], "ETSU Disc Golf Course", -82.362922, 36.30044, UIImage(named: "etsuDiscGolf")!),
+        Location(["basketball", "volleyball", "soccer"], "CPA", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
+        Location(["tennis"], "ETSU Tennis Courts", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!)
     ]
     
     override func viewDidLoad() {
@@ -44,7 +46,12 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         let selectedLocation = marker.userData as! Location
         self.locationToPass = selectedLocation
-        self.performSegue(withIdentifier: "goToSchedule", sender: self)
+        
+        if selectedLocation.name == "CPA" || selectedLocation.name == "ETSU Tennis Courts" {
+            self.performSegue(withIdentifier: "goToSelectSpecificLocation", sender: self)
+        } else {
+            self.performSegue(withIdentifier: "goToSchedule", sender: self)
+        }
         return true
     }
     
@@ -93,6 +100,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSchedule" {
             let x : scheduleController = segue.destination as! scheduleController
+            x.passedLocation = self.locationToPass
+        } else if segue.identifier == "goToSelectSpecificLocation" {
+            let x : SelectSpecificLocationViewController = segue.destination as! SelectSpecificLocationViewController
             x.passedLocation = self.locationToPass
         }
     }
