@@ -16,10 +16,12 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var locationName: UILabel!
+    @IBOutlet weak var locationImage: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLocations()
+        setLocationImage()
         setupLabel()
         tableView.dataSource = self
         tableView.delegate = self
@@ -48,6 +50,7 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     
     private func setupLabel() {
         locationName.text = passedLocation.name
+        locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
     
     
@@ -103,4 +106,12 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
         }
     }
 
+    func setLocationImage() {
+        if passedLocation.name == "CPA" {
+            locationImage.image = UIImage(named: "CPA")
+        } else if passedLocation.name == "ETSU Tennis Courts" {
+            locationImage.image = UIImage(named: "tennisCourts")
+        }
+    }
+    
 }

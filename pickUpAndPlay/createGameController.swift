@@ -329,6 +329,8 @@ class createGameController: UIViewController{
         
         addSubsButton.setImage(UIImage(named: "subsButton"), for: .normal)
         addSubsButton.setImage(UIImage(named: "selectedSubsButton"), for: .selected)
+        
+        locationLabel.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
     
     private func setPlayerLimits() {

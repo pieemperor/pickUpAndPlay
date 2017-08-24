@@ -16,6 +16,7 @@ import AVFoundation
 
 class eventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var spotsLeftLabel: UILabel!
     @IBOutlet weak var sportImage: UIImageView!
     @IBOutlet weak var gameTypeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -201,6 +202,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         joinButton.layer.cornerRadius = joinButton.frame.height/2
         joinButton.setTitle("Bail", for: .selected)
         joinButton.setTitle("Join", for: .normal)
+        
+        locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
     
     private func setupLocations() {
@@ -307,6 +310,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         self.timeLabel.text = game.time
         self.dateLabel.text = game.date
         self.gameTypeLabel.text = game.gameType
+        self.spotsLeftLabel.text = String(game.spotsRemaining) + " Spots Remaining"
         
         if game.sport == "soccer" {
             sportImage.image = UIImage(named: "soccerBall")
