@@ -110,50 +110,51 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             ref.child("events").observe(.childAdded, with: {(snapshot) in
                 if let eventsDictionary = snapshot.value as? [String : AnyObject] {
                     if snapshot.key == self.game.gameId {
-                        let playerListCount = eventsDictionary["playerList"]?.count!
-                        let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount!
-                        if spotsRemaining > 0 {
-                            ref.child("users").observe(.childAdded, with: {(snapshot) in
-                                if let usersDictionary = snapshot.value as? [String : AnyObject] {
-                                    if snapshot.key == Auth.auth().currentUser!.uid {
-                                        let profilePicURL = usersDictionary["photo"] as? String
-                                        var userProfilePic = UIImage()
-                                        
-                                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                        if let playerListCount = eventsDictionary["playerList"]?.count! {
+                            let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
+                            if spotsRemaining > 0 {
+                                ref.child("users").observe(.childAdded, with: {(snapshot) in
+                                    if let usersDictionary = snapshot.value as? [String : AnyObject] {
+                                        if snapshot.key == Auth.auth().currentUser!.uid {
+                                            let profilePicURL = usersDictionary["photo"] as? String
+                                            var userProfilePic = UIImage()
                                             
-                                            let picRef = Storage.storage().reference(forURL: profilePicURL!)
-                                            
-                                            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                                            picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-                                                if let error = error {
-                                                    // Uh-oh, an error occurred!
-                                                    print("The following error occurred - \(error)")
-                                                } else {
-                                                    // Data for "images/island.jpg" is returned
-                                                    userProfilePic = UIImage(data: data!)!
-                                                }
+                                            if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
                                                 
-                                                let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic)
-                                                self.playerList.append(player)
+                                                let picRef = Storage.storage().reference(forURL: profilePicURL!)
                                                 
-                                                self.idList.append(player.playerId)
-                                                
-                                                let eventsHandle = ref.child("events").child(self.game.gameId)
-                                                eventsHandle.updateChildValues(["playerList":self.idList])
-                                                self.tableView.reloadData()
-                                                self.inGame = true
-                                            }//End get data
-                                        }//End if profilePicURL != ""
-                                    }//End if snapshot.key == Auth.auth().currentUser
-                                }//If let usersDictionary =
-                            })//End ref.child("users").observe
-                        }/* End if there are spots left */ else {
-                            let alertController = UIAlertController(title: "Game Full", message: "This game is full.", preferredStyle: .alert)
-                            let actionOk = UIAlertAction(title: "OK",
-                                                         style: .default,
-                                                         handler: nil) //You can use a block here to handle a press on this button
-                            alertController.addAction(actionOk)
-                            self.present(alertController, animated: true, completion: nil)
+                                                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+                                                picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+                                                    if let error = error {
+                                                        // Uh-oh, an error occurred!
+                                                        print("The following error occurred - \(error)")
+                                                    } else {
+                                                        // Data for "images/island.jpg" is returned
+                                                        userProfilePic = UIImage(data: data!)!
+                                                    }
+                                                    
+                                                    let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic)
+                                                    self.playerList.append(player)
+                                                    
+                                                    self.idList.append(player.playerId)
+                                                    
+                                                    let eventsHandle = ref.child("events").child(self.game.gameId)
+                                                    eventsHandle.updateChildValues(["playerList":self.idList])
+                                                    self.tableView.reloadData()
+                                                    self.inGame = true
+                                                }//End get data
+                                            }//End if profilePicURL != ""
+                                        }//End if snapshot.key == Auth.auth().currentUser
+                                    }//If let usersDictionary =
+                                })//End ref.child("users").observe
+                            }/* End if there are spots left */ else {
+                                let alertController = UIAlertController(title: "Game Full", message: "This game is full.", preferredStyle: .alert)
+                                let actionOk = UIAlertAction(title: "OK",
+                                                             style: .default,
+                                                             handler: nil) //You can use a block here to handle a press on this button
+                                alertController.addAction(actionOk)
+                                self.present(alertController, animated: true, completion: nil)
+                            }
                         }
                     }//End if snapshot key = gameID
                 }//End eventsDictionary

@@ -79,23 +79,33 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                         let profileUpdates = ["users/\(Auth.auth().currentUser!.uid)": post]
                         ref.updateChildValues(profileUpdates)
                     }
+                    let alertController = UIAlertController(title: "Account Updated", message: "Your account has been successfully updated", preferredStyle: .alert)
+                    let actionOk = UIAlertAction(title: "OK",
+                                                 style: .default,
+                                                 handler: nil) //You can use a block here to handle a press on this button
+                    alertController.addAction(actionOk)
+                    self.present(alertController, animated: true, completion: nil)
                 }
             } else {
                 ref.child("users").observe(.childAdded, with: {(snapshot) in
                     if snapshot.key == Auth.auth().currentUser!.uid {
                         if let dictionary = snapshot.value as? [String : AnyObject] {
                             self.picURL = dictionary["photo"] as! String
+                            
+                            Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!) { (error) in
+                                let post = [ "firstName" : self.firstNameTextField.text!,
+                                             "lastName" : self.lastNameTextField.text!,
+                                             "photo" : self.picURL
+                                ]
+                                
+                                let profileUpdates = ["users/\(Auth.auth().currentUser!.uid)": post]
+                                ref.updateChildValues(profileUpdates)
+                            }
                         }
+                        
                     }
                 })
             }
-            
-            let alertController = UIAlertController(title: "Account Updated", message: "Your account has been successfully updated", preferredStyle: .alert)
-            let actionOk = UIAlertAction(title: "OK",
-                                         style: .default,
-                                         handler: nil) //You can use a block here to handle a press on this button
-            alertController.addAction(actionOk)
-            self.present(alertController, animated: true, completion: nil)
     
 
         } else {
