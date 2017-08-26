@@ -1593,7 +1593,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1610,7 +1610,7 @@ Directions</string>
     <resources>
         <image name="addPhoto" width="225" height="224"/>
         <image name="facebookButton" width="281" height="46"/>
-        <image name="gear" width="32" height="32"/>
+        <image name="gear" width="22" height="22"/>
         <image name="loginBG" width="93" height="167"/>
         <image name="or" width="416" height="41"/>
         <image name="profileBG" width="397" height="282"/>
@@ -1619,8 +1619,8 @@ Directions</string>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TvU-3m-pPR"/>
-        <segue reference="3aM-Aw-Hnq"/>
         <segue reference="PIL-Kj-fUK"/>
+        <segue reference="VXb-kk-V3v"/>
+        <segue reference="TvU-3m-pPR"/>
     </inferredMetricsTieBreakers>
 </document>

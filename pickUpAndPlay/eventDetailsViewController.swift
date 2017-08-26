@@ -160,16 +160,29 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 }//End eventsDictionary
             })//End ref.child("events").observe
         } /* End if in game */ else {
-            //Find index for userid to remove
-            if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
-                self.idList.remove(at: index)
-                self.playerList.remove(at: index)
-                self.tableView.reloadData()
-                inGame = false
-            }
+            let alertController = UIAlertController(title: "Delete Game?", message: "You are the only player left in this game. If you leave this game, it will be deleted", preferredStyle: .alert)
+            let actionCancel = UIAlertAction(title: "Cancel",
+                                         style: .default,
+                                         handler: nil) //You can use a block here to handle a press on this button
             
-            let eventsHandle = ref.child("events").child(self.game.gameId)
-            eventsHandle.updateChildValues(["playerList":self.idList])
+            let actionDelete = UIAlertAction(title: "Delete Game",
+                                             style: .destructive,
+                                             handler: { UIAlertAction in
+                                                //Find index for userid to remove
+                                                if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                                                    self.idList.remove(at: index)
+                                                    self.playerList.remove(at: index)
+                                                    self.tableView.reloadData()
+                                                    self.inGame = false
+                                                }
+                                                
+                                                let eventsHandle = ref.child("events").child(self.game.gameId)
+                                                eventsHandle.updateChildValues(["playerList":self.idList])
+            })
+            
+            alertController.addAction(actionCancel)
+            alertController.addAction(actionDelete)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
