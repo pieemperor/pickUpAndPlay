@@ -31,19 +31,19 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     private func setupLocations() {
         if passedLocation.name == "CPA" {
             possibleLocations = [
-                Location(["basketball"], "Court 1", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-                Location(["basketball"], "Court 2", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-                Location(["basketball", "volleyball"], "Court 3", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-                Location(["basketball", "soccer"], "Blue Court", -82.3745716, 36.2998606, UIImage(named: "CPA")!)
+                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
+                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
+                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
+                Location(["basketball", "soccer"], "CPA Blue Court", -82.3745716, 36.2998606, UIImage(named: "CPA")!)
             ]
         } else if passedLocation.name == "ETSU Tennis Courts" {
             possibleLocations = [
-                Location(["tennis"], "Court 1", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Court 2", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Court 3", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Court 4", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Court 5", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Court 6", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!)
+                Location(["tennis"], "Tennis Court 1", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
+                Location(["tennis"], "Tennis Court 2", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
+                Location(["tennis"], "Tennis Court 3", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
+                Location(["tennis"], "Tennis Court 4", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
+                Location(["tennis"], "Tennis Court 5", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
+                Location(["tennis"], "Tennis Court 6", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!)
             ]
         }
     }

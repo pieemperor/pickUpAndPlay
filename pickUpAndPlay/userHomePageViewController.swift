@@ -151,7 +151,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         let ref = Database.database().reference()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                let playerArray = dictionary["playerList"]!
+                if let playerArray = dictionary["playerList"] {
                 if playerArray.contains(Auth.auth().currentUser?.uid as Any) {
                     
                     let gameId = snapshot.key
@@ -181,6 +181,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                 } //End if location
                 //Sort games by date
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
+            }
             } //End if let dictionary
         }) //End observe snapshot
     } //End fetchGames
