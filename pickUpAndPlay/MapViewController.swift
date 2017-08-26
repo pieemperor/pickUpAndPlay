@@ -33,7 +33,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         Location(["ultimate"], "Tri-Hall Field", -82.3642177, 36.3038811, UIImage(named: "triHallField")!),
         Location(["discGolf"], "ETSU Disc Golf Course", -82.362922, 36.30044, UIImage(named: "etsuDiscGolf")!),
         Location(["basketball", "volleyball", "soccer"], "CPA", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-        Location(["tennis"], "ETSU Tennis Courts", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!)
+        Location(["tennis"], "ETSU Tennis Courts", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
+        Location(["basketball"], "Brooks Gym (Downstairs Court)", -82.370306, 36.302675, UIImage(named: "brooksGym")!),
     ]
     
     override func viewDidLoad() {
@@ -62,6 +63,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.delegate = self
         self.view = mapView
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         
         
         
