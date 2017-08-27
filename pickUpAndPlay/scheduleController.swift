@@ -17,7 +17,6 @@ import AVFoundation
 
 class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var locationName: UILabel!
@@ -31,18 +30,18 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     var timeArray = [String]()
     var selectedGame = Game()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationName.text = passedLocation.name
-
+        setupButtons()
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        fetchGames()
-        setupButtons()
         tableView.separatorColor = .clear
+        gameList = [Game]()
+        fetchGames()
     }
     
     //MARK: Table View Delegate methods
