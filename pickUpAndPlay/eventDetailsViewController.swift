@@ -142,6 +142,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                     eventsHandle.updateChildValues(["playerList":self.idList])
                                                     self.tableView.reloadData()
                                                     self.inGame = true
+                                                    self.spotsLeftLabel.text = String(spotsRemaining - 1) +  " Spots Remaining"
                                                 }//End get data
                                             }//End if profilePicURL != ""
                                         }//End if snapshot.key == Auth.auth().currentUser
@@ -159,32 +160,56 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                     }//End if snapshot key = gameID
                 }//End eventsDictionary
             })//End ref.child("events").observe
-        } /* End if in game */ else {
-            let alertController = UIAlertController(title: "Delete Game?", message: "You are the only player left in this game. If you leave this game, it will be deleted", preferredStyle: .alert)
-            let actionCancel = UIAlertAction(title: "Cancel",
-                                         style: .default,
-                                         handler: nil) //You can use a block here to handle a press on this button
-            
-            let actionDelete = UIAlertAction(title: "Delete Game",
-                                             style: .destructive,
-                                             handler: { UIAlertAction in
-                                                //Find index for userid to remove
-                                                if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
-                                                    self.idList.remove(at: index)
-                                                    self.playerList.remove(at: index)
-                                                    self.tableView.reloadData()
-                                                    self.inGame = false
-                                                }
-                                                
-                                                let eventsHandle = ref.child("events").child(self.game.gameId)
-                                                eventsHandle.updateChildValues(["playerList":self.idList])
-            })
-            
-            alertController.addAction(actionCancel)
-            alertController.addAction(actionDelete)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
+        } /* End if !in game */ else {
+            ref.child("events").observe(.childAdded, with: {(snapshot) in
+                if let eventsDictionary = snapshot.value as? [String : AnyObject] {
+                    if snapshot.key == self.game.gameId {
+                        if let playerListCount = eventsDictionary["playerList"]?.count! {
+                            if playerListCount == 1 {
+                                let alertController = UIAlertController(title: "Delete Game?", message: "You are the only player left in this game. If you leave this game, it will be deleted", preferredStyle: .alert)
+                                let actionCancel = UIAlertAction(title: "Cancel",
+                                                                 style: .default,
+                                                                 handler: nil) //You can use a block here to handle a press on this button
+                                
+                                let actionDelete = UIAlertAction(title: "Delete Game",
+                                                                 style: .destructive,
+                                                                 handler: { UIAlertAction in
+                                                                    //Find index for userid to remove
+                                                                    if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                                                                        self.idList.remove(at: index)
+                                                                        self.playerList.remove(at: index)
+                                                                        self.tableView.reloadData()
+                                                                        self.inGame = false
+                                                                    }
+                                                                    
+                                                                    let eventsHandle = ref.child("events").child(self.game.gameId)
+                                                                    eventsHandle.updateChildValues(["playerList":self.idList])
+                                                                    let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
+                                                                    self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
+                                })
+                                
+                                alertController.addAction(actionCancel)
+                                alertController.addAction(actionDelete)
+                                self.present(alertController, animated: true, completion: nil)
+                            }/* End if playerListCount == 1 */ else {
+                                if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                                    self.idList.remove(at: index)
+                                    self.playerList.remove(at: index)
+                                    self.tableView.reloadData()
+                                    self.inGame = false
+                                }
+                                
+                                let eventsHandle = ref.child("events").child(self.game.gameId)
+                                eventsHandle.updateChildValues(["playerList":self.idList])
+                                let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
+                                self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
+                            }
+                        }//End if let playerListCount
+                    }//End if snapshot.key ==
+                }//end if let eventsDictionary
+            })//End .child("events").observe
+        }//End else
+    }//End joinGame
     
     @IBAction func getDirections(_ sender: UIButton) {
         if longitude == 0 && latitude == 0 {
