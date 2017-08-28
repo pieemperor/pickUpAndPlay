@@ -51,6 +51,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
  
     
     //MARK: Facebook functions
+    //MARK: Facebook functions
     @IBAction func loginWithFacebook(_ sender: UIButton) {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
@@ -63,10 +64,27 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                             if (error == nil){
                                 //everything works print the user data
                                 print(result ?? "No error")
-                                //added this
+                                
+                                
+                                
+                                
+                                
+                                //********added this************
                                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                                 //this is where facebook connects to firebase auth
                                 Auth.auth().signIn(with: credential) { (user, error) in
+                                    
+                                    let ref = Database.database().reference()
+                                    
+                                    let fullNameArr = user?.displayName?.components(separatedBy: " ")
+                                    let fn = fullNameArr?[0]
+                                    let ln = fullNameArr?[1]
+                                    let profilePicURL = user?.photoURL?.absoluteString
+                                    
+                                    ref.child("users").child(user!.uid).setValue(["firstName": fn, "lastName": ln, "photo": profilePicURL])
+                                    print(user?.displayName!)
+                                    //prints Optional("Caleb Mitcler")
+                                    
                                     self.performSegue(withIdentifier: "goToMap", sender: self)
                                     if let error = error {
                                         print("Could not sign in with Facebook: \(error)")
