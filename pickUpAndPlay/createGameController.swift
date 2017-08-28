@@ -5,13 +5,17 @@
 //  Created by Caleb Mitcler on 5/20/17.
 //  Copyright © 2017 Caleb Mitcler. All rights reserved.
 //
-//TODO: Fix date picker and repeat picker
+//TODO: Fix date picker
 
 import UIKit
 import Firebase
 import FirebaseAuth
 
 class createGameController: UIViewController{
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
 
     //MARK: Properties
     //name of location

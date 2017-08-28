@@ -267,7 +267,7 @@
 				TargetAttributes = {
 					45F5A8F01EC27E2600EAAFCF = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = VE738W562A;
+						DevelopmentTeam = K42FQ8XY57;
 						ProvisioningStyle = Automatic;
 					};
 					45F5A9041EC27E2700EAAFCF = {
@@ -643,7 +643,7 @@
 			baseConfigurationReference = 75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VE738W562A;
+				DEVELOPMENT_TEAM = K42FQ8XY57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Bolts\"",
@@ -671,7 +671,7 @@
 				);
 				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -682,10 +682,10 @@
 			baseConfigurationReference = 58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VE738W562A;
+				DEVELOPMENT_TEAM = K42FQ8XY57;
 				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -186,6 +186,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                     eventsHandle.updateChildValues(["playerList":self.idList])
                                                                     let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
                                                                     self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
+                                                                    
                                 })
                                 
                                 alertController.addAction(actionCancel)
