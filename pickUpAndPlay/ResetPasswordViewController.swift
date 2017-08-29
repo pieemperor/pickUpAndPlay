@@ -23,6 +23,11 @@ class ResetPasswordViewController: UIViewController {
         setupButtons()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Dismiss the keyboard when the view is tapped on
+        emailTextField.resignFirstResponder()
+    }
+    
     @IBAction func resetPassword(_ sender: UIButton) {
         if emailTextField.text != "" {
             Auth.auth().sendPasswordReset(withEmail: emailTextField.text!) { (error) in

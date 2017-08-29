@@ -82,7 +82,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                                     let profilePicURL = user?.photoURL?.absoluteString
                                     
                                     ref.child("users").child(user!.uid).setValue(["firstName": fn, "lastName": ln, "photo": profilePicURL])
-                                    print(user?.displayName!)
                                     //prints Optional("Caleb Mitcler")
                                     
                                     self.performSegue(withIdentifier: "goToMap", sender: self)
@@ -142,7 +141,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                         self.wrongLoginText.isHidden = false
                         // Error: check error and show message
                     }
-                    
                 })
         }//End if let email, pass
     }//End signInButtonTapped

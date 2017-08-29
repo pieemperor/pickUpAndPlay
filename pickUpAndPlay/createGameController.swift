@@ -70,6 +70,22 @@ class createGameController: UIViewController{
         navigationController?.navigationBar.tintColor = .white
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Dismiss the keyboard when the view is tapped on
+        let dpSize = datePicker.bounds.size
+        let size = view.bounds.size
+        let y = isDatePickerShowing ? size.height : size.height - dpSize.height
+        isDatePickerShowing = !isDatePickerShowing
+        UIView.animate(withDuration: 0.75) {
+            self.datePicker.frame = CGRect(
+                x: (size.width - dpSize.width) / 2.0,
+                y: y,
+                width: dpSize.width,
+                height: dpSize.height
+            )
+        }
+    }
+    
     //MARK: Actions
     @IBAction func selectTime(_ sender: UIButton) {
         let dpSize = datePicker.bounds.size
