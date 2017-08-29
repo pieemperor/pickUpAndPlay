@@ -121,20 +121,24 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                 
                 let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
                 
+                
                 if profilePicURL != "", profilePicURL != nil {
+                    let url = URL(string: profilePicURL!)
+                    let data = try? Data(contentsOf: url!)
+                    self.profilePic.image = UIImage(data : data!)
                     
-                    let picRef = Storage.storage().reference(forURL: profilePicURL!)
-                    
-                    // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                    picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-                        if let error = error {
-                            // Uh-oh, an error occurred!
-                            print("The following error occurred - \(error)")
-                        } else {
-                            // Data for "images/island.jpg" is returned
-                            self.profilePic.image = UIImage(data: data!)
-                        }
-                    }
+//                    let picRef = Storage.storage().reference(forURL: profilePicURL!)
+//                    
+//                    // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+//                    picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+//                        if let error = error {
+//                            // Uh-oh, an error occurred!
+//                            print("The following error occurred - \(error)")
+//                        } else {
+//                            // Data for "images/island.jpg" is returned
+//                            self.profilePic.image = UIImage(data: data!)
+//                        }
+//                    }
                 } else {
                     self.profilePic.image = UIImage(named: "defaultProfilePic")
                     print("No profile pic URL")

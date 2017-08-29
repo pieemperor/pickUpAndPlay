@@ -206,27 +206,27 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
             if let usersDictionary = snapshot.value as? [String: AnyObject] {
                 if snapshot.key == Auth.auth().currentUser!.uid {
                     
-                    
                     let profilePicURL = usersDictionary["photo"] as? String
-                    var userProfilePic = UIImage()
-                    
                     if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                        let url = URL(string: profilePicURL!)
+                        let data = try? Data(contentsOf: url!)
+                        self.profilePic.image = UIImage(data : data!)
                         
-                        let picRef = Storage.storage().reference(forURL: profilePicURL!)
-                        
-                        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                        picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-                            if let error = error {
-                                // Uh-oh, an error occurred!
-                                print("The following error occurred - \(error)")
-                            } else {
-                                // Data for "images/island.jpg" is returned
-                                userProfilePic = UIImage(data: data!)!
-                            }
-                            
-                            self.profilePic.image = userProfilePic
-                        }//End get data
-                    }//End if profilePicURL
+//                        let picRef = Storage.storage().reference(forURL: profilePicURL!)
+//                        
+//                        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+//                        picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+//                            if let error = error {
+//                                // Uh-oh, an error occurred!
+//                                print("The following error occurred - \(error)")
+//                            } else {
+//                                // Data for "images/island.jpg" is returned
+//                                userProfilePic = UIImage(data: data!)!
+//                            }
+//                            
+//                            self.profilePic.image = userProfilePic
+//                        }//End get data
+                   }//End if profilePicURL
                     self.emailTextField.text = Auth.auth().currentUser!.email
                     self.firstNameTextField.text = usersDictionary["firstName"] as? String
                     self.lastNameTextField.text = usersDictionary["lastName"] as? String
