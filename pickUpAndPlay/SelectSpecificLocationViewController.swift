@@ -25,16 +25,15 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
         setupLabel()
         tableView.dataSource = self
         tableView.delegate = self
-        
     }
     
     private func setupLocations() {
         if passedLocation.name == "CPA" {
             possibleLocations = [
-                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-                Location(["basketball", "soccer"], "CPA Blue Court", -82.3745716, 36.2998606, UIImage(named: "CPA")!)
+                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606, UIImage(named: "cpaCourt1")!),
+                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606, UIImage(named: "cpaCourt2")!),
+                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606, UIImage(named: "cpaCourt3")!),
+                Location(["basketball", "soccer"], "CPA Court 4", -82.3745716, 36.2998606, UIImage(named: "cpaCourt4")!)
             ]
         } else if passedLocation.name == "ETSU Tennis Courts" {
             possibleLocations = [

@@ -929,7 +929,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testLocation" translatesAutoresizingMaskIntoConstraints="NO" id="w51-qw-Lj7">
                                 <rect key="frame" x="0.0" y="64" width="375" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="AA8-Xa-X4q"/>
+                                    <constraint firstAttribute="height" constant="180" id="AA8-Xa-X4q"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Placeholder" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIX-q7-xLU">
@@ -1093,7 +1093,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testLocation" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-Hq-Aaq">
                                 <rect key="frame" x="0.0" y="64" width="375" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="c5s-It-H1f"/>
+                                    <constraint firstAttribute="height" constant="180" id="c5s-It-H1f"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Placeholder" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tav-fA-3YC">
@@ -1619,8 +1619,8 @@ Directions</string>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PIL-Kj-fUK"/>
-        <segue reference="VXb-kk-V3v"/>
         <segue reference="TvU-3m-pPR"/>
+        <segue reference="3aM-Aw-Hnq"/>
+        <segue reference="PIL-Kj-fUK"/>
     </inferredMetricsTieBreakers>
 </document>

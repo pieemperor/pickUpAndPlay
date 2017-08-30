@@ -216,16 +216,19 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         if longitude == 0 && latitude == 0 {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
                 UIApplication.shared.open(URL(string:
-                    "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))&directionsmode=driving")! as URL, options: [:])
+                    "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
             } else {
-                print("Can't use com.google.maps://")
+                UIApplication.shared.open(URL(string:
+                    "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+
             }
         } else {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
                 UIApplication.shared.open(URL(string:
                     "comgooglemaps://?saddr=&daddr=\(Float(self.latitude)),\(Float(self.longitude))&directionsmode=driving")! as URL, options: [:])
             } else {
-                print("Can't use com.google.maps://")
+                UIApplication.shared.open(URL(string:
+                    "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
             }
         }
     }
