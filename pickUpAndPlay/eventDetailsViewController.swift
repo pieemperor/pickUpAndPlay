@@ -183,10 +183,10 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                     }
                                                                     
                                                                     let eventsHandle = ref.child("events").child(self.game.gameId)
-                                                                    eventsHandle.updateChildValues(["playerList":self.idList])
-                                                                    let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
-                                                                    self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
                                                                     
+                                                                    eventsHandle.removeValue()
+                                                                    
+                                                                    //MARK: Todo - Need to segue back to the schedule
                                 })
                                 
                                 alertController.addAction(actionCancel)
@@ -204,7 +204,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                 eventsHandle.updateChildValues(["playerList":self.idList])
                                 let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
                                 self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
-                            }
+                            }//End else
                         }//End if let playerListCount
                     }//End if snapshot.key ==
                 }//end if let eventsDictionary
@@ -220,7 +220,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             } else {
                 UIApplication.shared.open(URL(string:
                     "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
-
             }
         } else {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {

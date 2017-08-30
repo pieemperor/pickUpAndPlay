@@ -37,11 +37,11 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        gameList = [Game]()
+        fetchGames()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.separatorColor = .clear
-        gameList = [Game]()
-        fetchGames()
     }
     
     //MARK: Table View Delegate methods
