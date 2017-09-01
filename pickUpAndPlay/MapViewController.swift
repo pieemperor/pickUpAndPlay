@@ -14,8 +14,6 @@ import GoogleMaps
 import Firebase
 
 class MapViewController: UIViewController, GMSMapViewDelegate {
-    
-    
     //selected location that will be sent in prepare for segue
     var locationToPass = Location()
     
@@ -35,6 +33,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         Location(["basketball", "volleyball", "soccer"], "CPA", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
         Location(["tennis"], "ETSU Tennis Courts", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
         Location(["basketball"], "Brooks Gym (Downstairs Court)", -82.370306, 36.302675, UIImage(named: "brooksGym")!),
+        Location(["volleyball"], "Dossett Beach Volleyball Court", -82.37139, 36.29929, UIImage(named: "dossettVB")!),
     ]
     
     override func viewDidLoad() {

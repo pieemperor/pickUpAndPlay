@@ -22,6 +22,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var createGameButton: UIButton!
     @IBOutlet weak var upcomingGamesLabel: UILabel!
+    @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
    
     //name of location sent from mapViewController
     var passedLocation = Location()
@@ -140,6 +141,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchGames() {
         let ref = Database.database().reference()
+        tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 let location = dictionary["location"] as! String
@@ -176,6 +178,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                 //Sort games by date
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
+            self.tableSpinner.stopAnimating()
         }) //End observe snapshot
     } //End fetchGames
     

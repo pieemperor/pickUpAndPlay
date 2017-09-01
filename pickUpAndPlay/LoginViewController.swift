@@ -35,6 +35,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     @IBOutlet weak var fbSignInButton: UIButton!
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var wrongLoginText: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,8 +124,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     
     //Action to sign user in when sign in button is clicked
     @IBAction func signInButtonTapped(_ sender: UIButton) {
+        
         // Check to make sure email and pasword text fields are not nil
         if let email = emailTextField.text, let pass = passwordTextField.text {
+                spinner.startAnimating()
                 // Sign in the user with Firebase
                 Auth.auth().signIn(withEmail: email, password: pass, completion: { (user, error) in
                     
@@ -134,6 +137,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                         self.emailTextField.text = ""
                         self.passwordTextField.text = ""
                         self.wrongLoginText.isHidden = true
+                        self.spinner.stopAnimating()
                         self.performSegue(withIdentifier: "goToMap", sender: self)
                     }
                     else {

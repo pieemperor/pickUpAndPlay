@@ -25,6 +25,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var locationImage: UIImageView!
+    @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var joinSpinner: UIActivityIndicatorView!
     
     //event key sent from schedulecontroller
     var game = Game()
@@ -107,6 +109,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func joinGame(_ sender: Any) {
         let ref = Database.database().reference()
         if !inGame {
+            joinSpinner.startAnimating()
             ref.child("events").observe(.childAdded, with: {(snapshot) in
                 if let eventsDictionary = snapshot.value as? [String : AnyObject] {
                     if snapshot.key == self.game.gameId {
@@ -143,6 +146,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                     self.tableView.reloadData()
                                                     self.inGame = true
                                                     self.spotsLeftLabel.text = String(spotsRemaining - 1) +  " Spots Remaining"
+                                                    self.joinSpinner.stopAnimating()
                                                 }//End get data
                                             }//End if profilePicURL != ""
                                         }//End if snapshot.key == Auth.auth().currentUser
@@ -300,6 +304,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fetchPlayers() {
+        self.tableSpinner.startAnimating()
         let ref = Database.database().reference()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
@@ -324,23 +329,12 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                             let data = try? Data(contentsOf: url!)
                                             userProfilePic = UIImage(data : data!)!
                                             
-//                                            let picRef = Storage.storage().reference(forURL: profilePicURL!)
-//                                            
-//                                            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-//                                            picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-//                                                if let error = error {
-//                                                    // Uh-oh, an error occurred!
-//                                                    print("The following error occurred - \(error)")
-//                                                } else {
-//                                                    // Data for "images/island.jpg" is returned
-//                                                    userProfilePic = UIImage(data: data!)!
-//                                                }
-                                            
                                                 let player = Player(player, firstName as! String, lastName as! String, userProfilePic)
                                                 self.idList.append(player.playerId)
                                                 self.playerList.append(player)
                                                 self.tableView.reloadData()
-//                                            }
+                                                self.tableSpinner.stopAnimating()
+
                                         }//End if profilePicURL != ""
                                     }//End if player == snapshot.key
                                 }//End if let userDictionary

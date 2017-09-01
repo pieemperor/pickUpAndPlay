@@ -21,6 +21,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //MARK: variables
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -56,6 +57,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                 setDefaultBorderWidths()
                 if pw.characters.count > 5  {
                     setDefaultBorderWidths()
+                    spinner.startAnimating()
                     Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in
                         
                         //Get PNG representation of the image they chose
@@ -81,6 +83,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                                 //Save user's display name
                                 self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": picURL!])
                                 
+                                self.spinner.stopAnimating()
                                 // User is found, go to home screen
                                 self.performSegue(withIdentifier: "goToMap", sender: self)
                             } else {

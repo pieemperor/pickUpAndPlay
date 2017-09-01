@@ -21,6 +21,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var deleteAccountButton: UIButton!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     var uuid = UUID()
     var picWasSelected = false
@@ -51,7 +52,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         if firstNameTextField.text != "", lastNameTextField.text != "", emailTextField.text != "" {
             let ref = Database.database().reference()
 
-            
+            spinner.startAnimating()
             if picWasSelected {
                 //Get PNG representation of the image they chose
                 let imageData = UIImageJPEGRepresentation(self.profilePic.image!, 0.5)!
@@ -79,12 +80,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                         let profileUpdates = ["users/\(Auth.auth().currentUser!.uid)": post]
                         ref.updateChildValues(profileUpdates)
                     }
+                    self.spinner.stopAnimating()
                     let alertController = UIAlertController(title: "Account Updated", message: "Your account has been successfully updated", preferredStyle: .alert)
                     let actionOk = UIAlertAction(title: "OK",
                                                  style: .default,
                                                  handler: nil) //You can use a block here to handle a press on this button
                     alertController.addAction(actionOk)
                     self.present(alertController, animated: true, completion: nil)
+
                 }
             } else {
                 ref.child("users").observe(.childAdded, with: {(snapshot) in
@@ -100,6 +103,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                                 
                                 let profileUpdates = ["users/\(Auth.auth().currentUser!.uid)": post]
                                 ref.updateChildValues(profileUpdates)
+                                self.spinner.stopAnimating()
                             }
                         }
                         
@@ -169,6 +173,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         lastNameTextField.layer.cornerRadius = 10.0
         emailTextField.layer.cornerRadius = 10.0
         updateProfileButton.layer.cornerRadius = 10.0
+        spinner.layer.cornerRadius = 10.0
+        let transparentBlack = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
+        spinner.backgroundColor = transparentBlack
     }
     
     @IBAction func selectProfilePicFromLibrary(_ sender: UITapGestureRecognizer) {
@@ -202,6 +209,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     func loadUserData() {
         let ref = Database.database().reference()
+        spinner.startAnimating()
         ref.child("users").observe(.childAdded, with: {(snapshot) in
             if let usersDictionary = snapshot.value as? [String: AnyObject] {
                 if snapshot.key == Auth.auth().currentUser!.uid {
@@ -212,25 +220,12 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                         let data = try? Data(contentsOf: url!)
                         self.profilePic.image = UIImage(data : data!)
                         
-//                        let picRef = Storage.storage().reference(forURL: profilePicURL!)
-//                        
-//                        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-//                        picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-//                            if let error = error {
-//                                // Uh-oh, an error occurred!
-//                                print("The following error occurred - \(error)")
-//                            } else {
-//                                // Data for "images/island.jpg" is returned
-//                                userProfilePic = UIImage(data: data!)!
-//                            }
-//                            
-//                            self.profilePic.image = userProfilePic
-//                        }//End get data
                    }//End if profilePicURL
                     self.emailTextField.text = Auth.auth().currentUser!.email
                     self.firstNameTextField.text = usersDictionary["firstName"] as? String
                     self.lastNameTextField.text = usersDictionary["lastName"] as? String
                 }//End if snapshot.key
+                self.spinner.stopAnimating()
             }//End if let userDictionary
         })//End ref.child("users")
     }//End Load user data

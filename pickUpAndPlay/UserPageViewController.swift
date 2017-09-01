@@ -22,6 +22,8 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var userSpinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,6 +112,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func getUserInfo () {
         //Get the user's first and last name from Firebase
+        userSpinner.startAnimating()
         ref.child("users").child(self.userId).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
@@ -124,19 +127,8 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                 let url = URL(string: profilePicURL!)
                 let data = try? Data(contentsOf: url!)
                 self.profilePic.image = UIImage(data : data!)
+                self.userSpinner.stopAnimating()
                 
-//                let picRef = Storage.storage().reference(forURL: profilePicURL!)
-//                
-//                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-//                picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-//                    if let error = error {
-//                        // Uh-oh, an error occurred!
-//                        print("The following error occurred - \(error)")
-//                    } else {
-//                        // Data for "images/island.jpg" is returned
-//                        self.profilePic.image = UIImage(data: data!)
-//                    }
-//                }
             } else {
                 self.profilePic.image = UIImage(named: "defaultProfilePic")
                 print("No profile pic URL")
@@ -149,6 +141,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     }//End getUserInfo
     
     func fetchGames() {
+        tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 if let playerArray = dictionary["playerList"] as? [String] {
@@ -182,6 +175,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                 //Sort games by date
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
+            self.tableSpinner.stopAnimating()
         }) //End observe snapshot
     } //End fetchGames
     

@@ -17,6 +17,8 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
     
     var ref: DatabaseReference! = Database.database().reference()
     var gameList: [Game] = []
@@ -28,10 +30,11 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
         setupButtons()
-        fetchGames()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        fetchGames()
         getUserInfo()
     }
     
@@ -109,9 +112,9 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     
     //MARK: Firebase functions
     func getUserInfo () {
-        
         //Get the user's first and last name from Firebase
         if let userID = Auth.auth().currentUser?.uid {
+            spinner.startAnimating()
             ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
@@ -127,24 +130,13 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     let data = try? Data(contentsOf: url!)
                     self.profilePic.image = UIImage(data : data!)
                     
-//                    let picRef = Storage.storage().reference(forURL: profilePicURL!)
-//                    
-//                    // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-//                    picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-//                        if let error = error {
-//                            // Uh-oh, an error occurred!
-//                            print("The following error occurred - \(error)")
-//                        } else {
-//                            // Data for "images/island.jpg" is returned
-//                            self.profilePic.image = UIImage(data: data!)
-//                        }
-//                    }
+                    self.spinner.stopAnimating()
                 } else {
                     self.profilePic.image = UIImage(named: "defaultProfilePic")
+                    self.spinner.stopAnimating()
+
                     print("No profile pic URL")
                 }
-                
-                // ...
             }) { (error) in
                 print(error.localizedDescription)
             }
@@ -152,7 +144,9 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     }//End getUserInfo
     
     func fetchGames() {
+        gameList = [Game]()
         let ref = Database.database().reference()
+        self.tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 if let playerArray = dictionary["playerList"] {
@@ -187,6 +181,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             }
             } //End if let dictionary
+            self.tableSpinner.stopAnimating()
         }) //End observe snapshot
     } //End fetchGames
     
