@@ -750,9 +750,11 @@
                         <outlet property="tableSpinner" destination="1ru-8w-arQ" id="ZQl-xh-Gwm"/>
                         <outlet property="tableView" destination="3RQ-cu-Ff6" id="VPp-aA-CU9"/>
                         <segue destination="sT7-Oz-uhz" kind="show" identifier="goToEventDetails" id="krn-aR-g15"/>
+                        <segue destination="wEh-Qc-JO6" kind="unwind" identifier="unwindToProfile" unwindAction="unwindtoProfileWithUnwindSegue:" id="CoP-YE-37i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnu-gi-Ytz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wEh-Qc-JO6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1841" y="1017"/>
         </scene>
@@ -784,7 +786,7 @@
                                     <navigationItem id="Fml-uI-EI0">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="mBC-fE-jYH">
                                             <connections>
-                                                <segue destination="rb3-Fa-8GU" kind="unwind" unwindAction="unwindtoProfileWithUnwindSegue:" id="eyI-4O-8he"/>
+                                                <segue destination="rb3-Fa-8GU" kind="unwind" identifier="unwindToProfile" unwindAction="unwindtoProfileWithUnwindSegue:" id="eyI-4O-8he"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Log Out" id="uWp-Ag-YSd">
@@ -1666,7 +1668,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

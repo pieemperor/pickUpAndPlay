@@ -87,7 +87,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                                                  handler: nil) //You can use a block here to handle a press on this button
                     alertController.addAction(actionOk)
                     self.present(alertController, animated: true, completion: nil)
-
+                    self.goToProfile()
                 }
             } else {
                 ref.child("users").observe(.childAdded, with: {(snapshot) in
@@ -104,14 +104,12 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                                 let profileUpdates = ["users/\(Auth.auth().currentUser!.uid)": post]
                                 ref.updateChildValues(profileUpdates)
                                 self.spinner.stopAnimating()
+                                self.goToProfile()
                             }
                         }
-                        
                     }
                 })
             }
-    
-
         } else {
             let alertController = UIAlertController(title: "Empty Text Field", message: "All text fields are required", preferredStyle: .alert)
             let actionOk = UIAlertAction(title: "OK",
@@ -229,4 +227,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
             }//End if let userDictionary
         })//End ref.child("users")
     }//End Load user data
+    
+    func goToProfile(){
+        performSegue(withIdentifier: "unwindToProfile", sender: nil)
+    }
 }//End EditProfileViewController
