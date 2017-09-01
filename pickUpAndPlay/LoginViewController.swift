@@ -141,6 +141,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                         self.performSegue(withIdentifier: "goToMap", sender: self)
                     }
                     else {
+                        self.spinner.stopAnimating()
                         //If there is no user that matches the credentials, display feedback here
                         self.wrongLoginText.isHidden = false
                         // Error: check error and show message

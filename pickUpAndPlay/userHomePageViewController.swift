@@ -102,9 +102,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         greenRoundedView.layer.backgroundColor = myGreen.cgColor
         greenRoundedView.layer.masksToBounds = false
         greenRoundedView.layer.cornerRadius = 10.0
-        greenRoundedView.layer.shadowOffset = CGSize(width:-1,height: 0)
-        greenRoundedView.layer.shadowOpacity = 0.2
-        
+        greenRoundedView.layer.shadowOpacity = 0.0
         
         cell.contentView.addSubview(greenRoundedView)
         cell.contentView.sendSubview(toBack: greenRoundedView)
@@ -168,12 +166,13 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     let sport = dictionary["sport"]
                     let time = timeString
                     let date = justDate
-                    let spotsRemaining = dictionary["playerLimit"] //- dictionary["playerList"].count
+                    let playersInGame = dictionary["playerList"]?.count
+                    let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
                     let gameType = dictionary["gameType"]
                     self.locationToPass = dictionary["location"] as! String
         
                     
-                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining as! Int, gameType as! String)
+                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
                     self.gameList.append(game)
                     self.tableView.reloadData()
                 } //End if location
@@ -193,6 +192,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
             x.game = self.selectedGame
             x.otherPassedLocation = self.locationToPass
+            x.cameFrom = "userHome"
         }
     }
 }//End class

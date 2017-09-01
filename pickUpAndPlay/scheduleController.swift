@@ -102,8 +102,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         blueRoundedView.layer.backgroundColor = myBlue.cgColor
         blueRoundedView.layer.masksToBounds = false
         blueRoundedView.layer.cornerRadius = 10.0
-        blueRoundedView.layer.shadowOffset = CGSize(width:-1,height: 0)
-        blueRoundedView.layer.shadowOpacity = 0.2
+        blueRoundedView.layer.shadowOpacity = 0.0
         
         cell?.contentView.addSubview(blueRoundedView)
         cell?.contentView.sendSubview(toBack: blueRoundedView)
@@ -197,6 +196,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
             x.game = self.selectedGame
             x.passedLocation = self.passedLocation
+            x.cameFrom = "schedule"
         }
     }//End prepare for segue
 } // End class

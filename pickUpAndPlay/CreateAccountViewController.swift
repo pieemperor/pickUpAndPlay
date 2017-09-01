@@ -210,6 +210,9 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         createAccountButton.layer.borderWidth = 1.0
         createAccountButton.layer.borderColor = UIColor.white.cgColor
         createAccountButton.layer.cornerRadius = 10.0
+        spinner.layer.cornerRadius = 10.0
+        let transparentBlack = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.7)
+        spinner.backgroundColor = transparentBlack
         
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self

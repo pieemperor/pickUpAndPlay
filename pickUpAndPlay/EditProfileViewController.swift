@@ -157,6 +157,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                                                     print(error)
                                                 } else {
                                                     // Account deleted.
+                                                    self.goToLogin()
                                                 }
                                             }
         }) //You can use a block here to handle a press on this button
@@ -230,5 +231,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     func goToProfile(){
         performSegue(withIdentifier: "unwindToProfile", sender: nil)
+    }
+    
+    func goToLogin() {
+        performSegue(withIdentifier: "logOut", sender: nil)
     }
 }//End EditProfileViewController

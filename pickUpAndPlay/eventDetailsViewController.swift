@@ -29,6 +29,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var joinSpinner: UIActivityIndicatorView!
     
     //event key sent from schedulecontroller
+    var cameFrom = ""
     var game = Game()
     var playerList = [Player]()
     var idList = [String]()
@@ -96,8 +97,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         greenRoundedView.layer.backgroundColor = myGreen.cgColor
         greenRoundedView.layer.masksToBounds = false
         greenRoundedView.layer.cornerRadius = 10.0
-        greenRoundedView.layer.shadowOffset = CGSize(width:-1,height: 0)
-        greenRoundedView.layer.shadowOpacity = 0.2
+        greenRoundedView.layer.shadowOpacity = 0.0
+        
         
         
         cell.contentView.addSubview(greenRoundedView)
@@ -190,7 +191,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                     
                                                                     eventsHandle.removeValue()
                                                                     
-                                                                    //MARK: Todo - Need to segue back to the schedule
+                                                                    self.goBack()
                                 })
                                 
                                 alertController.addAction(actionCancel)
@@ -366,6 +367,16 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             sportImage.image = UIImage(named: "tennis")
         } else {
             print("That is not a valid sport")
+        }
+    }
+    
+    func goBack(){
+        if cameFrom == "schedule" {
+            performSegue(withIdentifier: "unwindToSchedule", sender: nil)
+        } else if cameFrom == "userHome" {
+            performSegue(withIdentifier: "unwindToUserHome", sender: nil)
+        } else if cameFrom == "userPage" {
+            performSegue(withIdentifier: "unwindToUserPage", sender: nil)
         }
     }
     

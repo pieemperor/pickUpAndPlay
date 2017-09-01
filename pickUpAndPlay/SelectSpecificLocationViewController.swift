@@ -88,9 +88,7 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
         greenRoundedView.layer.backgroundColor = myGreen.cgColor
         greenRoundedView.layer.masksToBounds = false
         greenRoundedView.layer.cornerRadius = 10.0
-        greenRoundedView.layer.shadowOffset = CGSize(width:-1,height: 0)
-        greenRoundedView.layer.shadowOpacity = 0.2
-        
+        greenRoundedView.layer.shadowOpacity = 0.0
         
         cell.contentView.addSubview(greenRoundedView)
         cell.contentView.sendSubview(toBack: greenRoundedView)
