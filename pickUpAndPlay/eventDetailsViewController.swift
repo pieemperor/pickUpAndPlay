@@ -125,17 +125,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                             
                                             if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
                                                 
-                                                let picRef = Storage.storage().reference(forURL: profilePicURL!)
-                                                
-                                                // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-                                                picRef.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-                                                    if let error = error {
-                                                        // Uh-oh, an error occurred!
-                                                        print("The following error occurred - \(error)")
-                                                    } else {
-                                                        // Data for "images/island.jpg" is returned
-                                                        userProfilePic = UIImage(data: data!)!
-                                                    }
+                                                let url = URL(string: profilePicURL!)
+                                                let data = try? Data(contentsOf: url!)
+                                                userProfilePic = UIImage(data : data!)!
                                                     
                                                     let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic)
                                                     self.playerList.append(player)
@@ -148,7 +140,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                     self.inGame = true
                                                     self.spotsLeftLabel.text = String(spotsRemaining - 1) +  " Spots Remaining"
                                                     self.joinSpinner.stopAnimating()
-                                                }//End get data
                                             }//End if profilePicURL != ""
                                         }//End if snapshot.key == Auth.auth().currentUser
                                     }//If let usersDictionary =

@@ -32,19 +32,18 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     var selectedGame = Game()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         timeArray = [String]()
-        gameList = [Game]()
-        fetchGames()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.separatorColor = .clear
-        super.viewDidLoad()
         locationName.text = passedLocation.name
         setupButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        tableView.reloadData()
+        fetchGames()
     }
     
     //MARK: Table View Delegate methods
@@ -60,6 +59,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameTableViewCell", for: indexPath) as? GameTableViewCell
         
+        if gameList.count > 0 {
         let game = gameList[indexPath.row]
         
         //set the cell's labels to their corresponding values for each game in the gameList array
@@ -83,29 +83,13 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             print("That is not a valid sport")
         }
-
+        }
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedGame = self.gameList[indexPath.row]
         self.performSegue(withIdentifier: "goToEventDetails", sender: self)
-    }
-    
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        let cell  = tableView.cellForRow(at: indexPath)
-        cell?.backgroundColor = .clear
-        
-        let myBlue = UIColor(displayP3Red:94.0/255.0, green:178.0/255.0, blue:178.0/255.0, alpha:1.0)
-        
-        let blueRoundedView: UIView = UIView(frame: CGRect(x:0,y:5,width:tableView.frame.width, height:80))
-        blueRoundedView.layer.backgroundColor = myBlue.cgColor
-        blueRoundedView.layer.masksToBounds = false
-        blueRoundedView.layer.cornerRadius = 10.0
-        blueRoundedView.layer.shadowOpacity = 0.0
-        
-        cell?.contentView.addSubview(blueRoundedView)
-        cell?.contentView.sendSubview(toBack: blueRoundedView)
     }
     
     //MARK: Table View appearance setup / rigging
@@ -122,8 +106,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         greenRoundedView.layer.backgroundColor = myGreen.cgColor
         greenRoundedView.layer.masksToBounds = false
         greenRoundedView.layer.cornerRadius = 10.0
-        greenRoundedView.layer.shadowOffset = CGSize(width:-1,height: 0)
-        greenRoundedView.layer.shadowOpacity = 0.2
+        greenRoundedView.layer.shadowOpacity = 0.0
         
         
         cell.contentView.addSubview(greenRoundedView)
@@ -139,6 +122,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     }//End setupButtons
     
     func fetchGames() {
+        gameList = [Game]()
         let ref = Database.database().reference()
         tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in

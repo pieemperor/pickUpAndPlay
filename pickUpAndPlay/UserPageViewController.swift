@@ -31,6 +31,9 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         setupButtons()
         getUserInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         fetchGames()
     }
 
@@ -96,8 +99,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         greenRoundedView.layer.backgroundColor = myGreen.cgColor
         greenRoundedView.layer.masksToBounds = false
         greenRoundedView.layer.cornerRadius = 10.0
-        greenRoundedView.layer.shadowOffset = CGSize(width:-1,height: 0)
-        greenRoundedView.layer.shadowOpacity = 0.2
+        greenRoundedView.layer.shadowOpacity = 0.0
         
         
         cell.contentView.addSubview(greenRoundedView)
@@ -141,6 +143,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     }//End getUserInfo
     
     func fetchGames() {
+        gameList = [Game]()
         tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
