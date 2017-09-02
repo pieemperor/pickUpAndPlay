@@ -71,18 +71,23 @@ class createGameController: UIViewController{
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Dismiss the keyboard when the view is tapped on
-        let dpSize = datePicker.bounds.size
-        let size = view.bounds.size
-        let y = isDatePickerShowing ? size.height : size.height - dpSize.height
-        isDatePickerShowing = !isDatePickerShowing
-        UIView.animate(withDuration: 0.75) {
-            self.datePicker.frame = CGRect(
-                x: (size.width - dpSize.width) / 2.0,
-                y: y,
-                width: dpSize.width,
-                height: dpSize.height
-            )
+        if isDatePickerShowing {
+            
+            // Dismiss the keyboard when the view is tapped on
+            let dpSize = datePicker.bounds.size
+            let size = view.bounds.size
+            let y = isDatePickerShowing ? size.height : size.height - dpSize.height
+            isDatePickerShowing = !isDatePickerShowing
+            UIView.animate(withDuration: 0.75) {
+                self.datePicker.frame = CGRect(
+                    x: (size.width - dpSize.width) / 2.0,
+                    y: y,
+                    width: dpSize.width,
+                    height: dpSize.height
+                )
+            }
+            time = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
+            timeButton.setTitle(time, for: .normal)
         }
     }
     

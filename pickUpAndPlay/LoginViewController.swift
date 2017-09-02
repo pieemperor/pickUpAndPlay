@@ -48,10 +48,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
             }
         }
         setupTextBoxes()
-        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        wrongLoginText.isHidden = true
+    }
  
     
-    //MARK: Facebook functions
     //MARK: Facebook functions
     @IBAction func loginWithFacebook(_ sender: UIButton) {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()

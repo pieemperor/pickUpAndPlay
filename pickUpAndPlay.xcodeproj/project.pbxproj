@@ -671,7 +671,7 @@
 				);
 				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay123;
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -685,7 +685,7 @@
 				DEVELOPMENT_TEAM = VE738W562A;
 				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay123;
+				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
