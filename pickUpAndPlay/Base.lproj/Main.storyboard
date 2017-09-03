@@ -429,45 +429,6 @@
             </objects>
             <point key="canvasLocation" x="-511.19999999999999" y="984.55772113943033"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="KV3-A1-pHH">
-            <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="2ss-fM-Exb" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TLd-GU-y2i"/>
-                        <viewControllerLayoutGuide type="bottom" id="xio-iZ-KMN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9d7-8j-Uqr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ia2-qX-Zpy">
-                                <rect key="frame" x="133.5" y="308.5" width="108" height="50.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter by Sport" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bK-0U-S5v">
-                                        <rect key="frame" x="0.0" y="0.0" width="108" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eeb-O6-SGh">
-                                        <rect key="frame" x="0.0" y="20.5" width="108" height="30"/>
-                                        <state key="normal" title="Button"/>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Ia2-qX-Zpy" firstAttribute="centerX" secondItem="9d7-8j-Uqr" secondAttribute="centerX" id="3BI-vy-7b4"/>
-                            <constraint firstItem="Ia2-qX-Zpy" firstAttribute="centerY" secondItem="9d7-8j-Uqr" secondAttribute="centerY" id="8PX-w9-sS4"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mKf-Jz-PqV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1841" y="-688"/>
-        </scene>
         <!--Select Specific Location View Controller-->
         <scene sceneID="pWu-8J-ZoT">
             <objects>
@@ -574,11 +535,6 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="wPV-Cg-XFW" kind="show" id="2Um-HT-HJc"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="qb6-qt-Uz7">
-                            <connections>
-                                <segue destination="2ss-fM-Exb" kind="presentation" id="8xx-ay-mTg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1674,7 +1630,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1701,7 +1657,7 @@ Directions</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pmk-xo-nJj"/>
-        <segue reference="3aM-Aw-Hnq"/>
+        <segue reference="VXb-kk-V3v"/>
         <segue reference="krn-aR-g15"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -152,9 +152,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                                          style: .destructive,
                                          handler: { UIAlertAction in
                                             Auth.auth().currentUser?.delete { error in
-                                                if let error = error {
-                                                    // An error happened.
-                                                    print(error)
+                                                if error != nil {
+                                                    self.presentDeleteError()
                                                 } else {
                                                     // Account deleted.
                                                     self.goToLogin()
@@ -235,5 +234,14 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     func goToLogin() {
         performSegue(withIdentifier: "logOut", sender: nil)
+    }
+    
+    func presentDeleteError(){
+        let alertController = UIAlertController(title: "Problem Deleting Account", message: "Cannot delete account. Log out and then try again. ", preferredStyle: .alert)
+        let actionCancel = UIAlertAction(title: "Okay",
+                                         style: .cancel,
+                                         handler: nil)
+        alertController.addAction(actionCancel)
+        self.present(alertController, animated: true, completion: nil)
     }
 }//End EditProfileViewController
