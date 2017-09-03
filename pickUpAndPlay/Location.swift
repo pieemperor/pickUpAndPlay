@@ -3,7 +3,7 @@
 //  pickUpAndPlay
 //
 //  Created by Dakota Cowell on 8/1/17.
-//  Copyright © 2017 Caleb Mitcler. All rights reserved.
+//  Copyright © 2017 Dakota Cowell. All rights reserved.
 //
 import GoogleMaps
 

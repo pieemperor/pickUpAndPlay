@@ -3,16 +3,9 @@
 //  pickUpAndPlay
 //
 //  Created by Caleb Mitcler on 5/9/17.
-//  Copyright © 2017 Caleb Mitcler. All rights reserved.
+//  Copyright © 2017 Dakota Cowell. All rights reserved.
 //
-//tutorial for custom auth login
-//https://www.youtube.com/watch?v=asKXHVUZiIY&t=869s
-//facebook login 
-//https://firebase.google.com/docs/auth/ios/facebook-login
 
-//TODO: Test Facebook Login
-//TODO: Create Loading animation
-//TODO: figure out how to skip login in AppDelegate if they are already logged in
 
 
 import UIKit
@@ -179,7 +172,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         passwordTextField.delegate = self
         wrongLoginText.isHidden = true
     }
-    
     
     //MARK: TextField Delegate Methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

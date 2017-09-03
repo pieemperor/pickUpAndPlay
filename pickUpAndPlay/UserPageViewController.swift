@@ -3,7 +3,7 @@
 //  pickUpAndPlay
 //
 //  Created by Caleb Mitcler on 6/1/17.
-//  Copyright © 2017 Caleb Mitcler. All rights reserved.
+//  Copyright © 2017 Dakota Cowell. All rights reserved.
 //
 
 import UIKit
@@ -175,7 +175,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                         self.gameList.append(game)
                         self.tableView.reloadData()
                     } //End if location
-                }
+                }//End if let playerArray = dictionary
                 //Sort games by date
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
@@ -191,4 +191,4 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         x.otherPassedLocation = self.locationToPass
         x.cameFrom = "userPage"
     }
-}
+}//End class

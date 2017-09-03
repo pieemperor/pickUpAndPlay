@@ -516,7 +516,7 @@
             </objects>
             <point key="canvasLocation" x="3036" y="-689.5052473763119"/>
         </scene>
-        <!--Pick-up & Play-->
+        <!--Pick Up & Play-->
         <scene sceneID="9D0-Qt-Cvf">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="bTo-Up-8Vw" customClass="MapViewController" customModule="pickUpAndPlay" customModuleProvider="target" sceneMemberID="viewController">
@@ -530,7 +530,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Pick-up &amp; Play" id="r3C-UU-YGD">
+                    <navigationItem key="navigationItem" title="Pick Up &amp; Play" id="r3C-UU-YGD">
                         <barButtonItem key="leftBarButtonItem" title="Profile" id="yh0-0H-FIO">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>

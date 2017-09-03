@@ -3,7 +3,7 @@
 //  pickUpAndPlay
 //
 //  Created by Dakota Cowell on 8/23/17.
-//  Copyright © 2017 Caleb Mitcler. All rights reserved.
+//  Copyright © 2017 Dakota Cowell. All rights reserved.
 //
 
 import UIKit
@@ -51,7 +51,6 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
         locationName.text = passedLocation.name
         locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
-    
     
     //MARK: Table View Delegate methods
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -110,5 +109,4 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
             locationImage.image = UIImage(named: "tennisCourts")
         }
     }
-    
-}
+}//End SelectSpecificLocationViewController

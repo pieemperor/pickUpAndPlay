@@ -3,9 +3,8 @@
 //  pickUpAndPlay
 //
 //  Created by Caleb Mitcler on 5/20/17.
-//  Copyright © 2017 Caleb Mitcler. All rights reserved.
+//  Copyright © 2017 Dakota Cowell. All rights reserved.
 //
-//TODO: Fix date picker
 
 import UIKit
 import Firebase

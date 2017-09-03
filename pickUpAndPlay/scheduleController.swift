@@ -3,17 +3,14 @@
 //  pickUpAndPlay
 //
 //  Created by Caleb Mitcler on 5/18/17.
-//  Copyright © 2017 Caleb Mitcler. All rights reserved.
+//  Copyright © 2017 Dakota Cowell. All rights reserved.
 //
-// TODO: Display something if there are no games for that location yet
-// TODO: Limit game times within 1 or 2 weeks
 
 import UIKit
 import Firebase
 import FirebaseAuth
 import FacebookLogin
 import AVFoundation
-
 
 class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

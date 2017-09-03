@@ -3,10 +3,7 @@
 //  pickUpAndPlay
 //
 //  Created by Caleb Mitcler on 5/30/17.
-//  Copyright © 2017 Caleb Mitcler. All rights reserved.
-//https://www.youtube.com/watch?v=B9sH_VxPPo4&t=81s
-
-//TODO: Fix crash if there are no players in playerList array
+//  Copyright © 2017 Dakota Cowell. All rights reserved.
 
 import UIKit
 import Firebase
