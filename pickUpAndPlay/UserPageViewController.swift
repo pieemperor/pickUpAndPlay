@@ -144,6 +144,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func fetchGames() {
         gameList = [Game]()
+        self.tableView.reloadData()
         tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {

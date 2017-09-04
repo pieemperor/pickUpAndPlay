@@ -120,6 +120,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     
     func fetchGames() {
         gameList = [Game]()
+        self.tableView.reloadData()
         let ref = Database.database().reference()
         tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
@@ -159,6 +160,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
+            print(self.gameList, "\n\n\n\n\n\n")
         }) //End observe snapshot
     } //End fetchGames
     

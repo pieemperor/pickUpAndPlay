@@ -27,7 +27,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var fbSignInButton: UIButton!
     @IBOutlet weak var createAccountButton: UIButton!
-    @IBOutlet weak var wrongLoginText: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -46,7 +45,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     override func viewWillAppear(_ animated: Bool) {
         emailTextField.text = ""
         passwordTextField.text = ""
-        wrongLoginText.isHidden = true
     }
  
     
@@ -134,14 +132,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                         // User is found, go to home screen
                         self.emailTextField.text = ""
                         self.passwordTextField.text = ""
-                        self.wrongLoginText.isHidden = true
                         self.spinner.stopAnimating()
                         self.performSegue(withIdentifier: "goToMap", sender: self)
                     }
                     else {
                         self.spinner.stopAnimating()
                         //If there is no user that matches the credentials, display feedback here
-                        self.wrongLoginText.isHidden = false
+                        let alertController = UIAlertController(title: "Invalid Login", message: "Incorrect username and password. Try again.", preferredStyle: .alert)
+                        let actionOk = UIAlertAction(title: "OK",
+                                                     style: .default,
+                                                     handler: nil)
+                        
+                        alertController.addAction(actionOk)
+                        self.present(alertController, animated: true, completion: nil)
                         // Error: check error and show message
                     }
                 })
@@ -170,7 +173,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         signInButton.layer.backgroundColor = transparentBlack.cgColor
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        wrongLoginText.isHidden = true
     }
     
     //MARK: TextField Delegate Methods

@@ -142,6 +142,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchGames() {
         gameList = [Game]()
+        self.tableView.reloadData()
         let ref = Database.database().reference()
         self.tableSpinner.startAnimating()
         ref.child("events").observe(.childAdded, with: {(snapshot) in
