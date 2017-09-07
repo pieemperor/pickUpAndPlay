@@ -54,6 +54,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
             if (error == nil){
                 let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                
+                if (result?.isCancelled)! {
+                    return
+                }
                 if(fbloginresult.grantedPermissions.contains("email"))
                 {
                     if((FBSDKAccessToken.current()) != nil){
@@ -61,9 +65,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                             if (error == nil){
                                 //everything works print the user data
                                 print(result ?? "No error")
-                                
-                                
-                                
                                 
                                 
                                 //********added this************

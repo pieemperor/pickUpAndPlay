@@ -14,7 +14,7 @@ class WebSiteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let url = URL(string: "https://pickupandplay-67953.firebaseapp.com/index.html") {
+        if let url = URL(string: "https://pickupandplayapp.com") {
             let request = URLRequest(url: url)
             webView.loadRequest(request)
         }

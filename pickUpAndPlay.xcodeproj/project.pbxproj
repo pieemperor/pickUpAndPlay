@@ -18,6 +18,7 @@
 		1D9548611F3E6686002816E7 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9548601F3E6686002816E7 /* PlayerTableViewCell.swift */; };
 		1DCE46301F4809BE00EF8855 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCE462F1F4809BE00EF8855 /* ResetPasswordViewController.swift */; };
 		1DCE46321F48118C00EF8855 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCE46311F48118C00EF8855 /* EditProfileViewController.swift */; };
+		1DF154161F607E9600203322 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF154151F607E9600203322 /* Crashlytics.framework */; };
 		1DF99A7E1EF6432400C3B589 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */; };
 		450EC6971ED1103C00CC3259 /* createGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450EC6961ED1103C00CC3259 /* createGameController.swift */; };
 		4543A9D51EDDE44600D383AC /* eventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */; };
@@ -64,6 +65,7 @@
 		1D9548601F3E6686002816E7 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		1DCE462F1F4809BE00EF8855 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		1DCE46311F48118C00EF8855 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		1DF154151F607E9600203322 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		450EC6961ED1103C00CC3259 /* createGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createGameController.swift; sourceTree = "<group>"; };
 		4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eventDetailsViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DF154161F607E9600203322 /* Crashlytics.framework in Frameworks */,
 				F1252DB89718B73D7960E3EA /* Pods_pickUpAndPlay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,13 +147,13 @@
 			isa = PBXGroup;
 			children = (
 				45F5A8F81EC27E2700EAAFCF /* Main.storyboard */,
-				1D2244A41F5E5FC20046114A /* WebSiteViewController.swift */,
 				1D6831D21F270A9F00E7CA72 /* Game.swift */,
 				1D93E06B1F30F61700E61AA9 /* Location.swift */,
 				1D6831D41F293BB600E7CA72 /* Player.swift */,
 				1D6831CA1F253D3300E7CA72 /* sportControl.swift */,
 				1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */,
 				1D9548601F3E6686002816E7 /* PlayerTableViewCell.swift */,
+				1D2244A41F5E5FC20046114A /* WebSiteViewController.swift */,
 				1D6EB6241F4D442100626326 /* SelectSpecificLocationViewController.swift */,
 				1DCE46311F48118C00EF8855 /* EditProfileViewController.swift */,
 				1DCE462F1F4809BE00EF8855 /* ResetPasswordViewController.swift */,
@@ -173,6 +176,7 @@
 		9833C57A3A5B30FBB25F7880 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1DF154151F607E9600203322 /* Crashlytics.framework */,
 				E87DE6C1C6EBC1D3EBDF7AF7 /* Pods_pickUpAndPlay.framework */,
 				D5477D618254B5F632C0C5C2 /* Pods_pickUpAndPlayTests.framework */,
 				EF5F7DF33FC200272A73DD05 /* Pods_pickUpAndPlayUITests.framework */,
@@ -206,6 +210,7 @@
 				45F5A8EF1EC27E2600EAAFCF /* Resources */,
 				5989F6DFE71F273FFFB24BD2 /* [CP] Embed Pods Frameworks */,
 				92D6B37988B0A7907FCAC337 /* [CP] Copy Pods Resources */,
+				1DF154141F607E5C00203322 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -266,12 +271,12 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Caleb Mitcler";
+				ORGANIZATIONNAME = "Dakota Cowell";
 				TargetAttributes = {
 					45F5A8F01EC27E2600EAAFCF = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = VE738W562A;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = K42FQ8XY57;
+						ProvisioningStyle = Manual;
 					};
 					45F5A9041EC27E2700EAAFCF = {
 						CreatedOnToolsVersion = 8.3;
@@ -350,6 +355,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		1DF154141F607E5C00203322 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run e6072719eed6e6eb6d12f0c3ab07a0efaf749a74 24a6d15f6c00fc71e5f6fac25a0303eb2d03434ce301d6960259a6dc46722492";
 		};
 		265377211E7567CE61B93D25 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -647,7 +665,8 @@
 			baseConfigurationReference = 75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VE738W562A;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = K42FQ8XY57;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Bolts\"",
@@ -672,11 +691,14 @@
 					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\"",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 					"\"${PODS_ROOT}/TwitterCore/iOS\"",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pup.pickupandplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5975a023-5a3d-4118-94fa-f40c3c2df966";
+				PROVISIONING_PROFILE_SPECIFIER = "Pick Up & Play";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -686,11 +708,18 @@
 			baseConfigurationReference = 58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VE738W562A;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = K42FQ8XY57;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = pickUpAndPlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = pup.pickUpAndPlay;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pup.pickupandplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5975a023-5a3d-4118-94fa-f40c3c2df966";
+				PROVISIONING_PROFILE_SPECIFIER = "Pick Up & Play";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
