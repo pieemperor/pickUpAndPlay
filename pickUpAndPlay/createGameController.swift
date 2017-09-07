@@ -57,7 +57,7 @@ class createGameController: UIViewController{
         setupSportButtons()
         setupDatePicker()
         locationLabel.text = location.name
-        locationImage.image = location.locationImage
+        //locationImage.image = location.locationImage
         
         
         /*

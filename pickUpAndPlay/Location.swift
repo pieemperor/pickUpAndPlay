@@ -12,21 +12,18 @@ class Location {
     var name: String
     var long: CLLocationDegrees
     var lat: CLLocationDegrees
-    var locationImage: UIImage
-    
+
     init(){
         self.availableSports = []
         self.name = ""
         self.long = 0
         self.lat = 0
-        self.locationImage = UIImage()
     }
     
-    init(_ availableSports: [String], _ name: String, _ long: CLLocationDegrees, _ lat: CLLocationDegrees, _ locationImage: UIImage) {
+    init(_ availableSports: [String], _ name: String, _ long: CLLocationDegrees, _ lat: CLLocationDegrees) {
         self.availableSports = availableSports
         self.name = name
         self.long = long
         self.lat = lat
-        self.locationImage = locationImage
     }
 }

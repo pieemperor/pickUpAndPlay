@@ -449,7 +449,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testLocation" translatesAutoresizingMaskIntoConstraints="NO" id="epT-iY-BtW">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="180" translatesAutoresizingMaskIntoConstraints="NO" id="epT-iY-BtW">
                                 <rect key="frame" x="0.0" y="64" width="375" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="lcq-eK-6X6"/>
@@ -971,7 +971,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testLocation" translatesAutoresizingMaskIntoConstraints="NO" id="w51-qw-Lj7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="180" translatesAutoresizingMaskIntoConstraints="NO" id="w51-qw-Lj7">
                                 <rect key="frame" x="0.0" y="64" width="375" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="AA8-Xa-X4q"/>
@@ -1141,7 +1141,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testLocation" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-Hq-Aaq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="180" translatesAutoresizingMaskIntoConstraints="NO" id="gKh-Hq-Aaq">
                                 <rect key="frame" x="0.0" y="64" width="375" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="c5s-It-H1f"/>
@@ -1519,7 +1519,7 @@ Directions</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testLocation" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-xk-Tma">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="180" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-xk-Tma">
                                 <rect key="frame" x="0.0" y="60" width="375" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="STG-j5-3Nx"/>
@@ -1677,7 +1677,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1701,12 +1701,11 @@ Directions</string>
         <image name="profileBG" width="397" height="282"/>
         <image name="questionMark" width="20" height="20"/>
         <image name="soccerBall" width="179" height="179"/>
-        <image name="testLocation" width="250" height="117"/>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
-        <segue reference="VXb-kk-V3v"/>
-        <segue reference="krn-aR-g15"/>
+        <segue reference="3aM-Aw-Hnq"/>
+        <segue reference="PIL-Kj-fUK"/>
     </inferredMetricsTieBreakers>
 </document>

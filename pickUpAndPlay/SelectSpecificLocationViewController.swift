@@ -30,19 +30,19 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     private func setupLocations() {
         if passedLocation.name == "CPA" {
             possibleLocations = [
-                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606, UIImage(named: "cpaCourt1")!),
-                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606, UIImage(named: "cpaCourt2")!),
-                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606, UIImage(named: "cpaCourt3")!),
-                Location(["basketball", "soccer"], "CPA Court 4", -82.3745716, 36.2998606, UIImage(named: "cpaCourt4")!)
+                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606),
+                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606),
+                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606),
+                Location(["basketball", "soccer"], "CPA Court 4", -82.3745716, 36.2998606)
             ]
         } else if passedLocation.name == "ETSU Tennis Courts" {
             possibleLocations = [
-                Location(["tennis"], "Tennis Court 1", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 2", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 3", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 4", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 5", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 6", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!)
+                Location(["tennis"], "ETSU Tennis Court 1", -82.3772667, 36.2974996),
+                Location(["tennis"], "ETSU Tennis Court 2", -82.3772667, 36.2974996),
+                Location(["tennis"], "ETSU Tennis Court 3", -82.3772667, 36.2974996),
+                Location(["tennis"], "ETSU Tennis Court 4", -82.3772667, 36.2974996),
+                Location(["tennis"], "ETSU Tennis Court 5", -82.3772667, 36.2974996),
+                Location(["tennis"], "ETSU Tennis Court 6", -82.3772667, 36.2974996)
             ]
         }
     }

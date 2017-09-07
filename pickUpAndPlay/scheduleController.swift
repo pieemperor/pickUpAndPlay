@@ -23,7 +23,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
    
     //name of location sent from mapViewController
     var passedLocation = Location()
-    //Sports available at that location - passed from mapViewController
     var gameList = [Game]()
     var timeArray = [String]()
     var selectedGame = Game()
@@ -35,6 +34,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.dataSource = self
         tableView.separatorColor = .clear
         locationName.text = passedLocation.name
+        fetchLocationImage()
         setupButtons()
     }
     
@@ -112,8 +112,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func setupButtons() {
         createGameButton.layer.cornerRadius = createGameButton.frame.height/2
-        locationImage.image = passedLocation.locationImage
-        locationImage.clipsToBounds = true
         
         locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }//End setupButtons
@@ -140,7 +138,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     let timeString = df.string(from: dateAsDate!)
                     
                     if let numberOfPlayers = dictionary["playerList"]?.count {
-                        
                         if dateAsDate! > Date() {
                             //Set values of game variable from database information
                             let sport = dictionary["sport"]
@@ -163,6 +160,22 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
             print(self.gameList, "\n\n\n\n\n\n")
         }) //End observe snapshot
     } //End fetchGames
+    
+    func fetchLocationImage() {
+        let picRef = Storage.storage().reference()
+        let picHandle = picRef.child("locationImages").child(passedLocation.name)
+        
+        picHandle.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+                print(error)
+            } else {
+                // Data for "images/island.jpg" is returned
+                self.locationImage.image = UIImage(data: data!)
+                self.locationImage.clipsToBounds = true
+            }
+        }
+    }
     
     @IBAction func unwindToSchedule(unwindSegue: UIStoryboardSegue) {}
     

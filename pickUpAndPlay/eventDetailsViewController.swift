@@ -287,8 +287,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 print("Invalid location passed to page")
             }
         } else {
-            locationImage.image = passedLocation.locationImage
-            locationImage.clipsToBounds = true
+            //locationImage.image = passedLocation.locationImage
+            //locationImage.clipsToBounds = true
         }
     }
     

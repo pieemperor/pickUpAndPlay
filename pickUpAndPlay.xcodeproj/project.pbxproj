@@ -275,7 +275,7 @@
 				TargetAttributes = {
 					45F5A8F01EC27E2600EAAFCF = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = K42FQ8XY57;
+						DevelopmentTeam = VE738W562A;
 						ProvisioningStyle = Manual;
 					};
 					45F5A9041EC27E2700EAAFCF = {
@@ -665,8 +665,8 @@
 			baseConfigurationReference = 75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = K42FQ8XY57;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VE738W562A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Bolts\"",
@@ -697,8 +697,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pup.pickupandplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5975a023-5a3d-4118-94fa-f40c3c2df966";
-				PROVISIONING_PROFILE_SPECIFIER = "Pick Up & Play";
+				PROVISIONING_PROFILE = "8e9e2095-d4da-4058-b3bf-3d8110da4aa5";
+				PROVISIONING_PROFILE_SPECIFIER = Wildcard2017;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -708,8 +708,8 @@
 			baseConfigurationReference = 58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = K42FQ8XY57;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = VE738W562A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -718,8 +718,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pup.pickupandplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5975a023-5a3d-4118-94fa-f40c3c2df966";
-				PROVISIONING_PROFILE_SPECIFIER = "Pick Up & Play";
+				PROVISIONING_PROFILE = "8e9e2095-d4da-4058-b3bf-3d8110da4aa5";
+				PROVISIONING_PROFILE_SPECIFIER = Wildcard2017;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
