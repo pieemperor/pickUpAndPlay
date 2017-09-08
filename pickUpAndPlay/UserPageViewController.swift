@@ -14,7 +14,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     var userId = ""
     var gameList: [Game] = []
     var selectedGame = Game()
-    var locationToPass = ""
     var ref: DatabaseReference! = Database.database().reference()
     
     @IBOutlet weak var gameLabel: UILabel!
@@ -170,7 +169,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                         let playersInGame = dictionary["playerList"]?.count
                         let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
                         let gameType = dictionary["gameType"]
-                        self.locationToPass = dictionary["location"] as! String
                         
                         let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
                         self.gameList.append(game)
@@ -189,7 +187,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
         x.game = self.selectedGame
-        x.otherPassedLocation = self.locationToPass
         x.cameFrom = "userPage"
     }
 }//End class

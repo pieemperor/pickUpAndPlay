@@ -612,7 +612,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileBG" translatesAutoresizingMaskIntoConstraints="NO" id="WKb-Sc-FhR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileBG" translatesAutoresizingMaskIntoConstraints="NO" id="WKb-Sc-FhR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="yPG-kt-IBT"/>
@@ -648,7 +648,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="325" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soccerBall" translatesAutoresizingMaskIntoConstraints="NO" id="1lx-Tn-hgP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="1lx-Tn-hgP">
                                                     <rect key="frame" x="18" y="20" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="0BP-Ys-mVR"/>
@@ -1013,7 +1013,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="325" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soccerBall" translatesAutoresizingMaskIntoConstraints="NO" id="1Qm-f2-XCB">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="1Qm-f2-XCB">
                                                     <rect key="frame" x="13" y="20" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="18z-sO-O47"/>
@@ -1357,7 +1357,7 @@ Directions</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileBG" translatesAutoresizingMaskIntoConstraints="NO" id="11m-LO-qhI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileBG" translatesAutoresizingMaskIntoConstraints="NO" id="11m-LO-qhI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="VgZ-e1-Fm4"/>
@@ -1380,7 +1380,7 @@ Directions</string>
                                             <rect key="frame" x="0.0" y="0.0" width="293" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soccerBall" translatesAutoresizingMaskIntoConstraints="NO" id="x6N-Ra-xA7">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="50" translatesAutoresizingMaskIntoConstraints="NO" id="x6N-Ra-xA7">
                                                     <rect key="frame" x="18" y="20" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="943-gY-Xw7"/>
@@ -1447,7 +1447,7 @@ Directions</string>
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xjU-yB-COF">
-                                <rect key="frame" x="127.5" y="83" width="120" height="145.5"/>
+                                <rect key="frame" x="127.5" y="39" width="120" height="145.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="CeC-rp-IxQ">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -1466,7 +1466,7 @@ Directions</string>
                                 </subviews>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="neu-9f-tWj">
-                                <rect key="frame" x="169" y="119" width="37" height="37"/>
+                                <rect key="frame" x="169" y="75" width="37" height="37"/>
                             </activityIndicatorView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Rak-aq-Rwb">
                                 <rect key="frame" x="169.5" y="344.5" width="37" height="37"/>
@@ -1700,12 +1700,11 @@ Directions</string>
         <image name="or" width="416" height="41"/>
         <image name="profileBG" width="397" height="282"/>
         <image name="questionMark" width="20" height="20"/>
-        <image name="soccerBall" width="179" height="179"/>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
+        <segue reference="krn-aR-g15"/>
         <segue reference="3aM-Aw-Hnq"/>
-        <segue reference="PIL-Kj-fUK"/>
     </inferredMetricsTieBreakers>
 </document>

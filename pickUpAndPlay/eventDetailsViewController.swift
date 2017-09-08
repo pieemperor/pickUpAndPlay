@@ -25,14 +25,12 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
     @IBOutlet weak var joinSpinner: UIActivityIndicatorView!
     
-    //event key sent from schedulecontroller
     var cameFrom = ""
     var game = Game()
     var playerList = [Player]()
     var idList = [String]()
     var selectedPlayer = ""
     var passedLocation = Location()
-    var otherPassedLocation = ""
     var latitude = 0.0
     var longitude = 0.0
     var inGame = false {
@@ -44,7 +42,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-        setupLocations()
+        fetchLocationImage()
         setDetailLabels()
         fetchPlayers()
         updateButtonSelectionStates()
@@ -241,57 +239,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
     
-    private func setupLocations() {
-        if otherPassedLocation != "" {
-            if otherPassedLocation == "Davis Basketball Court" {
-                locationImage.image = UIImage(named: "davisBBall")!
-                self.latitude = 36.3035454
-                self.longitude = -82.3639571
-            } else if otherPassedLocation == "Buc Ridge Basketball Court" {
-                locationImage.image = UIImage(named: "bucRidgeBBall")!
-                self.latitude = 36.2997041
-                self.longitude = -82.3592807
-            } else if otherPassedLocation == "Davis Beach Volleyball Court (Outside)" {
-                locationImage.image = UIImage(named: "davisVBall")!
-                self.latitude = 36.3035529
-                self.longitude = -82.3637902
-            } else if otherPassedLocation == "Buc Ridge Beach Volleyball Court" {
-                locationImage.image = UIImage(named: "brvbCourt")!
-                self.latitude = 36.3000031
-                self.longitude = -82.3592885
-            } else if otherPassedLocation == "Campus Ridge Beach Volleyball Court" {
-                locationImage.image = UIImage(named: "campusRidgeVBCourt")!
-                self.latitude = 36.2954593
-                self.longitude = -82.3746753
-            } else if otherPassedLocation == "CPA Front Yard" {
-                locationImage.image = UIImage(named: "cpaFrontYard")!
-                self.latitude = 36.301344
-                self.longitude = -82.373986
-            } else if otherPassedLocation == "CPA Side Yard" {
-                locationImage.image = UIImage(named: "cpaSideYard")!
-                self.latitude = 36.300691
-                self.longitude = -82.3748875
-            } else if otherPassedLocation == "The Quad" {
-                locationImage.image = UIImage(named: "quad")!
-                self.latitude = 36.3029164
-                self.longitude = -82.3698213
-            } else if otherPassedLocation == "Tri-Hall Field" {
-                locationImage.image = UIImage(named: "triHallField")!
-                self.latitude = 36.3038811
-                self.longitude = -82.3642177
-            } else if otherPassedLocation == "ETSU Disc Golf Course" {
-                locationImage.image = UIImage(named: "etsuDiscGolf")!
-                self.latitude = 36.30044
-                self.longitude = -82.362922
-            } else {
-                print("Invalid location passed to page")
-            }
-        } else {
-            //locationImage.image = passedLocation.locationImage
-            //locationImage.clipsToBounds = true
-        }
-    }
-    
     func fetchPlayers() {
         self.tableSpinner.startAnimating()
         let ref = Database.database().reference()
@@ -355,6 +302,22 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             sportImage.image = UIImage(named: "tennis")
         } else {
             print("That is not a valid sport")
+        }
+    }
+    
+    func fetchLocationImage() {
+        let picRef = Storage.storage().reference()
+        let picHandle = picRef.child("locationImages").child(passedLocation.name)
+        
+        picHandle.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
+            if let error = error {
+                // Uh-oh, an error occurred!
+                print(error)
+            } else {
+                // Data for "images/island.jpg" is returned
+                self.locationImage.image = UIImage(data: data!)
+                self.locationImage.clipsToBounds = true
+            }
         }
     }
     

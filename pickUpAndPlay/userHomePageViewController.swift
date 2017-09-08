@@ -22,14 +22,12 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     var ref: DatabaseReference! = Database.database().reference()
     var gameList: [Game] = []
     var selectedGame = Game()
-    var locationToPass = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         setupButtons()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +46,6 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection: Int)-> Int{
-        // an int that represents the number of games being held at this location
         return gameList.count
     }
     
@@ -169,8 +166,6 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     let playersInGame = dictionary["playerList"]?.count
                     let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
                     let gameType = dictionary["gameType"]
-                    self.locationToPass = dictionary["location"] as! String
-        
                     
                     let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
                     self.gameList.append(game)
@@ -191,7 +186,6 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         if segue.identifier == "goToEventDetails" {
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
             x.game = self.selectedGame
-            x.otherPassedLocation = self.locationToPass
             x.cameFrom = "userHome"
         }
     }

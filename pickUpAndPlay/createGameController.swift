@@ -85,6 +85,7 @@ class createGameController: UIViewController{
                     height: dpSize.height
                 )
             }
+            
             time = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
             timeButton.setTitle(time, for: .normal)
         }
