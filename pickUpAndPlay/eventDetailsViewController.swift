@@ -88,7 +88,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
         
-        let myGreen = UIColor(displayP3Red:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
+        let myGreen = UIColor(colorLiteralRed:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
         
         let greenRoundedView: UIView = UIView(frame: CGRect(x:0,y:5,width:tableView.frame.width, height:80))
         greenRoundedView.layer.backgroundColor = myGreen.cgColor
@@ -208,19 +208,37 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func getDirections(_ sender: UIButton) {
         if longitude == 0 && latitude == 0 {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-                UIApplication.shared.open(URL(string:
-                    "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(URL(string:
+                        "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                } else {
+                    UIApplication.shared.openURL(URL(string: "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")!)
+                }
             } else {
-                UIApplication.shared.open(URL(string:
-                    "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(URL(string:
+                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                } else {
+                    UIApplication.shared.openURL(URL(string:
+                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")!)
+                }
             }
         } else {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-                UIApplication.shared.open(URL(string:
-                    "comgooglemaps://?saddr=&daddr=\(Float(self.latitude)),\(Float(self.longitude))&directionsmode=driving")! as URL, options: [:])
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(URL(string:
+                        "comgooglemaps://?saddr=&daddr=\(Float(self.latitude)),\(Float(self.longitude))&directionsmode=driving")! as URL, options: [:])
+                } else {
+                    UIApplication.shared.openURL(URL(string:
+                        "comgooglemaps://?saddr=&daddr=\(Float(self.latitude)),\(Float(self.longitude))&directionsmode=driving")!)
+                }
             } else {
-                UIApplication.shared.open(URL(string:
-                    "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(URL(string:
+                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                } else {
+                    UIApplication.shared.openURL(URL(string:
+                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")!)                }
             }
         }
     }

@@ -1630,6 +1630,7 @@ Directions</string>
                                 <date key="date" timeIntervalSinceReferenceDate="517023279.81944501">
                                     <!--2017-05-21 01:34:39 +0000-->
                                 </date>
+                                <locale key="locale" localeIdentifier="en_US"/>
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" red="0.25098039215686274" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>

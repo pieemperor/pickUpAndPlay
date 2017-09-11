@@ -327,7 +327,7 @@ class createGameController: UIViewController{
     
     private func setupButtons() {
         //Create green color
-        let myGreen = UIColor(displayP3Red:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
+        let myGreen = UIColor(colorLiteralRed: 46.0/255.0, green: 204.0/255.0, blue: 114.0/255.0, alpha: 1.0)
         
         //Setup skill Selector button
         skillSelector.layer.cornerRadius = 5.0
