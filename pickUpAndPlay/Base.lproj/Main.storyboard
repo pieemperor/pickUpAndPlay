@@ -324,7 +324,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Psx-uf-Xus">
                                                 <rect key="frame" x="135" y="0.0" width="115" height="35"/>
@@ -333,7 +333,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -1706,7 +1706,7 @@ Directions</string>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TvU-3m-pPR"/>
+        <segue reference="pmk-xo-nJj"/>
         <segue reference="VXb-kk-V3v"/>
         <segue reference="krn-aR-g15"/>
     </inferredMetricsTieBreakers>
