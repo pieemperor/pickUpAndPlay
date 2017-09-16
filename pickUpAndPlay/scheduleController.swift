@@ -24,7 +24,9 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     //name of location sent from mapViewController
     var passedLocation = Location()
     var gameList = [Game]()
+    //timeArray gets sent to the createGameController to make sure the user doesn't create a game at the same time at the same place
     var timeArray = [String]()
+    //selectedGame gets passed to the eventDetails controller
     var selectedGame = Game()
     
     override func viewDidLoad() {
