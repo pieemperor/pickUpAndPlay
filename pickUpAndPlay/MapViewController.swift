@@ -52,7 +52,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             ref.child("locations").observe(.childAdded, with: {(snapshot) in
                 if let dict = snapshot.value as? [String : AnyObject] {
 
-                            let location = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees)
+                            let location = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
                             self.locations.append(location)
                     
                     let state_marker = GMSMarker()

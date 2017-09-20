@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class SelectSpecificLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    let ref = Database.database().reference()
     var passedLocation = Location()
     var possibleLocations = [Location]()
     var selectedLocation = Location()
@@ -30,19 +32,21 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     private func setupLocations() {
         if passedLocation.name == "CPA" {
             possibleLocations = [
-                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606),
-                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606),
-                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606),
-                Location(["basketball", "soccer"], "CPA Court 4", -82.3745716, 36.2998606)
+                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FCPA%20Court%201?alt=media&token=1dec1627-1be3-485d-9fdf-15a3b1d73de5"),
+                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FCPA%20Court%202?alt=media&token=4bf1c073-180d-4790-bf05-d26ab4a0d718"),
+                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FCPA%20Court%203?alt=media&token=30e31846-915a-40b5-8979-92bff7fafbc7"),
+                Location(["basketball", "soccer"], "CPA Court 4", -82.3745716, 36.2998606, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FCPA%20Court%204?alt=media&token=614c86a6-4abd-449c-ab24-09f85c1d95a1")
             ]
+            
+                ref.child("locations").updateChildValues(["subLocations": ["-KtSfjvhB1CzfEnCYnwV", "-KtSfjtJRyD65v4gx0GM", "-KtSfjtPKJZpW5wSMnuR", "-KtSfjtUWqJqjKTGcuh-"]])
         } else if passedLocation.name == "ETSU Tennis Courts" {
             possibleLocations = [
-                Location(["tennis"], "ETSU Tennis Court 1", -82.3772667, 36.2974996),
-                Location(["tennis"], "ETSU Tennis Court 2", -82.3772667, 36.2974996),
-                Location(["tennis"], "ETSU Tennis Court 3", -82.3772667, 36.2974996),
-                Location(["tennis"], "ETSU Tennis Court 4", -82.3772667, 36.2974996),
-                Location(["tennis"], "ETSU Tennis Court 5", -82.3772667, 36.2974996),
-                Location(["tennis"], "ETSU Tennis Court 6", -82.3772667, 36.2974996)
+                Location(["tennis"], "ETSU Tennis Court 1", -82.3772667, 36.2974996, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FETSU%20Tennis%20Courts?alt=media&token=b13d40e1-bcd8-43c2-8a0d-5d84ba701c62"),
+                Location(["tennis"], "ETSU Tennis Court 2", -82.3772667, 36.2974996, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FETSU%20Tennis%20Courts?alt=media&token=b13d40e1-bcd8-43c2-8a0d-5d84ba701c62"),
+                Location(["tennis"], "ETSU Tennis Court 3", -82.3772667, 36.2974996, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FETSU%20Tennis%20Courts?alt=media&token=b13d40e1-bcd8-43c2-8a0d-5d84ba701c62"),
+                Location(["tennis"], "ETSU Tennis Court 4", -82.3772667, 36.2974996, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FETSU%20Tennis%20Courts?alt=media&token=b13d40e1-bcd8-43c2-8a0d-5d84ba701c62"),
+                Location(["tennis"], "ETSU Tennis Court 5", -82.3772667, 36.2974996, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FETSU%20Tennis%20Courts?alt=media&token=b13d40e1-bcd8-43c2-8a0d-5d84ba701c62"),
+                Location(["tennis"], "ETSU Tennis Court 6", -82.3772667, 36.2974996, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FETSU%20Tennis%20Courts?alt=media&token=b13d40e1-bcd8-43c2-8a0d-5d84ba701c62")
             ]
         }
     }
