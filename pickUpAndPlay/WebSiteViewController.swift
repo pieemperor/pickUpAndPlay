@@ -10,6 +10,10 @@ import UIKit
 
 class WebSiteViewController: UIViewController {
 
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBOutlet weak var webView: UIWebView!
     
     override func viewDidLoad() {

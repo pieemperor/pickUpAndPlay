@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -224,14 +223,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CX-p6-DZi">
+                                <rect key="frame" x="156.5" y="607" width="62" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Web Site">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="xmY-0y-Mdm" kind="show" id="4Kl-g6-R0V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="S1k-rT-dia" secondAttribute="bottom" id="5Lh-8T-mHU"/>
                             <constraint firstItem="5CO-IV-CKz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7z7-QU-9Su"/>
+                            <constraint firstItem="7CX-p6-DZi" firstAttribute="top" secondItem="Z6E-sG-5to" secondAttribute="bottom" constant="10" id="Bsj-mp-g0M"/>
                             <constraint firstItem="S1k-rT-dia" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NM1-lQ-K1v"/>
                             <constraint firstAttribute="trailing" secondItem="S1k-rT-dia" secondAttribute="trailing" id="Nzu-Br-vVB"/>
                             <constraint firstItem="S1k-rT-dia" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="O5Z-t6-iVH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Z6E-sG-5to" secondAttribute="bottom" constant="70" id="YPC-L8-HGA"/>
+                            <constraint firstItem="7CX-p6-DZi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yae-Hf-cpU"/>
                             <constraint firstItem="WWR-ik-Tzd" firstAttribute="top" secondItem="Ekj-hv-uZN" secondAttribute="bottom" constant="10" id="a9K-6Y-fHU"/>
                             <constraint firstItem="Ekj-hv-uZN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fma-sH-xX7"/>
                             <constraint firstItem="Z6E-sG-5to" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ncA-TK-Qbp"/>
@@ -536,17 +547,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Cza-NG-xj9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="zMY-yL-iBv"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="1aT-ib-y44">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="hvb-OR-ZX7">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="tip-uX-G9I" kind="unwind" unwindAction="unwindToLoginWithUnwindSegue:" id="FNh-mE-YzG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANR-Xh-1Jp">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ANR-Xh-1Jp" firstAttribute="top" secondItem="Cza-NG-xj9" secondAttribute="bottom" id="3gl-sY-qLE"/>
                             <constraint firstAttribute="trailing" secondItem="ANR-Xh-1Jp" secondAttribute="trailing" id="8Qf-RK-Dcz"/>
+                            <constraint firstItem="Cza-NG-xj9" firstAttribute="top" secondItem="AIj-28-TIG" secondAttribute="top" id="R7i-kR-rre"/>
                             <constraint firstItem="ANR-Xh-1Jp" firstAttribute="leading" secondItem="AIj-28-TIG" secondAttribute="leading" id="TWr-bB-ISD"/>
+                            <constraint firstAttribute="trailing" secondItem="Cza-NG-xj9" secondAttribute="trailing" id="jZX-0s-hhc"/>
                             <constraint firstItem="ed8-I2-0IN" firstAttribute="top" secondItem="ANR-Xh-1Jp" secondAttribute="bottom" id="mNw-nb-1qE"/>
-                            <constraint firstItem="ANR-Xh-1Jp" firstAttribute="top" secondItem="Lca-3t-tVp" secondAttribute="bottom" id="zSj-Q8-mf0"/>
+                            <constraint firstItem="Cza-NG-xj9" firstAttribute="leading" secondItem="AIj-28-TIG" secondAttribute="leading" id="mZb-Gg-L6b"/>
                         </constraints>
                     </view>
                     <connections>
@@ -554,8 +584,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h9h-en-kai" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="tip-uX-G9I" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1841" y="-606"/>
+            <point key="canvasLocation" x="343" y="-706"/>
         </scene>
         <!--Pick Up & Play-->
         <scene sceneID="9D0-Qt-Cvf">
@@ -580,9 +611,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="questionMark" id="Lph-FT-tjg">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="xmY-0y-Mdm" kind="show" id="P7V-vO-ftS"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1678,7 +1706,7 @@ Directions</string>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="lj5-Ll-gze">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="lj5-Ll-gze">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1706,8 +1734,8 @@ Directions</string>
         <image name="verticalLine" width="1" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pmk-xo-nJj"/>
-        <segue reference="VXb-kk-V3v"/>
-        <segue reference="krn-aR-g15"/>
+        <segue reference="TvU-3m-pPR"/>
+        <segue reference="3aM-Aw-Hnq"/>
+        <segue reference="PIL-Kj-fUK"/>
     </inferredMetricsTieBreakers>
 </document>
