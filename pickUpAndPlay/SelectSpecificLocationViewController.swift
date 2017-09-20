@@ -38,7 +38,9 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
                 Location(["basketball", "soccer"], "CPA Court 4", -82.3745716, 36.2998606, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FCPA%20Court%204?alt=media&token=614c86a6-4abd-449c-ab24-09f85c1d95a1")
             ]
             
+            
                 ref.child("locations").updateChildValues(["subLocations": ["-KtSfjvhB1CzfEnCYnwV", "-KtSfjtJRyD65v4gx0GM", "-KtSfjtPKJZpW5wSMnuR", "-KtSfjtUWqJqjKTGcuh-"]])
+            
         } else if passedLocation.name == "ETSU Tennis Courts" {
             possibleLocations = [
                 Location(["tennis"], "ETSU Tennis Court 1", -82.3772667, 36.2974996, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/locationImages%2FETSU%20Tennis%20Courts?alt=media&token=b13d40e1-bcd8-43c2-8a0d-5d84ba701c62"),
