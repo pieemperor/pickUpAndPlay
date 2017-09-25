@@ -10,6 +10,7 @@ import Firebase
 import FirebaseAuth
 import FacebookLogin
 import AVFoundation
+import GoogleMaps
 
 class eventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -306,18 +307,30 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fetchLocationImage() {
-        let picRef = Storage.storage().reference()
-        let picHandle = picRef.child("locationImages").child(passedLocation.name)
-        
-        picHandle.getData(maxSize: 1 * 1024 * 1024 * 1024) { data, error in
-            if let error = error {
-                // Uh-oh, an error occurred!
-                print(error)
-            } else {
-                // Data for "images/island.jpg" is returned
-                self.locationImage.image = UIImage(data: data!)
-                self.locationImage.clipsToBounds = true
-            }
+        if passedLocation.locationImageURL == "" {
+            let ref = Database.database().reference()
+            ref.child("events").observe(.childAdded, with: {(snapshot) in
+                if let dictionary = snapshot.value as? [String : AnyObject] {
+                    if snapshot.key == self.game.gameId {
+                        let locationName = dictionary["location"] as? String
+                        
+                        ref.child("locations").observe(.childAdded, with: {(snapshot) in
+                            if let dict = snapshot.value as? [String : AnyObject] {
+                                if dict["locationName"] as? String == locationName {
+                                    self.passedLocation = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
+                                    let url = URL(string: self.passedLocation.locationImageURL)
+                                    let data = try? Data(contentsOf: url!)
+                                    self.locationImage.image = UIImage(data : data!)
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        } else {
+            let url = URL(string: self.passedLocation.locationImageURL)
+            let data = try? Data(contentsOf: url!)
+            self.locationImage.image = UIImage(data : data!)
         }
     }
     

@@ -22,6 +22,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     var ref: DatabaseReference! = Database.database().reference()
     var gameList: [Game] = []
     var selectedGame = Game()
+    var locationToPass = Location()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,5 +189,5 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
             x.game = self.selectedGame
             x.cameFrom = "userHome"
         }
-    }
+    }//End prepare for segue
 }//End class
