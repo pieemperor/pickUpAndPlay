@@ -115,7 +115,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     private func setupButtons() {
         createGameButton.layer.cornerRadius = createGameButton.frame.height/2
         
-        locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
+        locationName.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }//End setupButtons
     
     func fetchGames() {
@@ -159,7 +159,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
-            print(self.gameList, "\n\n\n\n\n\n")
         }) //End observe snapshot
     } //End fetchGames
     

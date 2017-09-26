@@ -22,6 +22,8 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchLocationImage()
+        setupLocations()
         setupLabel()
         tableView.dataSource = self
         tableView.delegate = self
@@ -29,7 +31,7 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     
     private func setupLabel() {
         locationName.text = passedLocation.name
-        locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
+        locationName.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
     
     //MARK: Table View Delegate methods
@@ -80,6 +82,19 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
             let x : scheduleController = segue.destination as! scheduleController
             x.passedLocation = self.selectedLocation
         }
+    }
+    
+    func setupLocations(){
+        for subLocation in passedLocation.subLocations! {
+            let location = Location(subLocation.availableSports, subLocation.name, passedLocation.long, passedLocation.lat, subLocation.locationImageURL)
+            possibleLocations.append(location)
+        }
+    }
+    
+    func fetchLocationImage(){
+            let url = URL(string: passedLocation.locationImageURL)
+            let data = try? Data(contentsOf: url!)
+            self.locationImage.image = UIImage(data : data!)
     }
 
 }//End SelectSpecificLocationViewController
