@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 class SelectSpecificLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    let ref = Database.database().reference()
     var passedLocation = Location()
     var possibleLocations = [Location]()
     var selectedLocation = Location()
@@ -20,31 +22,11 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchLocationImage()
         setupLocations()
-        setLocationImage()
         setupLabel()
         tableView.dataSource = self
         tableView.delegate = self
-    }
-    
-    private func setupLocations() {
-        if passedLocation.name == "CPA" {
-            possibleLocations = [
-                Location(["basketball"], "CPA Court 1", -82.3745716, 36.2998606, UIImage(named: "cpaCourt1")!),
-                Location(["basketball"], "CPA Court 2", -82.3745716, 36.2998606, UIImage(named: "cpaCourt2")!),
-                Location(["basketball", "volleyball"], "CPA Court 3", -82.3745716, 36.2998606, UIImage(named: "cpaCourt3")!),
-                Location(["basketball", "soccer"], "CPA Court 4", -82.3745716, 36.2998606, UIImage(named: "cpaCourt4")!)
-            ]
-        } else if passedLocation.name == "ETSU Tennis Courts" {
-            possibleLocations = [
-                Location(["tennis"], "Tennis Court 1", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 2", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 3", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 4", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 5", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-                Location(["tennis"], "Tennis Court 6", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!)
-            ]
-        }
     }
     
     private func setupLabel() {
@@ -101,12 +83,18 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
             x.passedLocation = self.selectedLocation
         }
     }
-
-    func setLocationImage() {
-        if passedLocation.name == "CPA" {
-            locationImage.image = UIImage(named: "CPA")
-        } else if passedLocation.name == "ETSU Tennis Courts" {
-            locationImage.image = UIImage(named: "tennisCourts")
+    
+    func setupLocations(){
+        for subLocation in passedLocation.subLocations! {
+            let location = Location(subLocation.availableSports, subLocation.name, passedLocation.long, passedLocation.lat, subLocation.locationImageURL)
+            possibleLocations.append(location)
         }
     }
+    
+    func fetchLocationImage(){
+            let url = URL(string: passedLocation.locationImageURL)
+            let data = try? Data(contentsOf: url!)
+            self.locationImage.image = UIImage(data : data!)
+    }
+
 }//End SelectSpecificLocationViewController

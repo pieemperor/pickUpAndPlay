@@ -13,28 +13,13 @@ import Firebase
 class MapViewController: UIViewController, GMSMapViewDelegate {
     //selected location that will be sent in prepare for segue
     var locationToPass = Location()
-    
-    // the coordinates are reversed from the url
-    //Create Location objects with list of sports available at those locations, name, coordinates, and Image
-    let locations = [
-        Location(["basketball"], "Davis Basketball Court", -82.3639571, 36.3035454, UIImage(named: "davisBBall")!),
-        Location(["basketball"], "Buc Ridge Basketball Court", -82.3592807, 36.2997041, UIImage(named: "bucRidgeBBall")!),
-        Location(["volleyball"], "Davis Beach Volleyball Court (Outside)", -82.3637902, 36.3035529, UIImage(named: "davisVBall")!),
-        Location(["volleyball"], "Buc Ridge Beach Volleyball Court", -82.3592885, 36.3000031, UIImage(named: "brvbCourt")!),
-        Location(["volleyball"], "Campus Ridge Beach Volleyball Court", -82.3746753, 36.2954593, UIImage(named: "campusRidgeVBCourt")!),
-        Location(["soccer", "ultimate"], "CPA Front Yard", -82.373986, 36.301344, UIImage(named: "cpaFrontYard")!),
-        Location(["ultimate"], "CPA Side Yard", -82.3748875, 36.300691, UIImage(named: "cpaSideYard")!),
-        Location(["ultimate"], "The Quad", -82.3698213, 36.3029164, UIImage(named: "quad")!),
-        Location(["ultimate"], "Tri-Hall Field", -82.3642177, 36.3038811, UIImage(named: "triHallField")!),
-        Location(["discGolf"], "ETSU Disc Golf Course", -82.362922, 36.30044, UIImage(named: "etsuDiscGolf")!),
-        Location(["basketball", "volleyball", "soccer"], "CPA", -82.3745716, 36.2998606, UIImage(named: "CPA")!),
-        Location(["tennis"], "ETSU Tennis Courts", -82.3772667, 36.2974996, UIImage(named: "tennisCourts")!),
-        Location(["basketball"], "Brooks Gym (Downstairs Court)", -82.370306, 36.302675, UIImage(named: "brooksGym")!),
-        Location(["volleyball"], "Dossett Beach Volleyball Court", -82.37139, 36.29929, UIImage(named: "dossettVB")!),
-    ]
+    var ref = Database.database().reference()
+    var locations = [Location]()
+    var mapView = GMSMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchLocations()
         setupMap()
         navigationController?.navigationBar.tintColor = .white
     }
@@ -44,7 +29,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let selectedLocation = marker.userData as! Location
         self.locationToPass = selectedLocation
         
-        if selectedLocation.name == "CPA" || selectedLocation.name == "ETSU Tennis Courts" {
+        if selectedLocation.subLocations != nil{
             self.performSegue(withIdentifier: "goToSelectSpecificLocation", sender: self)
         } else {
             self.performSegue(withIdentifier: "goToSchedule", sender: self)
@@ -56,44 +41,99 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
         //google map stuff
         let camera = GMSCameraPosition.camera(withLatitude:36.3035454 , longitude: -82.363957, zoom: 15.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.delegate = self
         self.view = mapView
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
-        
-        
-        
-        //make markers from locations array and set icons
-        for location in locations {
-            let state_marker = GMSMarker()
-            state_marker.position = CLLocationCoordinate2D(latitude: location.lat, longitude: location.long)
-            state_marker.title = location.name
-            state_marker.snippet = location.name
-            state_marker.map = mapView
-            state_marker.userData = location
-            
-            if location.availableSports.count == 1 {
-                if location.availableSports.contains("basketball") {
-                    state_marker.icon = UIImage(named: "basketballMarker")
-                } else if location.availableSports.contains("volleyball") {
-                    state_marker.icon = UIImage(named: "volleyballMarker")
-                } else if location.availableSports.contains("soccer") {
-                    state_marker.icon = UIImage(named: "soccerMarker")
-                } else if location.availableSports.contains("tennis") {
-                    state_marker.icon = UIImage(named: "tennisMarker")
-                } else if location.availableSports.contains("discGolf") {
-                    state_marker.icon = UIImage(named: "discGolfMarker")
-                } else if location.availableSports.contains("ultimate") {
-                    state_marker.icon = UIImage(named: "ultimateMarker")
-                } else {
-                    print ("No sport selected")
-                }
-            } else if location.availableSports.count > 1 {
-                state_marker.icon = UIImage(named: "multiSportMarker")
-            }
-        }
     }
+        
+        func fetchLocations(){
+            ref.child("locations").observe(.childAdded, with: {(snapshot) in
+                if let dict = snapshot.value as? [String : AnyObject] {
+                    var subLocationsObjectArray = [SubLocation]()
+                    if let subLocations = dict["subLocations"]{
+                        
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: subLocations, options: .prettyPrinted)
+                            // here "jsonData" is the dictionary encoded in JSON data
+                            print("jsonData: ", jsonData, "\n\n\n\n")
+                        
+                            if let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : [String : Any]]{
+                                for(_, value) in decoded {
+                                    let subLocation = SubLocation(value["availableSports"] as! [String], value["locationName"] as! String, value["image"] as! String)
+                                    subLocationsObjectArray.append(subLocation)
+                                }
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        
+                        subLocationsObjectArray = subLocationsObjectArray.sorted{ $0.name < $1.name }
+                        let location = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String, subLocationsObjectArray)
+                        self.locations.append(location)
+                        
+                        let state_marker = GMSMarker()
+                        state_marker.position = CLLocationCoordinate2D(latitude: location.lat, longitude: location.long)
+                        state_marker.title = location.name
+                        state_marker.snippet = location.name
+                        state_marker.map = self.mapView
+                        state_marker.userData = location
+                        
+                        if location.availableSports.count == 1 {
+                            if location.availableSports.contains("basketball") {
+                                state_marker.icon = UIImage(named: "basketballMarker")
+                            } else if location.availableSports.contains("volleyball") {
+                                state_marker.icon = UIImage(named: "volleyballMarker")
+                            } else if location.availableSports.contains("soccer") {
+                                state_marker.icon = UIImage(named: "soccerMarker")
+                            } else if location.availableSports.contains("tennis") {
+                                state_marker.icon = UIImage(named: "tennisMarker")
+                            } else if location.availableSports.contains("discGolf") {
+                                state_marker.icon = UIImage(named: "discGolfMarker")
+                            } else if location.availableSports.contains("ultimate") {
+                                state_marker.icon = UIImage(named: "ultimateMarker")
+                            } else {
+                                print ("No sport selected")
+                            }
+                        } else if location.availableSports.count > 1 {
+                            state_marker.icon = UIImage(named: "multiSportMarker")
+                        }
+                    } else {
+                        let location = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
+                        self.locations.append(location)
+                        
+                        let state_marker = GMSMarker()
+                        state_marker.position = CLLocationCoordinate2D(latitude: location.lat, longitude: location.long)
+                        state_marker.title = location.name
+                        state_marker.snippet = location.name
+                        state_marker.map = self.mapView
+                        state_marker.userData = location
+                        
+                        if location.availableSports.count == 1 {
+                            if location.availableSports.contains("basketball") {
+                                state_marker.icon = UIImage(named: "basketballMarker")
+                            } else if location.availableSports.contains("volleyball") {
+                                state_marker.icon = UIImage(named: "volleyballMarker")
+                            } else if location.availableSports.contains("soccer") {
+                                state_marker.icon = UIImage(named: "soccerMarker")
+                            } else if location.availableSports.contains("tennis") {
+                                state_marker.icon = UIImage(named: "tennisMarker")
+                            } else if location.availableSports.contains("discGolf") {
+                                state_marker.icon = UIImage(named: "discGolfMarker")
+                            } else if location.availableSports.contains("ultimate") {
+                                state_marker.icon = UIImage(named: "ultimateMarker")
+                            } else {
+                                print ("No sport selected")
+                            }
+                        } else if location.availableSports.count > 1 {
+                            state_marker.icon = UIImage(named: "multiSportMarker")
+                        }
+
+                    }//End else
+                }//End if let subLocations = dict["subLocations"]{
+            })//End observe locations
+        }//End fetchLocations
     
     //send location to schedule controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

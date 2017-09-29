@@ -23,9 +23,10 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
    
     //name of location sent from mapViewController
     var passedLocation = Location()
-    //Sports available at that location - passed from mapViewController
     var gameList = [Game]()
+    //timeArray gets sent to the createGameController to make sure the user doesn't create a game at the same time at the same place
     var timeArray = [String]()
+    //selectedGame gets passed to the eventDetails controller
     var selectedGame = Game()
     
     override func viewDidLoad() {
@@ -35,6 +36,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.dataSource = self
         tableView.separatorColor = .clear
         locationName.text = passedLocation.name
+        fetchLocationImage()
         setupButtons()
     }
     
@@ -112,8 +114,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func setupButtons() {
         createGameButton.layer.cornerRadius = createGameButton.frame.height/2
-        locationImage.image = passedLocation.locationImage
-        locationImage.clipsToBounds = true
         
         locationName.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }//End setupButtons
@@ -140,7 +140,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     let timeString = df.string(from: dateAsDate!)
                     
                     if let numberOfPlayers = dictionary["playerList"]?.count {
-                        
                         if dateAsDate! > Date() {
                             //Set values of game variable from database information
                             let sport = dictionary["sport"]
@@ -160,9 +159,16 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
-            print(self.gameList, "\n\n\n\n\n\n")
         }) //End observe snapshot
     } //End fetchGames
+    
+    func fetchLocationImage() {
+        let imageURL = passedLocation.locationImageURL
+            let url = URL(string: imageURL)
+            let data = try? Data(contentsOf: url!)
+            self.locationImage.image = UIImage(data : data!)
+
+    }
     
     @IBAction func unwindToSchedule(unwindSegue: UIStoryboardSegue) {}
     

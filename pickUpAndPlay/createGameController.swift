@@ -53,12 +53,11 @@ class createGameController: UIViewController{
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchLocationImage()
         setupButtons()
         setupSportButtons()
         setupDatePicker()
-        locationLabel.text = location.name
-        locationImage.image = location.locationImage
-        
+        locationLabel.text = location.name        
         
         /*
         //Setup Picker View
@@ -85,6 +84,7 @@ class createGameController: UIViewController{
                     height: dpSize.height
                 )
             }
+            
             time = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
             timeButton.setTitle(time, for: .normal)
         }
@@ -380,5 +380,12 @@ class createGameController: UIViewController{
         } else {
             print("Cannot set player limit because wrong sport")
         }
+    }
+
+    func fetchLocationImage() {
+        let imageURL = location.locationImageURL
+        let url = URL(string: imageURL)
+        let data = try? Data(contentsOf: url!)
+        self.locationImage.image = UIImage(data : data!)
     }
 }
