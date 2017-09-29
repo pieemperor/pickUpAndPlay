@@ -159,18 +159,19 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     df.dateFormat = "h:mm a"
                     let timeString = df.string(from: dateAsDate!)
                     
-                    
-                    //Set values of game variable from database information
-                    let sport = dictionary["sport"]
-                    let time = timeString
-                    let date = justDate
-                    let playersInGame = dictionary["playerList"]?.count
-                    let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
-                    let gameType = dictionary["gameType"]
-                    
-                    let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
-                    self.gameList.append(game)
-                    self.tableView.reloadData()
+                    if dateAsDate! > Date() {
+                        //Set values of game variable from database information
+                        let sport = dictionary["sport"]
+                        let time = timeString
+                        let date = justDate
+                        let playersInGame = dictionary["playerList"]?.count
+                        let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
+                        let gameType = dictionary["gameType"]
+                        
+                        let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
+                        self.gameList.append(game)
+                        self.tableView.reloadData()
+                    }
                 } //End if location
                 //Sort games by date
                 self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
