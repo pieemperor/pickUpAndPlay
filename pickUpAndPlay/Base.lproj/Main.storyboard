@@ -739,7 +739,6 @@
                             <constraint firstItem="6UK-Wt-wqy" firstAttribute="centerX" secondItem="02C-kg-tiW" secondAttribute="centerX" id="ZDP-Qc-7mE"/>
                             <constraint firstItem="1ru-8w-arQ" firstAttribute="top" secondItem="6UK-Wt-wqy" secondAttribute="bottom" constant="40" id="bI4-vb-87y"/>
                             <constraint firstAttribute="trailing" secondItem="WKb-Sc-FhR" secondAttribute="trailing" id="cdV-ZH-jNv"/>
-                            <constraint firstItem="0M6-Ep-RNG" firstAttribute="centerX" secondItem="02C-kg-tiW" secondAttribute="centerX" id="fZV-s0-4ZN"/>
                             <constraint firstItem="pLT-sd-hlv" firstAttribute="centerX" secondItem="02C-kg-tiW" secondAttribute="centerX" id="kPw-jx-YEe"/>
                             <constraint firstItem="0M6-Ep-RNG" firstAttribute="top" secondItem="pLT-sd-hlv" secondAttribute="bottom" constant="5" id="lb0-re-x3L"/>
                             <constraint firstItem="Bnb-FE-uke" firstAttribute="top" secondItem="x0W-P3-xiA" secondAttribute="bottom" constant="55" id="lwI-fN-stP"/>
@@ -1349,7 +1348,7 @@ Directions</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ICh-cR-HH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hIv-qD-qJD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4311.1999999999998" y="142.57871064467767"/>
+            <point key="canvasLocation" x="4231" y="122"/>
         </scene>
         <!--User Page View Controller-->
         <scene sceneID="Yps-fe-XA1">
@@ -1526,7 +1525,7 @@ Directions</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="180" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-xk-Tma">
                                 <rect key="frame" x="0.0" y="60" width="375" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="STG-j5-3Nx"/>
+                                    <constraint firstAttribute="height" constant="180" id="STG-j5-3Nx"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8E-FJ-1pB">
@@ -1709,6 +1708,6 @@ Directions</string>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
         <segue reference="l4n-GA-yhe"/>
-        <segue reference="3aM-Aw-Hnq"/>
+        <segue reference="VXb-kk-V3v"/>
     </inferredMetricsTieBreakers>
 </document>

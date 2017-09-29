@@ -29,7 +29,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let selectedLocation = marker.userData as! Location
         self.locationToPass = selectedLocation
         
-        if let subLocations = selectedLocation.subLocations{
+        if selectedLocation.subLocations != nil{
             self.performSegue(withIdentifier: "goToSelectSpecificLocation", sender: self)
         } else {
             self.performSegue(withIdentifier: "goToSchedule", sender: self)
@@ -53,13 +53,23 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 if let dict = snapshot.value as? [String : AnyObject] {
                     var subLocationsObjectArray = [SubLocation]()
                     if let subLocations = dict["subLocations"]{
-                        self.ref.child("locations").child(snapshot.key).child("subLocations").observe(.childAdded, with: {(snapshot) in
-                            if let dictionary = snapshot.value as? [String : AnyObject] {
-                                let subLocation = SubLocation(dictionary["availableSports"] as! [String], dictionary["locationName"] as! String, dictionary["image"] as! String)
-                                subLocationsObjectArray.append(subLocation)
-                            }
-                        })//End observe subLocations
                         
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: subLocations, options: .prettyPrinted)
+                            // here "jsonData" is the dictionary encoded in JSON data
+                            print("jsonData: ", jsonData, "\n\n\n\n")
+                        
+                            if let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : [String : Any]]{
+                                for(_, value) in decoded {
+                                    let subLocation = SubLocation(value["availableSports"] as! [String], value["locationName"] as! String, value["image"] as! String)
+                                    subLocationsObjectArray.append(subLocation)
+                                }
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        
+                        subLocationsObjectArray = subLocationsObjectArray.sorted{ $0.name < $1.name }
                         let location = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String, subLocationsObjectArray)
                         self.locations.append(location)
                         

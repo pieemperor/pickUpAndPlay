@@ -53,12 +53,11 @@ class createGameController: UIViewController{
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchLocationImage()
         setupButtons()
         setupSportButtons()
         setupDatePicker()
-        locationLabel.text = location.name
-        //locationImage.image = location.locationImage
-        
+        locationLabel.text = location.name        
         
         /*
         //Setup Picker View
@@ -355,7 +354,7 @@ class createGameController: UIViewController{
         addSubsButton.setImage(UIImage(named: "subsButton"), for: .normal)
         addSubsButton.setImage(UIImage(named: "selectedSubsButton"), for: .selected)
         
-        locationLabel.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
+        locationLabel.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
     
     private func setPlayerLimits() {
@@ -381,5 +380,12 @@ class createGameController: UIViewController{
         } else {
             print("Cannot set player limit because wrong sport")
         }
+    }
+
+    func fetchLocationImage() {
+        let imageURL = location.locationImageURL
+        let url = URL(string: imageURL)
+        let data = try? Data(contentsOf: url!)
+        self.locationImage.image = UIImage(data : data!)
     }
 }
