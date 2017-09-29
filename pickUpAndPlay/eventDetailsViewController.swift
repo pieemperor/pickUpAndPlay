@@ -39,6 +39,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             updateButtonSelectionStates()
         }
     }
+    var profilePicURL = URL(string: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,8 +122,11 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                             
                                             if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
                                                 
-                                                let url = URL(string: profilePicURL!)
-                                                let data = try? Data(contentsOf: url!)
+                                                self.profilePicURL = URL(string: profilePicURL!)
+                                            } else {
+                                                self.profilePicURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0")
+                                            }//End if profilePicURL != ""
+                                                let data = try? Data(contentsOf: self.profilePicURL!)
                                                 userProfilePic = UIImage(data : data!)!
                                                     
                                                     let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic)
@@ -136,7 +140,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                     self.inGame = true
                                                     self.spotsLeftLabel.text = String(spotsRemaining - 1) +  " Spots Remaining"
                                                     self.joinSpinner.stopAnimating()
-                                            }//End if profilePicURL != ""
                                         }//End if snapshot.key == Auth.auth().currentUser
                                     }//If let usersDictionary =
                                 })//End ref.child("users").observe
@@ -275,10 +278,10 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                     if player == snapshot.key {
                                         let firstName = userDictionary["firstName"]
                                         let lastName = userDictionary["lastName"]
-                                        let profilePicURL = userDictionary["photo"] as? String
+                                        var profilePicURL = userDictionary["photo"] as? String
                                         var userProfilePic = UIImage()
                                         
-                                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none", profilePicURL != " "{
                                             
                                             let url = URL(string: profilePicURL!)
                                             let data = try? Data(contentsOf: url!)
@@ -290,7 +293,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                 self.tableView.reloadData()
                                                 self.tableSpinner.stopAnimating()
 
-                                        }//End if profilePicURL != ""
+                                        }/* End if profilePicURL != "" */ else {
+                                            profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
+                                        }
                                     }//End if player == snapshot.key
                                 }//End if let userDictionary
                             })//End .child("users").observe

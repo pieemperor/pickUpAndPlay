@@ -29,8 +29,9 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
     }
     
     var ref: DatabaseReference! = Database.database().reference()
-    var profilePicURL = String()
+    var profilePicURL : String? = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
     let uuid = UUID()
+    var didSelectImage = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                     spinner.startAnimating()
                     Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in
                         
+                        if self.didSelectImage {
                         //Get PNG representation of the image they chose
                         let imageData = UIImageJPEGRepresentation(self.profilePic.image!, 0.5)!
                         
@@ -75,13 +77,13 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                         photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
                             
                             // When the image has successfully uploaded, we get it's download URL
-                            let picURL = snapshot.metadata?.downloadURL()?.absoluteString
+                            self.profilePicURL = snapshot.metadata?.downloadURL()?.absoluteString
                             // Set the download URL to the message box, so that the user can send it to the database
                             
                             // Check that user isn't nil
                             if let u = user {
                                 //Save user's display name
-                                self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": picURL!])
+                                self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": self.profilePicURL!])
                                 
                                 self.spinner.stopAnimating()
                                 // User is found, go to home screen
@@ -99,6 +101,27 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                                 // Error: check error and show message
                             }
                         }//End photo completion handler
+                        } else {
+                            if let u = user {
+                                //Save user's display name
+                                self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": self.profilePicURL!])
+                                
+                                self.spinner.stopAnimating()
+                                // User is found, go to home screen
+                                self.performSegue(withIdentifier: "goToMap", sender: self)
+                            } else {
+                                let alertController = UIAlertController(title: "Email Taken", message: "That email is already in use by another account", preferredStyle: .alert)
+                                let actionOk = UIAlertAction(title: "OK",
+                                                             style: .default,
+                                                             handler: nil) //You can use a block here to handle a press on this button
+                                
+                                alertController.addAction(actionOk)
+                                self.present(alertController, animated: true, completion: nil)
+                                self.emailTextField.layer.borderWidth = 1.0
+                                self.emailTextField.layer.borderColor = UIColor.red.cgColor
+                                // Error: check error and show message
+                            }
+                        }
                     })//End Firebase createUser
                 }//End if password field is > 6
                 else {
@@ -196,6 +219,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         
         // Set profilePic to display the selected image.
         profilePic.image = image
+        didSelectImage = true
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
