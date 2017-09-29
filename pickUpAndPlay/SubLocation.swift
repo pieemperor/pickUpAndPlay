@@ -25,3 +25,4 @@ class SubLocation {
         self.locationImageURL = locationImageURL
     }
 }
+
