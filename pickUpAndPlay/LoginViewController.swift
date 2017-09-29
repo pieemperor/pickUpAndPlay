@@ -161,7 +161,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     
     //Function to make the boxes and buttons with rounded edges
     func setupTextBoxes(){
-        let transparentBlack = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
+        let transparentBlack = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
         
         //Round the corners of the text boxes and make the border white
         emailTextField.layer.cornerRadius = 10.0

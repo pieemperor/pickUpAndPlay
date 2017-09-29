@@ -97,7 +97,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = .clear
         
-        let myGreen = UIColor(colorLiteralRed:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
+        let myGreen = UIColor(red:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
 
         let greenRoundedView: UIView = UIView(frame: CGRect(x:0,y:5,width:tableView.frame.width, height:80))
         greenRoundedView.layer.backgroundColor = myGreen.cgColor
@@ -115,7 +115,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         locationImage.image = passedLocation.locationImage
         locationImage.clipsToBounds = true
         
-        locationName.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
+        locationName.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }//End setupButtons
     
     func fetchGames() {

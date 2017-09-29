@@ -327,7 +327,7 @@ class createGameController: UIViewController{
     
     private func setupButtons() {
         //Create green color
-        let myGreen = UIColor(colorLiteralRed: 46.0/255.0, green: 204.0/255.0, blue: 114.0/255.0, alpha: 1.0)
+        let myGreen = UIColor(red: 46.0/255.0, green: 204.0/255.0, blue: 114.0/255.0, alpha: 1.0)
         
         //Setup skill Selector button
         skillSelector.layer.cornerRadius = 5.0
@@ -354,7 +354,7 @@ class createGameController: UIViewController{
         addSubsButton.setImage(UIImage(named: "subsButton"), for: .normal)
         addSubsButton.setImage(UIImage(named: "selectedSubsButton"), for: .selected)
         
-        locationLabel.backgroundColor = UIColor(colorLiteralRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
+        locationLabel.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }
     
     private func setPlayerLimits() {
