@@ -62,8 +62,11 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                     Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in
                         
                         if self.didSelectImage {
+                            
+                        let resizedImage = self.resizeImage(image: self.profilePic.image!, newWidth: 120.0)
+                            
                         //Get PNG representation of the image they chose
-                        let imageData = UIImageJPEGRepresentation(self.profilePic.image!, 0.5)!
+                        let imageData = UIImageJPEGRepresentation(resizedImage, 1.0)!
                         
                         // Get a reference to the profilePics folder where we'll store our photos
                         let picHandle = Storage.storage().reference().child("profilePics")
@@ -284,6 +287,21 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
             let firstView = self.stackView.arrangedSubviews[0]
             firstView.isHidden = false
         }
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        
+        
+        image.draw(in: CGRect(x: 0, y: 0,width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
     func setDefaultBorderWidths() {

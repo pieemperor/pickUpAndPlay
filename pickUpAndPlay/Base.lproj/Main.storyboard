@@ -1852,7 +1852,7 @@ Directions</string>
         <image name="PUPIcon" width="148" height="179"/>
         <image name="addPhoto" width="225" height="224"/>
         <image name="facebookButton" width="281" height="46"/>
-        <image name="gameList" width="22" height="23"/>
+        <image name="gameList" width="20" height="17"/>
         <image name="gear" width="22" height="22"/>
         <image name="loginBG" width="93" height="167"/>
         <image name="or" width="416" height="41"/>
