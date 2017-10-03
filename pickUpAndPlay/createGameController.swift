@@ -107,8 +107,6 @@ class createGameController: UIViewController{
             )
         }
         time = datePicker.date.timeIntervalSince1970
-        print(time)
-        
         let buttonTitle = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
         timeButton.setTitle(buttonTitle, for: .normal)
     }

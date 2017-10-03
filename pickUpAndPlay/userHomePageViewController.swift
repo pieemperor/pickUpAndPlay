@@ -152,14 +152,13 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     //Format the date stored in the database
                     let df = DateFormatter()
                     
-                    df.dateFormat = "MMM d, yyyy, h:mm a"
-                    let dateAsDate = df.date(from: dictionary["time"] as! String)
+                    let dateAsDate = Date(timeIntervalSince1970: dictionary["time"] as! Double)
                     df.dateFormat = "MMMM d"
-                    let justDate = df.string(from: dateAsDate!)
+                    let justDate = df.string(from: dateAsDate)
                     df.dateFormat = "h:mm a"
-                    let timeString = df.string(from: dateAsDate!)
+                    let timeString = df.string(from: dateAsDate)
                     
-                    if dateAsDate! > Date() {
+                    if dateAsDate > Date() {
                         //Set values of game variable from database information
                         let sport = dictionary["sport"]
                         let time = timeString
@@ -168,7 +167,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                         let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
                         let gameType = dictionary["gameType"]
                         
-                        let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
+                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String)
                         self.gameList.append(game)
                         self.tableView.reloadData()
                     }
