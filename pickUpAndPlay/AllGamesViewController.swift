@@ -103,7 +103,7 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
                         //Format the date stored in the database
                         let df = DateFormatter()
                         
-                        let dateAsDate = Date(timeIntervalSine1970: dictionary["time"] as! Double)
+                        let dateAsDate = Date(timeIntervalSince1970: dictionary["time"] as! Double)
                         df.dateFormat = "MMMM d"
                         let justDate = df.string(from: dateAsDate)
                         df.dateFormat = "h:mm a"
