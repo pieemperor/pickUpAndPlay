@@ -25,13 +25,13 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     var passedLocation = Location()
     var gameList = [Game]()
     //timeArray gets sent to the createGameController to make sure the user doesn't create a game at the same time at the same place
-    var timeArray = [String]()
+    var timeArray = [Double]()
     //selectedGame gets passed to the eventDetails controller
     var selectedGame = Game()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        timeArray = [String]()
+        timeArray = [Double]()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.separatorColor = .clear
@@ -150,7 +150,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                             
                             let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
                             self.gameList.append(game)
-                            self.timeArray.append(dictionary["time"] as! String)
+                            //self.timeArray.append(dictionary["time"] as! Double)
                             self.tableView.reloadData()
                     }
                 } //End if location
