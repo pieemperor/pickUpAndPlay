@@ -903,7 +903,7 @@
                         <barButtonItem key="rightBarButtonItem" image="gear" id="aBf-2L-3NM">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="CPY-KD-Pqj" kind="presentation" id="kBE-S7-GmT"/>
+                                <segue destination="CPY-KD-Pqj" kind="show" id="kBE-S7-GmT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -936,30 +936,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBG" translatesAutoresizingMaskIntoConstraints="NO" id="B0R-zK-ber">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="OKy-ER-3tq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="Zst-Kp-yx9"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem id="Fml-uI-EI0">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="mBC-fE-jYH">
-                                            <connections>
-                                                <segue destination="rb3-Fa-8GU" kind="unwind" identifier="unwindToProfile" unwindAction="unwindtoProfileWithUnwindSegue:" id="eyI-4O-8he"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="uWp-Ag-YSd">
-                                            <connections>
-                                                <action selector="logOut:" destination="CPY-KD-Pqj" id="hR4-vF-nbO"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Profile" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaJ-3S-AVm">
                                 <rect key="frame" x="85.5" y="122" width="203" height="50.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="42"/>
@@ -1081,21 +1057,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OKy-ER-3tq" firstAttribute="leading" secondItem="NOB-fN-QRM" secondAttribute="leading" id="15t-g4-fWM"/>
                             <constraint firstItem="EhD-4a-kId" firstAttribute="top" secondItem="B0R-zK-ber" secondAttribute="bottom" id="DKm-e4-48v"/>
                             <constraint firstAttribute="trailing" secondItem="B0R-zK-ber" secondAttribute="trailing" id="FcR-aW-Kyg"/>
+                            <constraint firstItem="QaJ-3S-AVm" firstAttribute="top" secondItem="fKJ-XF-kkn" secondAttribute="bottom" constant="58" id="N08-RS-siu"/>
                             <constraint firstItem="B0R-zK-ber" firstAttribute="top" secondItem="NOB-fN-QRM" secondAttribute="top" id="PGi-H4-K9q"/>
                             <constraint firstItem="ts1-Ca-icQ" firstAttribute="centerX" secondItem="NOB-fN-QRM" secondAttribute="centerX" id="RKt-ZR-1IV"/>
                             <constraint firstItem="ts1-Ca-icQ" firstAttribute="top" secondItem="QaJ-3S-AVm" secondAttribute="bottom" constant="40" id="RxE-hm-Upd"/>
                             <constraint firstItem="5hw-2q-fuW" firstAttribute="centerX" secondItem="NOB-fN-QRM" secondAttribute="centerX" id="VVa-BS-cji"/>
                             <constraint firstItem="QaJ-3S-AVm" firstAttribute="centerX" secondItem="NOB-fN-QRM" secondAttribute="centerX" id="c2W-jR-Uot"/>
                             <constraint firstItem="5hw-2q-fuW" firstAttribute="centerY" secondItem="NOB-fN-QRM" secondAttribute="centerY" id="gTV-gE-osI"/>
-                            <constraint firstAttribute="trailing" secondItem="OKy-ER-3tq" secondAttribute="trailing" id="qI7-9g-9FH"/>
-                            <constraint firstItem="QaJ-3S-AVm" firstAttribute="top" secondItem="OKy-ER-3tq" secondAttribute="bottom" constant="60" id="u8X-OR-Pni"/>
-                            <constraint firstItem="OKy-ER-3tq" firstAttribute="top" secondItem="NOB-fN-QRM" secondAttribute="top" id="uTc-en-o2i"/>
                             <constraint firstItem="B0R-zK-ber" firstAttribute="leading" secondItem="NOB-fN-QRM" secondAttribute="leading" id="wsV-gk-Wir"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="i3a-in-1BG">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="zTc-ec-tyf">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="logOut:" destination="CPY-KD-Pqj" id="XjX-OR-77f"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="deleteAccountButton" destination="4CZ-Wk-411" id="Hzp-tW-3X5"/>
                         <outlet property="emailTextField" destination="DcR-p8-WUc" id="bWs-DW-Ar1"/>
@@ -1157,7 +1138,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="gaw-D7-ZAc" kind="presentation" identifier="goToCreateGame" id="Ok1-1H-L5h"/>
+                                    <segue destination="gaw-D7-ZAc" kind="show" identifier="goToCreateGame" id="Ok1-1H-L5h"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OqN-R5-hsc">
@@ -1285,7 +1266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SFo-oY-9B2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3034.4000000000001" y="121.88905547226388"/>
+            <point key="canvasLocation" x="3036" y="189"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="BGb-sr-B2R">
@@ -1663,7 +1644,7 @@ Directions</string>
             </objects>
             <point key="canvasLocation" x="5278" y="143"/>
         </scene>
-        <!--Create Game Controller-->
+        <!--Create Game-->
         <scene sceneID="8N0-1j-ngF">
             <objects>
                 <viewController id="gaw-D7-ZAc" customClass="createGameController" customModule="pickUpAndPlay" customModuleProvider="target" sceneMemberID="viewController">
@@ -1676,39 +1657,13 @@ Directions</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="180" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-xk-Tma">
-                                <rect key="frame" x="0.0" y="60" width="375" height="180"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="STG-j5-3Nx"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8E-FJ-1pB">
-                                <rect key="frame" x="0.0" y="60" width="375" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="w7s-VH-plJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="6te-et-Amk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="SgC-1I-rvA"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="Create Game" id="6Uc-dj-fVN">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nEC-i8-UEg">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <segue destination="q54-Pw-kay" kind="unwind" identifier="unwindToSchedule" unwindAction="unwindToScheduleWithUnwindSegue:" id="IJu-Bq-H0U"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ExG-Aj-rLe">
-                                <rect key="frame" x="62.5" y="270" width="250" height="148"/>
+                                <rect key="frame" x="62.5" y="274" width="250" height="148"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MZH-hv-ugC">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
@@ -1740,7 +1695,7 @@ Directions</string>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhC-gL-hts">
-                                <rect key="frame" x="62.5" y="486" width="250" height="35"/>
+                                <rect key="frame" x="62.5" y="490" width="250" height="35"/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.6705882353" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="INw-90-bhC"/>
@@ -1754,7 +1709,7 @@ Directions</string>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="clQ-7u-3ci">
-                                <rect key="frame" x="100" y="428" width="175" height="48"/>
+                                <rect key="frame" x="100" y="432" width="175" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ic-Im-hLc">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -1788,28 +1743,36 @@ Directions</string>
                                 </date>
                                 <locale key="locale" localeIdentifier="en_US"/>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8E-FJ-1pB">
+                                <rect key="frame" x="0.0" y="64" width="375" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="w7s-VH-plJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.25098039215686274" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ReT-xk-Tma" firstAttribute="leading" secondItem="Tbl-NB-D9Q" secondAttribute="leading" id="00t-EE-gHA"/>
                             <constraint firstItem="Z8E-FJ-1pB" firstAttribute="leading" secondItem="Tbl-NB-D9Q" secondAttribute="leading" id="2zJ-wM-8sX"/>
-                            <constraint firstItem="Z8E-FJ-1pB" firstAttribute="top" secondItem="6te-et-Amk" secondAttribute="bottom" id="6fi-yI-4m9"/>
                             <constraint firstItem="clQ-7u-3ci" firstAttribute="top" secondItem="ExG-Aj-rLe" secondAttribute="bottom" constant="10" id="7Wd-gR-O5c"/>
-                            <constraint firstItem="6te-et-Amk" firstAttribute="top" secondItem="Tbl-NB-D9Q" secondAttribute="top" id="7zJ-4d-kl5"/>
+                            <constraint firstItem="ReT-xk-Tma" firstAttribute="top" secondItem="UvT-fk-uPQ" secondAttribute="bottom" id="A3l-i8-IRr"/>
                             <constraint firstItem="HhC-gL-hts" firstAttribute="top" secondItem="clQ-7u-3ci" secondAttribute="bottom" constant="10" id="Cqs-ye-9ld"/>
                             <constraint firstItem="ExG-Aj-rLe" firstAttribute="top" secondItem="ReT-xk-Tma" secondAttribute="bottom" constant="30" id="ECg-Vl-1DO"/>
-                            <constraint firstItem="6te-et-Amk" firstAttribute="leading" secondItem="Tbl-NB-D9Q" secondAttribute="leading" id="HE0-S8-wvL"/>
                             <constraint firstItem="ExG-Aj-rLe" firstAttribute="centerX" secondItem="Tbl-NB-D9Q" secondAttribute="centerX" id="O4L-9D-jTC"/>
-                            <constraint firstItem="ReT-xk-Tma" firstAttribute="top" secondItem="6te-et-Amk" secondAttribute="bottom" id="PAo-95-nlO"/>
                             <constraint firstAttribute="trailing" secondItem="ReT-xk-Tma" secondAttribute="trailing" id="X8r-F0-95B"/>
                             <constraint firstItem="clQ-7u-3ci" firstAttribute="centerX" secondItem="Tbl-NB-D9Q" secondAttribute="centerX" id="XBh-66-nZo"/>
                             <constraint firstAttribute="trailing" secondItem="Z8E-FJ-1pB" secondAttribute="trailing" id="YR7-gS-eQz"/>
                             <constraint firstItem="HhC-gL-hts" firstAttribute="centerX" secondItem="Tbl-NB-D9Q" secondAttribute="centerX" id="ZyM-BS-FEm"/>
-                            <constraint firstAttribute="trailing" secondItem="6te-et-Amk" secondAttribute="trailing" id="oG8-PG-b0B"/>
+                            <constraint firstItem="Z8E-FJ-1pB" firstAttribute="top" secondItem="UvT-fk-uPQ" secondAttribute="bottom" id="eJt-xU-ggD"/>
                             <constraint firstItem="Z8E-FJ-1pB" firstAttribute="centerX" secondItem="Tbl-NB-D9Q" secondAttribute="centerX" id="tSw-zu-SKO"/>
                         </constraints>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationItem key="navigationItem" title="Create Game" id="bZl-Rc-Jeh"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="addSubsButton" destination="7Ic-Im-hLc" id="0Ql-fY-AxY"/>
                         <outlet property="addSubsLabel" destination="1Pa-F8-Ma5" id="RwB-qs-kQu"/>
@@ -1820,10 +1783,11 @@ Directions</string>
                         <outlet property="skillSelector" destination="7NE-1b-jEM" id="CLb-9u-0aM"/>
                         <outlet property="sportsButtonsStack" destination="MZH-hv-ugC" id="kHL-Tm-uKH"/>
                         <outlet property="timeButton" destination="Qii-ZG-OvQ" id="3lD-0z-uy9"/>
+                        <segue destination="sFt-hy-PYl" kind="unwind" unwindAction="unwindToScheduleWithUnwindSegue:" id="QdB-lC-XxG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jP-GQ-hMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="q54-Pw-kay" userLabel="Exit" sceneMemberID="exit"/>
+                <exit id="sFt-hy-PYl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3036" y="1016.9415292353824"/>
         </scene>
@@ -1862,7 +1826,7 @@ Directions</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
-        <segue reference="krn-aR-g15"/>
+        <segue reference="PIL-Kj-fUK"/>
         <segue reference="VXb-kk-V3v"/>
     </inferredMetricsTieBreakers>
 </document>
