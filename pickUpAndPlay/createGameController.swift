@@ -20,7 +20,7 @@ class createGameController: UIViewController{
     //name of location
     var location = Location()
     //timeArray gets sent to the createGame from sceduleController so a game can't be made with the same time
-    var timeArray = [String]()
+    var timeArray = [Double]()
     private var sportButtons = [UIButton]()
     var isDatePickerShowing = false
     var numberOfSubs = 0
@@ -31,7 +31,7 @@ class createGameController: UIViewController{
             updateButtonSelectionStates()
         }
     }
-    var time = String()
+    var time = Double()
     var repeatFrequency = "Never"
     var gameType = "Recreational"
     var playerLimit = 0
@@ -85,8 +85,10 @@ class createGameController: UIViewController{
                 )
             }
             
-            time = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
-            timeButton.setTitle(time, for: .normal)
+            time = datePicker.date.timeIntervalSince1970
+            
+            let buttonTitle = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
+            timeButton.setTitle(buttonTitle, for: .normal)
         }
     }
     
@@ -104,8 +106,9 @@ class createGameController: UIViewController{
                 height: dpSize.height
             )
         }
-        time = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
-        timeButton.setTitle(time, for: .normal)
+        time = datePicker.date.timeIntervalSince1970
+        let buttonTitle = DateFormatter.localizedString(from: datePicker.date, dateStyle: DateFormatter.Style.medium, timeStyle:DateFormatter.Style.short)
+        timeButton.setTitle(buttonTitle, for: .normal)
     }
     
     
@@ -121,7 +124,7 @@ class createGameController: UIViewController{
     
     @IBAction func createGameButtonTapped(_ sender: Any) {
         if selectedSport != "" {
-            if time != "" {
+            if time != 0.0 {
                 if !timeArray.contains(time) {
                     //create a new event and add info as children
                     let ref = Database.database().reference()

@@ -25,13 +25,13 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     var passedLocation = Location()
     var gameList = [Game]()
     //timeArray gets sent to the createGameController to make sure the user doesn't create a game at the same time at the same place
-    var timeArray = [String]()
+    var timeArray = [Double]()
     //selectedGame gets passed to the eventDetails controller
     var selectedGame = Game()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        timeArray = [String]()
+        timeArray = [Double]()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.separatorColor = .clear
@@ -132,15 +132,15 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     //Format the date stored in the database
                     let df = DateFormatter()
                     
-                    df.dateFormat = "MMM d, yyyy, h:mm a"
-                    let dateAsDate = df.date(from: dictionary["time"] as! String)
-                    df.dateFormat = "MMMM d"
-                    let justDate = df.string(from: dateAsDate!)
+                    let dateAsDate = Date(timeIntervalSince1970: dictionary["time"] as! Double)
+
+                    df.dateFormat = "EEE, MMM d"
+                    let justDate = df.string(from: dateAsDate)
                     df.dateFormat = "h:mm a"
-                    let timeString = df.string(from: dateAsDate!)
+                    let timeString = df.string(from: dateAsDate)
                     
                     if let numberOfPlayers = dictionary["playerList"]?.count {
-                        if dateAsDate! > Date() {
+                        if dateAsDate > Date() {
                             //Set values of game variable from database information
                             let sport = dictionary["sport"]
                             let time = timeString
@@ -148,9 +148,9 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                             let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers
                             let gameType = dictionary["gameType"]
                             
-                            let game = Game(gameId, sport as! String, time , date, dateAsDate!, spotsRemaining, gameType as! String)
+                            let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String)
                             self.gameList.append(game)
-                            self.timeArray.append(dictionary["time"] as! String)
+                            //self.timeArray.append(dictionary["time"] as! Double)
                             self.tableView.reloadData()
                     }
                 } //End if location
