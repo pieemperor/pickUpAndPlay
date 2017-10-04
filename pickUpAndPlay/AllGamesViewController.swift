@@ -104,7 +104,7 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
                         let df = DateFormatter()
                         
                         let dateAsDate = Date(timeIntervalSince1970: dictionary["time"] as! Double)
-                        df.dateFormat = "MMMM d"
+                        df.dateFormat = "EEE, MMM d"
                         let justDate = df.string(from: dateAsDate)
                         df.dateFormat = "h:mm a"
                         let timeString = df.string(from: dateAsDate)
