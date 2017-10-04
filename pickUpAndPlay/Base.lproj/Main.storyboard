@@ -1086,6 +1086,7 @@
                         <outlet property="spinner" destination="5hw-2q-fuW" id="6fw-ff-djT"/>
                         <outlet property="updateProfileButton" destination="zZt-df-MGg" id="5wj-B8-YIc"/>
                         <segue destination="rb3-Fa-8GU" kind="unwind" identifier="logOut" unwindAction="unwindToLoginWithUnwindSegue:" id="zHP-7q-90P"/>
+                        <segue destination="rb3-Fa-8GU" kind="unwind" identifier="unwindToProfile" unwindAction="unwindtoProfileWithUnwindSegue:" id="6Kf-kG-WKJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywS-kk-WFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1826,7 +1827,7 @@ Directions</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
-        <segue reference="PIL-Kj-fUK"/>
+        <segue reference="krn-aR-g15"/>
         <segue reference="VXb-kk-V3v"/>
     </inferredMetricsTieBreakers>
 </document>
