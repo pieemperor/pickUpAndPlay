@@ -22,6 +22,10 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
         fetchGames()
     }
     
