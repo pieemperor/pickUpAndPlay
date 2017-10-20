@@ -16,11 +16,13 @@ import GoogleMaps
 import FBSDKLoginKit
 import Fabric
 import Crashlytics
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self])
@@ -30,6 +32,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application,
         didFinishLaunchingWithOptions:launchOptions)
+        
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            
+            let options: UNAuthorizationOptions = [.alert, .sound]
+            
+            center.requestAuthorization(options: options) {
+                (granted, error) in
+                if !granted {
+                    print("Something went wrong")
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+
+        
         return true
     }
     

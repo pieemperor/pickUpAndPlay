@@ -11,6 +11,7 @@ import FirebaseAuth
 import FacebookLogin
 import AVFoundation
 import GoogleMaps
+import UserNotifications
 
 class eventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -111,6 +112,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             ref.child("events").observe(.childAdded, with: {(snapshot) in
                 if let eventsDictionary = snapshot.value as? [String : AnyObject] {
                     if snapshot.key == self.game.gameId {
+                        let gameKey = snapshot.key
                         if let playerListCount = eventsDictionary["playerList"]?.count! {
                             let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
                             if spotsRemaining > 0 {
@@ -139,6 +141,39 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                     self.tableView.reloadData()
                                                     self.inGame = true
                                                     self.spotsLeftLabel.text = String(spotsRemaining - 1) +  " Spots Remaining"
+                                            
+                                            //**************  Create Notifications **************//
+                                            //Add notification to pop up one hour before the game.
+                                            if #available(iOS 10.0, *) {
+                                                
+                                                let content = UNMutableNotificationContent()
+                                                content.title = "Upcoming Game"
+                                                content.body = "You have \(self.convertSportToPhrase(self.game.sport)) in one hour. Don't miss it!"
+                                                // Configure the trigger for 1 hour before the game
+                                                
+                                                let notificationTime = Date(timeIntervalSince1970: self.game.dateTime.timeIntervalSince1970 - 3600)
+                                                
+                                                let dateInfo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notificationTime)
+                                                print(dateInfo)
+                                                let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+                                                
+                                                // Create the request object.
+                                                let request = UNNotificationRequest(identifier: "\(gameKey)", content: content, trigger: trigger)
+                                                
+                                                // Schedule the request.
+                                                let center = UNUserNotificationCenter.current()
+                                                center.add(request) { (error : Error?) in
+                                                    if let theError = error {
+                                                        print(theError.localizedDescription)
+                                                    }
+                                                }
+                                            } else {
+                                                // Fallback on earlier versions
+                                            }
+                                            //************* End of create notification ***************//
+                                            
+                                            
+                                            
                                                     self.joinSpinner.stopAnimating()
                                         }//End if snapshot.key == Auth.auth().currentUser
                                     }//If let usersDictionary =
@@ -180,6 +215,12 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                     let eventsHandle = ref.child("events").child(self.game.gameId)
                                                                     
                                                                     eventsHandle.removeValue()
+                                                                    
+                                                                    if #available(iOS 10.0, *) {
+                                                                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [snapshot.key])
+                                                                    } else {
+                                                                        // Fallback on earlier versions
+                                                                    }
                                                                     
                                                                     self.goBack()
                                 })
@@ -365,6 +406,24 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         } else if cameFrom == "userPage" {
             performSegue(withIdentifier: "unwindToUserPage", sender: nil)
         }
+    }
+    
+    func convertSportToPhrase(_ sport:String) -> String{
+        var sportName = "game"
+        if sport == "discGolf" {
+            sportName = "a disc golf game"
+        } else if sport == "ultimate" {
+            sportName = "an ultimate frisbee game"
+        } else if sport == "basketball" {
+            sportName = "a basketball game"
+        } else if sport == "volleyball" {
+            sportName = "a volleyball game"
+        } else if sport == "soccer" {
+            sportName = "a soccer game"
+        } else if sport == "tennis" {
+            sportName = "a tennis match"
+        }
+        return sportName
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

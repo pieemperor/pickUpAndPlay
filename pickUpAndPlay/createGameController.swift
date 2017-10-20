@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import UserNotifications
 
 class createGameController: UIViewController{
     
@@ -139,6 +140,36 @@ class createGameController: UIViewController{
                                 "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
                     let childUpdates = ["/events/\(key)": post]
                     ref.updateChildValues(childUpdates)
+                    
+                    //************************  Create Notifications **************************//
+                    //Add notification to pop up one hour before the game.
+                    if #available(iOS 10.0, *) {
+                        let date = Date(timeIntervalSince1970: time - 3600)
+
+                        let content = UNMutableNotificationContent()
+                        content.title = "Upcoming Game"
+                        content.body = "You have \(convertSportToPhrase(selectedSport)) in one hour. Don't miss it!"
+                        // Configure the trigger for 1 hour before the game
+
+                        let dateInfo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+                        print(dateInfo)
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+                        
+                        // Create the request object.
+                        let request = UNNotificationRequest(identifier: "\(key)", content: content, trigger: trigger)
+                        
+                        // Schedule the request.
+                        let center = UNUserNotificationCenter.current()
+                        center.add(request) { (error : Error?) in
+                            if let theError = error {
+                                print(theError.localizedDescription)
+                            }
+                        }
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    //*********************** End of create notification ************************//
+
                     performSegue(withIdentifier: "unwindToSchedule", sender: self)
                 } else {
                     let alertController = UIAlertController(title: "Time Slot Taken", message: "Someone has already created a game for that time.", preferredStyle: .alert)
@@ -148,7 +179,7 @@ class createGameController: UIViewController{
                     alertController.addAction(actionOk)
                     self.present(alertController, animated: true, completion: nil)
                 }
-            } else {
+            } /* End if time != 0 */else {
                 let alertController = UIAlertController(title: "No time selected", message: "You must select a time for your game.", preferredStyle: .alert)
                 let actionOk = UIAlertAction(title: "OK",
                                              style: .default,
@@ -157,7 +188,7 @@ class createGameController: UIViewController{
                 alertController.addAction(actionOk)
                 self.present(alertController, animated: true, completion: nil)
             }
-        } else {
+        }/*End if selectedSport = nil*/ else {
             let alertController = UIAlertController(title: "No sport selected", message: "You must select a sport.", preferredStyle: .alert)
             let actionOk = UIAlertAction(title: "OK",
                                          style: .default,
@@ -165,7 +196,7 @@ class createGameController: UIViewController{
             alertController.addAction(actionOk)
             self.present(alertController, animated: true, completion: nil)
         }
-    }
+    }//End create game
  
     @IBAction func addSubs(_ sender: UIButton) {
         if addSubsButton.isSelected == false {
@@ -390,5 +421,23 @@ class createGameController: UIViewController{
         let url = URL(string: imageURL)
         let data = try? Data(contentsOf: url!)
         self.locationImage.image = UIImage(data : data!)
+    }
+    
+    func convertSportToPhrase(_ sport:String) -> String{
+        var sportName = "game"
+        if sport == "discGolf" {
+            sportName = "a disc golf game"
+        } else if sport == "ultimate" {
+            sportName = "an ultimate frisbee game"
+        } else if sport == "basketball" {
+            sportName = "a basketball game"
+        } else if sport == "volleyball" {
+            sportName = "a volleyball game"
+        } else if sport == "soccer" {
+            sportName = "a soccer game"
+        } else if sport == "tennis" {
+            sportName = "a tennis match"
+        }
+        return sportName
     }
 }
