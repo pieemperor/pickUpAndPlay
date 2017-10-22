@@ -135,11 +135,13 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
         }) //End observe snapshot
     } //End fetchGames
     
+    @IBAction func unwindtoGamesList(unwindSegue: UIStoryboardSegue){}
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToEventDetails" {
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
             x.game = self.selectedGame
-            x.cameFrom = "userHome"
+            x.cameFrom = "gamesList"
         }
     }
 }

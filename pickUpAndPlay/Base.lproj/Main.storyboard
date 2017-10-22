@@ -1510,6 +1510,7 @@ Directions</string>
                         <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToSchedule" unwindAction="unwindToScheduleWithUnwindSegue:" id="KeC-6Y-Dev"/>
                         <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToUserPage" unwindAction="unwindtoUserPageWithUnwindSegue:" id="nV4-UJ-63X"/>
                         <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToUserHome" unwindAction="unwindtoProfileWithUnwindSegue:" id="Vkj-JX-nUJ"/>
+                        <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToGamesList" unwindAction="unwindtoGamesListWithUnwindSegue:" id="YfJ-af-bzH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ICh-cR-HH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1848,6 +1849,10 @@ Directions</string>
         <scene sceneID="f0b-R3-CdO">
             <objects>
                 <viewController id="5K8-OH-E6w" customClass="EmbeddedMapViewController" customModule="pickUpAndPlay" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WPT-4n-BJw"/>
+                        <viewControllerLayoutGuide type="bottom" id="6fE-nM-MOk"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6qb-dq-X6L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1876,7 +1881,7 @@ Directions</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
-        <segue reference="nUP-Ca-M8I"/>
+        <segue reference="PIL-Kj-fUK"/>
         <segue reference="lY2-zK-kRL"/>
     </inferredMetricsTieBreakers>
 </document>

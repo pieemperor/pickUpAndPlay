@@ -405,6 +405,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             performSegue(withIdentifier: "unwindToUserHome", sender: nil)
         } else if cameFrom == "userPage" {
             performSegue(withIdentifier: "unwindToUserPage", sender: nil)
+        } else if cameFrom == "gamesList" {
+            performSegue(withIdentifier: "unwindToGamesList", sender: nil)
         }
     }
     
