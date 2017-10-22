@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D1160AD1F72389900430FE7 /* AllGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1160AC1F72389900430FE7 /* AllGamesViewController.swift */; };
 		1D2244A51F5E5FC20046114A /* WebSiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2244A41F5E5FC20046114A /* WebSiteViewController.swift */; };
+		1D4A38A81F9D4731008F21DB /* EmbeddedMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4A38A71F9D4731008F21DB /* EmbeddedMapViewController.swift */; };
 		1D6831CB1F253D3300E7CA72 /* sportControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831CA1F253D3300E7CA72 /* sportControl.swift */; };
 		1D6831CD1F26F76700E7CA72 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */; };
 		1D6831D31F270A9F00E7CA72 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6831D21F270A9F00E7CA72 /* Game.swift */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		1D1160AC1F72389900430FE7 /* AllGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGamesViewController.swift; sourceTree = "<group>"; };
 		1D2244A41F5E5FC20046114A /* WebSiteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSiteViewController.swift; sourceTree = "<group>"; };
+		1D4A38A71F9D4731008F21DB /* EmbeddedMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedMapViewController.swift; sourceTree = "<group>"; };
 		1D6831CA1F253D3300E7CA72 /* sportControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportControl.swift; sourceTree = "<group>"; };
 		1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		1D6831D21F270A9F00E7CA72 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */,
 				1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */,
 				454E54AE1ECB72790011B84F /* MapViewController.swift */,
+				1D4A38A71F9D4731008F21DB /* EmbeddedMapViewController.swift */,
 				45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */,
 				450EC6961ED1103C00CC3259 /* createGameController.swift */,
 				454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */,
@@ -513,6 +516,7 @@
 				1D6831D51F293BB600E7CA72 /* Player.swift in Sources */,
 				1D93E06C1F30F61700E61AA9 /* Location.swift in Sources */,
 				4543A9D51EDDE44600D383AC /* eventDetailsViewController.swift in Sources */,
+				1D4A38A81F9D4731008F21DB /* EmbeddedMapViewController.swift in Sources */,
 				454D9CE81EDFE81C00C9F60F /* UserPageViewController.swift in Sources */,
 				1DCE46321F48118C00EF8855 /* EditProfileViewController.swift in Sources */,
 				1D2244A51F5E5FC20046114A /* WebSiteViewController.swift in Sources */,
