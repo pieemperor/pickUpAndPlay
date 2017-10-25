@@ -385,6 +385,29 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                     let url = URL(string: self.passedLocation.locationImageURL)
                                     let data = try? Data(contentsOf: url!)
                                     self.locationImage.image = UIImage(data : data!)
+                                } else {
+                                    if let subLocations = dict["subLocations"]{
+
+                                        do {
+                                            let jsonData = try JSONSerialization.data(withJSONObject: subLocations, options: .prettyPrinted)
+                                            // here "jsonData" is the dictionary encoded in JSON data
+                                            print("jsonData: ", jsonData, "\n\n\n\n")
+                                            
+                                            if let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : [String : Any]]{
+                                                for(_, value) in decoded {
+                                                    if value["locationName"] as? String == locationName {
+                                                    self.passedLocation = Location(value["availableSports"] as! [String], value["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                                                        
+                                                        let url = URL(string: self.passedLocation.locationImageURL)
+                                                        let data = try? Data(contentsOf: url!)
+                                                        self.locationImage.image = UIImage(data : data!)
+                                                    }
+                                                }
+                                            }
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
+                                    }
                                 }
                             }
                         })
