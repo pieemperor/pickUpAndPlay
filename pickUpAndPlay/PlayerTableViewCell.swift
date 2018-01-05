@@ -21,4 +21,11 @@ class PlayerTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    func setPlayer(_ player:Player){
+        self.profilePic.image = player.profilePicture
+        self.playerNameLabel.text = "\(player.firstName) \(player.lastName)"
+        self.profilePic.clipsToBounds = true
+        self.profilePic.layer.cornerRadius = (self.profilePic.frame.width) / 2
+    }
 }

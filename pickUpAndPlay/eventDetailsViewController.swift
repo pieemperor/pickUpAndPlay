@@ -65,10 +65,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) ->UITableViewCell{
         let player = playerList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableViewCell", for: indexPath) as? PlayerTableViewCell
-        cell?.playerNameLabel.text = player.firstName + " " + player.lastName
-            cell?.profilePic?.image = player.profilePicture
-            cell?.profilePic.clipsToBounds = true
-            cell?.profilePic?.layer.cornerRadius = (cell?.profilePic?.frame.width)! / 2
+        cell?.setPlayer(player)
         
         return cell!
     }

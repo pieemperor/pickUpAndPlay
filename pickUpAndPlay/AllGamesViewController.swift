@@ -44,27 +44,8 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
         
         let game = gameList[indexPath.row]
         
-        //set the cell's labels to their corresponding values for each game in the gameList array
-        cell?.timeLabel.text = game.time
-        cell?.dateLabel.text = game.date
-        cell?.spotsRemainingLabel.text = String(game.spotsRemaining)
-        
-        //Check to see what sport the game is and set the cell's image appropriately
-        if game.sport == "soccer" {
-            cell?.sportImage.image = UIImage(named: "soccerBall")
-        } else if game.sport == "basketball" {
-            cell?.sportImage.image = UIImage(named: "basketball")
-        } else if game.sport == "volleyball" {
-            cell?.sportImage.image = UIImage(named: "volleyball")
-        } else if game.sport == "ultimate" {
-            cell?.sportImage.image = UIImage(named: "ultimate")
-        } else if game.sport == "discGolf" {
-            cell?.sportImage.image = UIImage(named: "discGolf")
-        } else if game.sport == "tennis" {
-            cell?.sportImage.image = UIImage(named: "tennis")
-        } else {
-            print("Cannot set cell's image")
-        }
+        //Sets all of the cell's outlets to the properties stored in game
+        cell?.setGame(game)
         
         return cell!
     }
