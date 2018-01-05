@@ -84,20 +84,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = .clear
-        
-        let myGreen = UIColor(red:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
-        
-        let greenRoundedView: UIView = UIView(frame: CGRect(x:0,y:5,width:tableView.frame.width, height:80))
-        greenRoundedView.layer.backgroundColor = myGreen.cgColor
-        greenRoundedView.layer.masksToBounds = false
-        greenRoundedView.layer.cornerRadius = 10.0
-        greenRoundedView.layer.shadowOpacity = 0.0
-        
-        
-        
-        cell.contentView.addSubview(greenRoundedView)
-        cell.contentView.sendSubview(toBack: greenRoundedView)
+        if let gtvCell = cell as? PlayerTableViewCell {
+            gtvCell.setSizeAndColor(tableView.frame.width)
+        }
     }
     
     //Make sure the user is not in the game already - Then,  check to see if there are any spots open in that game. If not, tell the user that the game is full. If there are spots left, get the user's profile picture and info and create a player object and add it to the playerList and add that player's id to the playerList in the database

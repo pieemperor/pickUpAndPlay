@@ -56,7 +56,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
             setDefaultBorderWidths()
             if pw == cpw {
                 setDefaultBorderWidths()
-                if pw.characters.count > 5  {
+                if pw.count > 5  {
                     setDefaultBorderWidths()
                     spinner.startAnimating()
                     Auth.auth().createUser(withEmail: e, password: pw, completion: { (user, error) in

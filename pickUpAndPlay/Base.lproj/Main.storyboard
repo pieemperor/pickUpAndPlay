@@ -489,7 +489,7 @@
                                 <rect key="frame" x="25" y="280" width="325" height="323"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" textLabel="S3F-R0-C0D" style="IBUITableViewCellStyleDefault" id="Yr3-js-Q1T">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" textLabel="S3F-R0-C0D" style="IBUITableViewCellStyleDefault" id="Yr3-js-Q1T" customClass="GreenTableViewCell" customModule="pickUpAndPlay" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="325" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yr3-js-Q1T" id="0F6-Yq-OLS">
@@ -1882,6 +1882,6 @@ Directions</string>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
         <segue reference="PIL-Kj-fUK"/>
-        <segue reference="lY2-zK-kRL"/>
+        <segue reference="3aM-Aw-Hnq"/>
     </inferredMetricsTieBreakers>
 </document>

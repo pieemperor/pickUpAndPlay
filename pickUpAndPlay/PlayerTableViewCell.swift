@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayerTableViewCell: UITableViewCell {
+class PlayerTableViewCell: GreenTableViewCell{
     
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var playerNameLabel: UILabel!
@@ -21,7 +21,7 @@ class PlayerTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func setPlayer(_ player:Player){
         self.profilePic.image = player.profilePicture
         self.playerNameLabel.text = "\(player.firstName) \(player.lastName)"

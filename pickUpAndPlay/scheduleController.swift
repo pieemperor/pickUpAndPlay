@@ -77,19 +77,9 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = .clear
-        
-        let myGreen = UIColor(red:46.0/255.0, green:204.0/255.0, blue:114.0/255.0, alpha:1.0)
-
-        let greenRoundedView: UIView = UIView(frame: CGRect(x:0,y:5,width:tableView.frame.width, height:80))
-        greenRoundedView.layer.backgroundColor = myGreen.cgColor
-        greenRoundedView.layer.masksToBounds = false
-        greenRoundedView.layer.cornerRadius = 10.0
-        greenRoundedView.layer.shadowOpacity = 0.0
-        
-        
-        cell.contentView.addSubview(greenRoundedView)
-        cell.contentView.sendSubview(toBack: greenRoundedView)
+        if let gtvCell = cell as? GameTableViewCell {
+            gtvCell.setSizeAndColor(tableView.frame.width)
+        }
     }
     
     private func setupButtons() {

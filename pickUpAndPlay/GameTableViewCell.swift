@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameTableViewCell: UITableViewCell {
+class GameTableViewCell: GreenTableViewCell {
     
     //MARK: Properties
     @IBOutlet weak var timeLabel: UILabel!
