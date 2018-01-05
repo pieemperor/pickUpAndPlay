@@ -72,7 +72,7 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.reloadData()
         let ref = Database.database().reference()
         self.spinner.startAnimating()
-        ref.child("events").observe(.childAdded, with: {(snapshot) in
+        ref.child("events").queryOrdered(byChild: "time").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                     
                         let gameId = snapshot.key
@@ -100,8 +100,6 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
                         self.gameList.append(game)
                         self.tableView.reloadData()
                     }
-                    //Sort games by date
-                    self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
             self.spinner.stopAnimating()
         }) //End observe snapshot

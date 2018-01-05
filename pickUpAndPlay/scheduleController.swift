@@ -93,7 +93,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.reloadData()
         let ref = Database.database().reference()
         tableSpinner.startAnimating()
-        ref.child("events").observe(.childAdded, with: {(snapshot) in
+        ref.child("events").queryOrdered(byChild: "time").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 let location = dictionary["location"] as! String
                 if location == self.passedLocation.name {
@@ -125,8 +125,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 } //End if location
                 }
-                //Sort games by date
-                self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot

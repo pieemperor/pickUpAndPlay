@@ -115,7 +115,8 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         gameList = [Game]()
         self.tableView.reloadData()
         tableSpinner.startAnimating()
-        ref.child("events").observe(.childAdded, with: {(snapshot) in
+        ref.child("events").queryOrdered(byChild: "time").observe(.childAdded, with: {(snapshot) in
+
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 if let playerArray = dictionary["playerList"] as? [String] {
                     if playerArray.contains(self.userId) {
@@ -146,8 +147,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     } //End if location
                 }//End if let playerArray = dictionary
-                //Sort games by date
-                self.gameList.sort(by: {$0.dateTime.compare($1.dateTime) == .orderedAscending })
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot
