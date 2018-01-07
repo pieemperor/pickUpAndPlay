@@ -77,7 +77,7 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     
     func setupLocations(){
         for subLocation in passedLocation.subLocations! {
-            let location = Location(subLocation.availableSports, subLocation.name, passedLocation.long, passedLocation.lat, subLocation.locationImageURL)
+            let location = Location(passedLocation.locationId, subLocation.availableSports, subLocation.name, passedLocation.long, passedLocation.lat, subLocation.locationImageURL)
             possibleLocations.append(location)
         }
     }

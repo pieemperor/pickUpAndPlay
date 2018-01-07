@@ -70,7 +70,7 @@ class EmbeddedMapViewController: UIViewController, GMSMapViewDelegate{
                     }
                     
                     subLocationsObjectArray = subLocationsObjectArray.sorted{ $0.name < $1.name }
-                    let location = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String, subLocationsObjectArray)
+                    let location = Location(snapshot.key, dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String, subLocationsObjectArray)
                     self.locations.append(location)
                     
                     let state_marker = GMSMarker()
@@ -100,7 +100,7 @@ class EmbeddedMapViewController: UIViewController, GMSMapViewDelegate{
                         state_marker.icon = UIImage(named: "multiSportMarker")
                     }
                 } else {
-                    let location = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
+                    let location = Location(snapshot.key, dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
                     self.locations.append(location)
                     
                     let state_marker = GMSMarker()

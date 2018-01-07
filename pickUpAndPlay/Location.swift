@@ -8,6 +8,7 @@
 import GoogleMaps
 
 class Location {
+    var locationId: String
     var availableSports: [String]
     var name: String
     var long: CLLocationDegrees
@@ -16,6 +17,7 @@ class Location {
     var subLocations: [SubLocation]?
 
     init(){
+        self.locationId = ""
         self.availableSports = []
         self.name = ""
         self.long = 0
@@ -24,7 +26,8 @@ class Location {
         self.subLocations = [SubLocation()]
     }
     
-    init(_ availableSports: [String], _ name: String, _ long: CLLocationDegrees, _ lat: CLLocationDegrees, _ locationImageURL: String) {
+    init(_ locationId: String, _ availableSports: [String], _ name: String, _ long: CLLocationDegrees, _ lat: CLLocationDegrees, _ locationImageURL: String) {
+        self.locationId = locationId
         self.availableSports = availableSports
         self.name = name
         self.long = long
@@ -32,7 +35,8 @@ class Location {
         self.locationImageURL = locationImageURL
     }
     
-    init(_ availableSports: [String], _ name: String, _ long: CLLocationDegrees, _ lat: CLLocationDegrees, _ locationImageURL: String, _ subLocations: [SubLocation]) {
+    init(_ locationId: String, _ availableSports: [String], _ name: String, _ long: CLLocationDegrees, _ lat: CLLocationDegrees, _ locationImageURL: String, _ subLocations: [SubLocation]) {
+        self.locationId = locationId
         self.availableSports = availableSports
         self.name = name
         self.long = long

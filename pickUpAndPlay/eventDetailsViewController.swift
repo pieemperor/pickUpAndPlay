@@ -117,7 +117,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                 let data = try? Data(contentsOf: self.profilePicURL!)
                                                 userProfilePic = UIImage(data : data!)!
                                                     
-                                                    let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic)
+                                            let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic, (self.profilePicURL?.absoluteString)!)
                                                     self.playerList.append(player)
                                                     
                                                     self.idList.append(player.playerId)
@@ -314,7 +314,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                             let data = try? Data(contentsOf: url!)
                                             userProfilePic = UIImage(data : data!)!
                                             
-                                                let player = Player(player, firstName as! String, lastName as! String, userProfilePic)
+                                            let player = Player(player, firstName as! String, lastName as! String, userProfilePic, profilePicURL!)
                                                 self.idList.append(player.playerId)
                                                 self.playerList.append(player)
                                                 self.tableView.reloadData()
@@ -367,7 +367,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                         ref.child("locations").observe(.childAdded, with: {(snapshot) in
                             if let dict = snapshot.value as? [String : AnyObject] {
                                 if dict["locationName"] as? String == locationName {
-                                    self.passedLocation = Location(dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
+                                    self.passedLocation = Location(snapshot.key, dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
                                     let url = URL(string: self.passedLocation.locationImageURL)
                                     let data = try? Data(contentsOf: url!)
                                     self.locationImage.image = UIImage(data : data!)
@@ -382,7 +382,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                             if let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : [String : Any]]{
                                                 for(_, value) in decoded {
                                                     if value["locationName"] as? String == locationName {
-                                                    self.passedLocation = Location(value["availableSports"] as! [String], value["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                                                    self.passedLocation = Location(snapshot.key, value["availableSports"] as! [String], value["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, value["image"] as! String)
                                                         
                                                         let url = URL(string: self.passedLocation.locationImageURL)
                                                         let data = try? Data(contentsOf: url!)

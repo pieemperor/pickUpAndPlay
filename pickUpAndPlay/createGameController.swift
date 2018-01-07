@@ -25,6 +25,8 @@ class createGameController: UIViewController{
     private var sportButtons = [UIButton]()
     var isDatePickerShowing = false
     var numberOfSubs = 0
+    var authenticatedUser = Player()
+
     
     //variables to send to Firebase
     var selectedSport = "" {
@@ -54,6 +56,7 @@ class createGameController: UIViewController{
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        getUserInfo()
         fetchLocationImage()
         setupButtons()
         setupSportButtons()
@@ -138,7 +141,15 @@ class createGameController: UIViewController{
                                 "gameType": gameType,
                                 "playerLimit": playerLimit,
                                 "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
-                    let childUpdates = ["/events/\(key)": post]
+                    let userInfo = [
+                                    "firstName" : authenticatedUser.firstName,
+                                    "lastName" : authenticatedUser.lastName,
+                                    "photo": authenticatedUser.profilePictureUrl
+                    ]
+                    let childUpdates = ["/events/\(key)": post,
+                                        "/locationEvents/\(location.locationId)/\(key)": post,
+                                        "/userEvents/\(Auth.auth().currentUser!.uid)/\(key)": post,
+                                        "/eventUsers/\(key)/\(authenticatedUser.playerId)": userInfo] as [String : Any]
                     ref.updateChildValues(childUpdates)
                     
                     //************************  Create Notifications **************************//
@@ -440,4 +451,38 @@ class createGameController: UIViewController{
         }
         return sportName
     }
+    
+    //Temporary fix - need to find more efficient way to track current user
+    func getUserInfo () {
+        let ref = Database.database().reference()
+        
+        
+        //Get the user's first and last name from Firebase
+        if let userID = Auth.auth().currentUser?.uid {
+            ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                let firstName = value?["firstName"] as? String ?? "Didn't work"
+                let lastName = value?["lastName"] as? String ?? "Didn't work"
+                
+                let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
+                
+                
+                if profilePicURL != "", profilePicURL != nil {
+                    let url = URL(string: profilePicURL!)
+                    let data = try? Data(contentsOf: url!)
+                    self.authenticatedUser = Player(snapshot.key, firstName, lastName, UIImage(data: data!)!, profilePicURL!)
+                } else {
+                    let profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
+                    let url = URL(string: profilePicURL)
+                    let data = try? Data(contentsOf: url!)
+                    self.authenticatedUser = Player(snapshot.key, firstName, lastName, UIImage(data:data!)!, "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0")
+                    
+                    print("No profile pic URL")
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        }
+    }//End getUserInfo
 }
