@@ -17,6 +17,7 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
     var gameList: [Game] = []
     var selectedGame = Game()
     var locationToPass = ""
+    let ref = Database.database().reference()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         fetchGames()
+        
     }
     
     //MARK: Table View Delegate methods
@@ -69,10 +71,9 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
     
     func fetchGames() {
         gameList = [Game]()
-        self.tableView.reloadData()
-        let ref = Database.database().reference()
-        self.spinner.startAnimating()
-        ref.child("events").queryOrdered(byChild: "time").observe(.childAdded, with: {(snapshot) in
+        tableView.reloadData()
+        spinner.startAnimating()
+        ref.child("events").queryOrdered(byChild: "time").queryStarting(atValue: Date().timeIntervalSince1970).observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                     
                         let gameId = snapshot.key
@@ -85,7 +86,6 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
                         df.dateFormat = "h:mm a"
                         let timeString = df.string(from: dateAsDate)
                         
-                        if dateAsDate > Date() {
                         //Set values of game variable from database information
                         let sport = dictionary["sport"]
                         let time = timeString
@@ -99,7 +99,6 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
                         let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
                         self.gameList.append(game)
                         self.tableView.reloadData()
-                    }
             } //End if let dictionary
             self.spinner.stopAnimating()
         }) //End observe snapshot

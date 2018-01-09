@@ -11,11 +11,6 @@ import Firebase
 
 class UserPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var userId = ""
-    var gameList: [Game] = []
-    var selectedGame = Game()
-    var ref: DatabaseReference! = Database.database().reference()
-    
     @IBOutlet weak var gameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
@@ -23,6 +18,11 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
     @IBOutlet weak var userSpinner: UIActivityIndicatorView!
+    
+    var ref = Database.database().reference()
+    var gameList: [Game] = []
+    var selectedGame = Game()
+    var userId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection: Int)-> Int{
-        // an int that represents the number of games being held at this location
         return gameList.count
     }
     
@@ -73,12 +72,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         if let gtvCell = cell as? GameTableViewCell {
             gtvCell.setSizeAndColor(tableView.frame.width)
         }
-    }
-    
-    
-    func setupButtons() {
-        profilePic.layer.cornerRadius = profilePic.frame.height/2
-        backgroundImage.clipsToBounds = true
     }
     
     func getUserInfo () {
@@ -113,7 +106,7 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     func fetchGames() {
         gameList = [Game]()
-        self.tableView.reloadData()
+        tableView.reloadData()
         tableSpinner.startAnimating()
         let currentDate = Date().timeIntervalSince1970
         ref.child("userEvents/\(userId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
@@ -145,6 +138,11 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot
     } //End fetchGames
+    
+    private func setupButtons() {
+        profilePic.layer.cornerRadius = profilePic.frame.height/2
+        backgroundImage.clipsToBounds = true
+    }
     
     @IBAction func unwindtoUserPage(unwindSegue: UIStoryboardSegue){}
     

@@ -28,7 +28,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         return .lightContent
     }
     
-    var ref: DatabaseReference! = Database.database().reference()
+    let ref = Database.database().reference()
     var profilePicURL : String? = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
     let uuid = UUID()
     var didSelectImage = false

@@ -26,6 +26,7 @@ class createGameController: UIViewController{
     var isDatePickerShowing = false
     var numberOfSubs = 0
     var authenticatedUser = Player()
+    let ref = Database.database().reference()
 
     
     //variables to send to Firebase
@@ -131,7 +132,6 @@ class createGameController: UIViewController{
             if time != 0.0 {
                 if !timeArray.contains(time) {
                     //create a new event and add info as children
-                    let ref = Database.database().reference()
                     let key = ref.child("events").childByAutoId().key
                     let post = ["createdBy": Auth.auth().currentUser?.uid as Any,
                                 "location": location.name,
@@ -454,9 +454,6 @@ class createGameController: UIViewController{
     
     //Temporary fix - need to find more efficient way to track current user
     func getUserInfo () {
-        let ref = Database.database().reference()
-        
-        
         //Get the user's first and last name from Firebase
         if let userID = Auth.auth().currentUser?.uid {
             ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in

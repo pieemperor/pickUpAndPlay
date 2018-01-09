@@ -29,7 +29,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     //selectedGame gets passed to the eventDetails controller
     var selectedGame = Game()
     var eventsHandle = DatabaseHandle()
-    var ref = Database.database().reference()
+    let ref = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,13 +94,13 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
         locationName.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }//End setupButtons
     
+    //MARK: TODO: Make table only display games once on creation and make spinner stop spinning when there's no data
     func fetchGames() {
         gameList = [Game]()
-        self.tableView.reloadData()
-        self.ref = Database.database().reference()
+        tableView.reloadData()
         tableSpinner.startAnimating()
         let currentDate = Date().timeIntervalSince1970
-        self.eventsHandle = ref.child("locationEvents/\(passedLocation.locationId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
+        eventsHandle = ref.child("locationEvents/\(passedLocation.locationId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                     let gameId = snapshot.key
                     //Format the date stored in the database
@@ -134,6 +134,8 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     func fetchLocationImage() {
         let imageURL = passedLocation.locationImageURL
             let url = URL(string: imageURL)
+        
+        //MARK: NEED TO DO ASYNC - Attempt to download location image
             let data = try? Data(contentsOf: url!)
             self.locationImage.image = UIImage(data : data!)
 

@@ -14,7 +14,7 @@ class EmbeddedMapViewController: UIViewController, GMSMapViewDelegate{
 
     //selected location that will be sent in prepare for segue
     var locationToPass = Location()
-    var ref = Database.database().reference()
+    let ref = Database.database().reference()
     var locations = [Location]()
     var mapView = GMSMapView()
     
@@ -83,8 +83,6 @@ class EmbeddedMapViewController: UIViewController, GMSMapViewDelegate{
     func setMarkerInfo(location: Location){
         let state_marker = GMSMarker()
         state_marker.position = CLLocationCoordinate2D(latitude: location.lat, longitude: location.long)
-        state_marker.title = location.name
-        state_marker.snippet = location.name
         state_marker.map = self.mapView
         state_marker.userData = location
         

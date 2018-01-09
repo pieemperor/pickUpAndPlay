@@ -33,9 +33,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         super.viewDidLoad()
         //Check to see if user is logged in - If they are, segue to the MapViewController
         Auth.auth().addStateDidChangeListener() { auth, user in
-            // 2
             if user != nil {
-                // 3
                 self.performSegue(withIdentifier: "goToMap", sender: nil)
             }
         }

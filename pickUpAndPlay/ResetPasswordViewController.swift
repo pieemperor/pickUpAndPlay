@@ -31,7 +31,13 @@ class ResetPasswordViewController: UIViewController {
     @IBAction func resetPassword(_ sender: UIButton) {
         if emailTextField.text != "" {
             Auth.auth().sendPasswordReset(withEmail: emailTextField.text!) { (error) in
-                // ...
+                let alertController = UIAlertController(title: "Email Sent", message: "A password reset email has been sent to your account", preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "OK",
+                                             style: .default,
+                                             handler: nil)
+                
+                alertController.addAction(actionOk)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }

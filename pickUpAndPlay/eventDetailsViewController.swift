@@ -95,7 +95,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     //If the user is already in the game, remove the user from the playerList in Firebase
     @IBAction func joinGame(_ sender: Any) {
         if !inGame {
-            self.ref.child("eventUsers").child(game.gameId).child(Auth.auth().currentUser!.uid ).observe(.childAdded, with: {(snapshot) in
+            ref.child("eventUsers").child(game.gameId).child(Auth.auth().currentUser!.uid ).observe(.childAdded, with: {(snapshot) in
                 if let user = snapshot.value as? [String : Any]{
                     let profilePicURL = user["photo"] as? String
                     var userProfilePic = UIImage()
@@ -132,7 +132,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                     ])
                         self.tableView.reloadData()
                         self.inGame = true
-                        self.spotsLeftLabel.text = String(self.game.playerLimit - self.idList.count - 1) +  " Spots Remaining"
+                        self.spotsLeftLabel.text = String(self.game.spotsRemaining) +  " Spots Remaining"
                         
                         self.createNotification(gameKey: self.game.gameId)
                         
@@ -148,9 +148,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 }
             })
         } /* End if !in game */ else {
-            self.ref.child("events").observe(.childAdded, with: {(snapshot) in
+            ref.child("events").queryOrderedByKey().queryEqual(toValue: self.game.gameId).observe(.childAdded, with: {(snapshot) in
                 if let eventsDictionary = snapshot.value as? [String : AnyObject] {
-                    if snapshot.key == self.game.gameId {
                         if let playerListCount = eventsDictionary["playerList"]?.count! {
                             if playerListCount == 1 {
                                 let alertController = UIAlertController(title: "Delete Game?", message: "You are the only player left in this game. If you leave this game, it will be deleted", preferredStyle: .alert)
@@ -201,7 +200,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                 self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
                             }//End else
                         }//End if let playerListCount
-                    }//End if snapshot.key ==
                 }//end if let eventsDictionary
             })//End .child("events").observe
         }//End else
@@ -262,8 +260,8 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fetchPlayers() {
-        self.tableSpinner.startAnimating()
-        self.ref.child("eventUsers/\(self.game.gameId)").observe(.childAdded, with: {(snapshot) in
+        tableSpinner.startAnimating()
+        ref.child("eventUsers/\(self.game.gameId)").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
                let firstName = dictionary["firstName"]
                let lastName = dictionary["lastName"]
@@ -316,7 +314,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchLocationImage() {
         if passedLocation.locationImageURL == "" {
-            self.ref.child("events").observe(.childAdded, with: {(snapshot) in
+            ref.child("events").observe(.childAdded, with: {(snapshot) in
                 if let dictionary = snapshot.value as? [String : AnyObject] {
                     if snapshot.key == self.game.gameId {
                         let locationName = dictionary["location"] as? String

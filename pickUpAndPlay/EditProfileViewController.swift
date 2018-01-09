@@ -26,6 +26,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     var uuid = UUID()
     var picWasSelected = false
     var picURL = ""
+    let ref = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func updateProfile(_ sender: UIButton) {
         if firstNameTextField.text != "", lastNameTextField.text != "", emailTextField.text != "" {
-            let ref = Database.database().reference()
 
             spinner.startAnimating()
             if picWasSelected {
@@ -87,7 +87,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                         ]
                         
                         let profileUpdates = ["users/\(Auth.auth().currentUser!.uid)": post]
-                        ref.updateChildValues(profileUpdates)
+                        self.ref.updateChildValues(profileUpdates)
                     }
                     self.spinner.stopAnimating()
                     let alertController = UIAlertController(title: "Account Updated", message: "Your account has been successfully updated", preferredStyle: .alert)
@@ -99,7 +99,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                     self.goToProfile()
                 }
             } else {
-                ref.child("users").observe(.childAdded, with: {(snapshot) in
+                self.ref.child("users").observe(.childAdded, with: {(snapshot) in
                     if snapshot.key == Auth.auth().currentUser!.uid {
                         if let dictionary = snapshot.value as? [String : AnyObject] {
                             self.picURL = dictionary["photo"] as! String
@@ -111,7 +111,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                                 ]
                                 
                                 let profileUpdates = ["users/\(Auth.auth().currentUser!.uid)": post]
-                                ref.updateChildValues(profileUpdates)
+                                self.ref.updateChildValues(profileUpdates)
                                 self.spinner.stopAnimating()
                                 self.goToProfile()
                             }
@@ -215,7 +215,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     }
     
     func loadUserData() {
-        let ref = Database.database().reference()
         spinner.startAnimating()
         ref.child("users").observe(.childAdded, with: {(snapshot) in
             if let usersDictionary = snapshot.value as? [String: AnyObject] {

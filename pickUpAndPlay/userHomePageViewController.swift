@@ -19,10 +19,9 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
     
-    var ref: DatabaseReference! = Database.database().reference()
+    var ref = Database.database().reference()
     var gameList: [Game] = []
     var selectedGame = Game()
-    var locationToPass = Location()
     var authenticatedUser = Player()
     
     
@@ -36,11 +35,6 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     override func viewWillAppear(_ animated: Bool) {
         getUserInfo()
         fetchGames()
-    }
-    
-    func setupButtons() {
-        profilePic.layer.cornerRadius = profilePic.frame.height/2
-        backgroundImage.clipsToBounds = true
     }
     
     //MARK: Table View Delegate methods
@@ -115,9 +109,8 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchGames() {
         gameList = [Game]()
-        self.tableView.reloadData()
-        let ref = Database.database().reference()
-        self.tableSpinner.startAnimating()
+        tableView.reloadData()
+        tableSpinner.startAnimating()
         let currentDate = Date().timeIntervalSince1970
         ref.child("userEvents/\((Auth.auth().currentUser?.uid)!)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
 
@@ -148,6 +141,10 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         }) //End observe snapshot
     } //End fetchGames
     
+    private func setupButtons() {
+        profilePic.layer.cornerRadius = profilePic.frame.height/2
+        backgroundImage.clipsToBounds = true
+    }
     
     @IBAction func unwindtoProfile(unwindSegue: UIStoryboardSegue){}
     
