@@ -96,7 +96,7 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
                         self.locationToPass = dictionary["location"] as! String
                 
                         
-                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String)
+                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
                         self.gameList.append(game)
                         self.tableView.reloadData()
                     }

@@ -115,12 +115,11 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         gameList = [Game]()
         self.tableView.reloadData()
         tableSpinner.startAnimating()
-        ref.child("events").queryOrdered(byChild: "time").observe(.childAdded, with: {(snapshot) in
+        let currentDate = Date().timeIntervalSince1970
+        ref.child("userEvents/\(userId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
 
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                if let playerArray = dictionary["playerList"] as? [String] {
-                    if playerArray.contains(self.userId) {
-                        
+                
                         let gameId = snapshot.key
                         
                         //Format the date stored in the database
@@ -130,23 +129,18 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                         let justDate = df.string(from: dateAsDate)
                         df.dateFormat = "h:mm a"
                         let timeString = df.string(from: dateAsDate)
-                        
-                        
-                        if dateAsDate > Date() {
-                            //Set values of game variable from database information
-                            let sport = dictionary["sport"]
-                            let time = timeString
-                            let date = justDate
-                            let playersInGame = dictionary["playerList"]?.count
-                            let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
-                            let gameType = dictionary["gameType"]
-                            
-                            let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String)
-                            self.gameList.append(game)
-                            self.tableView.reloadData()
-                        }
-                    } //End if location
-                }//End if let playerArray = dictionary
+                
+                        //Set values of game variable from database information
+                        let sport = dictionary["sport"]
+                        let time = timeString
+                        let date = justDate
+                        let playersInGame = dictionary["playerList"]?.count
+                        let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
+                        let gameType = dictionary["gameType"]
+                
+                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
+                        self.gameList.append(game)
+                        self.tableView.reloadData()
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot

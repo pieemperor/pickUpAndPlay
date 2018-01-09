@@ -16,8 +16,10 @@ class Game {
     var dateTime: Date
     var spotsRemaining: Int
     var gameType: String
+    var playerLimit: Int
+    var locationId: String
     
-    init(_ gameId: String, _ sport: String, _ time: String, _ date: String, _ dateTime: Date, _ spotsRemaining: Int, _ gameType: String) {
+    init(_ gameId: String, _ sport: String, _ time: String, _ date: String, _ dateTime: Date, _ spotsRemaining: Int, _ gameType: String, _ playerLimit: Int, _ locationId: String) {
         self.gameId = gameId
         self.sport = sport
         self.time = time
@@ -25,6 +27,8 @@ class Game {
         self.dateTime = dateTime
         self.spotsRemaining = spotsRemaining
         self.gameType = gameType
+        self.playerLimit = playerLimit
+        self.locationId = locationId
     }
     
     init() {
@@ -35,5 +39,7 @@ class Game {
         self.dateTime = Date()
         self.spotsRemaining = 0
         self.gameType = ""
+        self.playerLimit = 0
+        self.locationId = ""
     }
 }

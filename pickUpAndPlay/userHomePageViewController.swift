@@ -23,6 +23,8 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     var gameList: [Game] = []
     var selectedGame = Game()
     var locationToPass = Location()
+    var authenticatedUser = Player()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +34,8 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchGames()
         getUserInfo()
+        fetchGames()
     }
     
     func setupButtons() {
@@ -95,6 +97,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                 if profilePicURL != "", profilePicURL != nil {
                     let url = URL(string: profilePicURL!)
                     let data = try? Data(contentsOf: url!)
+                    self.authenticatedUser = Player(snapshot.key, firstName, lastName, UIImage(data: data!)!, profilePicURL!)
                     self.profilePic.image = UIImage(data : data!)
                     
                     self.spinner.stopAnimating()
@@ -115,12 +118,10 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.reloadData()
         let ref = Database.database().reference()
         self.tableSpinner.startAnimating()
-        ref.child("events").queryOrdered(byChild: "time").observe(.childAdded, with: {(snapshot) in
+        let currentDate = Date().timeIntervalSince1970
+        ref.child("userEvents/\((Auth.auth().currentUser?.uid)!)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
 
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                if let playerArray = dictionary["playerList"] {
-                if playerArray.contains(Auth.auth().currentUser?.uid as Any) {
-                    
                     let gameId = snapshot.key
                     //Format the date stored in the database
                     let df = DateFormatter()
@@ -131,21 +132,17 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                     df.dateFormat = "h:mm a"
                     let timeString = df.string(from: dateAsDate)
                     
-                    if dateAsDate > Date() {
-                        //Set values of game variable from database information
-                        let sport = dictionary["sport"]
-                        let time = timeString
-                        let date = justDate
-                        let playersInGame = dictionary["playerList"]?.count
-                        let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
-                        let gameType = dictionary["gameType"]
-                        
-                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String)
-                        self.gameList.append(game)
-                        self.tableView.reloadData()
-                    }
-                } //End if location
-            }
+                    //Set values of game variable from database information
+                    let sport = dictionary["sport"]
+                    let time = timeString
+                    let date = justDate
+                    let playersInGame = dictionary["playerList"]?.count
+                    let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
+                    let gameType = dictionary["gameType"]
+                    
+                    let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
+                    self.gameList.append(game)
+                    self.tableView.reloadData()
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot

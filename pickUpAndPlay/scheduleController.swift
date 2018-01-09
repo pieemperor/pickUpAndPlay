@@ -21,13 +21,15 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var upcomingGamesLabel: UILabel!
     @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
    
-    //name of location sent from mapViewController
+    //location sent from mapViewController
     var passedLocation = Location()
     var gameList = [Game]()
     //timeArray gets sent to the createGameController to make sure the user doesn't create a game at the same time at the same place
     var timeArray = [Double]()
     //selectedGame gets passed to the eventDetails controller
     var selectedGame = Game()
+    var eventsHandle = DatabaseHandle()
+    var ref = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,10 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         fetchGames()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        ref.removeObserver(withHandle: eventsHandle)
     }
     
     //MARK: Table View Delegate methods
@@ -91,13 +97,11 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     func fetchGames() {
         gameList = [Game]()
         self.tableView.reloadData()
-        let ref = Database.database().reference()
+        self.ref = Database.database().reference()
         tableSpinner.startAnimating()
-        ref.child("events").queryOrdered(byChild: "time").observe(.childAdded, with: {(snapshot) in
+        let currentDate = Date().timeIntervalSince1970
+        self.eventsHandle = ref.child("locationEvents/\(passedLocation.locationId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                let location = dictionary["location"] as! String
-                if location == self.passedLocation.name {
-                    
                     let gameId = snapshot.key
                     //Format the date stored in the database
                     let df = DateFormatter()
@@ -110,7 +114,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     let timeString = df.string(from: dateAsDate)
                     
                     if let numberOfPlayers = dictionary["playerList"]?.count {
-                        if dateAsDate > Date() {
                             //Set values of game variable from database information
                             let sport = dictionary["sport"]
                             let time = timeString
@@ -118,12 +121,10 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                             let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers
                             let gameType = dictionary["gameType"]
                             
-                            let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String)
+                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
                             self.gameList.append(game)
                             //self.timeArray.append(dictionary["time"] as! Double)
                             self.tableView.reloadData()
-                    }
-                } //End if location
                 }
             } //End if let dictionary
             self.tableSpinner.stopAnimating()

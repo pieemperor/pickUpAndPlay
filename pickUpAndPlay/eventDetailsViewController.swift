@@ -41,6 +41,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     var profilePicURL = URL(string: "")
+    let ref = Database.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         setDetailLabels()
         fetchPlayers()
         updateButtonSelectionStates()
+        self.locationName.text = passedLocation.name
         
         //set table view delegate to self
         self.tableView.delegate = self
@@ -92,92 +94,61 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     //Make sure the user is not in the game already - Then,  check to see if there are any spots open in that game. If not, tell the user that the game is full. If there are spots left, get the user's profile picture and info and create a player object and add it to the playerList and add that player's id to the playerList in the database
     //If the user is already in the game, remove the user from the playerList in Firebase
     @IBAction func joinGame(_ sender: Any) {
-        let ref = Database.database().reference()
         if !inGame {
-            joinSpinner.startAnimating()
-            ref.child("events").observe(.childAdded, with: {(snapshot) in
-                if let eventsDictionary = snapshot.value as? [String : AnyObject] {
-                    if snapshot.key == self.game.gameId {
-                        let gameKey = snapshot.key
-                        if let playerListCount = eventsDictionary["playerList"]?.count! {
-                            let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
-                            if spotsRemaining > 0 {
-                                ref.child("users").observe(.childAdded, with: {(snapshot) in
-                                    if let usersDictionary = snapshot.value as? [String : AnyObject] {
-                                        if snapshot.key == Auth.auth().currentUser!.uid {
-                                            let profilePicURL = usersDictionary["photo"] as? String
-                                            var userProfilePic = UIImage()
-                                            
-                                            if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
-                                                
-                                                self.profilePicURL = URL(string: profilePicURL!)
-                                            } else {
-                                                self.profilePicURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0")
-                                            }//End if profilePicURL != ""
-                                                let data = try? Data(contentsOf: self.profilePicURL!)
-                                                userProfilePic = UIImage(data : data!)!
-                                                    
-                                            let player = Player(Auth.auth().currentUser!.uid, usersDictionary["firstName"] as! String, usersDictionary["lastName"] as! String, userProfilePic, (self.profilePicURL?.absoluteString)!)
-                                                    self.playerList.append(player)
-                                                    
-                                                    self.idList.append(player.playerId)
-                                                    
-                                                    let eventsHandle = ref.child("events").child(self.game.gameId)
-                                                    eventsHandle.updateChildValues(["playerList":self.idList])
-                                                    self.tableView.reloadData()
-                                                    self.inGame = true
-                                                    self.spotsLeftLabel.text = String(spotsRemaining - 1) +  " Spots Remaining"
-                                            
-                                            //**************  Create Notifications **************//
-                                            //Add notification to pop up one hour before the game.
-                                            if #available(iOS 10.0, *) {
-                                                
-                                                let content = UNMutableNotificationContent()
-                                                content.title = "Upcoming Game"
-                                                content.body = "You have \(self.convertSportToPhrase(self.game.sport)) in one hour. Don't miss it!"
-                                                // Configure the trigger for 1 hour before the game
-                                                
-                                                let notificationTime = Date(timeIntervalSince1970: self.game.dateTime.timeIntervalSince1970 - 3600)
-                                                
-                                                let dateInfo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notificationTime)
-                                                print(dateInfo)
-                                                let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
-                                                
-                                                // Create the request object.
-                                                let request = UNNotificationRequest(identifier: "\(gameKey)", content: content, trigger: trigger)
-                                                
-                                                // Schedule the request.
-                                                let center = UNUserNotificationCenter.current()
-                                                center.add(request) { (error : Error?) in
-                                                    if let theError = error {
-                                                        print(theError.localizedDescription)
-                                                    }
-                                                }
-                                            } else {
-                                                // Fallback on earlier versions
-                                            }
-                                            //************* End of create notification ***************//
-                                            
-                                            
-                                            
-                                                    self.joinSpinner.stopAnimating()
-                                        }//End if snapshot.key == Auth.auth().currentUser
-                                    }//If let usersDictionary =
-                                })//End ref.child("users").observe
-                            }/* End if there are spots left */ else {
-                                let alertController = UIAlertController(title: "Game Full", message: "This game is full.", preferredStyle: .alert)
-                                let actionOk = UIAlertAction(title: "OK",
-                                                             style: .default,
-                                                             handler: nil) //You can use a block here to handle a press on this button
-                                alertController.addAction(actionOk)
-                                self.present(alertController, animated: true, completion: nil)
-                            }
-                        }
-                    }//End if snapshot key = gameID
-                }//End eventsDictionary
-            })//End ref.child("events").observe
+            self.ref.child("eventUsers").child(game.gameId).child(Auth.auth().currentUser!.uid ).observe(.childAdded, with: {(snapshot) in
+                if let user = snapshot.value as? [String : Any]{
+                    let profilePicURL = user["photo"] as? String
+                    var userProfilePic = UIImage()
+                    
+                    if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                        self.profilePicURL = URL(string: profilePicURL!)
+                        //MARK: NEED TO DO ASYNC - Attempt to load image
+                        let data = try? Data(contentsOf: self.profilePicURL!)
+                        userProfilePic = UIImage(data : data!)!
+                    } else {
+                        self.profilePicURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0")
+                        userProfilePic = UIImage(named: "defaultProfilePic")!
+                    }
+                    
+                    let player = Player(Auth.auth().currentUser!.uid, user["firstName"] as! String, user["lastName"] as! String, userProfilePic,(self.profilePicURL?.absoluteString)!)
+                    
+                    self.playerList.append(player)
+                    self.idList.append(player.playerId)
+                    
+                    if self.idList.count < self.game.playerLimit {
+                        
+                        let eventDict = [
+                            "gameType": self.game.gameType,
+                            "location": self.game.locationId,
+                            "playerLimit": self.game.playerLimit,
+                            "sport": self.game.sport,
+                            "time": self.game.dateTime.timeIntervalSince1970
+                            ] as [String : Any]
+                        
+                        self.ref.updateChildValues(["events/\(self.game.gameId)/playerList":self.idList,
+                                                    "eventUsers/\(self.game.gameId)/\(player.playerId)": user,
+                                                    "userEvents/\(player.playerId)/\(self.game.gameId)": eventDict,
+                                                    "locationEvents/\(self.game.locationId)/\(self.game.gameId)": eventDict
+                                                    ])
+                        self.tableView.reloadData()
+                        self.inGame = true
+                        self.spotsLeftLabel.text = String(self.game.playerLimit - self.idList.count - 1) +  " Spots Remaining"
+                        
+                        self.createNotification(gameKey: self.game.gameId)
+                        
+                        self.joinSpinner.stopAnimating()
+                    } else {
+                        let alertController = UIAlertController(title: "Game Full", message: "This game is full.", preferredStyle: .alert)
+                        let actionOk = UIAlertAction(title: "OK",
+                                                     style: .default,
+                                                     handler: nil) //You can use a block here to handle a press on this button
+                        alertController.addAction(actionOk)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            })
         } /* End if !in game */ else {
-            ref.child("events").observe(.childAdded, with: {(snapshot) in
+            self.ref.child("events").observe(.childAdded, with: {(snapshot) in
                 if let eventsDictionary = snapshot.value as? [String : AnyObject] {
                     if snapshot.key == self.game.gameId {
                         if let playerListCount = eventsDictionary["playerList"]?.count! {
@@ -198,9 +169,11 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                         self.inGame = false
                                                                     }
                                                                     
-                                                                    let eventsHandle = ref.child("events").child(self.game.gameId)
-                                                                    
-                                                                    eventsHandle.removeValue()
+                                                                    self.ref.updateChildValues(["events/\(self.game.gameId)":NSNull(),
+                                                                                                "eventUsers/\(self.game.gameId)/\(Auth.auth().currentUser!.uid)": NSNull(),
+                                                                                                "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull(),
+                                                                                                "locationEvents/\(self.game.locationId)/\(self.game.gameId)": NSNull()
+                                                                        ])
                                                                     
                                                                     if #available(iOS 10.0, *) {
                                                                         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [snapshot.key])
@@ -222,7 +195,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                     self.inGame = false
                                 }
                                 
-                                let eventsHandle = ref.child("events").child(self.game.gameId)
+                                let eventsHandle = self.ref.child("events").child(self.game.gameId)
                                 eventsHandle.updateChildValues(["playerList":self.idList])
                                 let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
                                 self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
@@ -290,45 +263,30 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchPlayers() {
         self.tableSpinner.startAnimating()
-        let ref = Database.database().reference()
-        ref.child("events").observe(.childAdded, with: {(snapshot) in
+        self.ref.child("eventUsers/\(self.game.gameId)").observe(.childAdded, with: {(snapshot) in
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                if snapshot.key == self.game.gameId {
-                self.locationName.text = dictionary["location"] as? String
-                    if let playerIdArray = dictionary["playerList"] as? [String] {
-                        if playerIdArray.contains(Auth.auth().currentUser!.uid) {
-                            self.inGame = true
-                        }
-                        for player in playerIdArray {
-                            ref.child("users").observe(.childAdded, with: {(snapshot) in
-                                if let userDictionary = snapshot.value as? [String : AnyObject] {
-                                    if player == snapshot.key {
-                                        let firstName = userDictionary["firstName"]
-                                        let lastName = userDictionary["lastName"]
-                                        var profilePicURL = userDictionary["photo"] as? String
-                                        var userProfilePic = UIImage()
-                                        
-                                        if profilePicURL != "", profilePicURL != nil , profilePicURL != "none", profilePicURL != " "{
-                                            
-                                            let url = URL(string: profilePicURL!)
-                                            let data = try? Data(contentsOf: url!)
-                                            userProfilePic = UIImage(data : data!)!
-                                            
-                                            let player = Player(player, firstName as! String, lastName as! String, userProfilePic, profilePicURL!)
-                                                self.idList.append(player.playerId)
-                                                self.playerList.append(player)
-                                                self.tableView.reloadData()
-                                                self.tableSpinner.stopAnimating()
-
-                                        }/* End if profilePicURL != "" */ else {
-                                            profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
-                                        }
-                                    }//End if player == snapshot.key
-                                }//End if let userDictionary
-                            })//End .child("users").observe
-                        }//End for player in playerIdArray
-                    }//End if gameId = snapshot
-                }//End if let playerIdArray
+               let firstName = dictionary["firstName"]
+               let lastName = dictionary["lastName"]
+               var profilePicURL = dictionary["photo"] as? String
+               var userProfilePic = UIImage()
+                
+                if(snapshot.key == Auth.auth().currentUser!.uid){
+                    self.inGame = true
+                }
+               
+               if profilePicURL != "", profilePicURL != nil , profilePicURL != "none", profilePicURL != " "{
+                   let url = URL(string: profilePicURL!)
+                   let data = try? Data(contentsOf: url!)
+                   userProfilePic = UIImage(data : data!)!
+               }/* End if profilePicURL != "" */ else {
+                    profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
+                    userProfilePic = UIImage(named: "defaultProfilePic")!
+               }
+                let player = Player(snapshot.key, firstName as! String, lastName as! String, userProfilePic, profilePicURL!)
+                self.idList.append(player.playerId)
+                self.playerList.append(player)
+                self.tableView.reloadData()
+                self.tableSpinner.stopAnimating()
             }//End if let dictionary
         })//End snapshot in
     }//End fetchPlayers
@@ -358,17 +316,18 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchLocationImage() {
         if passedLocation.locationImageURL == "" {
-            let ref = Database.database().reference()
-            ref.child("events").observe(.childAdded, with: {(snapshot) in
+            self.ref.child("events").observe(.childAdded, with: {(snapshot) in
                 if let dictionary = snapshot.value as? [String : AnyObject] {
                     if snapshot.key == self.game.gameId {
                         let locationName = dictionary["location"] as? String
                         
-                        ref.child("locations").observe(.childAdded, with: {(snapshot) in
+                        self.ref.child("locations").observe(.childAdded, with: {(snapshot) in
                             if let dict = snapshot.value as? [String : AnyObject] {
                                 if dict["locationName"] as? String == locationName {
                                     self.passedLocation = Location(snapshot.key, dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
                                     let url = URL(string: self.passedLocation.locationImageURL)
+                                    
+                                    //MARK: NEED TO DO ASYNC - Attempt to download image
                                     let data = try? Data(contentsOf: url!)
                                     self.locationImage.image = UIImage(data : data!)
                                 } else {
@@ -436,6 +395,36 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
         return sportName
     }
+    
+    func createNotification(gameKey:String){
+        //Add notification to pop up one hour before the game.
+        if #available(iOS 10.0, *) {
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Upcoming Game"
+            content.body = "You have \(self.convertSportToPhrase(self.game.sport)) in one hour. Don't miss it!"
+            // Configure the trigger for 1 hour before the game
+            
+            let notificationTime = Date(timeIntervalSince1970: self.game.dateTime.timeIntervalSince1970 - 3600)
+            
+            let dateInfo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notificationTime)
+            print(dateInfo)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+            
+            // Create the request object.
+            let request = UNNotificationRequest(identifier: "\(gameKey)", content: content, trigger: trigger)
+            
+            // Schedule the request.
+            let center = UNUserNotificationCenter.current()
+            center.add(request) { (error : Error?) in
+                if let theError = error {
+                    print(theError.localizedDescription)
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }//End createNotification
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToUserPage" {
