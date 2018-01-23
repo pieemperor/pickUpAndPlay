@@ -133,8 +133,16 @@ class createGameController: UIViewController{
                 if !timeArray.contains(time) {
                     //create a new event and add info as children
                     let key = ref.child("events").childByAutoId().key
-                    let post = ["createdBy": Auth.auth().currentUser?.uid as Any,
-                                "location": location.name,
+                    let locationInfo = [
+                        location.locationId : [
+                            "availableSports": location.availableSports,
+                            "image": location.locationImageURL,
+                            "latitude": location.lat as Double,
+                            "longitude": location.long as Double,
+                            "locationName": location.name
+                        ]
+                    ]
+                    let post = ["location": locationInfo,
                                 "sport": selectedSport,
                                 "time": time,
                                 "repeatFrequency": repeatFrequency,

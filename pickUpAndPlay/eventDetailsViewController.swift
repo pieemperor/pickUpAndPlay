@@ -287,6 +287,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 self.tableSpinner.stopAnimating()
             }//End if let dictionary
         })//End snapshot in
+        self.tableSpinner.stopAnimating()
     }//End fetchPlayers
     
     private func setDetailLabels() {
@@ -344,6 +345,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                         let url = URL(string: self.passedLocation.locationImageURL)
                                                         let data = try? Data(contentsOf: url!)
                                                         self.locationImage.image = UIImage(data : data!)
+                                                        self.locationName.text = self.passedLocation.name
                                                     }
                                                 }
                                             }
