@@ -160,7 +160,6 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
             x.game = self.selectedGame
             x.passedLocation = self.passedLocation
-            x.cameFrom = "schedule"
         }
     }//End prepare for segue
 } // End class

@@ -26,7 +26,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
     @IBOutlet weak var joinSpinner: UIActivityIndicatorView!
     
-    var cameFrom = ""
     var game = Game()
     var playerList = [Player]()
     var idList = [String]()
@@ -175,7 +174,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                         // Fallback on earlier versions
                                                                     }
                                                                     
-                                                                    self.goBack()
+                                                                    self.dismiss(animated: true, completion: nil)
                                 })
                                 
                                 alertController.addAction(actionCancel)
@@ -295,18 +294,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             let url = URL(string: self.game.location.locationImageURL)
             let data = try? Data(contentsOf: url!)
             self.locationImage.image = UIImage(data : data!)
-    }
-    
-    func goBack(){
-        if cameFrom == "schedule" {
-            performSegue(withIdentifier: "unwindToSchedule", sender: nil)
-        } else if cameFrom == "userHome" {
-            performSegue(withIdentifier: "unwindToUserHome", sender: nil)
-        } else if cameFrom == "userPage" {
-            performSegue(withIdentifier: "unwindToUserPage", sender: nil)
-        } else if cameFrom == "gamesList" {
-            performSegue(withIdentifier: "unwindToGamesList", sender: nil)
-        }
     }
     
     func convertSportToPhrase(_ sport:String) -> String{
