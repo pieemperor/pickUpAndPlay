@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import GoogleMaps
 
 class userHomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -115,27 +116,31 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         ref.child("userEvents/\((Auth.auth().currentUser?.uid)!)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
 
             if let dictionary = snapshot.value as? [String : AnyObject] {
-                    let gameId = snapshot.key
-                    //Format the date stored in the database
-                    let df = DateFormatter()
-                    
-                    let dateAsDate = Date(timeIntervalSince1970: dictionary["time"] as! Double)
-                    df.dateFormat = "EEE, MMM d"
-                    let justDate = df.string(from: dateAsDate)
-                    df.dateFormat = "h:mm a"
-                    let timeString = df.string(from: dateAsDate)
-                    
-                    //Set values of game variable from database information
-                    let sport = dictionary["sport"]
-                    let time = timeString
-                    let date = justDate
-                    let playersInGame = dictionary["playerList"]?.count
-                    let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
-                    let gameType = dictionary["gameType"]
-                    
-                    let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
-                    self.gameList.append(game)
-                    self.tableView.reloadData()
+               let gameId = snapshot.key
+               //Format the date stored in the database
+               let df = DateFormatter()
+               
+               let dateAsDate = Date(timeIntervalSince1970: dictionary["time"] as! Double)
+               df.dateFormat = "EEE, MMM d"
+               let justDate = df.string(from: dateAsDate)
+               df.dateFormat = "h:mm a"
+               let timeString = df.string(from: dateAsDate)
+               
+               //Set values of game variable from database information
+               let sport = dictionary["sport"]
+               let time = timeString
+               let date = justDate
+               let playersInGame = dictionary["playerList"]?.count
+               let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
+                
+               let locationDict = dictionary["location"] as! [String: [String:Any]]
+               
+               for(key, value) in locationDict {
+                   let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                   let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
+                   self.gameList.append(game)
+                   self.tableView.reloadData()
+               }//End for
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot

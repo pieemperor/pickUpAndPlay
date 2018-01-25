@@ -36,8 +36,6 @@ class createGameController: UIViewController{
         }
     }
     var time = Double()
-    var repeatFrequency = "Never"
-    var gameType = "Recreational"
     var playerLimit = 0
     //let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
 
@@ -52,7 +50,6 @@ class createGameController: UIViewController{
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var locationLabel: UILabel!
     //@IBOutlet weak var repeatButton: UIButton!
-    @IBOutlet weak var repeatPicker: UIPickerView!
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
@@ -116,17 +113,6 @@ class createGameController: UIViewController{
         timeButton.setTitle(buttonTitle, for: .normal)
     }
     
-    
-    @IBAction func gameTypeChanged(_ sender: UISegmentedControl) {
-        if skillSelector.selectedSegmentIndex == 0 {
-            gameType = "Recreational"
-        } else if skillSelector.selectedSegmentIndex == 1 {
-            gameType = "Competitive"
-        } else {
-            print("Invalid selector option")
-        }
-    }
-    
     @IBAction func createGameButtonTapped(_ sender: Any) {
         if selectedSport != "" {
             if time != 0.0 {
@@ -145,8 +131,6 @@ class createGameController: UIViewController{
                     let post = ["location": locationInfo,
                                 "sport": selectedSport,
                                 "time": time,
-                                "repeatFrequency": repeatFrequency,
-                                "gameType": gameType,
                                 "playerLimit": playerLimit,
                                 "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
                     let userInfo = [
@@ -226,39 +210,6 @@ class createGameController: UIViewController{
             playerLimit = playerLimit - numberOfSubs
         }
     }
-    
-    /*
-     @IBAction func showRepeatPicker(_ sender: UIButton) {
-     if repeatPicker.isHidden == false {
-        repeatPicker.isHidden = true
-     } else {
-        repeatPicker.isHidden = false
-     }
-     }
-    */
-    
-    /*
-    //MARK: PickerView functions
-    // DataSource
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return repeatOptions.count
-    }
-    
-    // Delegate
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return repeatOptions[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        repeatButton.setTitle(repeatOptions[row], for: .normal)
-        repeatFrequency = repeatOptions[row]
-    }
-     */
-    
     
     //MARK: private functions
     private func setupSportButtons() {

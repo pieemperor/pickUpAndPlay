@@ -28,7 +28,7 @@
 		4543A9D51EDDE44600D383AC /* eventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */; };
 		454D9CE81EDFE81C00C9F60F /* UserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D9CE71EDFE81C00C9F60F /* UserPageViewController.swift */; };
 		454D9CEA1EE08C0A00C9F60F /* userHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */; };
-		454E54AF1ECB72790011B84F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E54AE1ECB72790011B84F /* MapViewController.swift */; };
+		454E54AF1ECB72790011B84F /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E54AE1ECB72790011B84F /* SegmentedViewController.swift */; };
 		45C42D401EC297500051D2E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */; };
 		45F1F3B71ECE5FF8005A1E09 /* scheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */; };
 		45F5A8F51EC27E2600EAAFCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */; };
@@ -79,7 +79,7 @@
 		4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eventDetailsViewController.swift; sourceTree = "<group>"; };
 		454D9CE71EDFE81C00C9F60F /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHomePageViewController.swift; sourceTree = "<group>"; };
-		454E54AE1ECB72790011B84F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		454E54AE1ECB72790011B84F /* SegmentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
 		45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleController.swift; sourceTree = "<group>"; };
 		45F5A8F11EC27E2600EAAFCF /* pickUpAndPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pickUpAndPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,7 +170,7 @@
 				1DCE462F1F4809BE00EF8855 /* ResetPasswordViewController.swift */,
 				45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */,
 				1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */,
-				454E54AE1ECB72790011B84F /* MapViewController.swift */,
+				454E54AE1ECB72790011B84F /* SegmentedViewController.swift */,
 				1D4A38A71F9D4731008F21DB /* EmbeddedMapViewController.swift */,
 				45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */,
 				450EC6961ED1103C00CC3259 /* createGameController.swift */,
@@ -530,7 +530,7 @@
 				1D9548611F3E6686002816E7 /* PlayerTableViewCell.swift in Sources */,
 				1D6EB6251F4D442100626326 /* SelectSpecificLocationViewController.swift in Sources */,
 				45F5A8F51EC27E2600EAAFCF /* AppDelegate.swift in Sources */,
-				454E54AF1ECB72790011B84F /* MapViewController.swift in Sources */,
+				454E54AF1ECB72790011B84F /* SegmentedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

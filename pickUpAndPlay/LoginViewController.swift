@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Check to see if user is logged in - If they are, segue to the MapViewController
+        //Check to see if user is logged in - If they are, segue to the SegmentedViewController
         Auth.auth().addStateDidChangeListener() { auth, user in
             if user != nil {
                 self.performSegue(withIdentifier: "goToMap", sender: nil)

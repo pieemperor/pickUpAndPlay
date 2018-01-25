@@ -207,7 +207,6 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         
         // Set profilePic to display the selected image.
         profilePic.image = image
-        
         picWasSelected = true
         
         // Dismiss the picker.
@@ -216,21 +215,17 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     func loadUserData() {
         spinner.startAnimating()
-        ref.child("users").observe(.childAdded, with: {(snapshot) in
-            if let usersDictionary = snapshot.value as? [String: AnyObject] {
-                if snapshot.key == Auth.auth().currentUser!.uid {
-                    
-                    let profilePicURL = usersDictionary["photo"] as? String
+        ref.child("users/\(Auth.auth().currentUser!.uid)").observe(.childAdded, with: {(snapshot) in
+            if let userDictionary = snapshot.value as? [String: AnyObject] {
+                    let profilePicURL = userDictionary["photo"] as? String
                     if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
                         let url = URL(string: profilePicURL!)
                         let data = try? Data(contentsOf: url!)
                         self.profilePic.image = UIImage(data : data!)
-                        
                    }//End if profilePicURL
                     self.emailTextField.text = Auth.auth().currentUser!.email
-                    self.firstNameTextField.text = usersDictionary["firstName"] as? String
-                    self.lastNameTextField.text = usersDictionary["lastName"] as? String
-                }//End if snapshot.key
+                    self.firstNameTextField.text = userDictionary["firstName"] as? String
+                    self.lastNameTextField.text = userDictionary["lastName"] as? String
                 self.spinner.stopAnimating()
             }//End if let userDictionary
         })//End ref.child("users")

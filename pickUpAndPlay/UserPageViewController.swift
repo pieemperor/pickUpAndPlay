@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMaps
 
 class UserPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -80,14 +81,15 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
         ref.child("users").child(self.userId).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
-            let firstName = value?["firstName"] as? String ?? "Didn't work"
-            let lastName = value?["lastName"] as? String ?? "Didn't work"
+            let firstName = value?["firstName"] as? String ?? " "
+            let lastName = value?["lastName"] as? String ?? " "
             self.nameLabel.text = firstName + " " + lastName
             self.gameLabel.text = "\(firstName)'s Games"
             
             let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
             
             if profilePicURL != "", profilePicURL != nil {
+                //MARK: NEED TO DO ASYNC
                 let url = URL(string: profilePicURL!)
                 let data = try? Data(contentsOf: url!)
                 self.profilePic.image = UIImage(data : data!)
@@ -129,11 +131,15 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
                         let date = justDate
                         let playersInGame = dictionary["playerList"]?.count
                         let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
-                        let gameType = dictionary["gameType"]
                 
-                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
-                        self.gameList.append(game)
-                        self.tableView.reloadData()
+                let locationDict = dictionary["location"] as! [String: [String:Any]]
+                
+                for(key, value) in locationDict {
+                    let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                    let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
+                    self.gameList.append(game)
+                    self.tableView.reloadData()
+                }//End for
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot

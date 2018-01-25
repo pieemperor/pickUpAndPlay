@@ -597,10 +597,10 @@
             </objects>
             <point key="canvasLocation" x="343" y="-706"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Segmented View Controller-->
         <scene sceneID="9D0-Qt-Cvf">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="bTo-Up-8Vw" customClass="MapViewController" customModule="pickUpAndPlay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SegmentedViewController" id="bTo-Up-8Vw" customClass="SegmentedViewController" customModule="pickUpAndPlay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m6w-F9-ebk"/>
                         <viewControllerLayoutGuide type="bottom" id="szb-MZ-2OW"/>
@@ -1356,29 +1356,23 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="Oex-IY-Xhm">
-                                        <rect key="frame" x="100" y="4.5" width="39.5" height="72"/>
+                                        <rect key="frame" x="100" y="7.5" width="46.5" height="65"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eh0-ha-xzJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="39.5" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="46.5" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMl-1h-4ww">
-                                                <rect key="frame" x="0.0" y="17.5" width="39.5" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQJ-LH-COO">
-                                                <rect key="frame" x="0.0" y="35" width="39.5" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <rect key="frame" x="0.0" y="21" width="46.5" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3h-hG-Ggk">
-                                                <rect key="frame" x="0.0" y="52.5" width="39.5" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <rect key="frame" x="0.0" y="42" width="46.5" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1496,7 +1490,6 @@ Directions</string>
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="Eh0-ha-xzJ" id="aj7-1z-INu"/>
-                        <outlet property="gameTypeLabel" destination="mQJ-LH-COO" id="9cu-cN-JYA"/>
                         <outlet property="joinButton" destination="IQ6-wu-lMl" id="BLZ-zW-Cjs"/>
                         <outlet property="joinSpinner" destination="3jJ-oA-MdX" id="uef-tg-LEL"/>
                         <outlet property="locationImage" destination="gKh-Hq-Aaq" id="9C1-nM-fdk"/>
@@ -1881,7 +1874,7 @@ Directions</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TvU-3m-pPR"/>
-        <segue reference="nUP-Ca-M8I"/>
+        <segue reference="PIL-Kj-fUK"/>
         <segue reference="3aM-Aw-Hnq"/>
     </inferredMetricsTieBreakers>
 </document>

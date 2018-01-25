@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FacebookLogin
 import AVFoundation
+import GoogleMaps
 
 class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -21,7 +22,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var upcomingGamesLabel: UILabel!
     @IBOutlet weak var tableSpinner: UIActivityIndicatorView!
    
-    //location sent from mapViewController
+    //location sent from EmbeddedMapViewController
     var passedLocation = Location()
     var gameList = [Game]()
     //timeArray gets sent to the createGameController to make sure the user doesn't create a game at the same time at the same place
@@ -114,18 +115,21 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     let timeString = df.string(from: dateAsDate)
                     
                     if let numberOfPlayers = dictionary["playerList"]?.count {
-                            //Set values of game variable from database information
-                            let sport = dictionary["sport"]
-                            let time = timeString
-                            let date = justDate
-                            let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers
-                            let gameType = dictionary["gameType"]
-                            
-                        let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, gameType as! String, dictionary["playerLimit"] as! Int, dictionary["location"] as! String)
+                        //Set values of game variable from database information
+                        let sport = dictionary["sport"]
+                        let time = timeString
+                        let date = justDate
+                        let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers
+                        
+                        let locationDict = dictionary["location"] as! [String: [String:Any]]
+                        
+                        for(key, value) in locationDict {
+                            let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                            let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
                             self.gameList.append(game)
-                            //self.timeArray.append(dictionary["time"] as! Double)
                             self.tableView.reloadData()
-                }
+                        }//End for
+                }//End if let numberOfPlayers
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot
@@ -146,7 +150,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToCreateGame" {
             
-            // send the name of the location to the createGame view
+            // send the the location to the createGame view
             let x : createGameController = segue.destination as! createGameController
             x.location = self.passedLocation
             x.timeArray = self.timeArray

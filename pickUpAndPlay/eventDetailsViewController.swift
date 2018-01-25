@@ -17,7 +17,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var spotsLeftLabel: UILabel!
     @IBOutlet weak var sportImage: UIImageView!
-    @IBOutlet weak var gameTypeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var joinButton: UIButton!
@@ -33,8 +32,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     var idList = [String]()
     var selectedPlayer = ""
     var passedLocation = Location()
-    var latitude = 0.0
-    var longitude = 0.0
     var inGame = false {
         didSet {
             updateButtonSelectionStates()
@@ -50,7 +47,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         setDetailLabels()
         fetchPlayers()
         updateButtonSelectionStates()
-        self.locationName.text = passedLocation.name
         
         //set table view delegate to self
         self.tableView.delegate = self
@@ -118,8 +114,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                     if self.idList.count < self.game.playerLimit {
                         
                         let eventDict = [
-                            "gameType": self.game.gameType,
-                            "location": self.game.locationId,
+                            "location": self.game.location.locationId,
                             "playerLimit": self.game.playerLimit,
                             "sport": self.game.sport,
                             "time": self.game.dateTime.timeIntervalSince1970
@@ -128,7 +123,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                         self.ref.updateChildValues(["events/\(self.game.gameId)/playerList":self.idList,
                                                     "eventUsers/\(self.game.gameId)/\(player.playerId)": user,
                                                     "userEvents/\(player.playerId)/\(self.game.gameId)": eventDict,
-                                                    "locationEvents/\(self.game.locationId)/\(self.game.gameId)": eventDict
+                                                    "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)": eventDict
                                                     ])
                         self.tableView.reloadData()
                         self.inGame = true
@@ -171,7 +166,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                     self.ref.updateChildValues(["events/\(self.game.gameId)":NSNull(),
                                                                                                 "eventUsers/\(self.game.gameId)/\(Auth.auth().currentUser!.uid)": NSNull(),
                                                                                                 "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull(),
-                                                                                                "locationEvents/\(self.game.locationId)/\(self.game.gameId)": NSNull()
+                                                                                                "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)": NSNull()
                                                                         ])
                                                                     
                                                                     if #available(iOS 10.0, *) {
@@ -206,41 +201,23 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }//End joinGame
     
     @IBAction func getDirections(_ sender: UIButton) {
-        if longitude == 0 && latitude == 0 {
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(URL(string:
-                        "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                        "comgooglemaps://?saddr=&daddr=\(Float(self.game.location.lat)),\(Float(self.game.location.long))")! as URL, options: [:])
                 } else {
-                    UIApplication.shared.openURL(URL(string: "comgooglemaps://?saddr=&daddr=\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")!)
+                    print(self.game.location.long)
+                    UIApplication.shared.openURL(URL(string: "comgooglemaps://?saddr=&daddr=\(Float(self.game.location.lat)),\(Float(self.game.location.long))")!)
                 }
             } else {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(URL(string:
-                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
+                        "https://www.google.com/maps/place/\(Float(self.game.location.lat)),\(Float(self.game.location.long))")! as URL, options: [:])
                 } else {
                     UIApplication.shared.openURL(URL(string:
-                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")!)
+                        "https://www.google.com/maps/place/\(Float(self.game.location.lat)),\(Float(self.game.location.long))")!)
                 }
             }
-        } else {
-            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(URL(string:
-                        "comgooglemaps://?saddr=&daddr=\(Float(self.latitude)),\(Float(self.longitude))&directionsmode=driving")! as URL, options: [:])
-                } else {
-                    UIApplication.shared.openURL(URL(string:
-                        "comgooglemaps://?saddr=&daddr=\(Float(self.latitude)),\(Float(self.longitude))&directionsmode=driving")!)
-                }
-            } else {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(URL(string:
-                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")! as URL, options: [:])
-                } else {
-                    UIApplication.shared.openURL(URL(string:
-                        "https://www.google.com/maps/place/\(Float(self.passedLocation.lat)),\(Float(self.passedLocation.long))")!)                }
-            }
-        }
     }
     
     private func updateButtonSelectionStates() {
@@ -291,9 +268,10 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }//End fetchPlayers
     
     private func setDetailLabels() {
+        self.locationName.text = game.location.name
+
         self.timeLabel.text = game.time
         self.dateLabel.text = game.date
-        self.gameTypeLabel.text = game.gameType
         self.spotsLeftLabel.text = String(game.spotsRemaining) + " Spots Remaining"
         
         if game.sport == "soccer" {
@@ -314,56 +292,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fetchLocationImage() {
-        if passedLocation.locationImageURL == "" {
-            ref.child("events").observe(.childAdded, with: {(snapshot) in
-                if let dictionary = snapshot.value as? [String : AnyObject] {
-                    if snapshot.key == self.game.gameId {
-                        let locationName = dictionary["location"] as? String
-                        
-                        self.ref.child("locations").observe(.childAdded, with: {(snapshot) in
-                            if let dict = snapshot.value as? [String : AnyObject] {
-                                if dict["locationName"] as? String == locationName {
-                                    self.passedLocation = Location(snapshot.key, dict["availableSports"] as! [String], dict["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, dict["image"] as! String)
-                                    let url = URL(string: self.passedLocation.locationImageURL)
-                                    
-                                    //MARK: NEED TO DO ASYNC - Attempt to download image
-                                    let data = try? Data(contentsOf: url!)
-                                    self.locationImage.image = UIImage(data : data!)
-                                } else {
-                                    if let subLocations = dict["subLocations"]{
-
-                                        do {
-                                            let jsonData = try JSONSerialization.data(withJSONObject: subLocations, options: .prettyPrinted)
-                                            // here "jsonData" is the dictionary encoded in JSON data
-                                            print("jsonData: ", jsonData, "\n\n\n\n")
-                                            
-                                            if let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : [String : Any]]{
-                                                for(_, value) in decoded {
-                                                    if value["locationName"] as? String == locationName {
-                                                    self.passedLocation = Location(snapshot.key, value["availableSports"] as! [String], value["locationName"] as! String, dict["longitude"] as! CLLocationDegrees, dict["latitude"] as! CLLocationDegrees, value["image"] as! String)
-                                                        
-                                                        let url = URL(string: self.passedLocation.locationImageURL)
-                                                        let data = try? Data(contentsOf: url!)
-                                                        self.locationImage.image = UIImage(data : data!)
-                                                        self.locationName.text = self.passedLocation.name
-                                                    }
-                                                }
-                                            }
-                                        } catch {
-                                            print(error.localizedDescription)
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                    }
-                }
-            })
-        } else {
-            let url = URL(string: self.passedLocation.locationImageURL)
+            let url = URL(string: self.game.location.locationImageURL)
             let data = try? Data(contentsOf: url!)
             self.locationImage.image = UIImage(data : data!)
-        }
     }
     
     func goBack(){

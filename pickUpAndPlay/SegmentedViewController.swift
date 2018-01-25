@@ -1,8 +1,8 @@
 //
-//  MapViewController.swift
+//  SegmentedViewController.swift
 //  pickUpAndPlay
 //
-//  Created by Caleb Mitcler on 5/16/17.
+//  Created by Dakota Cowell on 10/22/17.
 //  Copyright © 2017 Dakota Cowell. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import Firebase
 
-class MapViewController: UIViewController{
+class SegmentedViewController: UIViewController{
     @IBOutlet weak var gamesListView: UIView!
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!

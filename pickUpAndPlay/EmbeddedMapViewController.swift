@@ -38,7 +38,6 @@ class EmbeddedMapViewController: UIViewController, GMSMapViewDelegate{
     }
     
     func setupMap() {
-        
         //google map stuff
         let camera = GMSCameraPosition.camera(withLatitude:36.3035454 , longitude: -82.363957, zoom: 15.0)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -52,19 +51,11 @@ class EmbeddedMapViewController: UIViewController, GMSMapViewDelegate{
         ref.child("locations").observe(.childAdded, with: {(snapshot) in
             if let dict = snapshot.value as? [String : AnyObject] {
                 var subLocationsObjectArray = [SubLocation]()
-                if let subLocations = dict["subLocations"]{
+                if let subLocations = dict["subLocations"] as? [String:[String:Any]]{
                     
-                    do {
-                        let jsonData = try JSONSerialization.data(withJSONObject: subLocations, options: .prettyPrinted)
-                        
-                        if let decoded = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String : [String : Any]]{
-                            for(_, value) in decoded {
-                                let subLocation = SubLocation(value["availableSports"] as! [String], value["locationName"] as! String, value["image"] as! String)
-                                subLocationsObjectArray.append(subLocation)
-                            }
-                        }
-                    } catch {
-                        print(error.localizedDescription)
+                    for(_, value) in subLocations {
+                        let subLocation = SubLocation(value["availableSports"] as! [String], value["locationName"] as! String, value["image"] as! String)
+                        subLocationsObjectArray.append(subLocation)
                     }
                     
                     subLocationsObjectArray = subLocationsObjectArray.sorted{ $0.name < $1.name }
