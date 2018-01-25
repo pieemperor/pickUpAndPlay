@@ -157,6 +157,7 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
         if segue.identifier == "goToEventDetails" {
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
             x.game = self.selectedGame
+            x.cameFrom = "userHome"
         }
     }//End prepare for segue
 }//End class

@@ -37,7 +37,6 @@ class createGameController: UIViewController{
     }
     var time = Double()
     var playerLimit = 0
-    //let repeatOptions = ["Never", "Every Day", "Every Week", "Every 2 Weeks", "Every Month"]
 
     //MARK: Outlets
     @IBOutlet weak var locationImage: UIImageView!
@@ -45,28 +44,23 @@ class createGameController: UIViewController{
     @IBOutlet weak var addSubsButton: UIButton!
     @IBOutlet weak var addSubsLabel: UILabel!
     @IBOutlet weak var createGameButton: UIButton!
-    @IBOutlet weak var skillSelector: UISegmentedControl!
     @IBOutlet weak var timeButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var locationLabel: UILabel!
-    //@IBOutlet weak var repeatButton: UIButton!
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getUserInfo()
         fetchLocationImage()
         setupButtons()
         setupSportButtons()
         setupDatePicker()
+        selectedSport = location.availableSports[0]
+        setPlayerLimits()
         locationLabel.text = location.name        
         
-        /*
-        //Setup Picker View
-        repeatPicker.isHidden = true
-        repeatPicker.delegate = self
-        repeatPicker.dataSource = self
-        */
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -333,9 +327,6 @@ class createGameController: UIViewController{
         //Create green color
         let myGreen = UIColor(red: 46.0/255.0, green: 204.0/255.0, blue: 114.0/255.0, alpha: 1.0)
         
-        //Setup skill Selector button
-        skillSelector.layer.cornerRadius = 5.0
-        
         //Setup time Button
         timeButton.layer.borderColor = myGreen.cgColor
         timeButton.layer.borderWidth = 1.0
@@ -343,17 +334,6 @@ class createGameController: UIViewController{
         
         //Setup Create game button
         createGameButton.layer.cornerRadius = createGameButton.frame.height/2
-        
-        /*
-        //Setup repeat button
-        repeatButton.layer.borderWidth = 1.0
-        repeatButton.layer.borderColor = myGreen.cgColor
-        repeatButton.layer.cornerRadius = 5.0
-        */
-        
-        let white: UIColor = .white
-        skillSelector.setTitleTextAttributes([NSForegroundColorAttributeName: white], for: .normal)
-        skillSelector.setTitleTextAttributes([NSForegroundColorAttributeName: white], for: .selected)
         
         addSubsButton.setImage(UIImage(named: "subsButton"), for: .normal)
         addSubsButton.setImage(UIImage(named: "selectedSubsButton"), for: .selected)

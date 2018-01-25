@@ -155,5 +155,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
         x.game = self.selectedGame
+        x.cameFrom = "userPage"
     }
 }//End class

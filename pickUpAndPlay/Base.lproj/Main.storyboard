@@ -1690,7 +1690,7 @@ Directions</string>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ExG-Aj-rLe">
-                                <rect key="frame" x="62.5" y="274" width="250" height="148"/>
+                                <rect key="frame" x="62.5" y="274" width="250" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MZH-hv-ugC">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
@@ -1705,24 +1705,13 @@ Directions</string>
                                             <action selector="selectTime:" destination="gaw-D7-ZAc" eventType="touchUpInside" id="wm6-Hl-Kfb"/>
                                         </connections>
                                     </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7NE-1b-jEM">
-                                        <rect key="frame" x="0.0" y="120" width="250" height="29"/>
-                                        <segments>
-                                            <segment title="Recreational"/>
-                                            <segment title="Competitive"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="gameTypeChanged:" destination="gaw-D7-ZAc" eventType="valueChanged" id="1c4-Cp-doR"/>
-                                        </connections>
-                                    </segmentedControl>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="udI-Dp-4bl"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhC-gL-hts">
-                                <rect key="frame" x="62.5" y="490" width="250" height="35"/>
+                                <rect key="frame" x="62.5" y="442" width="250" height="35"/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.6705882353" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="INw-90-bhC"/>
@@ -1736,7 +1725,7 @@ Directions</string>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="clQ-7u-3ci">
-                                <rect key="frame" x="100" y="432" width="175" height="48"/>
+                                <rect key="frame" x="100" y="384" width="175" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ic-Im-hLc">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -1807,7 +1796,6 @@ Directions</string>
                         <outlet property="datePicker" destination="Tf2-OX-P4j" id="5Wu-PQ-99Y"/>
                         <outlet property="locationImage" destination="ReT-xk-Tma" id="rhg-Wd-2LC"/>
                         <outlet property="locationLabel" destination="Z8E-FJ-1pB" id="dPp-RG-ctv"/>
-                        <outlet property="skillSelector" destination="7NE-1b-jEM" id="CLb-9u-0aM"/>
                         <outlet property="sportsButtonsStack" destination="MZH-hv-ugC" id="kHL-Tm-uKH"/>
                         <outlet property="timeButton" destination="Qii-ZG-OvQ" id="3lD-0z-uy9"/>
                         <segue destination="sFt-hy-PYl" kind="unwind" identifier="unwindToSchedule" unwindAction="unwindToScheduleWithUnwindSegue:" id="QdB-lC-XxG"/>

@@ -111,6 +111,7 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
         if segue.identifier == "goToEventDetails" {
             let x : eventDetailsViewController = segue.destination as! eventDetailsViewController
             x.game = self.selectedGame
+            x.cameFrom = "allGames"
         }
     }
 }

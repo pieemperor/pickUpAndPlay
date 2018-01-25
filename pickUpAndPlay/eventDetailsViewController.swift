@@ -30,7 +30,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     var playerList = [Player]()
     var idList = [String]()
     var selectedPlayer = ""
-    var passedLocation = Location()
+    var cameFrom = ""
     var inGame = false {
         didSet {
             updateButtonSelectionStates()
@@ -42,7 +42,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-        fetchLocationImage()
+        locationImage.image = fetchImage(urlString: game.location.locationImageURL)
         setDetailLabels()
         fetchPlayers()
         updateButtonSelectionStates()
@@ -174,7 +174,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                                         // Fallback on earlier versions
                                                                     }
                                                                     
-                                                                    self.dismiss(animated: true, completion: nil)
+                                                                    self.goBack()
                                 })
                                 
                                 alertController.addAction(actionCancel)
@@ -249,9 +249,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 }
                
                if profilePicURL != "", profilePicURL != nil , profilePicURL != "none", profilePicURL != " "{
-                   let url = URL(string: profilePicURL!)
-                   let data = try? Data(contentsOf: url!)
-                   userProfilePic = UIImage(data : data!)!
+                userProfilePic = self.fetchImage(urlString: profilePicURL!)
                }/* End if profilePicURL != "" */ else {
                     profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
                     userProfilePic = UIImage(named: "defaultProfilePic")!
@@ -290,10 +288,15 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
-    func fetchLocationImage() {
-            let url = URL(string: self.game.location.locationImageURL)
+    //MARK: NEED TO DO ASYNC
+    func fetchImage(urlString: String) -> UIImage{
+            let url = URL(string: urlString)
             let data = try? Data(contentsOf: url!)
-            self.locationImage.image = UIImage(data : data!)
+        if let image = UIImage(data : data!){
+            return image
+        } else {
+            return UIImage()
+        }
     }
     
     func convertSportToPhrase(_ sport:String) -> String{
@@ -343,6 +346,18 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             // Fallback on earlier versions
         }
     }//End createNotification
+    
+    private func goBack(){
+        if cameFrom == "schedule" {
+            performSegue(withIdentifier: "unwindToSchedule", sender: nil)
+        } else if cameFrom == "allGames" {
+            performSegue(withIdentifier: "unwindToGamesList", sender: nil)
+        } else if cameFrom == "userPage" {
+            performSegue(withIdentifier: "unwindToUserHome", sender: nil)
+        } else if cameFrom == "userHome" {
+            performSegue(withIdentifier: "unwindToUserPage", sender: nil)
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToUserPage" {
