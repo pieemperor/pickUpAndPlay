@@ -1501,9 +1501,9 @@ Directions</string>
                         <outlet property="timeLabel" destination="fMl-1h-4ww" id="Tn6-1q-13r"/>
                         <segue destination="JFS-5U-qgt" kind="show" identifier="goToUserPage" id="ebA-3z-1J7"/>
                         <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToSchedule" unwindAction="unwindToScheduleWithUnwindSegue:" id="KeC-6Y-Dev"/>
-                        <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToUserPage" unwindAction="unwindtoUserPageWithUnwindSegue:" id="nV4-UJ-63X"/>
-                        <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToUserHome" unwindAction="unwindtoProfileWithUnwindSegue:" id="Vkj-JX-nUJ"/>
                         <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToGamesList" unwindAction="unwindtoGamesListWithUnwindSegue:" id="YfJ-af-bzH"/>
+                        <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToUserPage" unwindAction="unwindtoUserPageWithUnwindSegue:" id="uS4-1P-Qcu"/>
+                        <segue destination="hIv-qD-qJD" kind="unwind" identifier="unwindToProfile" unwindAction="unwindtoProfileWithUnwindSegue:" id="B02-ra-VTK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ICh-cR-HH4" userLabel="First Responder" sceneMemberID="firstResponder"/>

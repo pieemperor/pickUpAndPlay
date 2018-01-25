@@ -353,9 +353,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
         } else if cameFrom == "allGames" {
             performSegue(withIdentifier: "unwindToGamesList", sender: nil)
         } else if cameFrom == "userPage" {
-            performSegue(withIdentifier: "unwindToUserHome", sender: nil)
-        } else if cameFrom == "userHome" {
             performSegue(withIdentifier: "unwindToUserPage", sender: nil)
+        } else if cameFrom == "userHome" {
+            performSegue(withIdentifier: "unwindToProfile", sender: nil)
         }
     }
     
