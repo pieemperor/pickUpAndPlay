@@ -113,7 +113,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     let justDate = df.string(from: dateAsDate)
                     df.dateFormat = "h:mm a"
                     let timeString = df.string(from: dateAsDate)
-                    
+                
                     if let numberOfPlayers = dictionary["playerList"]?.count {
                         //Set values of game variable from database information
                         let sport = dictionary["sport"]

@@ -213,23 +213,24 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         dismiss(animated: true, completion: nil)
     }
     
-    func loadUserData() {
+    func loadUserData(){
         spinner.startAnimating()
-        ref.child("users/\(Auth.auth().currentUser!.uid)").observe(.childAdded, with: {(snapshot) in
-            if let userDictionary = snapshot.value as? [String: AnyObject] {
-                    let profilePicURL = userDictionary["photo"] as? String
-                    if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
-                        let url = URL(string: profilePicURL!)
-                        let data = try? Data(contentsOf: url!)
-                        self.profilePic.image = UIImage(data : data!)
-                   }//End if profilePicURL
-                    self.emailTextField.text = Auth.auth().currentUser!.email
-                    self.firstNameTextField.text = userDictionary["firstName"] as? String
-                    self.lastNameTextField.text = userDictionary["lastName"] as? String
-                self.spinner.stopAnimating()
-            }//End if let userDictionary
-        })//End ref.child("users")
-    }//End Load user data
+        ref.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: {(snapshot) in
+            let value = snapshot.value as? [String : Any]
+            let profilePicURL = value!["photo"] as? String
+            if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
+                //MARK: NEED TO DO ASYNC
+                let url = URL(string: profilePicURL!)
+                let data = try? Data(contentsOf: url!)
+                self.profilePic.image = UIImage(data : data!)
+            }//End if profilePicURL
+            
+            self.emailTextField.text = Auth.auth().currentUser!.email
+            self.firstNameTextField.text = value!["firstName"] as? String
+            self.lastNameTextField.text = value!["lastName"] as? String
+            self.spinner.stopAnimating()
+        })
+    }
     
     func goToProfile(){
         performSegue(withIdentifier: "unwindToProfile", sender: nil)

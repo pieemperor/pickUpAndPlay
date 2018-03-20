@@ -90,11 +90,12 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     //If the user is already in the game, remove the user from the playerList in Firebase
     @IBAction func joinGame(_ sender: Any) {
         if !inGame {
-            ref.child("eventUsers").child(game.gameId).child(Auth.auth().currentUser!.uid ).observe(.childAdded, with: {(snapshot) in
-                if let user = snapshot.value as? [String : Any]{
-                    let profilePicURL = user["photo"] as? String
+            ref.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: {(snapshot) in
+                let user = snapshot.value as? NSDictionary
+                let profilePicURL = user!["photo"] as? String
                     var userProfilePic = UIImage()
                     
+                    //Get profile pic from database
                     if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
                         self.profilePicURL = URL(string: profilePicURL!)
                         //MARK: NEED TO DO ASYNC - Attempt to load image
@@ -104,25 +105,32 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                         self.profilePicURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0")
                         userProfilePic = UIImage(named: "defaultProfilePic")!
                     }
-                    
-                    let player = Player(Auth.auth().currentUser!.uid, user["firstName"] as! String, user["lastName"] as! String, userProfilePic,(self.profilePicURL?.absoluteString)!)
-                    
-                    self.playerList.append(player)
-                    self.idList.append(player.playerId)
-                    
+
                     if self.idList.count < self.game.playerLimit {
                         
+                        //Create player from fetched info
+                        let player = Player(Auth.auth().currentUser!.uid, user!["firstName"] as! String, user!["lastName"] as! String, userProfilePic,(self.profilePicURL?.absoluteString)!)
+                        
+                        self.idList.append(player.playerId)
+                        
                         let eventDict = [
-                            "location": self.game.location.locationId,
+                            "location": [self.game.location.locationId : [
+                                "availableSports": self.game.location.availableSports,
+                                "image": self.game.location.locationImageURL,
+                                "latitude": self.game.location.lat,
+                                "longitude": self.game.location.long,
+                                "locationName":self.game.location.name]],
                             "playerLimit": self.game.playerLimit,
                             "sport": self.game.sport,
-                            "time": self.game.dateTime.timeIntervalSince1970
+                            "time": self.game.dateTime.timeIntervalSince1970,
+                            "playerList": self.idList
                             ] as [String : Any]
                         
-                        self.ref.updateChildValues(["events/\(self.game.gameId)/playerList":self.idList,
-                                                    "eventUsers/\(self.game.gameId)/\(player.playerId)": user,
+                        self.ref.updateChildValues([
+                                                    "eventUsers/\(self.game.gameId)/\(player.playerId)" : user,
                                                     "userEvents/\(player.playerId)/\(self.game.gameId)": eventDict,
-                                                    "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)": eventDict
+                                                    "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)" : eventDict,
+                                                    "events/\(self.game.gameId)/playerList" : self.idList
                                                     ])
                         self.tableView.reloadData()
                         self.inGame = true
@@ -139,62 +147,68 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                         alertController.addAction(actionOk)
                         self.present(alertController, animated: true, completion: nil)
                     }
-                }
             })
         } /* End if !in game */ else {
-            ref.child("events").queryOrderedByKey().queryEqual(toValue: self.game.gameId).observe(.childAdded, with: {(snapshot) in
-                if let eventsDictionary = snapshot.value as? [String : AnyObject] {
-                        if let playerListCount = eventsDictionary["playerList"]?.count! {
-                            if playerListCount == 1 {
-                                let alertController = UIAlertController(title: "Delete Game?", message: "You are the only player left in this game. If you leave this game, it will be deleted", preferredStyle: .alert)
-                                let actionCancel = UIAlertAction(title: "Cancel",
-                                                                 style: .default,
-                                                                 handler: nil) //You can use a block here to handle a press on this button
-                                
-                                let actionDelete = UIAlertAction(title: "Delete Game",
-                                                                 style: .destructive,
-                                                                 handler: { UIAlertAction in
-                                                                    //Find index for userid to remove
-                                                                    if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
-                                                                        self.idList.remove(at: index)
-                                                                        self.playerList.remove(at: index)
-                                                                        self.tableView.reloadData()
-                                                                        self.inGame = false
-                                                                    }
-                                                                    
-                                                                    self.ref.updateChildValues(["events/\(self.game.gameId)":NSNull(),
-                                                                                                "eventUsers/\(self.game.gameId)/\(Auth.auth().currentUser!.uid)": NSNull(),
-                                                                                                "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull(),
-                                                                                                "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)": NSNull()
-                                                                        ])
-                                                                    
-                                                                    if #available(iOS 10.0, *) {
-                                                                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [snapshot.key])
-                                                                    } else {
-                                                                        // Fallback on earlier versions
-                                                                    }
-                                                                    
-                                                                    self.goBack()
-                                })
-                                
-                                alertController.addAction(actionCancel)
-                                alertController.addAction(actionDelete)
-                                self.present(alertController, animated: true, completion: nil)
-                            }/* End if playerListCount == 1 */ else {
-                                if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
-                                    self.idList.remove(at: index)
-                                    self.playerList.remove(at: index)
-                                    self.tableView.reloadData()
-                                    self.inGame = false
-                                }
-                                
-                                let eventsHandle = self.ref.child("events").child(self.game.gameId)
-                                eventsHandle.updateChildValues(["playerList":self.idList])
-                                let spotsRemaining = eventsDictionary["playerLimit"] as! Int - playerListCount
-                                self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
-                            }//End else
-                        }//End if let playerListCount
-                }//end if let eventsDictionary
+            ref.child("events").child(self.game.gameId).observeSingleEvent(of: .value, with: {(snapshot) in
+                let eventsDictionary = snapshot.value as? NSDictionary
+                    let playerListCount = self.idList.count
+                      if playerListCount == 1 {
+                          let alertController = UIAlertController(title: "Delete Game?", message: "You are the only player left in this game. If you leave this game, it will be deleted", preferredStyle: .alert)
+                          let actionCancel = UIAlertAction(title: "Cancel",
+                                                           style: .default,
+                                                           handler: nil) //You can use a block here to handle a press on this button
+                        
+                          let actionDelete = UIAlertAction(title: "Delete Game",
+                                                           style: .destructive,
+                                                           handler: { UIAlertAction in
+                                                              //Find index for userid to remove
+                                                              if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                                                                  self.idList.remove(at: index)
+                                                                  self.playerList.remove(at: index)
+                                                                  self.tableView.reloadData()
+                                                                  self.inGame = false
+                                                              }
+                                                            
+                                                              self.ref.updateChildValues(["events/\(self.game.gameId)":NSNull(),
+                                                                                          "eventUsers/\(self.game.gameId)/\(Auth.auth().currentUser!.uid)": NSNull(),
+                                                                                          "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull(),
+                                                                                          "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)": NSNull()
+                                                                  ])
+                                                            
+                                                              if #available(iOS 10.0, *) {
+                                                                  UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [snapshot.key])
+                                                              } else {
+                                                                  // Fallback on earlier versions
+                                                              }
+                                                            
+                                                              self.goBack()
+                          })
+                        
+                          alertController.addAction(actionCancel)
+                          alertController.addAction(actionDelete)
+                          self.present(alertController, animated: true, completion: nil)
+                      }/* End if playerListCount == 1 */ else {
+                          if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                            print("Before: ", self.idList)
+                              self.idList.remove(at: index)
+                            print("After: ", self.idList)
+                              self.playerList.remove(at: index)
+                              self.tableView.reloadData()
+                              self.inGame = false
+                            
+                            
+                              self.ref.updateChildValues([
+                                                        "eventUsers/\(self.game.gameId)/\(Auth.auth().currentUser!.uid)": NSNull(),
+                                                        "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull(),
+                                                        "events/\(self.game.gameId)/playerList" : self.idList,
+                                                        "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)/playerList" : self.idList
+                                                        
+                                ])
+                          }
+
+                          let spotsRemaining = eventsDictionary!["playerLimit"] as! Int - self.idList.count
+                          self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
+                      }//End else
             })//End .child("events").observe
         }//End else
     }//End joinGame
@@ -205,7 +219,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                     UIApplication.shared.open(URL(string:
                         "comgooglemaps://?saddr=&daddr=\(Float(self.game.location.lat)),\(Float(self.game.location.long))")! as URL, options: [:])
                 } else {
-                    print(self.game.location.long)
                     UIApplication.shared.openURL(URL(string: "comgooglemaps://?saddr=&daddr=\(Float(self.game.location.lat)),\(Float(self.game.location.long))")!)
                 }
             } else {
@@ -238,6 +251,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     func fetchPlayers() {
         tableSpinner.startAnimating()
         ref.child("eventUsers/\(self.game.gameId)").observe(.childAdded, with: {(snapshot) in
+            print("Inside Observe: ", self.idList)
             if let dictionary = snapshot.value as? [String : AnyObject] {
                let firstName = dictionary["firstName"]
                let lastName = dictionary["lastName"]
@@ -262,6 +276,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             }//End if let dictionary
         })//End snapshot in
         self.tableSpinner.stopAnimating()
+        print("After snapshot", self.idList)
     }//End fetchPlayers
     
     private func setDetailLabels() {
@@ -329,7 +344,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             let notificationTime = Date(timeIntervalSince1970: self.game.dateTime.timeIntervalSince1970 - 3600)
             
             let dateInfo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: notificationTime)
-            print(dateInfo)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
             
             // Create the request object.
