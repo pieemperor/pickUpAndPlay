@@ -114,22 +114,27 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
                     df.dateFormat = "h:mm a"
                     let timeString = df.string(from: dateAsDate)
                 
-                    if let numberOfPlayers = dictionary["playerList"]?.count {
-                        //Set values of game variable from database information
-                        let sport = dictionary["sport"]
-                        let time = timeString
-                        let date = justDate
-                        let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers
-                        
-                        let locationDict = dictionary["location"] as! [String: [String:Any]]
-                        
-                        for(key, value) in locationDict {
-                            let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
-                            let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
-                            self.gameList.append(game)
-                            self.tableView.reloadData()
-                        }//End for
-                }//End if let numberOfPlayers
+                    self.ref.child("eventUsers").child("\(gameId)").observeSingleEvent(of: .value, with: {(snapshot) in
+                        let eventUserDict = snapshot.value as? NSDictionary
+                        let numberOfPlayers = eventUserDict?.allKeys.count
+
+                        if numberOfPlayers! > 0 {
+                            //Set values of game variable from database information
+                            let sport = dictionary["sport"]
+                            let time = timeString
+                            let date = justDate
+                            let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers!
+                            
+                            let locationDict = dictionary["location"] as! [String: [String:Any]]
+                            
+                                for(key, value) in locationDict {
+                                    let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                                    let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
+                                    self.gameList.append(game)
+                                    self.tableView.reloadData()
+                                }//End for
+                        }//End if let numberOfPlayers
+                })//End ref eventUsers
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot

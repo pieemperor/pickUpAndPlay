@@ -89,17 +89,22 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
                let sport = dictionary["sport"]
                let time = timeString
                let date = justDate
-               let playersInGame = dictionary["playerList"]?.count
-               let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
-               
-               let locationDict = dictionary["location"] as! [String: [String:Any]]
                 
-               for(key, value) in locationDict {
-                       let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
-                   let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
-                   self.gameList.append(game)
-                   self.tableView.reloadData()
-               }//End for
+                self.ref.child("eventUsers").child("\(gameId)").observeSingleEvent(of: .value, with: {(snapshot) in
+                   let eventUserDict = snapshot.value as? NSDictionary
+                   let playersInGame = eventUserDict?.allKeys.count
+                    
+                   let spotsRemaining = dictionary["playerLimit"] as! Int - playersInGame!
+                   
+                   let locationDict = dictionary["location"] as! [String: [String:Any]]
+                    
+                   for(key, value) in locationDict {
+                           let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                       let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
+                       self.gameList.append(game)
+                       self.tableView.reloadData()
+                   }//End for
+                })
             } //End if let dictionary
             self.spinner.stopAnimating()
         }) //End observe snapshot

@@ -123,17 +123,16 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                             "playerLimit": self.game.playerLimit,
                             "sport": self.game.sport,
                             "time": self.game.dateTime.timeIntervalSince1970,
-                            "playerList": self.idList
                             ] as [String : Any]
                         
                         self.ref.updateChildValues([
                                                     "eventUsers/\(self.game.gameId)/\(player.playerId)" : user,
                                                     "userEvents/\(player.playerId)/\(self.game.gameId)": eventDict,
                                                     "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)" : eventDict,
-                                                    "events/\(self.game.gameId)/playerList" : self.idList
                                                     ])
                         self.tableView.reloadData()
                         self.inGame = true
+                        self.game.spotsRemaining -= 1
                         self.spotsLeftLabel.text = String(self.game.spotsRemaining) +  " Spots Remaining"
                         
                         self.createNotification(gameKey: self.game.gameId)
@@ -189,9 +188,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                           self.present(alertController, animated: true, completion: nil)
                       }/* End if playerListCount == 1 */ else {
                           if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
-                            print("Before: ", self.idList)
                               self.idList.remove(at: index)
-                            print("After: ", self.idList)
                               self.playerList.remove(at: index)
                               self.tableView.reloadData()
                               self.inGame = false
@@ -199,15 +196,12 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                             
                               self.ref.updateChildValues([
                                                         "eventUsers/\(self.game.gameId)/\(Auth.auth().currentUser!.uid)": NSNull(),
-                                                        "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull(),
-                                                        "events/\(self.game.gameId)/playerList" : self.idList,
-                                                        "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)/playerList" : self.idList
-                                                        
+                                                        "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull()
                                 ])
                           }
-
-                          let spotsRemaining = eventsDictionary!["playerLimit"] as! Int - self.idList.count
-                          self.spotsLeftLabel.text = String(spotsRemaining + 1) +  " Spots Remaining"
+                            //let spotsRemaining = eventsDictionary!["playerLimit"] as! Int - self.idList.count
+                        self.game.spotsRemaining += 1
+                            self.spotsLeftLabel.text = String(self.game.spotsRemaining) + " Spots Remaining"
                       }//End else
             })//End .child("events").observe
         }//End else
@@ -251,7 +245,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     func fetchPlayers() {
         tableSpinner.startAnimating()
         ref.child("eventUsers/\(self.game.gameId)").observe(.childAdded, with: {(snapshot) in
-            print("Inside Observe: ", self.idList)
             if let dictionary = snapshot.value as? [String : AnyObject] {
                let firstName = dictionary["firstName"]
                let lastName = dictionary["lastName"]
@@ -276,7 +269,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             }//End if let dictionary
         })//End snapshot in
         self.tableSpinner.stopAnimating()
-        print("After snapshot", self.idList)
     }//End fetchPlayers
     
     private func setDetailLabels() {
