@@ -81,6 +81,7 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
         }
     }
     
+    //MARK: Need to do Async
     func fetchLocationImage(){
             let url = URL(string: passedLocation.locationImageURL)
             let data = try? Data(contentsOf: url!)

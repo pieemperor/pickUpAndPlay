@@ -130,6 +130,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DC86300206D255200F2C353 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1D6831D21F270A9F00E7CA72 /* Game.swift */,
+				1D93E06B1F30F61700E61AA9 /* Location.swift */,
+				1DDCC7581F7EE452003DA299 /* SubLocation.swift */,
+				1D6831D41F293BB600E7CA72 /* Player.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1DC86301206D258D00F2C353 /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */,
+				1D9548601F3E6686002816E7 /* PlayerTableViewCell.swift */,
+				1DB21B661FFF3A51003CEE0C /* GreenTableViewCell.swift */,
+			);
+			path = TableViews;
+			sourceTree = "<group>";
+		};
 		45F5A8E81EC27E2600EAAFCF = {
 			isa = PBXGroup;
 			children = (
@@ -154,15 +175,10 @@
 		45F5A8F31EC27E2600EAAFCF /* pickUpAndPlay */ = {
 			isa = PBXGroup;
 			children = (
+				1DC86301206D258D00F2C353 /* TableViews */,
+				1DC86300206D255200F2C353 /* Models */,
 				45F5A8F81EC27E2700EAAFCF /* Main.storyboard */,
-				1D6831D21F270A9F00E7CA72 /* Game.swift */,
-				1D93E06B1F30F61700E61AA9 /* Location.swift */,
-				1DDCC7581F7EE452003DA299 /* SubLocation.swift */,
-				1D6831D41F293BB600E7CA72 /* Player.swift */,
 				1D6831CA1F253D3300E7CA72 /* sportControl.swift */,
-				1D6831CC1F26F76700E7CA72 /* GameTableViewCell.swift */,
-				1D9548601F3E6686002816E7 /* PlayerTableViewCell.swift */,
-				1DB21B661FFF3A51003CEE0C /* GreenTableViewCell.swift */,
 				1D1160AC1F72389900430FE7 /* AllGamesViewController.swift */,
 				1D2244A41F5E5FC20046114A /* WebSiteViewController.swift */,
 				1D6EB6241F4D442100626326 /* SelectSpecificLocationViewController.swift */,

@@ -90,9 +90,8 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
             
             if profilePicURL != "", profilePicURL != nil {
                 //MARK: NEED TO DO ASYNC
-                let url = URL(string: profilePicURL!)
-                let data = try? Data(contentsOf: url!)
-                self.profilePic.image = UIImage(data : data!)
+                let profilePic = self.fetchImage(urlString: profilePicURL!)
+                self.profilePic.image = profilePic
                 self.userSpinner.stopAnimating()
                 
             } else {
@@ -151,6 +150,17 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     private func setupButtons() {
         profilePic.layer.cornerRadius = profilePic.frame.height/2
         backgroundImage.clipsToBounds = true
+    }
+    
+    //MARK: NEED TO DO ASYNC
+    func fetchImage(urlString: String) -> UIImage{
+        let url = URL(string: urlString)
+        let data = try? Data(contentsOf: url!)
+        if let image = UIImage(data : data!){
+            return image
+        } else {
+            return UIImage()
+        }
     }
     
     @IBAction func unwindtoUserPage(unwindSegue: UIStoryboardSegue){}

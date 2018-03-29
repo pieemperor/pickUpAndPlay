@@ -219,10 +219,8 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
             let value = snapshot.value as? [String : Any]
             let profilePicURL = value!["photo"] as? String
             if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
-                //MARK: NEED TO DO ASYNC
-                let url = URL(string: profilePicURL!)
-                let data = try? Data(contentsOf: url!)
-                self.profilePic.image = UIImage(data : data!)
+                let profilePic = self.fetchImage(urlString: profilePicURL!)
+                self.profilePic.image = profilePic
             }//End if profilePicURL
             
             self.emailTextField.text = Auth.auth().currentUser!.email
@@ -256,12 +254,22 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
         
-        
         image.draw(in: CGRect(x: 0, y: 0,width: newWidth, height: newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         return newImage!
+    }
+    
+    //MARK: NEED TO DO ASYNC
+    func fetchImage(urlString: String) -> UIImage{
+        let url = URL(string: urlString)
+        let data = try? Data(contentsOf: url!)
+        if let image = UIImage(data : data!){
+            return image
+        } else {
+            return UIImage()
+        }
     }
     
 }//End EditProfileViewController

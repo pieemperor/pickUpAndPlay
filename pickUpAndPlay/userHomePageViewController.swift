@@ -90,10 +90,10 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                 
                 
                 if profilePicURL != "", profilePicURL != nil {
-                    let url = URL(string: profilePicURL!)
-                    let data = try? Data(contentsOf: url!)
-                    self.authenticatedUser = Player(snapshot.key, firstName, lastName, UIImage(data: data!)!, profilePicURL!)
-                    self.profilePic.image = UIImage(data : data!)
+                    let profilePic = self.fetchImage(urlString: profilePicURL!)
+                    
+                    self.authenticatedUser = Player(firstName, firstName, lastName, profilePic, profilePicURL!)
+                    self.profilePic.image = profilePic
                     
                     self.spinner.stopAnimating()
                 } else {
@@ -155,6 +155,17 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     private func setupButtons() {
         profilePic.layer.cornerRadius = profilePic.frame.height/2
         backgroundImage.clipsToBounds = true
+    }
+    
+    //MARK: NEED TO DO ASYNC
+    func fetchImage(urlString: String) -> UIImage{
+        let url = URL(string: urlString)
+        let data = try? Data(contentsOf: url!)
+        if let image = UIImage(data : data!){
+            return image
+        } else {
+            return UIImage()
+        }
     }
     
     @IBAction func unwindtoProfile(unwindSegue: UIStoryboardSegue){}

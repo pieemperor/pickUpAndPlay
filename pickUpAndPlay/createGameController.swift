@@ -366,6 +366,7 @@ class createGameController: UIViewController{
         }
     }
 
+    //MARK: Need to do async
     func fetchLocationImage() {
         let imageURL = location.locationImageURL
         let url = URL(string: imageURL)
