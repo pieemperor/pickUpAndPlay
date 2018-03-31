@@ -126,7 +126,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                             ] as [String : Any]
                         
                         self.ref.updateChildValues([
-                                                    "eventUsers/\(self.game.gameId)/\(player.playerId)" : user,
+                                                    "eventUsers/\(self.game.gameId)/\(player.playerId)" : user as Any,
                                                     "userEvents/\(player.playerId)/\(self.game.gameId)": eventDict,
                                                     "locationEvents/\(self.game.location.locationId)/\(self.game.gameId)" : eventDict,
                                                     ])
