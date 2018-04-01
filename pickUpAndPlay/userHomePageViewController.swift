@@ -10,6 +10,8 @@ import UIKit
 import FirebaseAuth
 import Firebase
 import GoogleMaps
+import AlamofireImage
+import Alamofire
 
 class userHomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -89,12 +91,20 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
                 let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
                 
                 
-                if profilePicURL != "", profilePicURL != nil {
-                    let profilePic = self.fetchImage(urlString: profilePicURL!)
+                if profilePicURL != "", profilePicURL != nil {                    
+                    // Use Alamofire to download the image
+                    Alamofire.request(profilePicURL!).responseData { (response) in
+                       if response.error == nil {
+                                print(response.result)
                     
-                    self.authenticatedUser = Player(firstName, firstName, lastName, profilePic, profilePicURL!)
-                    self.profilePic.image = profilePic
-                    
+                                // Show the downloaded image:
+                                if let data = response.data {
+                                    let profilePic = UIImage(data:data)
+                                        self.profilePic.image = profilePic
+                                    self.authenticatedUser = Player(firstName, firstName, lastName, profilePic!, profilePicURL!)
+                                    }
+                            }
+                    }
                     self.spinner.stopAnimating()
                 } else {
                     self.profilePic.image = UIImage(named: "defaultProfilePic")
@@ -155,17 +165,6 @@ class userHomePageViewController: UIViewController, UITableViewDelegate, UITable
     private func setupButtons() {
         profilePic.layer.cornerRadius = profilePic.frame.height/2
         backgroundImage.clipsToBounds = true
-    }
-    
-    //MARK: NEED TO DO ASYNC
-    func fetchImage(urlString: String) -> UIImage{
-        let url = URL(string: urlString)
-        let data = try? Data(contentsOf: url!)
-        if let image = UIImage(data : data!){
-            return image
-        } else {
-            return UIImage()
-        }
     }
     
     @IBAction func unwindtoProfile(unwindSegue: UIStoryboardSegue){}

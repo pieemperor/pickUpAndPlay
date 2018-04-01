@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import AlamofireImage
+import Alamofire
 
 class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
@@ -219,8 +221,15 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
             let value = snapshot.value as? [String : Any]
             let profilePicURL = value!["photo"] as? String
             if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
-                let profilePic = self.fetchImage(urlString: profilePicURL!)
-                self.profilePic.image = profilePic
+                Alamofire.request(profilePicURL!).responseData { (response) in
+                    if response.error == nil {
+                        print(response.result)
+                        // Show the downloaded image:
+                        if let data = response.data {
+                            self.profilePic.image = UIImage(data:data)
+                        }
+                    }
+                }
             }//End if profilePicURL
             
             self.emailTextField.text = Auth.auth().currentUser!.email
@@ -260,16 +269,4 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         
         return newImage!
     }
-    
-    //MARK: NEED TO DO ASYNC
-    func fetchImage(urlString: String) -> UIImage{
-        let url = URL(string: urlString)
-        let data = try? Data(contentsOf: url!)
-        if let image = UIImage(data : data!){
-            return image
-        } else {
-            return UIImage()
-        }
-    }
-    
 }//End EditProfileViewController

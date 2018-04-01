@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import UserNotifications
+import AlamofireImage
+import Alamofire
 
 class createGameController: UIViewController{
     
@@ -366,12 +368,10 @@ class createGameController: UIViewController{
         }
     }
 
-    //MARK: Need to do async
     func fetchLocationImage() {
         let imageURL = location.locationImageURL
         let url = URL(string: imageURL)
-        let data = try? Data(contentsOf: url!)
-        self.locationImage.image = UIImage(data : data!)
+        self.locationImage.af_setImage(withURL: url!, placeholderImage: UIImage(named: "profileBG"))
     }
     
     func convertSportToPhrase(_ sport:String) -> String{

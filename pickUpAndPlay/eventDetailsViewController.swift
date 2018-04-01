@@ -12,6 +12,8 @@ import FacebookLogin
 import AVFoundation
 import GoogleMaps
 import UserNotifications
+import AlamofireImage
+import Alamofire
 
 class eventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -42,7 +44,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-        locationImage.image = fetchImage(urlString: game.location.locationImageURL)
+        locationImage.af_setImage(withURL: URL(string: game.location.locationImageURL)!, placeholderImage: UIImage(named: "profileBG"))
         setDetailLabels()
         fetchPlayers()
         updateButtonSelectionStates()
@@ -98,9 +100,15 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                     //Get profile pic from database
                     if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
                         self.profilePicURL = URL(string: profilePicURL!)
-                        //MARK: NEED TO DO ASYNC - Attempt to load image
-                        let data = try? Data(contentsOf: self.profilePicURL!)
-                        userProfilePic = UIImage(data : data!)!
+                        Alamofire.request(profilePicURL!).responseData { (response) in
+                            if response.error == nil {
+                                print(response.result)
+                                // Show the downloaded image:
+                                if let data = response.data {
+                                    userProfilePic = UIImage(data:data)!
+                                }
+                            }
+                        }
                     } else {
                         self.profilePicURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0")
                         userProfilePic = UIImage(named: "defaultProfilePic")!
@@ -248,24 +256,38 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             if let dictionary = snapshot.value as? [String : AnyObject] {
                let firstName = dictionary["firstName"]
                let lastName = dictionary["lastName"]
-               var profilePicURL = dictionary["photo"] as? String
+               let profilePicURL = dictionary["photo"] as? String
                var userProfilePic = UIImage()
+                var url: URL
                 
                 if(snapshot.key == Auth.auth().currentUser!.uid){
                     self.inGame = true
                 }
                
                if profilePicURL != "", profilePicURL != nil , profilePicURL != "none", profilePicURL != " "{
-                userProfilePic = self.fetchImage(urlString: profilePicURL!)
+                url = URL(string: profilePicURL!)!
+                
                }/* End if profilePicURL != "" */ else {
-                    profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
-                    userProfilePic = UIImage(named: "defaultProfilePic")!
+                url = URL(string: "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0")!
                }
-                let player = Player(snapshot.key, firstName as! String, lastName as! String, userProfilePic, profilePicURL!)
-                self.idList.append(player.playerId)
-                self.playerList.append(player)
-                self.tableView.reloadData()
-                self.tableSpinner.stopAnimating()
+                
+                Alamofire.request(url).responseData { (response) in
+                    if response.error == nil {
+                        print(response.result)
+                        
+                        // Show the downloaded image:
+                        if let data = response.data {
+                            userProfilePic = UIImage(data:data)!
+                        } else {
+                            userProfilePic = UIImage(named: "defaultProfilePic")!
+                        }
+                    let player = Player(snapshot.key, firstName as! String, lastName as! String, userProfilePic, profilePicURL!)
+                    self.idList.append(player.playerId)
+                    self.playerList.append(player)
+                    self.tableView.reloadData()
+                    self.tableSpinner.stopAnimating()
+                    }
+                }
             }//End if let dictionary
         })//End snapshot in
         self.tableSpinner.stopAnimating()
@@ -292,17 +314,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             sportImage.image = UIImage(named: "tennis")
         } else {
             print("That is not a valid sport")
-        }
-    }
-    
-    //MARK: NEED TO DO ASYNC
-    func fetchImage(urlString: String) -> UIImage{
-            let url = URL(string: urlString)
-            let data = try? Data(contentsOf: url!)
-        if let image = UIImage(data : data!){
-            return image
-        } else {
-            return UIImage()
         }
     }
     

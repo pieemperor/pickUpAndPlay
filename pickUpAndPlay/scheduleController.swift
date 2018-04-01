@@ -12,6 +12,8 @@ import FirebaseAuth
 import FacebookLogin
 import AVFoundation
 import GoogleMaps
+import AlamofireImage
+import Alamofire
 
 class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -143,11 +145,7 @@ class scheduleController: UIViewController, UITableViewDelegate, UITableViewData
     func fetchLocationImage() {
         let imageURL = passedLocation.locationImageURL
             let url = URL(string: imageURL)
-        
-        //MARK: NEED TO DO ASYNC - Attempt to download location image
-            let data = try? Data(contentsOf: url!)
-            self.locationImage.image = UIImage(data : data!)
-
+        self.locationImage.af_setImage(withURL: url!, placeholderImage: UIImage(named: "profileBG"))
     }
     
     @IBAction func unwindToSchedule(unwindSegue: UIStoryboardSegue) {}

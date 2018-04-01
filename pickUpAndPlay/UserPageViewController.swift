@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleMaps
+import AlamofireImage
+import Alamofire
 
 class UserPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -86,12 +88,18 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
             self.nameLabel.text = firstName + " " + lastName
             self.gameLabel.text = "\(firstName)'s Games"
             
-            let profilePicURL = value?["photo"] as? String? ?? "Didn't work"
+            let profilePicURL = value?["photo"] as? String? ?? ""
             
             if profilePicURL != "", profilePicURL != nil {
-                //MARK: NEED TO DO ASYNC
-                let profilePic = self.fetchImage(urlString: profilePicURL!)
-                self.profilePic.image = profilePic
+                Alamofire.request(profilePicURL!).responseData { (response) in
+                    if response.error == nil {
+                        print(response.result)
+                        // Show the downloaded image:
+                        if let data = response.data {
+                            self.profilePic.image = UIImage(data:data)
+                        }
+                    }
+                }
                 self.userSpinner.stopAnimating()
                 
             } else {
@@ -150,17 +158,6 @@ class UserPageViewController: UIViewController, UITableViewDelegate, UITableView
     private func setupButtons() {
         profilePic.layer.cornerRadius = profilePic.frame.height/2
         backgroundImage.clipsToBounds = true
-    }
-    
-    //MARK: NEED TO DO ASYNC
-    func fetchImage(urlString: String) -> UIImage{
-        let url = URL(string: urlString)
-        let data = try? Data(contentsOf: url!)
-        if let image = UIImage(data : data!){
-            return image
-        } else {
-            return UIImage()
-        }
     }
     
     @IBAction func unwindtoUserPage(unwindSegue: UIStoryboardSegue){}
