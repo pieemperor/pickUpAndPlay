@@ -15,7 +15,7 @@ import GoogleMaps
 import AlamofireImage
 import Alamofire
 
-class scheduleController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class scheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var locationImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!

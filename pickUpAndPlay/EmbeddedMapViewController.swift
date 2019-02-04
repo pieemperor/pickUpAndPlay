@@ -101,7 +101,7 @@ class EmbeddedMapViewController: UIViewController, GMSMapViewDelegate{
     //send location to schedule controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSchedule" {
-            let x : scheduleController = segue.destination as! scheduleController
+            let x : scheduleViewController = segue.destination as! scheduleViewController
             x.passedLocation = self.locationToPass
         } else if segue.identifier == "goToSelectSpecificLocation" {
             let x : SelectSpecificLocationViewController = segue.destination as! SelectSpecificLocationViewController

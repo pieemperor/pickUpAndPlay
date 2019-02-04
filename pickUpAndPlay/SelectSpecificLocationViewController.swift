@@ -69,7 +69,7 @@ class SelectSpecificLocationViewController: UIViewController, UITableViewDelegat
     //send location to schedule controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToScheduleController" {
-            let x : scheduleController = segue.destination as! scheduleController
+            let x : scheduleViewController = segue.destination as! scheduleViewController
             x.passedLocation = self.selectedLocation
         }
     }

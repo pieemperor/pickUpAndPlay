@@ -24,16 +24,4 @@ target 'pickUpAndPlay' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
-
-
-  target 'pickUpAndPlayTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'pickUpAndPlayUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end

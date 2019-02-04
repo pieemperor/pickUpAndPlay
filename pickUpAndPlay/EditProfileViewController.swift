@@ -80,7 +80,20 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                 photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
                     
                     // When the image has successfully uploaded, we get it's download URL
-                    self.picURL = (snapshot.metadata?.downloadURL()?.absoluteString)!
+                    photoRef.downloadURL(completion: {url, error in
+                        if let error = error {
+                            print("An error has occured getting the image URL - ", error)
+                        } else {
+                            if let url = url {
+                                self.picURL = url.absoluteString
+                            } else {
+                                print("Unable to unwrap url")
+                            }
+                        }
+                    })
+                    
+                    //Old way to get download URL - Doesn't work any more. The above way is correct now
+                    //self.picURL = (snapshot.metadata?.downloadURL()?.absoluteString)!
                     
                     Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!) { (error) in
                         let post = [ "firstName" : self.firstNameTextField.text!,

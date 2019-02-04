@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import GoogleMaps
 
+
 class AllGamesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!

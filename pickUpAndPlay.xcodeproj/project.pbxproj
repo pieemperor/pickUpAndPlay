@@ -30,14 +30,12 @@
 		454D9CEA1EE08C0A00C9F60F /* userHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */; };
 		454E54AF1ECB72790011B84F /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E54AE1ECB72790011B84F /* SegmentedViewController.swift */; };
 		45C42D401EC297500051D2E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */; };
-		45F1F3B71ECE5FF8005A1E09 /* scheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */; };
+		45F1F3B71ECE5FF8005A1E09 /* scheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1F3B61ECE5FF8005A1E09 /* scheduleViewController.swift */; };
 		45F5A8F51EC27E2600EAAFCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */; };
 		45F5A8F71EC27E2600EAAFCF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */; };
 		45F5A8FA1EC27E2700EAAFCF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F5A8F81EC27E2700EAAFCF /* Main.storyboard */; };
 		45F5A8FF1EC27E2700EAAFCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F5A8FD1EC27E2700EAAFCF /* LaunchScreen.storyboard */; };
-		A0AB5EDFEE0D6D9E8DB001EE /* Pods_pickUpAndPlayTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5477D618254B5F632C0C5C2 /* Pods_pickUpAndPlayTests.framework */; };
-		DC0709B04F83A81E14AD3326 /* Pods_pickUpAndPlayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5F7DF33FC200272A73DD05 /* Pods_pickUpAndPlayUITests.framework */; };
-		F1252DB89718B73D7960E3EA /* Pods_pickUpAndPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E87DE6C1C6EBC1D3EBDF7AF7 /* Pods_pickUpAndPlay.framework */; };
+		5ABEA9EEC0AC8F82F9C87423 /* Pods_pickUpAndPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365EC3C3B89B94B6BCF26D7C /* Pods_pickUpAndPlay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,13 +73,15 @@
 		1DDCC7581F7EE452003DA299 /* SubLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubLocation.swift; sourceTree = "<group>"; };
 		1DF154151F607E9600203322 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		35CEA08A8230E7B734415B0B /* Pods-pickUpAndPlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay.release.xcconfig"; sourceTree = "<group>"; };
+		365EC3C3B89B94B6BCF26D7C /* Pods_pickUpAndPlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pickUpAndPlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		450EC6961ED1103C00CC3259 /* createGameController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createGameController.swift; sourceTree = "<group>"; };
 		4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eventDetailsViewController.swift; sourceTree = "<group>"; };
 		454D9CE71EDFE81C00C9F60F /* UserPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPageViewController.swift; sourceTree = "<group>"; };
 		454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHomePageViewController.swift; sourceTree = "<group>"; };
 		454E54AE1ECB72790011B84F /* SegmentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
 		45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleController.swift; sourceTree = "<group>"; };
+		45F1F3B61ECE5FF8005A1E09 /* scheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleViewController.swift; sourceTree = "<group>"; };
 		45F5A8F11EC27E2600EAAFCF /* pickUpAndPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pickUpAndPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -90,15 +90,7 @@
 		45F5A9001EC27E2700EAAFCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F5A9051EC27E2700EAAFCF /* pickUpAndPlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pickUpAndPlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F5A9101EC27E2700EAAFCF /* pickUpAndPlayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pickUpAndPlayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		49B984E5CBAB4017648FC634 /* Pods-pickUpAndPlayTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests.release.xcconfig"; sourceTree = "<group>"; };
-		4E3F874A4679B0CDB17CF1EB /* Pods-pickUpAndPlayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay.release.xcconfig"; sourceTree = "<group>"; };
-		75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay.debug.xcconfig"; sourceTree = "<group>"; };
-		B85E9A5FF405715ED580512A /* Pods-pickUpAndPlayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests.release.xcconfig"; sourceTree = "<group>"; };
-		D5477D618254B5F632C0C5C2 /* Pods_pickUpAndPlayTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pickUpAndPlayTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D64604FC2117483D2BFADE65 /* Pods-pickUpAndPlayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlayTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E87DE6C1C6EBC1D3EBDF7AF7 /* Pods_pickUpAndPlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pickUpAndPlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF5F7DF33FC200272A73DD05 /* Pods_pickUpAndPlayUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pickUpAndPlayUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88FBBB856E4EFC4656B51FC5 /* Pods-pickUpAndPlay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pickUpAndPlay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DF154161F607E9600203322 /* Crashlytics.framework in Frameworks */,
-				F1252DB89718B73D7960E3EA /* Pods_pickUpAndPlay.framework in Frameworks */,
+				5ABEA9EEC0AC8F82F9C87423 /* Pods_pickUpAndPlay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0AB5EDFEE0D6D9E8DB001EE /* Pods_pickUpAndPlayTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC0709B04F83A81E14AD3326 /* Pods_pickUpAndPlayUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,8 +147,8 @@
 				45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */,
 				45F5A8F31EC27E2600EAAFCF /* pickUpAndPlay */,
 				45F5A8F21EC27E2600EAAFCF /* Products */,
-				C0E9D522032EB48D32C65034 /* Pods */,
 				9833C57A3A5B30FBB25F7880 /* Frameworks */,
+				DAA2D8D4DA09D60988174749 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -188,7 +178,7 @@
 				1DF99A7D1EF6432400C3B589 /* CreateAccountViewController.swift */,
 				454E54AE1ECB72790011B84F /* SegmentedViewController.swift */,
 				1D4A38A71F9D4731008F21DB /* EmbeddedMapViewController.swift */,
-				45F1F3B61ECE5FF8005A1E09 /* scheduleController.swift */,
+				45F1F3B61ECE5FF8005A1E09 /* scheduleViewController.swift */,
 				450EC6961ED1103C00CC3259 /* createGameController.swift */,
 				454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */,
 				4543A9D41EDDE44600D383AC /* eventDetailsViewController.swift */,
@@ -205,22 +195,16 @@
 			isa = PBXGroup;
 			children = (
 				1DF154151F607E9600203322 /* Crashlytics.framework */,
-				E87DE6C1C6EBC1D3EBDF7AF7 /* Pods_pickUpAndPlay.framework */,
-				D5477D618254B5F632C0C5C2 /* Pods_pickUpAndPlayTests.framework */,
-				EF5F7DF33FC200272A73DD05 /* Pods_pickUpAndPlayUITests.framework */,
+				365EC3C3B89B94B6BCF26D7C /* Pods_pickUpAndPlay.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C0E9D522032EB48D32C65034 /* Pods */ = {
+		DAA2D8D4DA09D60988174749 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */,
-				58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */,
-				D64604FC2117483D2BFADE65 /* Pods-pickUpAndPlayTests.debug.xcconfig */,
-				49B984E5CBAB4017648FC634 /* Pods-pickUpAndPlayTests.release.xcconfig */,
-				4E3F874A4679B0CDB17CF1EB /* Pods-pickUpAndPlayUITests.debug.xcconfig */,
-				B85E9A5FF405715ED580512A /* Pods-pickUpAndPlayUITests.release.xcconfig */,
+				88FBBB856E4EFC4656B51FC5 /* Pods-pickUpAndPlay.debug.xcconfig */,
+				35CEA08A8230E7B734415B0B /* Pods-pickUpAndPlay.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -232,13 +216,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45F5A9191EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlay" */;
 			buildPhases = (
-				3C02BBB0C07E20CFDCE91289 /* [CP] Check Pods Manifest.lock */,
+				E649894D0EA90F383FAF4BA5 /* [CP] Check Pods Manifest.lock */,
 				45F5A8ED1EC27E2600EAAFCF /* Sources */,
 				45F5A8EE1EC27E2600EAAFCF /* Frameworks */,
 				45F5A8EF1EC27E2600EAAFCF /* Resources */,
-				5989F6DFE71F273FFFB24BD2 /* [CP] Embed Pods Frameworks */,
-				92D6B37988B0A7907FCAC337 /* [CP] Copy Pods Resources */,
 				1DF154141F607E5C00203322 /* ShellScript */,
+				6E14013CEED3BEEDD3C9A30C /* [CP] Embed Pods Frameworks */,
+				640F9EA37288C81A75C9BCE7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,12 +237,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45F5A91C1EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlayTests" */;
 			buildPhases = (
-				3A0F2B734EB5F806E0098879 /* [CP] Check Pods Manifest.lock */,
 				45F5A9011EC27E2700EAAFCF /* Sources */,
 				45F5A9021EC27E2700EAAFCF /* Frameworks */,
 				45F5A9031EC27E2700EAAFCF /* Resources */,
-				0FB8677C7C90250B959EA943 /* [CP] Embed Pods Frameworks */,
-				9874DFA43E55C6B8EA060E6C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,12 +255,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45F5A91F1EC27E2700EAAFCF /* Build configuration list for PBXNativeTarget "pickUpAndPlayUITests" */;
 			buildPhases = (
-				7ABAD6BABD985A4B42A4FC23 /* [CP] Check Pods Manifest.lock */,
 				45F5A90C1EC27E2700EAAFCF /* Sources */,
 				45F5A90D1EC27E2700EAAFCF /* Frameworks */,
 				45F5A90E1EC27E2700EAAFCF /* Resources */,
-				91A287BA36A4E20D7AE9EEA2 /* [CP] Embed Pods Frameworks */,
-				265377211E7567CE61B93D25 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,21 +347,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0FB8677C7C90250B959EA943 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1DF154141F607E5C00203322 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -397,61 +360,48 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" e6072719eed6e6eb6d12f0c3ab07a0efaf749a74 24a6d15f6c00fc71e5f6fac25a0303eb2d03434ce301d6960259a6dc46722492";
 		};
-		265377211E7567CE61B93D25 /* [CP] Copy Pods Resources */ = {
+		640F9EA37288C81A75C9BCE7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
+				"${PODS_ROOT}/GoogleMaps/Subspecs/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3A0F2B734EB5F806E0098879 /* [CP] Check Pods Manifest.lock */ = {
+		6E14013CEED3BEEDD3C9A30C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-pickUpAndPlayTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3C02BBB0C07E20CFDCE91289 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-pickUpAndPlay-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5989F6DFE71F273FFFB24BD2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-frameworks.sh",
@@ -464,13 +414,16 @@
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
@@ -481,10 +434,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,77 +446,26 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7ABAD6BABD985A4B42A4FC23 /* [CP] Check Pods Manifest.lock */ = {
+		E649894D0EA90F383FAF4BA5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-pickUpAndPlayUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-pickUpAndPlay-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		91A287BA36A4E20D7AE9EEA2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayUITests/Pods-pickUpAndPlayUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92D6B37988B0A7907FCAC337 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle,
-				"${PODS_ROOT}/GoogleMaps/Subspecs/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlay/Pods-pickUpAndPlay-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9874DFA43E55C6B8EA060E6C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pickUpAndPlayTests/Pods-pickUpAndPlayTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -589,7 +492,7 @@
 				1DCE46321F48118C00EF8855 /* EditProfileViewController.swift in Sources */,
 				1D2244A51F5E5FC20046114A /* WebSiteViewController.swift in Sources */,
 				1D6831CD1F26F76700E7CA72 /* GameTableViewCell.swift in Sources */,
-				45F1F3B71ECE5FF8005A1E09 /* scheduleController.swift in Sources */,
+				45F1F3B71ECE5FF8005A1E09 /* scheduleViewController.swift in Sources */,
 				45F5A8F71EC27E2600EAAFCF /* LoginViewController.swift in Sources */,
 				1D9548611F3E6686002816E7 /* PlayerTableViewCell.swift in Sources */,
 				1D6EB6251F4D442100626326 /* SelectSpecificLocationViewController.swift in Sources */,
@@ -754,7 +657,7 @@
 		};
 		45F5A91A1EC27E2700EAAFCF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75DCC38BEAF03D5123ADE023 /* Pods-pickUpAndPlay.debug.xcconfig */;
+			baseConfigurationReference = 88FBBB856E4EFC4656B51FC5 /* Pods-pickUpAndPlay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -800,7 +703,7 @@
 		};
 		45F5A91B1EC27E2700EAAFCF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58766049AB5914BD1F3D572B /* Pods-pickUpAndPlay.release.xcconfig */;
+			baseConfigurationReference = 35CEA08A8230E7B734415B0B /* Pods-pickUpAndPlay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -823,7 +726,6 @@
 		};
 		45F5A91D1EC27E2700EAAFCF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D64604FC2117483D2BFADE65 /* Pods-pickUpAndPlayTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -839,7 +741,6 @@
 		};
 		45F5A91E1EC27E2700EAAFCF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49B984E5CBAB4017648FC634 /* Pods-pickUpAndPlayTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -855,7 +756,6 @@
 		};
 		45F5A9201EC27E2700EAAFCF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E3F874A4679B0CDB17CF1EB /* Pods-pickUpAndPlayUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = J742724FE7;
@@ -870,7 +770,6 @@
 		};
 		45F5A9211EC27E2700EAAFCF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B85E9A5FF405715ED580512A /* Pods-pickUpAndPlayUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = J742724FE7;

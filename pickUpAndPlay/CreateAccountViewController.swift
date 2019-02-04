@@ -80,13 +80,23 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                         photoRef.putData(imageData, metadata: metadata).observe(.success) { (snapshot) in
                             
                             // When the image has successfully uploaded, we get it's download URL
-                            self.profilePicURL = snapshot.metadata?.downloadURL()?.absoluteString
+                            photoRef.downloadURL(completion: {url, error in
+                                if let error = error {
+                                    print("An error occured when attempting to retrieve URL - ", error)
+                                } else {
+                                    self.profilePicURL = url?.absoluteString
+                                }
+                            })
+                            
+                            //Old version of Firebase Storage - This code doesn't work any more. The
+                            //self.profilePicURL = snapshot.metadata?.downloadURL()?.absoluteString
+                            
                             // Set the download URL to the message box, so that the user can send it to the database
                             
                             // Check that user isn't nil
                             if let u = user {
                                 //Save user's display name
-                                self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": self.profilePicURL!])
+                                self.ref.child("users").child(u.user.uid).setValue(["firstName": fn, "lastName": ln, "photo": self.profilePicURL!])
                                 
                                 self.spinner.stopAnimating()
                                 // User is found, go to home screen
@@ -107,7 +117,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                         } else {
                             if let u = user {
                                 //Save user's display name
-                                self.ref.child("users").child(u.uid).setValue(["firstName": fn, "lastName": ln, "photo": self.profilePicURL!])
+                                self.ref.child("users").child(u.user.uid).setValue(["firstName": fn, "lastName": ln, "photo": self.profilePicURL!])
                                 
                                 self.spinner.stopAnimating()
                                 // User is found, go to home screen
