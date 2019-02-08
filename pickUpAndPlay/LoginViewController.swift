@@ -68,17 +68,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                                 //********added this************
                                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                                 //this is where facebook connects to firebase auth
-                                Auth.auth().signIn(with: credential) { (user, error) in
+                                Auth.auth().signInAndRetrieveData(with: credential){ (authResult, error) in
                                     
                                     let ref = Database.database().reference()
                                     
-                                    let fullNameArr = user?.displayName?.components(separatedBy: " ")
+                                    let fullNameArr = authResult?.user.displayName?.components(separatedBy: " ")
                                     let fn = fullNameArr?[0]
                                     let ln = fullNameArr?[1]
-                                    let profilePicURL = user?.photoURL?.absoluteString
+                                    let profilePicURL = authResult?.user.photoURL?.absoluteString
                                     
-                                    ref.child("users").child(user!.uid).setValue(["firstName": fn, "lastName": ln, "photo": profilePicURL])
-                                    //prints Optional("Caleb Mitcler")
+                                    ref.child("users").child((authResult?.user.uid)!).setValue(["firstName": fn, "lastName": ln, "photo": profilePicURL])
                                     
                                     self.performSegue(withIdentifier: "goToMap", sender: self)
                                     if let error = error {
@@ -102,7 +101,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         }
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         //this is where facebook connects to firebase auth
-        Auth.auth().signIn(with: credential) { (user, error) in
+        Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
             self.performSegue(withIdentifier: "goToMap", sender: self)
             if let error = error {
                 print("Could not sign in with Facebook: \(error)")

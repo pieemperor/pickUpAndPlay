@@ -134,10 +134,10 @@ class createGameController: UIViewController{
                                     "lastName" : authenticatedUser.lastName,
                                     "photo": authenticatedUser.profilePictureUrl
                     ]
-                    let childUpdates = ["/events/\(key)": post,
-                                        "/locationEvents/\(location.locationId)/\(key)": post,
-                                        "/userEvents/\(Auth.auth().currentUser!.uid)/\(key)": post,
-                                        "/eventUsers/\(key)/\(authenticatedUser.playerId)": userInfo] as [String : Any]
+                    let childUpdates = ["/events/\(String(describing: key))": post,
+                                        "/locationEvents/\(location.locationId)/\(String(describing: key))": post,
+                                        "/userEvents/\(Auth.auth().currentUser!.uid)/\(String(describing: key))": post,
+                                        "/eventUsers/\(String(describing: key))/\(authenticatedUser.playerId)": userInfo] as [String : Any]
                     ref.updateChildValues(childUpdates)
                     
                     //************************  Create Notifications **************************//
@@ -155,7 +155,7 @@ class createGameController: UIViewController{
                         let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
                         
                         // Create the request object.
-                        let request = UNNotificationRequest(identifier: "\(key)", content: content, trigger: trigger)
+                        let request = UNNotificationRequest(identifier: "\(String(describing: key))", content: content, trigger: trigger)
                         
                         // Schedule the request.
                         let center = UNUserNotificationCenter.current()

@@ -81,8 +81,8 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                             
                             // When the image has successfully uploaded, we get it's download URL
                             photoRef.downloadURL(completion: {url, error in
-                                if let error = error {
-                                    print("An error occured when attempting to retrieve URL - ", error)
+                                if let err = error {
+                                    print("An error occured when attempting to retrieve URL - ", err)
                                 } else {
                                     self.profilePicURL = url?.absoluteString
                                 }

@@ -157,7 +157,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
             })
         } /* End if !in game */ else {
             ref.child("events").child(self.game.gameId).observeSingleEvent(of: .value, with: {(snapshot) in
-                let eventsDictionary = snapshot.value as? NSDictionary
+                _ = snapshot.value as? NSDictionary
                     let playerListCount = self.idList.count
                       if playerListCount == 1 {
                           let alertController = UIAlertController(title: "Delete Game?", message: "You are the only player left in this game. If you leave this game, it will be deleted", preferredStyle: .alert)
