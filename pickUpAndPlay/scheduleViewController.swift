@@ -97,46 +97,47 @@ class scheduleViewController: UIViewController, UITableViewDelegate, UITableView
         locationName.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
     }//End setupButtons
     
-    //MARK: TODO: Make table only display games once on creation and make spinner stop spinning when there's no data
+    //MARK: TODO: Make table only display games once on creation
     func fetchGames() {
         gameList = [Game]()
         tableView.reloadData()
         tableSpinner.startAnimating()
         let currentDate = Date().timeIntervalSince1970
-        eventsHandle = ref.child("locationEvents/\(passedLocation.locationId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.childAdded, with: {(snapshot) in
-            if let dictionary = snapshot.value as? [String : AnyObject] {
-                    let gameId = snapshot.key
+        eventsHandle = ref.child("locationEvents/\(passedLocation.locationId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.value, with: {(snapshot) in
+            if let gamesDictionary = snapshot.value as? [String : AnyObject] {
+                
+                for (gameId, game) in gamesDictionary {
                     //Format the date stored in the database
                     let df = DateFormatter()
                     
-                    let dateAsDate = Date(timeIntervalSince1970: dictionary["time"] as! Double)
-
+                    let dateAsDate = Date(timeIntervalSince1970: game["time"] as! Double)
+                    
                     df.dateFormat = "EEE, MMM d"
                     let justDate = df.string(from: dateAsDate)
                     df.dateFormat = "h:mm a"
                     let timeString = df.string(from: dateAsDate)
-                
+                    
                     self.ref.child("eventUsers").child("\(gameId)").observeSingleEvent(of: .value, with: {(snapshot) in
                         let eventUserDict = snapshot.value as? NSDictionary
                         let numberOfPlayers = eventUserDict?.allKeys.count
-
+                        
                         if numberOfPlayers! > 0 {
                             //Set values of game variable from database information
-                            let sport = dictionary["sport"]
+                            let sport = game["sport"]
                             let time = timeString
                             let date = justDate
-                            let spotsRemaining = dictionary["playerLimit"] as! Int - numberOfPlayers!
+                            let spotsRemaining = game["playerLimit"] as! Int - numberOfPlayers!
+                            let locationDict = game["location"] as! [String: [String:Any]]
                             
-                            let locationDict = dictionary["location"] as! [String: [String:Any]]
-                            
-                                for(key, value) in locationDict {
-                                    let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
-                                    let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, dictionary["playerLimit"] as! Int, location)
-                                    self.gameList.append(game)
-                                    self.tableView.reloadData()
-                                }//End for
+                            for(key, value) in locationDict {
+                                let location = Location(key, value["availableSports"] as! [String], value["locationName"] as! String, value["longitude"] as! CLLocationDegrees, value["latitude"] as! CLLocationDegrees, value["image"] as! String)
+                                let game = Game(gameId, sport as! String, time , date, dateAsDate, spotsRemaining, game["playerLimit"] as! Int, location)
+                                self.gameList.append(game)
+                                self.tableView.reloadData()
+                            }//End for
                         }//End if let numberOfPlayers
-                })//End ref eventUsers
+                    })//End ref eventUsers
+                }
             } //End if let dictionary
             self.tableSpinner.stopAnimating()
         }) //End observe snapshot
