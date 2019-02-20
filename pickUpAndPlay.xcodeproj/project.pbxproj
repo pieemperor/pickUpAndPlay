@@ -30,6 +30,7 @@
 		454D9CEA1EE08C0A00C9F60F /* userHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */; };
 		454E54AF1ECB72790011B84F /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E54AE1ECB72790011B84F /* SegmentedViewController.swift */; };
 		45C42D401EC297500051D2E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */; };
+		45D05C34221E148500337D0E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D05C33221E148500337D0E /* ChatViewController.swift */; };
 		45F1F3B71ECE5FF8005A1E09 /* scheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1F3B61ECE5FF8005A1E09 /* scheduleViewController.swift */; };
 		45F5A8F51EC27E2600EAAFCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */; };
 		45F5A8F71EC27E2600EAAFCF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5A8F61EC27E2600EAAFCF /* LoginViewController.swift */; };
@@ -81,6 +82,7 @@
 		454D9CE91EE08C0A00C9F60F /* userHomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userHomePageViewController.swift; sourceTree = "<group>"; };
 		454E54AE1ECB72790011B84F /* SegmentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
 		45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		45D05C33221E148500337D0E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		45F1F3B61ECE5FF8005A1E09 /* scheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleViewController.swift; sourceTree = "<group>"; };
 		45F5A8F11EC27E2600EAAFCF /* pickUpAndPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pickUpAndPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F5A8F41EC27E2600EAAFCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		45F5A8E81EC27E2600EAAFCF = {
 			isa = PBXGroup;
 			children = (
+				45D05C33221E148500337D0E /* ChatViewController.swift */,
 				45C42D3F1EC297500051D2E4 /* GoogleService-Info.plist */,
 				45F5A8F31EC27E2600EAAFCF /* pickUpAndPlay */,
 				45F5A8F21EC27E2600EAAFCF /* Products */,
@@ -485,6 +488,7 @@
 				1DB21B671FFF3A51003CEE0C /* GreenTableViewCell.swift in Sources */,
 				454D9CEA1EE08C0A00C9F60F /* userHomePageViewController.swift in Sources */,
 				1D6831D51F293BB600E7CA72 /* Player.swift in Sources */,
+				45D05C34221E148500337D0E /* ChatViewController.swift in Sources */,
 				1D93E06C1F30F61700E61AA9 /* Location.swift in Sources */,
 				4543A9D51EDDE44600D383AC /* eventDetailsViewController.swift in Sources */,
 				1D4A38A81F9D4731008F21DB /* EmbeddedMapViewController.swift in Sources */,
