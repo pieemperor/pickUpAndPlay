@@ -114,62 +114,65 @@ class createGameController: UIViewController{
             if time != 0.0 {
                 if !timeArray.contains(time) {
                     //create a new event and add info as children
-                    let key = ref.child("events").childByAutoId().key
-                    let locationInfo = [
-                        location.locationId : [
-                            "availableSports": location.availableSports,
-                            "image": location.locationImageURL,
-                            "latitude": location.lat as Double,
-                            "longitude": location.long as Double,
-                            "locationName": location.name
-                        ]
-                    ]
-                    let post = ["location": locationInfo,
-                                "sport": selectedSport,
-                                "time": time,
-                                "playerLimit": playerLimit,
-                                "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
-                    let userInfo = [
-                                    "firstName" : authenticatedUser.firstName,
-                                    "lastName" : authenticatedUser.lastName,
-                                    "photo": authenticatedUser.profilePictureUrl
-                    ]
-                    let childUpdates = ["/events/\(String(describing: key))": post,
-                                        "/locationEvents/\(location.locationId)/\(String(describing: key))": post,
-                                        "/userEvents/\(Auth.auth().currentUser!.uid)/\(String(describing: key))": post,
-                                        "/eventUsers/\(String(describing: key))/\(authenticatedUser.playerId)": userInfo] as [String : Any]
-                    ref.updateChildValues(childUpdates)
+                    let optionalKey = ref.child("events").childByAutoId().key
                     
-                    //************************  Create Notifications **************************//
-                    //Add notification to pop up one hour before the game.
-                    if #available(iOS 10.0, *) {
-                        let date = Date(timeIntervalSince1970: time - 3600)
-
-                        let content = UNMutableNotificationContent()
-                        content.title = "Upcoming Game"
-                        content.body = "You have \(convertSportToPhrase(selectedSport)) in one hour. Don't miss it!"
-                        // Configure the trigger for 1 hour before the game
-
-                        let dateInfo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-                        print(dateInfo)
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+                    if let key = optionalKey {
+                        let locationInfo = [
+                            location.locationId : [
+                                "availableSports": location.availableSports,
+                                "image": location.locationImageURL,
+                                "latitude": location.lat as Double,
+                                "longitude": location.long as Double,
+                                "locationName": location.name
+                            ]
+                        ]
+                        let post = ["location": locationInfo,
+                                    "sport": selectedSport,
+                                    "time": time,
+                                    "playerLimit": playerLimit,
+                                    "playerList": [Auth.auth().currentUser?.uid] ] as [String : Any]
+                        let userInfo = [
+                                        "firstName" : authenticatedUser.firstName,
+                                        "lastName" : authenticatedUser.lastName,
+                                        "photo": authenticatedUser.profilePictureUrl
+                        ]
+                        let childUpdates = ["/events/\(String(describing: key))": post,
+                                            "/locationEvents/\(location.locationId)/\(String(describing: key))": post,
+                                            "/userEvents/\(Auth.auth().currentUser!.uid)/\(String(describing: key))": post,
+                                            "/eventUsers/\(String(describing: key))/\(authenticatedUser.playerId)": userInfo] as [String : Any]
+                        ref.updateChildValues(childUpdates)
                         
-                        // Create the request object.
-                        let request = UNNotificationRequest(identifier: "\(String(describing: key))", content: content, trigger: trigger)
-                        
-                        // Schedule the request.
-                        let center = UNUserNotificationCenter.current()
-                        center.add(request) { (error : Error?) in
-                            if let theError = error {
-                                print(theError.localizedDescription)
+                        //************************  Create Notifications **************************//
+                        //Add notification to pop up one hour before the game.
+                        if #available(iOS 10.0, *) {
+                            let date = Date(timeIntervalSince1970: time - 3600)
+
+                            let content = UNMutableNotificationContent()
+                            content.title = "Upcoming Game"
+                            content.body = "You have \(convertSportToPhrase(selectedSport)) in one hour. Don't miss it!"
+                            // Configure the trigger for 1 hour before the game
+
+                            let dateInfo = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+                            print(dateInfo)
+                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+                            
+                            // Create the request object.
+                            let request = UNNotificationRequest(identifier: "\(String(describing: key))", content: content, trigger: trigger)
+                            
+                            // Schedule the request.
+                            let center = UNUserNotificationCenter.current()
+                            center.add(request) { (error : Error?) in
+                                if let theError = error {
+                                    print(theError.localizedDescription)
+                                }
                             }
+                        } else {
+                            // Fallback on earlier versions
                         }
-                    } else {
-                        // Fallback on earlier versions
-                    }
-                    //*********************** End of create notification ************************//
+                        //*********************** End of create notification ************************//
 
-                    performSegue(withIdentifier: "unwindToSchedule", sender: self)
+                        performSegue(withIdentifier: "unwindToSchedule", sender: self)
+                    }
                 } else {
                     let alertController = UIAlertController(title: "Time Slot Taken", message: "Someone has already created a game for that time.", preferredStyle: .alert)
                     let actionOk = UIAlertAction(title: "OK",
