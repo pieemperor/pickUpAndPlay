@@ -105,6 +105,41 @@
             </objects>
             <point key="canvasLocation" x="-511.19999999999999" y="-705.69715142428788"/>
         </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="7DR-Wo-bWz">
+            <objects>
+                <viewController id="LpO-eZ-XAJ" customClass="ChatViewController" customModule="pickUpAndPlay" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IG4-ZD-r27"/>
+                        <viewControllerLayoutGuide type="bottom" id="dWg-J6-oIA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GOa-nD-PL9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udz-GS-9QM">
+                                <rect key="frame" x="160" y="289" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="go back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="p0M-Vl-J7M"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This will be chat ui" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyc-JX-nSm">
+                                <rect key="frame" x="160" y="108" width="141" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FAg-YI-I53" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1196" y="330"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -230,6 +265,14 @@
                                 </state>
                                 <connections>
                                     <segue destination="xmY-0y-Mdm" kind="show" id="4Kl-g6-R0V"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-36-LO3">
+                                <rect key="frame" x="56" y="607" width="33" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Chat"/>
+                                <connections>
+                                    <segue destination="LpO-eZ-XAJ" kind="show" id="c9N-9p-k74"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -731,7 +774,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalLine" translatesAutoresizingMaskIntoConstraints="NO" id="Ezb-o5-MWu">
-                                                    <rect key="frame" x="80" y="21" width="1" height="48"/>
+                                                    <rect key="frame" x="80" y="33.5" width="1" height="23"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -869,7 +912,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalLine" translatesAutoresizingMaskIntoConstraints="NO" id="sh1-Or-hyl">
-                                                    <rect key="frame" x="80" y="21" width="1" height="48"/>
+                                                    <rect key="frame" x="80" y="33.5" width="1" height="23"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1218,7 +1261,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalLine" translatesAutoresizingMaskIntoConstraints="NO" id="wzO-JN-P1V">
-                                                    <rect key="frame" x="80" y="21" width="1" height="48"/>
+                                                    <rect key="frame" x="80" y="33.5" width="1" height="23"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -1579,7 +1622,7 @@ Directions</string>
                                                     </subviews>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalLine" translatesAutoresizingMaskIntoConstraints="NO" id="kdN-aJ-Ctl">
-                                                    <rect key="frame" x="80" y="21" width="1" height="48"/>
+                                                    <rect key="frame" x="80" y="33.5" width="1" height="23"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
