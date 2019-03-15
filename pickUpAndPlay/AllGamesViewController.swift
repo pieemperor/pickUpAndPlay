@@ -67,13 +67,12 @@ class AllGamesViewController: UIViewController, UITableViewDelegate, UITableView
             gtvCell.setSizeAndColor(tableView.frame.width)
         }
     }
-
     
     func fetchGames() {
         gameList = [Game]()
         tableView.reloadData()
         spinner.startAnimating()
-        ref.child("events").queryOrdered(byChild: "time").queryStarting(atValue: Date().timeIntervalSince1970).observe(.value, with: {(snapshot) in
+            ref.child("events").queryOrdered(byChild: "time").queryStarting(atValue: Date().timeIntervalSince1970).observeSingleEvent(of: .value, with: {(snapshot) in
             if let games = snapshot.value as? [String : AnyObject] {
                 
                 for (gameId, game) in games {

@@ -103,7 +103,7 @@ class scheduleViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.reloadData()
         tableSpinner.startAnimating()
         let currentDate = Date().timeIntervalSince1970
-        eventsHandle = ref.child("locationEvents/\(passedLocation.locationId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observe(.value, with: {(snapshot) in
+        _ = ref.child("locationEvents/\(passedLocation.locationId)").queryOrdered(byChild: "time").queryStarting(atValue: currentDate).observeSingleEvent(of: .value, with: {(snapshot) in
             if let gamesDictionary = snapshot.value as? [String : AnyObject] {
                 
                 for (gameId, game) in gamesDictionary {
