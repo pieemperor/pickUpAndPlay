@@ -231,23 +231,27 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     func loadUserData(){
         spinner.startAnimating()
         ref.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: {(snapshot) in
+            var profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
             let value = snapshot.value as? [String : Any]
-            let profilePicURL = value!["photo"] as? String
-            if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
-                Alamofire.request(profilePicURL!).responseData { (response) in
-                    if response.error == nil {
-                        print(response.result)
-                        // Show the downloaded image:
-                        if let data = response.data {
-                            self.profilePic.image = UIImage(data:data)
+            if let value = value, let currentUser = Auth.auth().currentUser {
+                profilePicURL = value["photo"] as? String ?? "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
+                if profilePicURL != "", profilePicURL != "none"{
+                    Alamofire.request(profilePicURL).responseData { (response) in
+                        if response.error == nil {
+                            print(response.result)
+                            // Show the downloaded image:
+                            if let data = response.data {
+                                self.profilePic.image = UIImage(data:data)
+                            }
                         }
                     }
-                }
-            }//End if profilePicURL
-            
-            self.emailTextField.text = Auth.auth().currentUser!.email
-            self.firstNameTextField.text = value!["firstName"] as? String
-            self.lastNameTextField.text = value!["lastName"] as? String
+                }//End if profilePicURL
+    
+                self.emailTextField.text = currentUser.email
+                self.firstNameTextField.text = value["firstName"] as? String
+                self.lastNameTextField.text = value["lastName"] as? String
+            }
+
             self.spinner.stopAnimating()
         })
     }

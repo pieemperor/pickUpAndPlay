@@ -99,7 +99,9 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                     
                     //Get profile pic from database
                     if profilePicURL != "", profilePicURL != nil , profilePicURL != "none"{
-                        self.profilePicURL = URL(string: profilePicURL!)
+                        if let profilePicURL = profilePicURL{
+                            self.profilePicURL = URL(string: profilePicURL)
+                        }
                         Alamofire.request(profilePicURL!).responseData { (response) in
                             if response.error == nil {
                                 print(response.result)
@@ -116,8 +118,18 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
 
                     if self.idList.count < self.game.playerLimit {
                         
+                        
+                        var player  = Player()
                         //Create player from fetched info
-                        let player = Player(Auth.auth().currentUser!.uid, user!["firstName"] as! String, user!["lastName"] as! String, userProfilePic,(self.profilePicURL?.absoluteString)!)
+                        if let firstName = user?["firstName"] as? String {
+                            if let lastName = user?["lastName"] as? String {
+                                if let profilePicURL = self.profilePicURL?.absoluteString {
+                                    player = Player(Auth.auth().currentUser!.uid, firstName, lastName, userProfilePic,profilePicURL)
+                                }
+                            }
+                        }
+                        
+
                         
                         self.idList.append(player.playerId)
                         
@@ -205,7 +217,6 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                             "userEvents/\(Auth.auth().currentUser!.uid)/\(self.game.gameId)": NSNull()
                         ])
                 }
-                //let spotsRemaining = eventsDictionary!["playerLimit"] as! Int - self.idList.count
                 self.game.spotsRemaining += 1
                 self.spotsLeftLabel.text = String(self.game.spotsRemaining) + " Spots Remaining"
             }//End else
@@ -278,11 +289,16 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                         } else {
                             userProfilePic = UIImage(named: "defaultProfilePic")!
                         }
-                    let player = Player(snapshot.key, firstName as! String, lastName as! String, userProfilePic, profilePicURL!)
-                    self.idList.append(player.playerId)
-                    self.playerList.append(player)
-                    self.tableView.reloadData()
-                    self.tableSpinner.stopAnimating()
+                        
+                        if let firstName = firstName as? String {
+                            if let lastName = lastName as? String {
+                                let player = Player(snapshot.key, firstName, lastName, userProfilePic, profilePicURL!)
+                                self.idList.append(player.playerId)
+                                self.playerList.append(player)
+                                self.tableView.reloadData()
+                                self.tableSpinner.stopAnimating()
+                            }
+                        }
                     }
                 }
             }//End if let dictionary

@@ -75,8 +75,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                                     let fullNameArr = authResult?.user.displayName?.components(separatedBy: " ")
                                     let fn = fullNameArr?[0]
                                     let ln = fullNameArr?[1]
-                                    let profilePicURL = authResult?.user.photoURL?.absoluteString
+                                    let resultString = result! as! [String:Any]
+                                    let userId = resultString["id"]
+                                    var profilePicURL = "https://firebasestorage.googleapis.com/v0/b/pickupandplay-67953.appspot.com/o/image_uploaded_from_ios.jpg?alt=media&token=a931d6aa-7945-471e-aa40-cfb3acf463b0"
                                     
+                                    if let userId = userId {
+                                        profilePicURL = "https://graph.facebook.com/\(String(describing: userId))/picture?type=large"
+                                    //let profilePicURL = authResult?.user.photoURL?.absoluteString
+                                    }
                                     ref.child("users").child((authResult?.user.uid)!).setValue(["firstName": fn, "lastName": ln, "photo": profilePicURL])
                                     
                                     self.performSegue(withIdentifier: "goToMap", sender: self)
