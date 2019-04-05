@@ -8,7 +8,6 @@ target 'pickUpAndPlay' do
   pod 'FirebaseUI'
   pod 'TwitterCore', '<=2.8.0' # fixed
 
-
   # Pods for pickUpAndPlay
 
   pod 'Firebase/Core'
@@ -20,8 +19,9 @@ target 'pickUpAndPlay' do
 
   pod 'GoogleMaps', '= 2.1.0'
 
-
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+
+  pod 'MessageKit'
 end

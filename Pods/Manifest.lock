@@ -142,6 +142,9 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
   - leveldb-library (1.20)
+  - MessageInputBar/Core (0.4.1)
+  - MessageKit (2.0.0):
+    - MessageInputBar/Core
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -166,6 +169,7 @@ DEPENDENCIES:
   - Firebase/Database
   - FirebaseUI
   - GoogleMaps (= 2.1.0)
+  - MessageKit
   - TwitterCore (<= 2.8.0)
 
 SPEC REPOS:
@@ -196,6 +200,8 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - leveldb-library
+    - MessageInputBar
+    - MessageKit
     - nanopb
     - SDWebImage
     - TwitterCore
@@ -228,11 +234,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
+  MessageKit: 29c1c87e5a396d2ca7a3f712e5171dc9aba42a1e
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: fd21d9a5d47fb5f371b83b7fca42b9d38a91ec51
+PODFILE CHECKSUM: 4f6b9e045f409c33c7998f4649b4577601252ca4
 
 COCOAPODS: 1.5.3
