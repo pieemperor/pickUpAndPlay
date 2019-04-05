@@ -179,7 +179,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                                  style: .destructive,
                                                  handler: { UIAlertAction in
                                                     //Find index for userid to remove
-                                                    if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                                                    if let index = self.idList.firstIndex(of: Auth.auth().currentUser!.uid) {
                                                         self.idList.remove(at: index)
                                                         self.playerList.remove(at: index)
                                                         self.tableView.reloadData()
@@ -205,7 +205,7 @@ class eventDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 alertController.addAction(actionDelete)
                 self.present(alertController, animated: true, completion: nil)
             }/* End if playerListCount == 1 */ else {
-                if let index = self.idList.index(of: Auth.auth().currentUser!.uid) {
+                if let index = self.idList.firstIndex(of: Auth.auth().currentUser!.uid) {
                     self.idList.remove(at: index)
                     self.playerList.remove(at: index)
                     self.tableView.reloadData()

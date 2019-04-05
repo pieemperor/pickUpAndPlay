@@ -286,7 +286,7 @@ class createGameController: UIViewController{
     }
     
     @objc func sportButtonTapped(button: UIButton) {
-        guard let index = sportButtons.index(of: button) else {
+        guard let index = sportButtons.firstIndex(of: button) else {
             fatalError("The button, \(button), is not in the sportButtons array: \(sportButtons)")
         }
         
