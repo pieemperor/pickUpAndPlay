@@ -285,6 +285,7 @@
 					45F5A8F01EC27E2600EAAFCF = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = K42FQ8XY57;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 					};
 					45F5A9041EC27E2700EAAFCF = {
@@ -701,7 +702,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5975a023-5a3d-4118-94fa-f40c3c2df966";
 				PROVISIONING_PROFILE_SPECIFIER = "Pick Up & Play";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -724,7 +726,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5975a023-5a3d-4118-94fa-f40c3c2df966";
 				PROVISIONING_PROFILE_SPECIFIER = "Pick Up & Play";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

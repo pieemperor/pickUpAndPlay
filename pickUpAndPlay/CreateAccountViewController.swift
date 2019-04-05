@@ -66,7 +66,7 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
                         let resizedImage = self.resizeImage(image: self.profilePic.image!, newWidth: 120.0)
                             
                         //Get PNG representation of the image they chose
-                        let imageData = UIImageJPEGRepresentation(resizedImage, 1.0)!
+                        let imageData = resizedImage.jpegData(compressionQuality: 1.0)!
                         
                         // Get a reference to the profilePics folder where we'll store our photos
                         let picHandle = Storage.storage().reference().child("profilePics")
@@ -223,10 +223,13 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
         // Get local file URLs
-        guard let image: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+        guard let image: UIImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         
@@ -321,4 +324,14 @@ class CreateAccountViewController: UIViewController,  UIImagePickerControllerDel
         self.passwordTextField.layer.borderWidth = 0.0
         self.confirmPasswordTextField.layer.borderWidth = 0.0
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }
